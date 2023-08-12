@@ -1,9 +1,8 @@
 package kodz.org.template.dashboard.domain.interactor.row
 
-import android.content.Context
-import kodz.org.core.base.adapter.model.BaseContract
-import kodz.org.core.component.section_title.ButtonEventHandler
-import kodz.org.core.component.section_title.SectionTitleContract
+import kodz.org.core.base.adapter.model.BaseRow
+import kodz.org.core.base.handler.ButtonEventHandler
+import kodz.org.core.component.section_title.SectionTitleRow
 import kodz.org.core.component.section_title.SectionTitleDataModel
 import javax.inject.Inject
 
@@ -13,21 +12,18 @@ import javax.inject.Inject
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-class GenerateSectionTitleRow @Inject constructor(
-    private val context: Context,
-) {
+class GenerateSectionTitleRow @Inject constructor() {
 
     fun execute(
         params: Params
-    ): BaseContract = SectionTitleContract(context, params.sectionTitleData).apply {
-        // component.eventHandler = params.buttonEventHandler
+    ): BaseRow = SectionTitleRow(params.dataModel).apply {
+        component.eventHandler = params.buttonEventHandler
         viewModel.isButtonEnable.set(params.isButtonEnable == true)
         viewModel.isButtonVisible.set(params.isButtonVisible == true)
-        viewModel.buttonEventHandler = params.buttonEventHandler
     }
 
     data class Params(
-        val sectionTitleData: SectionTitleDataModel,
+        val dataModel: SectionTitleDataModel,
         val buttonEventHandler: ButtonEventHandler,
         val isButtonEnable: Boolean? = true,
         val isButtonVisible: Boolean? = true,

@@ -1,4 +1,4 @@
-package kodz.org.core.component.section_title
+package kodz.org.core.base.handler
 
 
 /**
@@ -8,4 +8,5 @@ package kodz.org.core.component.section_title
  */
 interface ButtonEventHandler {
     fun onButtonClick()
+    fun onButtonLongClick() {}
 }

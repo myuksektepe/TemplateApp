@@ -10,5 +10,5 @@ import androidx.databinding.ViewDataBinding
 
 abstract class BaseComponent {
     abstract val binding: ViewDataBinding?
-    abstract fun initBinding()
+    abstract fun initBinding(viewDataBinding: ViewDataBinding)
 }

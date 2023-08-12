@@ -2,7 +2,7 @@ package kodz.org.core.base.adapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
-import kodz.org.core.base.adapter.model.BaseContract
+import kodz.org.core.base.adapter.model.BaseRow
 
 
 /**
@@ -10,13 +10,13 @@ import kodz.org.core.base.adapter.model.BaseContract
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-class MultipleTypeAdapterDiffUtil : DiffUtil.ItemCallback<BaseContract>() {
-    override fun areItemsTheSame(oldItem: BaseContract, newItem: BaseContract): Boolean {
+class MultipleTypeAdapterDiffUtil : DiffUtil.ItemCallback<BaseRow>() {
+    override fun areItemsTheSame(oldItem: BaseRow, newItem: BaseRow): Boolean {
         return oldItem == newItem
     }
 
     @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(oldItem: BaseContract, newItem: BaseContract): Boolean {
+    override fun areContentsTheSame(oldItem: BaseRow, newItem: BaseRow): Boolean {
         return oldItem == newItem
     }
 }

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
-import kodz.org.core.base.adapter.model.BaseContract
+import kodz.org.core.base.adapter.model.BaseRow
 
 
 /**
@@ -13,24 +13,27 @@ import kodz.org.core.base.adapter.model.BaseContract
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-open class MultipleTypeAdapter : ListAdapter<BaseContract, MultipleTypeAdapterViewHolder>(MultipleTypeAdapterDiffUtil()) {
-    private var row: BaseContract? = null
+open class MultipleTypeAdapter : ListAdapter<BaseRow, MultipleTypeAdapterViewHolder>(MultipleTypeAdapterDiffUtil()) {
+    private var row: BaseRow? = null
 
     override fun getItemViewType(position: Int): Int {
-        val rowModel = currentList[position] as BaseContract
+        val rowModel = currentList[position] as BaseRow
         // row = rowModel
         return rowModel.layout
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MultipleTypeAdapterViewHolder {
+        val binding: ViewDataBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context), viewType, parent, false
+        )
+        return MultipleTypeAdapterViewHolder(binding)
+        /*
         row?.binding?.let {
             return MultipleTypeAdapterViewHolder(it)
         } ?: run {
-            val binding: ViewDataBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context), viewType, parent, false
-            )
-            return MultipleTypeAdapterViewHolder(binding)
+
         }
+         */
     }
 
     override fun onBindViewHolder(holder: MultipleTypeAdapterViewHolder, position: Int) {

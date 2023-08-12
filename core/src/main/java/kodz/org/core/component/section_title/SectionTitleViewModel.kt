@@ -1,6 +1,7 @@
 package kodz.org.core.component.section_title
 
 import androidx.databinding.ObservableBoolean
+import kodz.org.core.base.handler.ButtonEventHandler
 import kodz.org.core.base.viewmodel.BaseViewModel
 
 
@@ -12,9 +13,4 @@ import kodz.org.core.base.viewmodel.BaseViewModel
 class SectionTitleViewModel : BaseViewModel() {
     val isButtonEnable = ObservableBoolean(true)
     val isButtonVisible = ObservableBoolean(true)
-    var buttonEventHandler: ButtonEventHandler? = null
-
-    fun onViewAllButtonClick() {
-        buttonEventHandler?.onButtonClick()
-    }
 }

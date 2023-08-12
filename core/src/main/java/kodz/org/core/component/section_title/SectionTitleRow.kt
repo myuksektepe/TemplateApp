@@ -1,10 +1,9 @@
 package kodz.org.core.component.section_title
 
-import android.content.Context
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.R
 import kodz.org.core.base.adapter.model.BaseDataModel
-import kodz.org.core.base.adapter.model.BaseContract
+import kodz.org.core.base.adapter.model.BaseRow
 import kotlin.reflect.KClass
 
 
@@ -13,13 +12,12 @@ import kotlin.reflect.KClass
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-class SectionTitleContract(
-    private val context: Context,
-    override val data: BaseDataModel,
-) : BaseContract() {
+class SectionTitleRow(
+    override val dataModel: BaseDataModel,
+) : BaseRow() {
     override val layout: Int = R.layout.component_section_title
     override val dataClass: KClass<*> = SectionTitleDataModel::class
     override val viewModel = SectionTitleViewModel()
-    override val component = SectionTitleComponent(context)
-    override val binding: ViewDataBinding? get() = component.binding
+    override val component = SectionTitleComponent()
+    override var binding: ViewDataBinding? = null
 }
