@@ -1,0 +1,5 @@
+<resources>
+    <string name="pleaseWait">Lütfen Bekleyiniz…</string>
+    <string name="tryAgain">Yeniden Deneyin</string>
+    <string name="viewAll">Tümünü Gör ></string>
+</resources>

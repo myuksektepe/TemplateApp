@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -36,13 +37,29 @@ android {
 
 dependencies {
     // Modules
-    project(path = ":core")
+    implementation(project(":core"))
 
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Main
+    implementation(Dependencies.appcompat)
+    implementation(Dependencies.material)
+    implementation(Dependencies.sdp)
+    implementation(Dependencies.constraintlayout)
+
+    // KTX
+    implementation(Dependencies.ktxCore)
+    implementation(Dependencies.ktxActivity)
+    implementation(Dependencies.ktxFragment)
+    implementation(Dependencies.ktxNavigationUi)
+    implementation(Dependencies.ktxNavigationFragment)
+    implementation(Dependencies.ktxLifecycleViewModel)
+
+    // Hilt
+    implementation(Dependencies.hilt)
+    kapt(Dependencies.hiltCompiler)
+    kapt(Dependencies.hiltCompilerX)
+
+    // Test
+    testImplementation(Dependencies.junitTest)
+    androidTestImplementation(Dependencies.junit)
+    androidTestImplementation(Dependencies.espressoCore)
 }

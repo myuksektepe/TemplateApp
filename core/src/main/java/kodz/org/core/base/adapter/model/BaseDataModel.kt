@@ -1,4 +1,4 @@
-package kodz.org.core.adapter.model
+package kodz.org.core.base.adapter.model
 
 
 /**

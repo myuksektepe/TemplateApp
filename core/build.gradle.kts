@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 
@@ -33,10 +34,34 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Main
+    implementation(Dependencies.appcompat)
+    implementation(Dependencies.material)
+    implementation(Dependencies.sdp)
+
+    // Glide
+    implementation(Dependencies.glide) {
+        exclude(group = "com.android.support")
+    }
+    kapt("androidx.annotation:annotation:1.6.0")
+    kapt(Dependencies.glideCompiler)
+
+    // KTX
+    implementation(Dependencies.ktxCore)
+    implementation(Dependencies.ktxNavigationFragment)
+    implementation(Dependencies.ktxNavigationUi)
+
+    // Hilt
+    implementation(Dependencies.hilt)
+    kapt(Dependencies.hiltCompiler)
+    kapt(Dependencies.hiltCompilerX)
+
+    // RecyclerView
+    implementation(Dependencies.recyclerView)
+    implementation(Dependencies.recyclerViewSelection)
+
+    // Test
+    testImplementation(Dependencies.junitTest)
+    androidTestImplementation(Dependencies.junit)
+    androidTestImplementation(Dependencies.espressoCore)
 }

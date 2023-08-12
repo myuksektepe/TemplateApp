@@ -1,0 +1,5 @@
+<resources>
+    <string name="pleaseWait">Please Wait…</string>
+    <string name="tryAgain">Try Again</string>
+    <string name="viewAll">View All ></string>
+</resources>

@@ -5,12 +5,13 @@
  */
 
 object DependencyVersions {
-    const val kotlin = "1.9.0"
-    const val appCompat = "1.5.1"
-    const val material = "1.7.0"
+    const val kotlin = "1.10.0"
+    const val appCompat = "1.6.1"
+    const val material = "1.9.0"
     const val constraintlayout = "2.1.4"
     const val legacySupportV4 = "1.0.0"
     const val recyclerView = "1.2.1"
+    const val recyclerViewSelection = "1.2.0-alpha01"
     const val swipeRefreshLayout = "1.1.0"
     const val viewPager2 = "1.0.0"
     const val flexBox = "3.0.0"
@@ -68,7 +69,7 @@ object DependencyVersions {
     // Test
     const val junitTest = "4.13.2"
     const val junit = "1.1.4"
-    const val espresso = "3.5.0"
+    const val espresso = "3.5.1"
 }
 
 object Dependencies {
@@ -79,6 +80,7 @@ object Dependencies {
     const val constraintlayout = "androidx.constraintlayout:constraintlayout:${DependencyVersions.constraintlayout}"
     const val legacySupportV4 = "androidx.legacy:legacy-support-v4:${DependencyVersions.legacySupportV4}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${DependencyVersions.recyclerView}"
+    const val recyclerViewSelection = "androidx.recyclerview:recyclerview-selection:${DependencyVersions.recyclerViewSelection}"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${DependencyVersions.swipeRefreshLayout}"
     const val flexBox = "com.google.android.flexbox:flexbox:${DependencyVersions.flexBox}"
 
