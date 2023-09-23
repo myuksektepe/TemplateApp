@@ -1,4 +1,4 @@
-package kodz.org.template.dashboard.presentation
+package kodz.org.feature.dashboard.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
@@ -8,8 +8,8 @@ import kodz.org.core.base.component.BaseRow
 import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.Resource
-import kodz.org.template.R
-import kodz.org.template.databinding.FragmentDashboardBinding
+import kodz.org.feature.dashboard.R
+import kodz.org.feature.dashboard.databinding.FragmentDashboardBinding
 
 class DashboardFragment :
     BaseFragment<DashboardViewModel, FragmentDashboardBinding>(R.layout.fragment_dashboard) {

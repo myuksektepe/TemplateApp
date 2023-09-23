@@ -1,20 +1,16 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
-    namespace = ConfigData.appId
+    namespace = "kodz.org.feature.dashboard"
     compileSdk = ConfigData.compileSdk
     defaultConfig {
-        applicationId = ConfigData.appId
         minSdk = ConfigData.minSdk
         targetSdk = ConfigData.targetSdk
-        versionCode = ConfigData.versionCode
-        versionName = ConfigData.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
@@ -22,10 +18,7 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "$project.rootDir/tools/proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "$project.rootDir/tools/proguard-rules.pro")
         }
     }
     buildFeatures { dataBinding = true }
@@ -40,19 +33,15 @@ android {
 }
 
 dependencies {
+
     // Modules
     implementation(project(":core"))
-    implementation(project(":feature:dashboard"))
-    implementation(project(":feature:entry_detail"))
 
     // Main
     implementation(Dependencies.appcompat)
     implementation(Dependencies.material)
     implementation(Dependencies.sdp)
     implementation(Dependencies.constraintlayout)
-
-    // Kotlin
-    // implementation(Dependencies.kotlinReflec)
 
     // KTX
     implementation(Dependencies.ktxCore)

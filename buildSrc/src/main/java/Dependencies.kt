@@ -16,6 +16,8 @@ object DependencyVersions {
     const val viewPager2 = "1.0.0"
     const val flexBox = "3.0.0"
 
+    const val kotlinReflec = "1.9.10"
+
     // KTX
     const val ktxCore = "1.8.0"
     const val ktxActivity = "1.5.1"
@@ -83,6 +85,9 @@ object Dependencies {
     const val recyclerViewSelection = "androidx.recyclerview:recyclerview-selection:${DependencyVersions.recyclerViewSelection}"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${DependencyVersions.swipeRefreshLayout}"
     const val flexBox = "com.google.android.flexbox:flexbox:${DependencyVersions.flexBox}"
+
+    // Kotlin
+    const val kotlinReflec = "org.jetbrains.kotlin:kotlin-reflect:${DependencyVersions.kotlinReflec}"
 
     // KTX
     const val ktxCore = "androidx.core:core-ktx:${DependencyVersions.ktxCore}"

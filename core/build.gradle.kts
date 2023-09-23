@@ -5,7 +5,6 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
-
 android {
     namespace = "kodz.org.core"
     compileSdk = ConfigData.compileSdk

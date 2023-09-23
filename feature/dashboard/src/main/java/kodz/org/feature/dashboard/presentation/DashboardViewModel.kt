@@ -1,4 +1,4 @@
-package kodz.org.template.dashboard.presentation
+package kodz.org.feature.dashboard.presentation
 
 import android.util.Log
 import androidx.lifecycle.LiveData
