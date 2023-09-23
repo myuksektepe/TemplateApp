@@ -2,8 +2,8 @@ package kodz.org.core.base.adapter
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import kodz.org.core.base.adapter.model.BaseRow
 import kodz.org.core.BR
+import kodz.org.core.base.component.BaseRow
 
 
 /**

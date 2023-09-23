@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <!-- Loading -->
+        <FrameLayout
+            android:id="@+id/frmLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black70"
+            android:elevation="4dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_32sdp"
+                android:shadowColor="@color/black70"
+                app:cardCornerRadius="@dimen/_16sdp"
+                app:cardElevation="@dimen/_16sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_24sdp">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtLoadingTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/loading"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                        app:layout_constraintStart_toStartOf="@+id/progressBar"
+                        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+                    <TextView
+                        android:id="@+id/txtLoadingDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:maxHeight="@dimen/_60sdp"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbars="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/txtLoadingTitle"
+                        app:layout_constraintStart_toStartOf="@+id/txtLoadingTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/txtLoadingTitle"
+                        tools:text="@string/lipsum" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+
+        <!-- Error -->
+        <FrameLayout
+            android:id="@+id/frmError"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/scarlet30"
+            android:elevation="4dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_32sdp"
+                android:shadowColor="@color/black70"
+                app:cardCornerRadius="@dimen/_16sdp"
+                app:cardElevation="@dimen/_16sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_24sdp">
+
+                    <TextView
+                        android:id="@+id/txtErrorTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_16sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/error" />
+
+                    <TextView
+                        android:id="@+id/txtErrorDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:maxHeight="@dimen/_100sdp"
+                        android:nestedScrollingEnabled="true"
+                        android:padding="@dimen/_6sdp"
+                        android:scrollbars="vertical"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtErrorTitle"
+                        tools:text="@string/lipsum" />
+
+                    <Button
+                        android:id="@+id/btnErrorPrimary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_8sdp"
+                        android:backgroundTint="@color/success"
+                        android:drawableTint="@color/white"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtErrorDescription"
+                        tools:drawableLeft="@drawable/ic_close"
+                        tools:text="Tamam olabilir anladık" />
+
+                    <Button
+                        android:id="@+id/btnErrorCancel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_8sdp"
+                        android:backgroundTint="@color/scarlet"
+                        android:maxLines="2"
+                        android:text="@string/cancel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btnErrorPrimary"
+                        tools:text="@string/cancel" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainer"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_graph" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_menu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,7 +1,5 @@
 package kodz.org.core.base.fragment
 
-import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.StrictMode
@@ -15,11 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
-import kodz.org.core.R
-import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.base.acitivity.BaseActivity
+import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.model.ErrorModel
-import kodz.org.core.model.ErrorType
 import kodz.org.core.model.LoadingModel
 
 
@@ -29,7 +25,8 @@ import kodz.org.core.model.LoadingModel
  * yuksektepemurat@gmail.com
  */
 
-abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private val view: Int) : Fragment(view) {
+abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private val view: Int) :
+    Fragment(view) {
 
     abstract val viewModel: BaseViewModel
 
@@ -41,7 +38,11 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
     abstract fun bindingViewModel(binding: DB)
     abstract val isBottomNavigationViewVisible: Boolean
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = DataBindingUtil.inflate<DB>(inflater, view, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -63,39 +64,16 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         viewDidLoad(savedInstanceState)
     }
 
-    fun showFullScreenLoading(title: String? = null, description: String? = null) {
-        (requireActivity() as BaseActivity<*, *>).showFullScreenLoading(
-            LoadingModel(
-                isShow = true,
-                title = title ?: requireContext().getString(R.string.pleaseWait),
-                description = description
-            )
-        )
+    fun showFullScreenLoading(loadingModel: LoadingModel) {
+        (requireActivity() as BaseActivity<*, *>).showFullScreenLoading(loadingModel)
     }
 
     fun hideFullScreenLoading() {
         (requireActivity() as BaseActivity<*, *>).hideFullScreenLoading()
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    fun showFullScreenError(
-        type: ErrorType,
-        title: String?,
-        description: String?,
-        buttonText: String? = null,
-        buttonIcon: Drawable? = null,
-        buttonClickListener: View.OnClickListener
-    ) {
-        (requireActivity() as BaseActivity<*, *>).showFullScreenError(
-            ErrorModel(
-                isShow = true,
-                title = title,
-                description = description,
-                buttonText = if (type == ErrorType.BLOCKER) null else buttonText ?: getString(R.string.tryAgain),
-                buttonIcon = if (type == ErrorType.BLOCKER) null else buttonIcon ?: requireContext().getDrawable(R.drawable.ic_refresh),
-            ),
-            buttonClickListener = buttonClickListener
-        )
+    fun showFullScreenError(errorModel: ErrorModel, callback: (() -> Unit?)? = null) {
+        (requireActivity() as BaseActivity<*, *>).showFullScreenError(errorModel, callback)
     }
 
     fun hideFullScreenError() {
@@ -132,5 +110,6 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         _binding = null
     }
 
-    fun <T> observeLiveData(liveData: LiveData<T>, observer: Observer<T>): Unit = liveData.observe(viewLifecycleOwner, observer)
+    fun <T> observeLiveData(liveData: LiveData<T>, observer: Observer<T>): Unit =
+        liveData.observe(viewLifecycleOwner, observer)
 }

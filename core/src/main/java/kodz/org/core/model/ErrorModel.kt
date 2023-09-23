@@ -1,7 +1,5 @@
 package kodz.org.core.model
 
-import android.graphics.drawable.Drawable
-
 
 /**
  * Created by Murat Yüksektepe on 9.08.2023.
@@ -9,10 +7,10 @@ import android.graphics.drawable.Drawable
  * yuksektepemurat@gmail.com
  */
 data class ErrorModel(
-    var isShow: Boolean = false,
-    val title: String?,
-    val description: String?,
-    val buttonText: String?,
-    val buttonIcon: Drawable?,
-    val isCloseButtonVisible: Boolean = true
+    val title: String? = null,
+    val description: String? = null,
+    val buttonText: String? = null,
+    val buttonIcon: Int? = null,
+    val isCancelButtonVisible: Boolean = true,
+    val buttonCallback: (() -> Unit?)? = null,
 )

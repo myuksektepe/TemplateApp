@@ -3,9 +3,6 @@ package kodz.org.core.base.acitivity
 import android.net.Uri
 import android.os.Bundle
 import android.os.StrictMode
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -28,7 +25,8 @@ import kodz.org.core.model.LoadingModel
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private val view: Int) : AppCompatActivity() {
+abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private val view: Int) :
+    AppCompatActivity() {
 
     abstract val viewModel: VM
     abstract var viewLifeCycleOwner: LifecycleOwner
@@ -46,15 +44,15 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
     open fun getNavHostFragment(): NavHostFragment? = null
 
     private fun initBinding() {
+        viewLifeCycleOwner = this
         _binding?.lifecycleOwner = viewLifeCycleOwner
-        viewLifeCycleOwner = this // TODO control this?
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         // Hide statusbar
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        // requestWindowFeature(Window.FEATURE_NO_TITLE)
+        // this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         // Hide soft-key bar
         // this.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -66,7 +64,6 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
 
         // Data view binding
         _binding = DataBindingUtil.inflate(layoutInflater, view, null, false)
-        //_binding = inflate.invoke(layoutInflater)
         setContentView(_binding!!.root)
 
         // Navigation host
@@ -88,7 +85,7 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
     abstract fun showFullScreenLoading(loadingModel: LoadingModel)
     abstract fun hideFullScreenLoading()
 
-    abstract fun showFullScreenError(errorModel: ErrorModel, buttonClickListener: View.OnClickListener?)
+    abstract fun showFullScreenError(errorModel: ErrorModel, callback: (() -> Unit?)? = null)
     abstract fun hideFullScreenError()
 
     fun navigate(

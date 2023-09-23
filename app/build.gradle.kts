@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -21,7 +22,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "$project.rootDir/tools/proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "$project.rootDir/tools/proguard-rules.pro"
+            )
         }
     }
     buildFeatures { dataBinding = true }
@@ -55,8 +59,13 @@ dependencies {
 
     // Hilt
     implementation(Dependencies.hilt)
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     kapt(Dependencies.hiltCompiler)
     kapt(Dependencies.hiltCompilerX)
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
 
     // Test
     testImplementation(Dependencies.junitTest)

@@ -1,6 +1,5 @@
 package kodz.org.core.component.section_title
 
-import android.util.Log
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.component.BaseComponent
 import kodz.org.core.base.handler.ButtonEventHandler
@@ -24,18 +23,12 @@ class SectionTitleComponent @Inject constructor() : BaseComponent() {
 
     private fun initComponent() {
         (binding as? ComponentSectionTitleBinding)?.run {
+
+            // EventHandler
             btnSectionViewAll.setSpamProtectedClickListener {
                 eventHandler?.onButtonClick()
             }
 
-            btnSectionViewAll.setOnLongClickListener {
-                eventHandler?.onButtonLongClick()
-                true
-            }
-
-            txtSectionTitle.setSpamProtectedClickListener {
-                Log.i("applog", data!!.titleText)
-            }
         }
     }
 

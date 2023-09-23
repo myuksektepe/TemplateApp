@@ -1,5 +1,12 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="home">Home</string>
+    <string name="loading">Loading…</string>
     <string name="pleaseWait">Please Wait…</string>
     <string name="tryAgain">Try Again</string>
     <string name="viewAll">View All ></string>
+    <string name="error">Error!</string>
+    <string name="warning">Warning!</string>
+    <string name="success">Success</string>
+    <string name="okay">Okay</string>
+    <string name="cancel">Cancel</string>
 </resources>

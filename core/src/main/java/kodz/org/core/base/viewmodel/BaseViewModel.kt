@@ -1,6 +1,5 @@
 package kodz.org.core.base.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 
 
@@ -9,4 +8,4 @@ import androidx.lifecycle.ViewModel
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-open class BaseViewModel() : ViewModel() {}
+abstract class BaseViewModel() : ViewModel() {}

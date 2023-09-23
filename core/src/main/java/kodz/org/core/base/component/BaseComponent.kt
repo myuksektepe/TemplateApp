@@ -8,6 +8,11 @@ import androidx.databinding.ViewDataBinding
  * yuksektepemurat@gmail.com
  */
 
+/**
+ * Bir komponent yaratmak için kullanılan temel sınıf.
+ * Bu sınıftan türetilen sınıflarda komponentin görüntüsü üzerinde
+ * binding kullanıralak atamalar yapılır.
+ */
 abstract class BaseComponent {
     abstract val binding: ViewDataBinding?
     abstract fun initBinding(viewDataBinding: ViewDataBinding)

@@ -2,7 +2,7 @@ package kodz.org.core.base.adapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
-import kodz.org.core.base.adapter.model.BaseRow
+import kodz.org.core.base.component.BaseRow
 
 
 /**

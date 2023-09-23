@@ -6,7 +6,7 @@ package kodz.org.core.base.handler
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-interface ButtonEventHandler {
+interface ButtonEventHandler : BaseEventHandler {
     fun onButtonClick()
     fun onButtonLongClick() {}
 }

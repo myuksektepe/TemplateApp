@@ -51,6 +51,9 @@ dependencies {
     implementation(Dependencies.ktxNavigationFragment)
     implementation(Dependencies.ktxNavigationUi)
 
+    // Gson
+    implementation(Dependencies.gson)
+
     // Hilt
     implementation(Dependencies.hilt)
     kapt(Dependencies.hiltCompiler)
@@ -59,6 +62,9 @@ dependencies {
     // RecyclerView
     implementation(Dependencies.recyclerView)
     implementation(Dependencies.recyclerViewSelection)
+
+    // ViewPager
+    implementation(Dependencies.viewPager2)
 
     // Test
     testImplementation(Dependencies.junitTest)

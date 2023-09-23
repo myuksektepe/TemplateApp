@@ -7,7 +7,6 @@ package kodz.org.core.model
  * yuksektepemurat@gmail.com
  */
 data class LoadingModel(
-    var isShow: Boolean = false,
-    val title: String?,
+    val title: String? = null,
     val description: String? = null
 )
