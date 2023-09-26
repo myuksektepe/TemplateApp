@@ -14,4 +14,4 @@ data class SectionTitleDataModel(
     @SerializedName("isButtonVisible") val isButtonVisible: Boolean = true,
     @SerializedName("isButtonEnable") val isButtonEnable: Boolean = true,
     @SerializedName("buttonText") val buttonText: String? = null,
-) : BaseDataModel
+) : BaseDataModel()

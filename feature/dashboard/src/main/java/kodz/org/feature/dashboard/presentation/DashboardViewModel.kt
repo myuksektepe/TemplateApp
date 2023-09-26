@@ -1,24 +1,31 @@
 package kodz.org.feature.dashboard.presentation
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kodz.org.core.base.component.BaseDataModel
 import kodz.org.core.base.component.BaseRow
+import kodz.org.core.base.data.http.HttpFlow
+import kodz.org.core.base.data.http.HttpRequest
+import kodz.org.core.base.data.http.toResponseModel
 import kodz.org.core.base.handler.ButtonEventHandler
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.component.carousel.CarouselDataModel
 import kodz.org.core.component.carousel.CarouselRow
 import kodz.org.core.component.carousel_item.CarouselItemDataModel
 import kodz.org.core.component.carousel_item.CarouselItemRow
-import kodz.org.core.component.section_title.GenerateSectionTitleRow
 import kodz.org.core.component.section_title.SectionTitleDataModel
 import kodz.org.core.component.section_title.SectionTitleRow
 import kodz.org.core.model.Resource
+import kodz.org.feature.dashboard.data.DashboardRequest
+import kodz.org.feature.dashboard.data.DashboardResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,38 +37,18 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor() : BaseViewModel() {
+class DashboardViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val httpRequest: HttpRequest
+) : BaseViewModel() {
 
+    private var job: Job? = null
     private val rowListLiveData = MutableLiveData<Resource<List<BaseRow>>>()
     val rowList: LiveData<Resource<List<BaseRow>>> get() = rowListLiveData
-    private var job: Job? = null
 
-    private val carouselList = listOf(
-        CarouselItemRow(
-            CarouselItemDataModel(
-                14,
-                "Yazılımcılar için Heyecan Verici Side Proje Fikirleri",
-                "Description 1",
-                "https://talentgrid.io/wp-cjontent/uploads/2023/01/pexels-diva-plavalaguna-6147025-1-1-900x604.jpg"
-            )
-        ),
-        CarouselItemRow(
-            CarouselItemDataModel(
-                27,
-                "Hızlı büyüyen bir start-up’ta yazılımcı olmak sana neler katar?",
-                "Description 2",
-                "https://talentgrid.io/wp-content/uploads/2022/09/dev1-900x604.png"
-            )
-        ),
-        CarouselItemRow(
-            CarouselItemDataModel(
-                31,
-                "Kadın Yazılımcı Platformları \uD83C\uDF89",
-                "Description 3",
-                "https://talentgrid.io/wp-content/uploads/2022/01/Red-and-Gold-Cute-Illustrative-Greetings-Lunar-New-Year-Video-3-900x604.png"
-            )
-        ),
-    )
+    private val carouselList = mutableListOf<CarouselItemRow>()
+    private val componentList = mutableListOf<BaseRow>()
+
 
     private val sectionButtonEventHandler = object : ButtonEventHandler {
         override fun onButtonClick() {
@@ -73,37 +60,25 @@ class DashboardViewModel @Inject constructor() : BaseViewModel() {
         job?.cancel()
         job = null
         job = viewModelScope.launch(Dispatchers.IO) {
+
             // Loading
             rowListLiveData.postValue(Resource.Loading)
 
-            // Process
-            val rowList = listOf(
-                // Carousel
+            /*
+            carouselList.add(CarouselItemRow(CarouselItemDataModel(2, "Title 1")))
+            val cList = listOf<BaseRow>(
+                SectionTitleRow(SectionTitleDataModel("Başlık")),
                 CarouselRow(CarouselDataModel(carouselList)),
-
-                // Section Title
-                SectionTitleRow(SectionTitleDataModel("Butonsuz Başlık", isButtonVisible = false)),
-
-                // Section Title
-                SectionTitleRow(SectionTitleDataModel("Tüm Konular")),
-
-                // Section Title
-                GenerateSectionTitleRow().execute(
-                    GenerateSectionTitleRow.Params(
-                        SectionTitleDataModel("Tüm Hikayeler"),
-                        sectionButtonEventHandler
-                    )
-                ),
-
-                // Carousel
-                CarouselRow(CarouselDataModel(carouselList)),
-
-                // Carousel
-                CarouselRow(CarouselDataModel(carouselList)),
+                SectionTitleRow(SectionTitleDataModel("Başlık")),
             )
+            componentList.addAll(cList)
+            rowListLiveData.postValue(Resource.Success(componentList))
+             */
 
-            delay(1300)
+            // Process
+            doSomeMiracle()
 
+            // Error
             /*
             rowListLiveData.postValue(Resource.Error(
                 ErrorModel(
@@ -116,8 +91,54 @@ class DashboardViewModel @Inject constructor() : BaseViewModel() {
             ))
              */
 
-            // Result
-            rowListLiveData.postValue(Resource.Success(rowList))
+
+        }
+    }
+
+    fun doSomeMiracle() {
+        viewModelScope.launch(Dispatchers.IO) {
+            httpRequest.postRequest<DashboardRequest, DashboardResponse>(
+                context, DashboardRequest()
+            ).collectLatest { response ->
+                when (response) {
+                    is HttpFlow.Success -> {
+                        response.data.dashboard?.forEach {
+                            val dataModelString = it.dataModel
+                            var clsRow: BaseRow? = null
+
+                            it.rowName?.let { rowName ->
+                                when (rowName) {
+                                    "SectionTitleRow" -> {
+                                        val dataModel: BaseDataModel? = dataModelString?.toResponseModel<SectionTitleDataModel>()
+                                        clsRow = SectionTitleRow(dataModel!!)
+                                    }
+
+                                    "CarouselRow" -> {
+                                        val dataModel = dataModelString?.toResponseModel<CarouselDataModel>()
+                                        dataModel?.itemList?.forEach { carouselItemData ->
+                                            carouselList.add(CarouselItemRow(carouselItemData))
+                                        }
+                                        clsRow = CarouselRow(dataModel!!)
+                                    }
+
+                                    "CarouselItemRow" -> {
+                                        val dataModel: BaseDataModel? = dataModelString?.toResponseModel<CarouselItemDataModel>()
+                                        clsRow = CarouselItemRow(dataModel!!)
+                                    }
+                                }
+
+                                clsRow?.let { row -> componentList.add(row) }
+                            }
+
+                        }
+
+                        // Send Component List to Adapter
+                        rowListLiveData.postValue(Resource.Success(componentList))
+                    }
+
+                    else -> {}
+                }
+            }
         }
     }
 }

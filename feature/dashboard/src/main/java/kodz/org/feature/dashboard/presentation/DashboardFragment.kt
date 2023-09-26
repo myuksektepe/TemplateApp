@@ -3,6 +3,7 @@ package kodz.org.feature.dashboard.presentation
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.adapter.MultipleTypeAdapter
 import kodz.org.core.base.component.BaseRow
 import kodz.org.core.base.fragment.BaseFragment
@@ -11,6 +12,7 @@ import kodz.org.core.model.Resource
 import kodz.org.feature.dashboard.R
 import kodz.org.feature.dashboard.databinding.FragmentDashboardBinding
 
+@AndroidEntryPoint
 class DashboardFragment :
     BaseFragment<DashboardViewModel, FragmentDashboardBinding>(R.layout.fragment_dashboard) {
     override val viewModel: DashboardViewModel by viewModels()
@@ -53,7 +55,8 @@ class DashboardFragment :
     private fun setUI() {
         binding.listDashboard.run {
             adapter = rowAdapter
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             // addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
             setHasFixedSize(true)
         }

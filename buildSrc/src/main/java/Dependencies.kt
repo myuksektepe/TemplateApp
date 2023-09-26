@@ -5,7 +5,7 @@
  */
 
 object DependencyVersions {
-    const val kotlin = "1.10.0"
+    const val kotlin = "1.9.0"
     const val appCompat = "1.6.1"
     const val material = "1.9.0"
     const val constraintlayout = "2.1.4"
@@ -16,12 +16,13 @@ object DependencyVersions {
     const val viewPager2 = "1.0.0"
     const val flexBox = "3.0.0"
 
+    // Kotlin
     const val kotlinReflec = "1.9.10"
 
     // KTX
-    const val ktxCore = "1.8.0"
-    const val ktxActivity = "1.5.1"
-    const val ktxFragment = "1.5.5"
+    const val ktxCore = "1.12.0"
+    const val ktxActivity = "1.7.2"
+    const val ktxFragment = "1.6.1"
     const val ktxLifecycle = "2.6.0-alpha03"
 
     // Hilt

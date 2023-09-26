@@ -12,4 +12,5 @@ package kodz.org.core.base.component
  * Bu sınıftan türetilen alt sınıflarda ilgili komponentin ihtiyacı
  * olan veriler için değişkenler oluşturulur.
  */
-interface BaseDataModel
+abstract class BaseDataModel {
+}

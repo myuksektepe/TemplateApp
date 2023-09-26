@@ -6,9 +6,12 @@ import androidx.viewpager2.widget.ViewPager2
 import kodz.org.core.R
 import kodz.org.core.base.adapter.MultipleTypeAdapter
 import kodz.org.core.base.component.BaseComponent
+import kodz.org.core.base.component.BaseRow
 import kodz.org.core.common.HorizontalMarginItemDecoration
 import kodz.org.core.component.carousel_item.CarouselItemEventHandler
+import kodz.org.core.component.carousel_item.CarouselItemRow
 import kodz.org.core.databinding.ComponentCarouselBinding
+import kodz.org.core.extension.gone
 
 class CarouselComponent : BaseComponent() {
     override var binding: ViewDataBinding? = null
@@ -22,10 +25,18 @@ class CarouselComponent : BaseComponent() {
 
     private fun initComponent() {
         (binding as? ComponentCarouselBinding)?.run {
-            data?.list?.let { list ->
+            data?.itemList?.let { list ->
                 prepareCarousel(this.viewPagerVertical)
                 this.viewPagerVertical.adapter = carouselAdapter
-                carouselAdapter.submitList(list)
+
+                val itemList = mutableListOf<CarouselItemRow>()
+                list.forEach {
+                    itemList.add(CarouselItemRow(it))
+                }
+
+                carouselAdapter.submitList(itemList as List<BaseRow>?)
+            } ?: run {
+                binding?.root?.gone()
             }
         }
     }

@@ -6,6 +6,7 @@ import android.text.method.ScrollingMovementMethod
 import androidx.activity.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
@@ -13,6 +14,7 @@ import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.LoadingModel
 import kodz.org.template.databinding.ActivityMainBinding
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
     override val viewModel: MainViewModel by viewModels()
     override var viewLifeCycleOwner: LifecycleOwner = this

@@ -1,8 +1,10 @@
-package kodz.org.core.component.section_title
+package kodz.org.feature.dashboard.presentation.row
 
-import kodz.org.core.base.component.GenerateBaseRow
 import kodz.org.core.base.component.BaseRow
+import kodz.org.core.base.component.GenerateBaseRow
 import kodz.org.core.base.handler.ButtonEventHandler
+import kodz.org.core.component.section_title.SectionTitleDataModel
+import kodz.org.core.component.section_title.SectionTitleRow
 
 
 /**

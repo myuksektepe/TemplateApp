@@ -18,7 +18,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "$project.rootDir/tools/proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "$project.rootDir/tools/proguard-rules.pro"
+            )
         }
     }
     buildFeatures { dataBinding = true }
@@ -42,13 +45,19 @@ dependencies {
     implementation(Dependencies.glide) {
         exclude(group = "com.android.support")
     }
-    kapt("androidx.annotation:annotation:1.6.0")
+    kapt("androidx.annotation:annotation:1.7.0")
     kapt(Dependencies.glideCompiler)
 
     // KTX
     implementation(Dependencies.ktxCore)
     implementation(Dependencies.ktxNavigationFragment)
     implementation(Dependencies.ktxNavigationUi)
+
+    // Retrofit2
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.retrofitGson)
+    implementation(Dependencies.retrofitCoroutinesAdapter)
+    implementation(Dependencies.okHttpLogging)
 
     // Gson
     implementation(Dependencies.gson)

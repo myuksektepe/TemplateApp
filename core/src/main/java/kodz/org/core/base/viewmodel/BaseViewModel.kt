@@ -8,4 +8,4 @@ import androidx.lifecycle.ViewModel
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-abstract class BaseViewModel() : ViewModel() {}
+abstract class BaseViewModel() : ViewModel()

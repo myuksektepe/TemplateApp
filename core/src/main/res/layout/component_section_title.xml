@@ -40,7 +40,6 @@
             android:layout_marginEnd="@dimen/_16sdp"
             android:background="@color/transparent"
             android:enabled="@{data.isButtonEnable}"
-            android:onClick="@{() -> viewModel.onButtonClick()}"
             android:padding="@dimen/_10sdp"
             android:text="@{data.buttonText != null ? data.buttonText : @string/viewAll}"
             android:textSize="@dimen/_11sdp"

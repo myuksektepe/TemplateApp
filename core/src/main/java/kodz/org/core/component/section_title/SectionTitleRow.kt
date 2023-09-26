@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-class SectionTitleRow(
+open class SectionTitleRow(
     override var dataModel: BaseDataModel
 ) : BaseRow() {
     override val layout: Int = R.layout.component_section_title

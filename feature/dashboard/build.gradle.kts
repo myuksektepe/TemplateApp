@@ -51,10 +51,17 @@ dependencies {
     implementation(Dependencies.ktxNavigationFragment)
     implementation(Dependencies.ktxLifecycleViewModel)
 
+    // Kotlin
+    implementation(Dependencies.kotlinReflec)
+
     // Hilt
     implementation(Dependencies.hilt)
     kapt(Dependencies.hiltCompiler)
     kapt(Dependencies.hiltCompilerX)
+
+    // Gson
+    implementation(Dependencies.gson)
+    implementation(Dependencies.gson)
 
     // Test
     testImplementation(Dependencies.junitTest)

@@ -13,6 +13,8 @@
             android:id="@+id/listDashboard"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            tools:itemCount="4"
+            tools:listitem="@layout/component_section_title"
             baseApppplication:layout_constraintBottom_toBottomOf="parent"
             baseApppplication:layout_constraintEnd_toEndOf="parent"
             baseApppplication:layout_constraintStart_toStartOf="parent"
