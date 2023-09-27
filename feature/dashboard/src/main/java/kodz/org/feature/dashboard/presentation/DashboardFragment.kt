@@ -16,7 +16,7 @@ import kodz.org.feature.dashboard.databinding.FragmentDashboardBinding
 class DashboardFragment :
     BaseFragment<DashboardViewModel, FragmentDashboardBinding>(R.layout.fragment_dashboard) {
     override val viewModel: DashboardViewModel by viewModels()
-    override val isBottomNavigationViewVisible = true
+    override val isBottomNavigationViewVisible = false
     private val rowAdapter = MultipleTypeAdapter()
 
     override fun bindingViewModel(binding: FragmentDashboardBinding) {

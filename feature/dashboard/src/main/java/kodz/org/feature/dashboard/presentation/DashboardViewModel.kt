@@ -1,19 +1,15 @@
 package kodz.org.feature.dashboard.presentation
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kodz.org.core.base.component.BaseComponent
-import kodz.org.core.base.component.BaseDataModel
 import kodz.org.core.base.component.BaseRow
 import kodz.org.core.base.data.http.HttpFlow
 import kodz.org.core.base.data.http.HttpRequest
 import kodz.org.core.base.data.http.toResponseModel
-import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.component.carousel.CarouselComponent
@@ -21,10 +17,10 @@ import kodz.org.core.component.carousel.CarouselDataModel
 import kodz.org.core.component.carousel.CarouselRow
 import kodz.org.core.component.carousel_item.CarouselItemDataModel
 import kodz.org.core.component.carousel_item.CarouselItemRow
+import kodz.org.core.component.makeRow
 import kodz.org.core.component.section_title.SectionTitleComponent
 import kodz.org.core.component.section_title.SectionTitleDataModel
 import kodz.org.core.component.section_title.SectionTitleRow
-import kodz.org.core.model.ClickEventModel
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.Resource
 import kodz.org.feature.dashboard.data.DashboardRequest
@@ -34,7 +30,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.reflect.full.primaryConstructor
 
 
 /**
@@ -85,7 +80,7 @@ class DashboardViewModel @Inject constructor(
                             it.rowName?.let { rowName ->
                                 when (rowName) {
                                     "SectionTitleRow" -> {
-                                        clsRow = makeRow<SectionTitleDataModel, SectionTitleRow, SectionTitleComponent>(dataModelString)
+                                        clsRow = makeRow<SectionTitleRow, SectionTitleComponent, SectionTitleDataModel>(dataModelString)
                                         /*
                                         dataModelString?.toResponseModel<SectionTitleDataModel>()?.let { dataModel ->
                                             clsRow = SectionTitleRow(dataModel).apply {
@@ -104,12 +99,12 @@ class DashboardViewModel @Inject constructor(
                                             dataModel.itemList.forEach { carouselItemData ->
                                                 CarouselItemRow(carouselItemData)
                                             }
-                                            clsRow = makeRow<CarouselDataModel, CarouselRow, CarouselComponent>(dataModelString)
+                                            clsRow = makeRow<CarouselRow, CarouselComponent, CarouselDataModel>(dataModelString)
                                         }
                                     }
 
                                     "CarouselItemRow" -> {
-                                        clsRow = makeRow<CarouselItemDataModel, CarouselItemRow, CarouselComponent>(dataModelString)
+                                        clsRow = makeRow<CarouselItemRow, CarouselComponent, CarouselItemDataModel>(dataModelString)
                                     }
                                 }
 
@@ -124,19 +119,5 @@ class DashboardViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    private inline fun <reified BDM : BaseDataModel, reified R : BaseRow, reified C : BaseComponent> makeRow(dataModelString: String?): BaseRow? {
-        var row: BaseRow? = null
-        dataModelString?.toResponseModel<BDM>()?.let { dataModel ->
-            row = R::class.primaryConstructor?.call(dataModel)?.apply {
-                (component as? C)?.eventHandler = object : ItemClickHandler {
-                    override fun onItemClick(clickEventModel: ClickEventModel?) {
-                        Log.i("applog", clickEventModel.toString())
-                    }
-                }
-            }
-        }
-        return row
     }
 }

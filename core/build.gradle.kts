@@ -48,6 +48,9 @@ dependencies {
     kapt("androidx.annotation:annotation:1.7.0")
     kapt(Dependencies.glideCompiler)
 
+    // Kotlin
+    implementation(Dependencies.kotlinReflec)
+
     // KTX
     implementation(Dependencies.ktxCore)
     implementation(Dependencies.ktxNavigationFragment)

@@ -51,9 +51,6 @@ dependencies {
     implementation(Dependencies.ktxNavigationFragment)
     implementation(Dependencies.ktxLifecycleViewModel)
 
-    // Kotlin
-    implementation(Dependencies.kotlinReflec)
-
     // Hilt
     implementation(Dependencies.hilt)
     kapt(Dependencies.hiltCompiler)
