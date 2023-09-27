@@ -14,5 +14,4 @@ class CarouselItemRow(
     override val viewModel = CarouselItemViewModel()
     override val component = CarouselItemComponent()
     override var binding: ViewDataBinding? = null
-    // override var eventHandler: BaseEventHandler? = null
 }

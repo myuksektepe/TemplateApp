@@ -55,8 +55,7 @@ class DashboardFragment :
     private fun setUI() {
         binding.listDashboard.run {
             adapter = rowAdapter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             // addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
             setHasFixedSize(true)
         }

@@ -1,6 +1,7 @@
 package kodz.org.core.base.component
 
 import androidx.databinding.ViewDataBinding
+import kodz.org.core.base.handler.ItemClickHandler
 
 /**
  * Created by Murat Yüksektepe on 10.08.2023.
@@ -14,6 +15,7 @@ import androidx.databinding.ViewDataBinding
  * binding kullanıralak atamalar yapılır.
  */
 abstract class BaseComponent {
+    abstract var eventHandler: ItemClickHandler?
     abstract val binding: ViewDataBinding?
     abstract fun initBinding(viewDataBinding: ViewDataBinding)
 }

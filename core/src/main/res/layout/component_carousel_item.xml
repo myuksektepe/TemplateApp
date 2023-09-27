@@ -20,8 +20,7 @@
         android:layout_height="match_parent"
         android:layout_marginVertical="@dimen/_16sdp"
         app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="@dimen/_8sdp"
-        android:onClick="@{() -> viewModel.onItemClick(data.id)}">
+        app:cardElevation="@dimen/_8sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,12 +30,12 @@
                 android:id="@+id/img"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:foreground="@drawable/carousel_item_background"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_close"
-                android:foreground="@drawable/carousel_item_background"/>
+                tools:src="@drawable/ic_close" />
 
             <TextView
                 android:id="@+id/txtTitle"

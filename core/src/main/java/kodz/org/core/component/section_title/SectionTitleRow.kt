@@ -20,5 +20,4 @@ open class SectionTitleRow(
     override val viewModel = SectionTitleViewModel()
     override val component = SectionTitleComponent()
     override var binding: ViewDataBinding? = null
-    // override var eventHandler: BaseEventHandler? = null
 }

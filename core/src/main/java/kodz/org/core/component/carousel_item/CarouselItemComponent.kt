@@ -4,12 +4,13 @@ import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
 import kodz.org.core.R
 import kodz.org.core.base.component.BaseComponent
+import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.databinding.ComponentCarouselItemBinding
 import kodz.org.core.extension.setSpamProtectedClickListener
 
 class CarouselItemComponent : BaseComponent() {
     override var binding: ViewDataBinding? = null
-    var eventHandler: CarouselItemEventHandler? = null
+    override var eventHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
@@ -28,7 +29,7 @@ class CarouselItemComponent : BaseComponent() {
 
                 // EventHandler
                 this.crsItemCard.setSpamProtectedClickListener {
-                    eventHandler?.onItemClick(data.id)
+                    eventHandler?.onItemClick(data.clickEventModel)
                 }
             }
         }

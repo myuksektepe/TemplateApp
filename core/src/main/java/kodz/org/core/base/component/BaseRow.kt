@@ -21,5 +21,4 @@ abstract class BaseRow {
     abstract val viewModel: BaseViewModel
     abstract val component: BaseComponent
     abstract var binding: ViewDataBinding?
-    // abstract var eventHandler: BaseEventHandler?
 }

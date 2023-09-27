@@ -2,7 +2,7 @@ package kodz.org.core.component.section_title
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.component.BaseComponent
-import kodz.org.core.base.handler.ButtonEventHandler
+import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.databinding.ComponentSectionTitleBinding
 import kodz.org.core.extension.setSpamProtectedClickListener
 import javax.inject.Inject
@@ -13,8 +13,8 @@ import javax.inject.Inject
  * yuksektepemurat@gmail.com
  */
 class SectionTitleComponent @Inject constructor() : BaseComponent() {
-    var eventHandler: ButtonEventHandler? = null
     override var binding: ViewDataBinding? = null
+    override var eventHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
@@ -26,7 +26,7 @@ class SectionTitleComponent @Inject constructor() : BaseComponent() {
 
             // EventHandler
             btnSectionViewAll.setSpamProtectedClickListener {
-                eventHandler?.onButtonClick()
+                eventHandler?.onItemClick(data?.clickEventModel)
             }
 
         }
