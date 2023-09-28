@@ -7,9 +7,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.adapter.MultipleTypeAdapter
 import kodz.org.core.base.component.BaseRow
 import kodz.org.core.base.fragment.BaseFragment
+import kodz.org.core.common.CommonIcons
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.Resource
 import kodz.org.feature.dashboard.R
+import kodz.org.feature.dashboard.data.SettingsModel
 import kodz.org.feature.dashboard.databinding.FragmentDashboardBinding
 
 @AndroidEntryPoint
@@ -29,7 +31,11 @@ class DashboardFragment :
     }
 
     override fun observeViewModel() {
-        viewModel.rowList.observe(viewLifecycleOwner) {
+        observeLiveData(viewModel.screenSettingsLiveData) {
+            prepareScreen(it)
+        }
+
+        observeLiveData(viewModel.rowListLiveData) {
             when (it) {
                 is Resource.Loading -> {
                     showFullScreenLoading(LoadingModel())
@@ -64,5 +70,17 @@ class DashboardFragment :
     private fun showResultViaAdapter(adapter: MultipleTypeAdapter, list: List<BaseRow>) {
         hideFullScreenLoading()
         adapter.submitList(list)
+    }
+
+    private fun prepareScreen(screenSettingsModel: SettingsModel?) {
+        screenSettingsModel?.let {
+            // Title & Icon
+            it.title?.let { title ->
+                setActionBarTitleAndIcon(
+                    title = title,
+                    icon = if (it.isBackIconVisible == true) CommonIcons.GO_BACK else it.customIcon
+                )
+            }
+        }
     }
 }

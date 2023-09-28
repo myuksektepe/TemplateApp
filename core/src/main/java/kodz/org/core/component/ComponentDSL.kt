@@ -22,3 +22,15 @@ inline fun <reified R : BaseRow, reified C : BaseComponent, reified BDM : BaseDa
     }
     return row
 }
+
+inline fun <reified R : BaseRow, reified C : BaseComponent, reified BDM : BaseDataModel> makeRow(dataModel: BaseDataModel?): BaseRow? {
+    var row: BaseRow? = null
+    row = R::class.primaryConstructor?.call(dataModel)?.apply {
+        (component as? C)?.eventHandler = object : ItemClickHandler {
+            override fun onItemClick(clickEventModel: ClickEventModel?) {
+                Log.i("applog", clickEventModel.toString())
+            }
+        }
+    }
+    return row
+}

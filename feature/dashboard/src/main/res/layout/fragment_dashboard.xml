@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:baseApppplication="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,12 +13,12 @@
             android:id="@+id/listDashboard"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="4"
-            tools:listitem="@layout/component_section_title"
-            baseApppplication:layout_constraintBottom_toBottomOf="parent"
-            baseApppplication:layout_constraintEnd_toEndOf="parent"
-            baseApppplication:layout_constraintStart_toStartOf="parent"
-            baseApppplication:layout_constraintTop_toTopOf="parent" />
+            tools:listitem="@layout/component_section_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

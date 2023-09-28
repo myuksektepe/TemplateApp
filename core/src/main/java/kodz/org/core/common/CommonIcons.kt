@@ -5,6 +5,9 @@ import kodz.org.core.R
 
 enum class CommonIcons(val imageName: String, val resourceId: Int) {
 
+    @SerializedName("goBack")
+    GO_BACK("goBack", R.drawable.ic_back),
+
     @SerializedName("refresh", alternate = ["tryAgain"])
     REFRESH("refresh", R.drawable.ic_refresh),
 

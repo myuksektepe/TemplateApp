@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
+import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core.model.ErrorModel
@@ -52,7 +53,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             txtErrorTitle.text = errorModel.title ?: getString(kodz.org.core.R.string.error)
 
             // Description
-            txtErrorDescription.text = errorModel.description
+            txtErrorDescription.apply {
+                text = errorModel.description
+                movementMethod = ScrollingMovementMethod()
+            }
             txtLoadingDescription.movementMethod = ScrollingMovementMethod()
 
             // Primary Button
@@ -75,4 +79,19 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         binding.apply { frmError.gone() }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
+    override fun setActionBarTitleAndIcon(title: String?, icon: CommonIcons?) {
+        binding.run {
+
+            if (!title.isNullOrEmpty()) {
+                toolBar.title = title
+                appBar.visible()
+            }
+            icon?.let { icon -> toolBar.navigationIcon = getDrawable(icon.resourceId) }
+            toolBar.setNavigationOnClickListener {
+                if (icon == CommonIcons.GO_BACK) finish()
+            }
+
+        }
+    }
 }

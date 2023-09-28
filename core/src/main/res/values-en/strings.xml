@@ -9,4 +9,5 @@
     <string name="success">Success</string>
     <string name="okay">Okay</string>
     <string name="cancel">Cancel</string>
+    <string name="search">Quick search…</string>
 </resources>

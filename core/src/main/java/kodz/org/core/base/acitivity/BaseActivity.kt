@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kodz.org.core.base.viewmodel.BaseViewModel
+import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.safeNavigate
 import kodz.org.core.extension.setIsVisible
 import kodz.org.core.model.ErrorModel
@@ -117,4 +118,6 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
     fun setBottomNavigationViewVisibility(isVisible: Boolean) {
         getBottomNavigationView()?.setIsVisible(isVisible)
     }
+
+    abstract fun setActionBarTitleAndIcon(title: String?, icon: CommonIcons?)
 }

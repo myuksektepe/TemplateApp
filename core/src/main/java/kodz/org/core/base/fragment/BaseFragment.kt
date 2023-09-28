@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.BaseViewModel
+import kodz.org.core.common.CommonIcons
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.LoadingModel
 
@@ -108,6 +109,10 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    fun setActionBarTitleAndIcon(title: String, icon: CommonIcons?) {
+        (requireActivity() as BaseActivity<*, *>).setActionBarTitleAndIcon(title, icon)
     }
 
     fun <T> observeLiveData(liveData: LiveData<T>, observer: Observer<T>): Unit =

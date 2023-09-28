@@ -16,6 +16,6 @@ import kodz.org.core.base.handler.ItemClickHandler
  */
 abstract class BaseComponent {
     abstract var eventHandler: ItemClickHandler?
-    abstract val binding: ViewDataBinding?
+    abstract var binding: ViewDataBinding?
     abstract fun initBinding(viewDataBinding: ViewDataBinding)
 }

@@ -8,7 +8,6 @@ import kodz.org.core.extension.isOnline
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -29,34 +28,33 @@ class HttpRequest @Inject constructor(
 
         coroutineScope {
             emit(HttpFlow.Loading)
-            var call: Response<*>? = null
             if (context.isOnline()) {
                 try {
-                    call = httpApiService.doPostRequest<RS>(
+                    httpApiService.doPostRequest<RS>(
                         inputModel = inputJsonObject,
                         token = "[TOKEN]",
                         path = requestModel.endpoint
-                    )
+                    ).let {
+                        if (it.isSuccessful) {
+                            it.body()?.let { body ->
+                                // Type converting
+                                val type = object : TypeToken<RS>() {}.type
+                                val outPutJsonObject = gson.toJsonTree(body).asJsonObject
+                                // val outPutJsonObject2 = gson.fromJson<RS>(body.toString(), JsonObject::class.java)
+                                val responseObject = gson.fromJson<RS>(outPutJsonObject.toString(), type)
+                                emit(HttpFlow.Success(responseObject))
+                            } ?: kotlin.run {
+                                emit(HttpFlow.Error(BaseError(errorMessage = it.message())))
+                            }
+                        } else {
+                            emit(HttpFlow.Error(BaseError(errorMessage = it.errorBody().toString())))
+                        }
+                    }
                 } catch (e: Exception) {
                     emit(HttpFlow.Error(BaseError(errorMessage = e.message)))
+                } catch (e: IllegalStateException) {
+                    emit(HttpFlow.Error(BaseError(errorMessage = e.message)))
                 }
-
-                call?.let {
-                    if (it.isSuccessful) {
-                        it.body()?.let { body ->
-                            // Type converting
-                            val type = object : TypeToken<RS>() {}.type
-                            val outPutJsonObject = gson.toJsonTree(body).asJsonObject
-                            val responseObject = gson.fromJson<RS>(outPutJsonObject, type)
-                            emit(HttpFlow.Success(responseObject))
-                        } ?: kotlin.run {
-                            emit(HttpFlow.Error(BaseError(errorMessage = call.message())))
-                        }
-                    } else {
-                        emit(HttpFlow.Error(BaseError(errorMessage = call.errorBody().toString())))
-                    }
-                }
-
             } else {
                 emit(HttpFlow.Error(BaseError(errorMessage = "Internet connection error!")))
             }

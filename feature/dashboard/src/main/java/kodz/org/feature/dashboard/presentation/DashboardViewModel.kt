@@ -18,6 +18,9 @@ import kodz.org.core.component.carousel.CarouselRow
 import kodz.org.core.component.carousel_item.CarouselItemDataModel
 import kodz.org.core.component.carousel_item.CarouselItemRow
 import kodz.org.core.component.makeRow
+import kodz.org.core.component.searchbox.SearchBoxComponent
+import kodz.org.core.component.searchbox.SearchBoxDataModel
+import kodz.org.core.component.searchbox.SearchBoxRow
 import kodz.org.core.component.section_title.SectionTitleComponent
 import kodz.org.core.component.section_title.SectionTitleDataModel
 import kodz.org.core.component.section_title.SectionTitleRow
@@ -25,6 +28,7 @@ import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.Resource
 import kodz.org.feature.dashboard.data.DashboardRequest
 import kodz.org.feature.dashboard.data.DashboardResponse
+import kodz.org.feature.dashboard.data.SettingsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -45,10 +49,14 @@ class DashboardViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private var job: Job? = null
-    private val rowListLiveData = MutableLiveData<Resource<List<BaseRow>>>()
-    val rowList: LiveData<Resource<List<BaseRow>>> get() = rowListLiveData
-
     private val componentList = mutableListOf<BaseRow>()
+
+    private val rowList = MutableLiveData<Resource<List<BaseRow>>>()
+    val rowListLiveData: LiveData<Resource<List<BaseRow>>> get() = rowList
+
+    private val screenSettings = MutableLiveData<SettingsModel?>()
+    val screenSettingsLiveData: LiveData<SettingsModel?> get() = screenSettings
+
 
     fun fetchAdapter() {
         job?.cancel()
@@ -57,11 +65,11 @@ class DashboardViewModel @Inject constructor(
             httpRequest.postRequest<DashboardRequest, DashboardResponse>(context, DashboardRequest()).collectLatest { response ->
                 when (response) {
                     is HttpFlow.Loading -> {
-                        rowListLiveData.postValue(Resource.Loading)
+                        rowList.postValue(Resource.Loading)
                     }
 
                     is HttpFlow.Error -> {
-                        rowListLiveData.postValue(Resource.Error(
+                        rowList.postValue(Resource.Error(
                             ErrorModel(
                                 title = "Üzgünüz, bir hata oluştu",
                                 description = response.exception.message,
@@ -73,25 +81,25 @@ class DashboardViewModel @Inject constructor(
                     }
 
                     is HttpFlow.Success -> {
-                        response.data.dashboard?.forEach {
+                        var clsRow: BaseRow? = null
+
+                        screenSettings.postValue(response.data.settings)
+
+                        // If SearchBox is visible
+                        response.data.settings?.isSearchBoxVisible?.let {
+                            makeRow<SearchBoxRow, SearchBoxComponent, SearchBoxDataModel>(SearchBoxDataModel())?.let {
+                                componentList.add(it)
+                            }
+                        }
+
+                        // Rows
+                        response.data.rows?.forEach {
                             val dataModelString = it.dataModel
-                            var clsRow: BaseRow? = null
 
                             it.rowName?.let { rowName ->
                                 when (rowName) {
                                     "SectionTitleRow" -> {
                                         clsRow = makeRow<SectionTitleRow, SectionTitleComponent, SectionTitleDataModel>(dataModelString)
-                                        /*
-                                        dataModelString?.toResponseModel<SectionTitleDataModel>()?.let { dataModel ->
-                                            clsRow = SectionTitleRow(dataModel).apply {
-                                                component.eventHandler = object : ItemClickHandler {
-                                                    override fun onItemClick(clickEventModel: ClickEventModel?) {
-                                                        Log.i("applog", clickEventModel.toString())
-                                                    }
-                                                }
-                                            }
-                                        }
-                                         */
                                     }
 
                                     "CarouselRow" -> {
@@ -106,15 +114,18 @@ class DashboardViewModel @Inject constructor(
                                     "CarouselItemRow" -> {
                                         clsRow = makeRow<CarouselItemRow, CarouselComponent, CarouselItemDataModel>(dataModelString)
                                     }
-                                }
 
+                                    "SearchBoxRow" -> {
+                                        clsRow = makeRow<SearchBoxRow, SearchBoxComponent, SearchBoxDataModel>(dataModelString)
+                                    }
+                                }
                                 clsRow?.let { row -> componentList.add(row) }
                             }
 
                         }
 
                         // Send Component List to Adapter
-                        rowListLiveData.postValue(Resource.Success(componentList))
+                        rowList.postValue(Resource.Success(componentList))
                     }
                 }
             }
