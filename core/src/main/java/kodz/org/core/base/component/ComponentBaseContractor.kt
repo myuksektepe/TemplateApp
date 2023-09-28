@@ -14,7 +14,7 @@ import kodz.org.core.base.handler.ItemClickHandler
  * Bu sınıftan türetilen sınıflarda komponentin görüntüsü üzerinde
  * binding kullanıralak atamalar yapılır.
  */
-abstract class BaseComponent {
+abstract class ComponentBaseContractor {
     abstract var eventHandler: ItemClickHandler?
     abstract var binding: ViewDataBinding?
     abstract fun initBinding(viewDataBinding: ViewDataBinding)

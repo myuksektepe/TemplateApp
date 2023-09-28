@@ -1,5 +1,5 @@
 package kodz.org.core.component.carousel_item
 
-import kodz.org.core.base.viewmodel.BaseViewModel
+import kodz.org.core.base.component.ComponentBaseViewModel
 
-class CarouselItemViewModel : BaseViewModel() {}
+class CarouselItemViewModel : ComponentBaseViewModel() {}

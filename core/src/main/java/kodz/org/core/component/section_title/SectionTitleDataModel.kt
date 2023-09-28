@@ -1,7 +1,7 @@
 package kodz.org.core.component.section_title
 
 import com.google.gson.annotations.SerializedName
-import kodz.org.core.base.component.BaseDataModel
+import kodz.org.core.base.component.ComponentBaseDataModel
 import kodz.org.core.model.ClickEventModel
 
 /**
@@ -16,4 +16,4 @@ data class SectionTitleDataModel(
     @SerializedName("isButtonEnable") val isButtonEnable: Boolean = true,
     @SerializedName("buttonText") val buttonText: String? = null,
     @SerializedName("clickEventModel") override val clickEventModel: ClickEventModel? = null
-) : BaseDataModel()
+) : ComponentBaseDataModel()

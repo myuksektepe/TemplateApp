@@ -10,7 +10,7 @@
             type="kodz.org.core.component.searchbox.SearchBoxViewModel" />
 
         <variable
-            name="dataModel"
+            name="data"
             type="kodz.org.core.component.searchbox.SearchBoxDataModel" />
     </data>
 

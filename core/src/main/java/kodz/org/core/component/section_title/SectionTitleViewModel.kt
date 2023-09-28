@@ -1,6 +1,6 @@
 package kodz.org.core.component.section_title
 
-import kodz.org.core.base.viewmodel.BaseViewModel
+import kodz.org.core.base.component.ComponentBaseViewModel
 
 
 /**
@@ -8,5 +8,5 @@ import kodz.org.core.base.viewmodel.BaseViewModel
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-class SectionTitleViewModel : BaseViewModel() {
+class SectionTitleViewModel : ComponentBaseViewModel() {
 }

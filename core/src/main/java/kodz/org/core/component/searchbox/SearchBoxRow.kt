@@ -2,16 +2,16 @@ package kodz.org.core.component.searchbox
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.R
-import kodz.org.core.base.component.BaseDataModel
-import kodz.org.core.base.component.BaseRow
+import kodz.org.core.base.component.ComponentBaseDataModel
+import kodz.org.core.base.component.ComponentBaseRow
 import kotlin.reflect.KClass
 
 class SearchBoxRow(
-    override var dataModel: BaseDataModel
-) : BaseRow() {
+    override var dataModel: ComponentBaseDataModel
+) : ComponentBaseRow() {
     override val layout = R.layout.component_searchbox
     override val dataClass: KClass<*> = SearchBoxDataModel::class
     override val viewModel = SearchBoxViewModel()
-    override val component = SearchBoxComponent()
+    override val component = SearchBoxContractor()
     override var binding: ViewDataBinding? = null
 }

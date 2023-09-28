@@ -1,6 +1,6 @@
 package kodz.org.core.component.searchbox
 
-import kodz.org.core.base.viewmodel.BaseViewModel
+import kodz.org.core.base.component.ComponentBaseViewModel
 
-class SearchBoxViewModel : BaseViewModel() {
+class SearchBoxViewModel : ComponentBaseViewModel() {
 }

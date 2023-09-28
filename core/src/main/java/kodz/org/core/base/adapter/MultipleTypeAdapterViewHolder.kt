@@ -3,7 +3,7 @@ package kodz.org.core.base.adapter
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import kodz.org.core.BR
-import kodz.org.core.base.component.BaseRow
+import kodz.org.core.base.component.ComponentBaseRow
 
 
 /**
@@ -12,7 +12,7 @@ import kodz.org.core.base.component.BaseRow
  * yuksektepemurat@gmail.com
  */
 class MultipleTypeAdapterViewHolder(private var binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(row: BaseRow) {
+    fun bind(row: ComponentBaseRow) {
         binding.apply {
             setVariable(BR.data, row.dataModel)
             setVariable(BR.viewModel, row.viewModel)

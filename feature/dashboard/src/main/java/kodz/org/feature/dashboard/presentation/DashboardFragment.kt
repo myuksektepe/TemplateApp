@@ -5,7 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.adapter.MultipleTypeAdapter
-import kodz.org.core.base.component.BaseRow
+import kodz.org.core.base.component.ComponentBaseRow
 import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.model.LoadingModel
@@ -67,7 +67,7 @@ class DashboardFragment :
         }
     }
 
-    private fun showResultViaAdapter(adapter: MultipleTypeAdapter, list: List<BaseRow>) {
+    private fun showResultViaAdapter(adapter: MultipleTypeAdapter, list: List<ComponentBaseRow>) {
         hideFullScreenLoading()
         adapter.submitList(list)
     }

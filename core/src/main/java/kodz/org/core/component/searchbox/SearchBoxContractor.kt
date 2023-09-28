@@ -1,10 +1,12 @@
 package kodz.org.core.component.searchbox
 
+import android.view.inputmethod.EditorInfo
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.component.BaseComponent
+import kodz.org.core.base.component.ComponentBaseContractor
 import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.databinding.ComponentSearchboxBinding
 
-class SearchBoxComponent : BaseComponent() {
+class SearchBoxContractor : ComponentBaseContractor() {
     override var eventHandler: ItemClickHandler? = null
     override var binding: ViewDataBinding? = null
 
@@ -14,6 +16,10 @@ class SearchBoxComponent : BaseComponent() {
     }
 
     private fun initComponent() {
-
+        (binding as? ComponentSearchboxBinding)?.run {
+            data?.let { data ->
+                edtSearch.imeOptions = EditorInfo.IME_ACTION_DONE
+            }
+        }
     }
 }

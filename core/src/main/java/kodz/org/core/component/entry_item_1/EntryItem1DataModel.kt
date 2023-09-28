@@ -1,13 +1,11 @@
-package kodz.org.core.component.carousel_item
+package kodz.org.core.component.entry_item_1
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.component.ComponentBaseDataModel
 import kodz.org.core.model.ClickEventModel
 
-data class CarouselItemDataModel(
-    @SerializedName("id") val id: Int,
+class EntryItem1DataModel(
+    @SerializedName("clickEventModel") override val clickEventModel: ClickEventModel? = null,
     @SerializedName("title") val title: String? = null,
-    @SerializedName("description") val description: String? = null,
     @SerializedName("imageUrl") val imageUrl: String? = null,
-    @SerializedName("clickEventModel") override val clickEventModel: ClickEventModel? = null
 ) : ComponentBaseDataModel()

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
-import kodz.org.core.base.component.BaseRow
+import kodz.org.core.base.component.ComponentBaseRow
 
 
 /**
@@ -13,10 +13,10 @@ import kodz.org.core.base.component.BaseRow
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-open class MultipleTypeAdapter : ListAdapter<BaseRow, MultipleTypeAdapterViewHolder>(MultipleTypeAdapterDiffUtil()) {
+open class MultipleTypeAdapter : ListAdapter<ComponentBaseRow, MultipleTypeAdapterViewHolder>(MultipleTypeAdapterDiffUtil()) {
 
     override fun getItemViewType(position: Int): Int {
-        val rowModel = currentList[position] as BaseRow
+        val rowModel = currentList[position] as ComponentBaseRow
         return rowModel.layout
     }
 

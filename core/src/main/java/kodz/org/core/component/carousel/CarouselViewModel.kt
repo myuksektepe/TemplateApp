@@ -1,6 +1,6 @@
 package kodz.org.core.component.carousel
 
-import kodz.org.core.base.viewmodel.BaseViewModel
+import kodz.org.core.base.component.ComponentBaseViewModel
 
-class CarouselViewModel : BaseViewModel() {
+class CarouselViewModel : ComponentBaseViewModel() {
 }

@@ -14,6 +14,6 @@ import kodz.org.core.model.ClickEventModel
  * Bu sınıftan türetilen alt sınıflarda ilgili komponentin ihtiyacı
  * olan veriler için değişkenler oluşturulur.
  */
-abstract class BaseDataModel() {
+abstract class ComponentBaseDataModel() {
     abstract val clickEventModel: ClickEventModel?
 }
