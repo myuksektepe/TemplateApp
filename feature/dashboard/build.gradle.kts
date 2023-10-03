@@ -60,6 +60,9 @@ dependencies {
     implementation(Dependencies.gson)
     implementation(Dependencies.gson)
 
+    // Swipre Refresh Layout
+    implementation(Dependencies.swipeRefreshLayout)
+
     // Test
     testImplementation(Dependencies.junitTest)
     androidTestImplementation(Dependencies.junit)

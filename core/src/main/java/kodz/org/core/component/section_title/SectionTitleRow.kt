@@ -18,6 +18,6 @@ open class SectionTitleRow(
     override val layout: Int = R.layout.component_section_title
     override val dataClass: KClass<*> = SectionTitleDataModel::class
     override val viewModel = SectionTitleViewModel()
-    override val component = SectionTitleContractor()
+    override val contractor = SectionTitleContractor()
     override var binding: ViewDataBinding? = null
 }

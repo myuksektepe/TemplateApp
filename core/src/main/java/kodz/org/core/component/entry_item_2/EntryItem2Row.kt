@@ -11,6 +11,6 @@ class EntryItem2Row(override var dataModel: ComponentBaseDataModel) : ComponentB
     override val layout: Int = R.layout.component_entry_item_2
     override val dataClass: KClass<*> = EntryItem2DataModel::class
     override val viewModel: ComponentBaseViewModel = EntryItem2ViewModel()
-    override val component = EntryItem2Contractor()
+    override val contractor = EntryItem2Contractor()
     override var binding: ViewDataBinding? = null
 }

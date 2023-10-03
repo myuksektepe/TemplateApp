@@ -33,7 +33,7 @@ class CarouselContractor : ComponentBaseContractor() {
                 list.forEach {
                     itemList.add(
                         CarouselItemRow(it).apply {
-                            component.eventHandler = eventHandler
+                            contractor.eventHandler = eventHandler
                         }
                     )
                 }

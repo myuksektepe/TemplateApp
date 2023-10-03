@@ -12,6 +12,6 @@ class SearchBoxRow(
     override val layout = R.layout.component_searchbox
     override val dataClass: KClass<*> = SearchBoxDataModel::class
     override val viewModel = SearchBoxViewModel()
-    override val component = SearchBoxContractor()
+    override val contractor = SearchBoxContractor()
     override var binding: ViewDataBinding? = null
 }

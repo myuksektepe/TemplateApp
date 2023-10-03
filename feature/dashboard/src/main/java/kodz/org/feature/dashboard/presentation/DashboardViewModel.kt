@@ -1,6 +1,7 @@
 package kodz.org.feature.dashboard.presentation
 
 import android.content.Context
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,7 @@ import kodz.org.core.base.component.ComponentBaseRow
 import kodz.org.core.base.data.http.HttpFlow
 import kodz.org.core.base.data.http.HttpRequest
 import kodz.org.core.base.data.http.toResponseModel
+import kodz.org.core.base.handler.SearchHandler
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.component.carousel.CarouselContractor
@@ -54,6 +56,7 @@ class DashboardViewModel @Inject constructor(
     private val httpRequest: HttpRequest
 ) : BaseViewModel() {
 
+    var lifecycleOwner: LifecycleOwner? = null
     private var job: Job? = null
     private val componentList = mutableListOf<ComponentBaseRow>()
 
@@ -63,8 +66,12 @@ class DashboardViewModel @Inject constructor(
     private val screenSettings = MutableLiveData<SettingsModel?>()
     val screenSettingsLiveData: LiveData<SettingsModel?> get() = screenSettings
 
+    private val searchedText = MutableLiveData<String?>()
+    val searchedTextLiveData: LiveData<String?> get() = searchedText
+
 
     fun fetchAdapter() {
+        componentList.clear()
         job?.cancel()
         job = null
         job = viewModelScope.launch(Dispatchers.IO) {
@@ -91,51 +98,54 @@ class DashboardViewModel @Inject constructor(
 
                         screenSettings.postValue(response.data.settings)
 
+                        /*
                         // If SearchBox is visible
-                        response.data.settings?.isSearchBoxVisible?.let {
-                            makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(SearchBoxDataModel())?.let {
-                                componentList.add(it)
+                        if (response.data.settings?.isSearchBoxVisible == true) {
+                            makeRow<SearchBoxRow, SearchBoxContractor>(SearchBoxDataModel())?.let { row ->
+                                componentList.add(row)
+                                (row.contractor as SearchBoxContractor).searchHandler = searchHandler
                             }
                         }
+                         */
 
                         // Rows
                         response.data.rows?.forEach {
-                            val dataModelString = it.dataModel
+                            if (it.isVisible == true) {
+                                val dataModelString = it.dataModel
+                                it.rowName?.let { rowName ->
+                                    when (rowName) {
+                                        "SectionTitleRow" -> {
+                                            clsRow = makeRow<SectionTitleRow, SectionTitleContractor, SectionTitleDataModel>(dataModelString)
+                                        }
 
-                            it.rowName?.let { rowName ->
-                                when (rowName) {
-                                    "SectionTitleRow" -> {
-                                        clsRow = makeRow<SectionTitleRow, SectionTitleContractor, SectionTitleDataModel>(dataModelString)
-                                    }
-
-                                    "CarouselRow" -> {
-                                        dataModelString?.toResponseModel<CarouselDataModel>()?.let { dataModel ->
-                                            dataModel.itemList.forEach { carouselItemData ->
-                                                CarouselItemRow(carouselItemData)
+                                        "CarouselRow" -> {
+                                            dataModelString?.toResponseModel<CarouselDataModel>()?.let { dataModel ->
+                                                dataModel.itemList.forEach { carouselItemData ->
+                                                    CarouselItemRow(carouselItemData)
+                                                }
+                                                clsRow = makeRow<CarouselRow, CarouselContractor, CarouselDataModel>(dataModelString)
                                             }
-                                            clsRow = makeRow<CarouselRow, CarouselContractor, CarouselDataModel>(dataModelString)
+                                        }
+
+                                        "CarouselItemRow" -> {
+                                            clsRow = makeRow<CarouselItemRow, CarouselContractor, CarouselItemDataModel>(dataModelString)
+                                        }
+
+                                        "SearchBoxRow" -> {
+                                            clsRow = makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(dataModelString)
+                                        }
+
+                                        "EntryItem1Row" -> {
+                                            clsRow = makeRow<EntryItem1Row, EntryItem1Contractor, EntryItem1DataModel>(dataModelString)
+                                        }
+
+                                        "EntryItem2Row" -> {
+                                            clsRow = makeRow<EntryItem2Row, EntryItem2Contractor, EntryItem2DataModel>(dataModelString)
                                         }
                                     }
-
-                                    "CarouselItemRow" -> {
-                                        clsRow = makeRow<CarouselItemRow, CarouselContractor, CarouselItemDataModel>(dataModelString)
-                                    }
-
-                                    "SearchBoxRow" -> {
-                                        clsRow = makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(dataModelString)
-                                    }
-
-                                    "EntryItem1Row" -> {
-                                        clsRow = makeRow<EntryItem1Row, EntryItem1Contractor, EntryItem1DataModel>(dataModelString)
-                                    }
-
-                                    "EntryItem2Row" -> {
-                                        clsRow = makeRow<EntryItem2Row, EntryItem2Contractor, EntryItem2DataModel>(dataModelString)
-                                    }
+                                    clsRow?.let { row -> componentList.add(row) }
                                 }
-                                clsRow?.let { row -> componentList.add(row) }
                             }
-
                         }
 
                         // Send Component List to Adapter
@@ -143,6 +153,12 @@ class DashboardViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    private val searchHandler = object : SearchHandler {
+        override fun searchedText(text: String?) {
+            searchedText.postValue(text)
         }
     }
 }

@@ -18,6 +18,6 @@ abstract class ComponentBaseRow {
     abstract val layout: Int
     abstract val dataClass: KClass<*>
     abstract val viewModel: ComponentBaseViewModel
-    abstract val component: ComponentBaseContractor
+    abstract val contractor: ComponentBaseContractor
     abstract var binding: ViewDataBinding?
 }

@@ -12,7 +12,7 @@ object DependencyVersions {
     const val legacySupportV4 = "1.0.0"
     const val recyclerView = "1.2.1"
     const val recyclerViewSelection = "1.2.0-alpha01"
-    const val swipeRefreshLayout = "1.1.0"
+    const val swipeRefreshLayout = "1.2.0-alpha01"
     const val viewPager2 = "1.0.0"
     const val flexBox = "3.0.0"
 

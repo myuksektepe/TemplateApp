@@ -12,6 +12,6 @@ class CarouselRow(
     override val layout: Int = R.layout.component_carousel
     override val dataClass: KClass<*> = CarouselDataModel::class
     override val viewModel = CarouselViewModel()
-    override val component = CarouselContractor()
+    override val contractor = CarouselContractor()
     override var binding: ViewDataBinding? = null
 }
