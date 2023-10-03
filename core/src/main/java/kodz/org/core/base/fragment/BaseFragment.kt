@@ -111,8 +111,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         _binding = null
     }
 
-    fun setActionBarTitleAndIcon(title: String, icon: CommonIcons?) {
-        (requireActivity() as BaseActivity<*, *>).setActionBarTitleAndIcon(title, icon)
+    fun setActionBarTitleAndIcon(title: String, subTitle: String?, icon: CommonIcons?) {
+        (requireActivity() as BaseActivity<*, *>).setActionBarTitleAndIcon(title, subTitle, icon)
     }
 
     fun <T> observeLiveData(liveData: LiveData<T>, observer: Observer<T>): Unit =

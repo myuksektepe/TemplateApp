@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.component.ComponentBaseRow
 import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.common.CommonIcons
+import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.Resource
@@ -95,6 +96,7 @@ class DashboardFragment :
             it.title?.let { title ->
                 setActionBarTitleAndIcon(
                     title = title,
+                    subTitle = it.subTitle,
                     icon = if (it.isBackIconVisible == true) CommonIcons.GO_BACK else it.customIcon
                 )
             }
@@ -117,7 +119,7 @@ class DashboardFragment :
 
                 })
                 binding.searchBox.root.visible()
-            }
+            } else binding.searchBox.root.gone()
         }
     }
 }

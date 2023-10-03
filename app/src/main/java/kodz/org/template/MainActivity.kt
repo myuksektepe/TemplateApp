@@ -80,11 +80,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    override fun setActionBarTitleAndIcon(title: String?, icon: CommonIcons?) {
+    override fun setActionBarTitleAndIcon(title: String?, subTitle: String?, icon: CommonIcons?) {
         binding.run {
 
             if (!title.isNullOrEmpty()) {
                 toolBar.title = title
+                toolBar.subtitle = subTitle
                 appBar.visible()
             }
             icon?.let { icon -> toolBar.navigationIcon = getDrawable(icon.resourceId) }

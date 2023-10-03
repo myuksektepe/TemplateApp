@@ -119,5 +119,5 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
         getBottomNavigationView()?.setIsVisible(isVisible)
     }
 
-    abstract fun setActionBarTitleAndIcon(title: String?, icon: CommonIcons?)
+    abstract fun setActionBarTitleAndIcon(title: String?, subTitle: String?, icon: CommonIcons?)
 }
