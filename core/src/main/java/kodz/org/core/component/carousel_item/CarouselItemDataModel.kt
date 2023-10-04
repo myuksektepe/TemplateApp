@@ -2,7 +2,7 @@ package kodz.org.core.component.carousel_item
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.component.ComponentBaseDataModel
-import kodz.org.core.model.ClickEventModel
+import kodz.org.core.model.screen.ClickEventModel
 
 data class CarouselItemDataModel(
     @SerializedName("id") val id: Int,

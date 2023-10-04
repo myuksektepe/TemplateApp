@@ -7,6 +7,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDeepLinkRequest
@@ -42,7 +43,7 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
     abstract fun getBottomNavigationView(): BottomNavigationView?
 
     protected var navHost: NavHostFragment? = null
-    open fun getNavHostFragment(): NavHostFragment? = null
+    open fun getFragmentContainerView(): FragmentContainerView? = null
 
     private fun initBinding() {
         viewLifeCycleOwner = this
@@ -68,7 +69,7 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
         setContentView(_binding!!.root)
 
         // Navigation host
-        navHost = getNavHostFragment()
+        navHost = getFragmentContainerView()?.id?.let { supportFragmentManager.findFragmentById(it) } as NavHostFragment
         navHost?.let {
             getBottomNavigationView()?.setupWithNavController(it.navController)
         }
@@ -102,6 +103,10 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
             val request = NavDeepLinkRequest.Builder.fromUri(uri).build()
             navHost?.navController?.navigate(request)
         }
+    }
+
+    fun navigateWithDeepLink(deepLinkRequest: NavDeepLinkRequest) {
+        navHost?.navController?.navigate(deepLinkRequest)
     }
 
     fun navigateUp() = navHost?.navController?.navigateUp()

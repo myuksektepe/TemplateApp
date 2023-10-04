@@ -15,7 +15,7 @@ import kodz.org.core.base.handler.ItemClickHandler
  * binding kullanıralak atamalar yapılır.
  */
 abstract class ComponentBaseContractor {
-    abstract var eventHandler: ItemClickHandler?
+    abstract var itemClickHandler: ItemClickHandler?
     abstract var binding: ViewDataBinding?
     abstract fun initBinding(viewDataBinding: ViewDataBinding)
 }

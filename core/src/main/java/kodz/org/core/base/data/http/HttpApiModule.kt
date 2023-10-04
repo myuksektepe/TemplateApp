@@ -39,7 +39,7 @@ object HttpApiModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://api.rit.im/")
+            .baseUrl("https://api.rit.im/template/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())

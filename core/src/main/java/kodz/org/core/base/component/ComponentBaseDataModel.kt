@@ -1,6 +1,6 @@
 package kodz.org.core.base.component
 
-import kodz.org.core.model.ClickEventModel
+import kodz.org.core.model.screen.ClickEventModel
 
 
 /**

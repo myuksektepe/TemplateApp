@@ -16,7 +16,7 @@ import kodz.org.core.extension.gone
 class CarouselContractor : ComponentBaseContractor() {
     override var binding: ViewDataBinding? = null
     private val carouselAdapter by lazy { MultipleTypeAdapter() }
-    override var eventHandler: ItemClickHandler? = null
+    override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
@@ -33,7 +33,7 @@ class CarouselContractor : ComponentBaseContractor() {
                 list.forEach {
                     itemList.add(
                         CarouselItemRow(it).apply {
-                            contractor.eventHandler = eventHandler
+                            contractor.itemClickHandler = itemClickHandler
                         }
                     )
                 }

@@ -1,4 +1,4 @@
-package kodz.org.feature.entry_detail
+package kodz.org.feature.new_screen
 
 import org.junit.Test
 

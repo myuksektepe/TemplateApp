@@ -9,5 +9,24 @@
         android:id="@+id/dashboardFragment"
         android:name="kodz.org.feature.dashboard.presentation.DashboardFragment"
         android:label="DashboardFragment"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <argument
+            android:name="endpoint"
+            app:argType="string"
+            app:nullable="true" />
+        <deepLink app:uri="android-app://kodz.org.template/mainScreenFragment?endpoint={endpoint}" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newScreenFragment"
+        android:name="kodz.org.feature.new_screen.presentation.NewScreenFragment"
+        android:label="NewScreenFragment"
+        tools:layout="@layout/new_screen_fragment">
+        <argument
+            android:name="endpoint"
+            app:argType="string"
+            app:nullable="true" />
+        <deepLink app:uri="android-app://kodz.org.template/newScreenFragment?endpoint={endpoint}" />
+    </fragment>
+
 </navigation>

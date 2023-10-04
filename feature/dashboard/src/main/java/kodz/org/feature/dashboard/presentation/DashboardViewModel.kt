@@ -1,7 +1,6 @@
 package kodz.org.feature.dashboard.presentation
 
 import android.content.Context
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,7 +10,7 @@ import kodz.org.core.base.component.ComponentBaseRow
 import kodz.org.core.base.data.http.HttpFlow
 import kodz.org.core.base.data.http.HttpRequest
 import kodz.org.core.base.data.http.toResponseModel
-import kodz.org.core.base.handler.SearchHandler
+import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.component.carousel.CarouselContractor
@@ -34,9 +33,10 @@ import kodz.org.core.component.section_title.SectionTitleDataModel
 import kodz.org.core.component.section_title.SectionTitleRow
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.Resource
+import kodz.org.core.model.screen.ClickEventModel
+import kodz.org.core.model.screen.SettingsModel
 import kodz.org.feature.dashboard.data.DashboardRequest
 import kodz.org.feature.dashboard.data.DashboardResponse
-import kodz.org.feature.dashboard.data.SettingsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -56,7 +56,6 @@ class DashboardViewModel @Inject constructor(
     private val httpRequest: HttpRequest
 ) : BaseViewModel() {
 
-    var lifecycleOwner: LifecycleOwner? = null
     private var job: Job? = null
     private val componentList = mutableListOf<ComponentBaseRow>()
 
@@ -69,13 +68,15 @@ class DashboardViewModel @Inject constructor(
     private val searchedText = MutableLiveData<String?>()
     val searchedTextLiveData: LiveData<String?> get() = searchedText
 
+    private val clickEventModel = MutableLiveData<ClickEventModel?>()
+    val clickEventModelLiveData: LiveData<ClickEventModel?> get() = clickEventModel
 
-    fun fetchAdapter() {
+    fun fetchAdapter(endpoint: String) {
         componentList.clear()
         job?.cancel()
         job = null
         job = viewModelScope.launch(Dispatchers.IO) {
-            httpRequest.postRequest<DashboardRequest, DashboardResponse>(context, DashboardRequest()).collectLatest { response ->
+            httpRequest.postRequest<DashboardRequest, DashboardResponse>(context, DashboardRequest(endpoint)).collectLatest { response ->
                 when (response) {
                     is HttpFlow.Loading -> {
                         rowList.postValue(Resource.Loading)
@@ -106,6 +107,11 @@ class DashboardViewModel @Inject constructor(
                                 (row.contractor as SearchBoxContractor).searchHandler = searchHandler
                             }
                         }
+                        private val searchHandler = object : SearchHandler {
+                            override fun searchedText(text: String?) {
+                                searchedText.postValue(text)
+                            }
+                        }
                          */
 
                         // Rows
@@ -115,7 +121,7 @@ class DashboardViewModel @Inject constructor(
                                 it.rowName?.let { rowName ->
                                     when (rowName) {
                                         "SectionTitleRow" -> {
-                                            clsRow = makeRow<SectionTitleRow, SectionTitleContractor, SectionTitleDataModel>(dataModelString)
+                                            clsRow = makeRow<SectionTitleRow, SectionTitleContractor, SectionTitleDataModel>(dataModelString, itemClickHandler)
                                         }
 
                                         "CarouselRow" -> {
@@ -123,24 +129,24 @@ class DashboardViewModel @Inject constructor(
                                                 dataModel.itemList.forEach { carouselItemData ->
                                                     CarouselItemRow(carouselItemData)
                                                 }
-                                                clsRow = makeRow<CarouselRow, CarouselContractor, CarouselDataModel>(dataModelString)
+                                                clsRow = makeRow<CarouselRow, CarouselContractor, CarouselDataModel>(dataModelString, itemClickHandler)
                                             }
                                         }
 
                                         "CarouselItemRow" -> {
-                                            clsRow = makeRow<CarouselItemRow, CarouselContractor, CarouselItemDataModel>(dataModelString)
+                                            clsRow = makeRow<CarouselItemRow, CarouselContractor, CarouselItemDataModel>(dataModelString, itemClickHandler)
                                         }
 
                                         "SearchBoxRow" -> {
-                                            clsRow = makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(dataModelString)
+                                            clsRow = makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(dataModelString, itemClickHandler)
                                         }
 
                                         "EntryItem1Row" -> {
-                                            clsRow = makeRow<EntryItem1Row, EntryItem1Contractor, EntryItem1DataModel>(dataModelString)
+                                            clsRow = makeRow<EntryItem1Row, EntryItem1Contractor, EntryItem1DataModel>(dataModelString, itemClickHandler)
                                         }
 
                                         "EntryItem2Row" -> {
-                                            clsRow = makeRow<EntryItem2Row, EntryItem2Contractor, EntryItem2DataModel>(dataModelString)
+                                            clsRow = makeRow<EntryItem2Row, EntryItem2Contractor, EntryItem2DataModel>(dataModelString, itemClickHandler)
                                         }
                                     }
                                     clsRow?.let { row -> componentList.add(row) }
@@ -156,9 +162,12 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
-    private val searchHandler = object : SearchHandler {
-        override fun searchedText(text: String?) {
-            searchedText.postValue(text)
+    private val itemClickHandler = object : ItemClickHandler {
+        override fun onItemClick(clickEventModel: ClickEventModel?) {
+            clickEventModel?.run {
+                this@DashboardViewModel.clickEventModel.postValue(this)
+            }
         }
     }
+
 }

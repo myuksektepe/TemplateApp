@@ -10,7 +10,7 @@ import kodz.org.core.extension.setSpamProtectedClickListener
 
 class EntryItem1Contractor : ComponentBaseContractor() {
     override var binding: ViewDataBinding? = null
-    override var eventHandler: ItemClickHandler? = null
+    override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
@@ -32,7 +32,7 @@ class EntryItem1Contractor : ComponentBaseContractor() {
 
                 // EventHandler
                 itemLayout.setSpamProtectedClickListener {
-                    eventHandler?.onItemClick(data.clickEventModel)
+                    itemClickHandler?.onItemClick(data.clickEventModel)
                 }
 
             }

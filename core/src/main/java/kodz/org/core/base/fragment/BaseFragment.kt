@@ -12,9 +12,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavDirections
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.BaseViewModel
+import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.LoadingModel
@@ -63,6 +65,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         viewDidLoad(savedInstanceState)
+        val fragmentName = this::class.java.simpleName
+        AppLog("Created Fragment: $fragmentName")
     }
 
     fun showFullScreenLoading(loadingModel: LoadingModel) {
@@ -92,6 +96,11 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             if (uri != null)
                 (requireActivity() as BaseActivity<*, *>).navigate(uri = uri)
         }
+    }
+
+    fun navigateWithDeepLink(deepLinkRequest: NavDeepLinkRequest) {
+        if (requireActivity() is BaseActivity<*, *>)
+            (requireActivity() as BaseActivity<*, *>).navigateWithDeepLink(deepLinkRequest)
     }
 
     fun navigateUp() {

@@ -2,7 +2,7 @@ package kodz.org.core.component.section_title
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.component.ComponentBaseDataModel
-import kodz.org.core.model.ClickEventModel
+import kodz.org.core.model.screen.ClickEventModel
 
 /**
  * Created by Murat Yüksektepe on 9.08.2023.

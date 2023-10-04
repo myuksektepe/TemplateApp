@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "kodz.org.feature.entry_detail"
+    namespace = "kodz.org.feature.new_screen"
     compileSdk = ConfigData.compileSdk
     defaultConfig {
         minSdk = ConfigData.minSdk
@@ -50,6 +50,7 @@ dependencies {
     implementation(Dependencies.ktxNavigationUi)
     implementation(Dependencies.ktxNavigationFragment)
     implementation(Dependencies.ktxLifecycleViewModel)
+
 
     // Hilt
     implementation(Dependencies.hilt)

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import androidx.activity.viewModels
+import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override val viewModel: MainViewModel by viewModels()
     override var viewLifeCycleOwner: LifecycleOwner = this
     override fun getBottomNavigationView(): BottomNavigationView = binding.bottomNavigation
+    override fun getFragmentContainerView(): FragmentContainerView? = binding.fragmentContainer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

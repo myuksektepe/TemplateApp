@@ -181,33 +181,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:elevation="16dp"
                 android:shadowColor="@color/black70"
-                android:shadowRadius="8">
-                <!--
-                <ImageView
-                    android:id="@+id/actionBarIcon"
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    tools:src="@drawable/ic_back" />
-
-                <TextView
-                    android:id="@+id/actionBarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold"
-                    tools:text="Başlık" />
-
-                <ImageView
-                    android:id="@+id/actionBarSearchIcon"
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:src="@drawable/ic_search"
-                    app:tint="@color/black70" />
-                    -->
-            </com.google.android.material.appbar.MaterialToolbar>
+                android:shadowRadius="8" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Fragment Container -->

@@ -3,18 +3,22 @@ package kodz.org.feature.dashboard.presentation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.component.ComponentBaseRow
 import kodz.org.core.base.fragment.BaseFragment
+import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.Resource
+import kodz.org.core.model.screen.EventTypeCode
+import kodz.org.core.model.screen.SettingsModel
 import kodz.org.feature.dashboard.R
-import kodz.org.feature.dashboard.data.SettingsModel
 import kodz.org.feature.dashboard.databinding.FragmentDashboardBinding
 import kodz.org.feature.dashboard.domain.adapter.DashboardAdapter
 
@@ -24,15 +28,20 @@ class DashboardFragment :
     override val viewModel: DashboardViewModel by viewModels()
     override val isBottomNavigationViewVisible = false
     private val rowAdapter = DashboardAdapter()
-
+    private var endPoint: String? = "dashboard.json"
     override fun bindingViewModel(binding: FragmentDashboardBinding) {
         binding.lifecycleOwner = this
-        viewModel.lifecycleOwner = this
     }
 
     override fun viewDidLoad(savedInstanceState: Bundle?) {
         setUI()
-        viewModel.fetchAdapter()
+        arguments?.run {
+            endPoint = getString("endpoint")
+            AppLog("endpoint: $endPoint")
+            endPoint?.let { viewModel.fetchAdapter(it) }
+        } ?: run {
+            viewModel.fetchAdapter("dashboard.json")
+        }
     }
 
     override fun observeViewModel() {
@@ -56,13 +65,38 @@ class DashboardFragment :
                             errorModel = it.errorModel,
                             callback = {
                                 hideFullScreenError()
-                                viewModel.fetchAdapter()
+                                viewModel.fetchAdapter(endPoint ?: "dashboard.json")
                             }
                         )
                     }
 
                     is Resource.Success -> {
                         showResultViaAdapter(rowAdapter, it.data.toMutableList())
+                    }
+                }
+            }
+
+            observeLiveData(clickEventModelLiveData) { clickEventModel ->
+                clickEventModel?.let {
+                    when (it.eventTypeCode) {
+                        EventTypeCode.OPEN_SCREEN -> {
+                            val navDeepLinkRequest = NavDeepLinkRequest.Builder.fromUri(
+                                "android-app://kodz.org.template/mainScreenFragment?endpoint=${it.endpoint}".toUri()
+                            ).build()
+                            navigateWithDeepLink(navDeepLinkRequest)
+                        }
+
+                        EventTypeCode.CLOSE_THE_SCREEN -> {
+                            navigateUp()
+                        }
+
+                        EventTypeCode.CLOSE_THE_APP -> {
+                            activity?.finish()
+                        }
+
+                        else -> {
+                            // Do nothing
+                        }
                     }
                 }
             }
@@ -78,7 +112,7 @@ class DashboardFragment :
             }
 
             swiperefresh.setOnRefreshListener {
-                viewModel.fetchAdapter()
+                viewModel.fetchAdapter(endPoint ?: "dashboard.json")
                 binding.searchBox.edtSearch.text = null
                 swiperefresh.isRefreshing = false
             }

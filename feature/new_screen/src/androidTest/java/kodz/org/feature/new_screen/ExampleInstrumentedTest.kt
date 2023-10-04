@@ -1,4 +1,4 @@
-package kodz.org.feature.entry_detail
+package kodz.org.feature.new_screen
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("kodz.org.feature.entry_detail.test", appContext.packageName)
+        assertEquals("kodz.org.feature.new_screen.test", appContext.packageName)
     }
 }

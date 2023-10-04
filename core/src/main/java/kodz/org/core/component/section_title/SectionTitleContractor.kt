@@ -14,7 +14,7 @@ import javax.inject.Inject
  */
 class SectionTitleContractor @Inject constructor() : ComponentBaseContractor() {
     override var binding: ViewDataBinding? = null
-    override var eventHandler: ItemClickHandler? = null
+    override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
@@ -27,7 +27,7 @@ class SectionTitleContractor @Inject constructor() : ComponentBaseContractor() {
 
                 // EventHandler
                 btnSectionViewAll.setSpamProtectedClickListener {
-                    eventHandler?.onItemClick(data.clickEventModel)
+                    itemClickHandler?.onItemClick(data.clickEventModel)
                 }
 
             }

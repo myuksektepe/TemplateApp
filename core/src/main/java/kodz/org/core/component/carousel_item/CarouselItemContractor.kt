@@ -10,7 +10,7 @@ import kodz.org.core.extension.setSpamProtectedClickListener
 
 class CarouselItemContractor : ComponentBaseContractor() {
     override var binding: ViewDataBinding? = null
-    override var eventHandler: ItemClickHandler? = null
+    override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
@@ -29,7 +29,7 @@ class CarouselItemContractor : ComponentBaseContractor() {
 
                 // EventHandler
                 this.crsItemCard.setSpamProtectedClickListener {
-                    eventHandler?.onItemClick(data.clickEventModel)
+                    itemClickHandler?.onItemClick(data.clickEventModel)
                 }
 
             }

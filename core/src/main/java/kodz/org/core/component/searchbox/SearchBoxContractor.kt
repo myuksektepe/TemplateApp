@@ -10,8 +10,8 @@ import kodz.org.core.base.handler.SearchHandler
 import kodz.org.core.databinding.ComponentSearchboxBinding
 
 class SearchBoxContractor : ComponentBaseContractor() {
-    override var eventHandler: ItemClickHandler? = null
     override var binding: ViewDataBinding? = null
+    override var itemClickHandler: ItemClickHandler? = null
     var searchHandler: SearchHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {

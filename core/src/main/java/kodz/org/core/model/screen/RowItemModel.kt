@@ -1,4 +1,4 @@
-package kodz.org.core.model
+package kodz.org.core.model.screen
 
 import com.google.gson.annotations.SerializedName
 

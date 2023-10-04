@@ -40,7 +40,6 @@ class HttpRequest @Inject constructor(
                                 // Type converting
                                 val type = object : TypeToken<RS>() {}.type
                                 val outPutJsonObject = gson.toJsonTree(body).asJsonObject
-                                // val outPutJsonObject2 = gson.fromJson<RS>(body.toString(), JsonObject::class.java)
                                 val responseObject = gson.fromJson<RS>(outPutJsonObject.toString(), type)
                                 emit(HttpFlow.Success(responseObject))
                             } ?: kotlin.run {
