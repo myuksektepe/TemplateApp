@@ -28,7 +28,7 @@ class DashboardFragment :
     override val viewModel: DashboardViewModel by viewModels()
     override val isBottomNavigationViewVisible = false
     private val rowAdapter = DashboardAdapter()
-    private var endPoint: String? = "dashboard.json"
+    private var endPoint: String = "dashboard.json"
     override fun bindingViewModel(binding: FragmentDashboardBinding) {
         binding.lifecycleOwner = this
     }
@@ -36,12 +36,14 @@ class DashboardFragment :
     override fun viewDidLoad(savedInstanceState: Bundle?) {
         setUI()
         arguments?.run {
-            endPoint = getString("endpoint")
-            AppLog("endpoint: $endPoint")
-            endPoint?.let { viewModel.fetchAdapter(it) }
+            getString("endpoint")?.let {
+                endPoint = it
+                viewModel.fetchAdapter(it)
+            }
         } ?: run {
-            viewModel.fetchAdapter("dashboard.json")
+            viewModel.fetchAdapter(endPoint)
         }
+        AppLog("endpoint: $endPoint")
     }
 
     override fun observeViewModel() {
@@ -65,7 +67,7 @@ class DashboardFragment :
                             errorModel = it.errorModel,
                             callback = {
                                 hideFullScreenError()
-                                viewModel.fetchAdapter(endPoint ?: "dashboard.json")
+                                viewModel.fetchAdapter(endPoint)
                             }
                         )
                     }
@@ -99,6 +101,8 @@ class DashboardFragment :
                         }
                     }
                 }
+
+                viewModel.clearLiveData()
             }
         }
     }
@@ -112,7 +116,7 @@ class DashboardFragment :
             }
 
             swiperefresh.setOnRefreshListener {
-                viewModel.fetchAdapter(endPoint ?: "dashboard.json")
+                viewModel.fetchAdapter(endPoint)
                 binding.searchBox.edtSearch.text = null
                 swiperefresh.isRefreshing = false
             }
@@ -155,5 +159,9 @@ class DashboardFragment :
                 binding.searchBox.root.visible()
             } else binding.searchBox.root.gone()
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return true
     }
 }

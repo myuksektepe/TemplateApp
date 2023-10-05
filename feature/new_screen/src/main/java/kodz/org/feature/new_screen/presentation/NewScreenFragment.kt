@@ -34,4 +34,8 @@ class NewScreenFragment : BaseFragment<NewScreenViewModel, NewScreenFragmentBind
     override fun bindingViewModel(binding: NewScreenFragmentBinding) {
         binding.lifecycleOwner = this
     }
+
+    override fun onBackPressed(): Boolean {
+        return true
+    }
 }

@@ -72,6 +72,9 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
         navHost = getFragmentContainerView()?.id?.let { supportFragmentManager.findFragmentById(it) } as NavHostFragment
         navHost?.let {
             getBottomNavigationView()?.setupWithNavController(it.navController)
+            it.navController.addOnDestinationChangedListener { controller, destination, arguments ->
+                // AppLog(controller.backQueue.map { it.destination.displayName }.toString())
+            }
         }
 
         // StrictMode policy

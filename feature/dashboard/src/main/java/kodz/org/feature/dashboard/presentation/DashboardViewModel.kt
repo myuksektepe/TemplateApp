@@ -170,4 +170,8 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
+    fun clearLiveData() {
+        clickEventModel.postValue(null)
+    }
+
 }
