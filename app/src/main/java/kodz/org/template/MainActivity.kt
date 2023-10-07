@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
@@ -18,6 +19,8 @@ import kodz.org.core.extension.visible
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.LoadingModel
 import kodz.org.template.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -125,17 +128,19 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     }
 
     private fun setClickable(view: View?, isClickable: Boolean) {
-        if (view != null) {
-            this.view = view
-            // view.isClickable = isClickable
-            // view.isFocusable = isClickable
-            // view.isScrollContainer = isClickable
-            view.isEnabled = isClickable
-            AppLog("$isClickable - ${view.toString()}")
-            if (view is ViewGroup) {
-                for (i in 0 until view.childCount) {
-                    setClickable(view.getChildAt(i), isClickable)
-                    AppLog("-- $isClickable - ${view.getChildAt(i).toString()}")
+        lifecycleScope.launch(Dispatchers.Main) {
+            if (view != null) {
+                this@MainActivity.view = view
+                // view.isClickable = isClickable
+                // view.isFocusable = isClickable
+                // view.isScrollContainer = isClickable
+                view.isEnabled = isClickable
+                AppLog("$isClickable - ${view.toString()}")
+                if (view is ViewGroup) {
+                    for (i in 0 until view.childCount) {
+                        setClickable(view.getChildAt(i), isClickable)
+                        AppLog("-- $isClickable - ${view.getChildAt(i).toString()}")
+                    }
                 }
             }
         }
