@@ -14,7 +14,6 @@ import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
-import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.screen.EventTypeCode
 import kodz.org.core.model.screen.SettingsModel
@@ -59,7 +58,7 @@ class DashboardFragment :
             observeLiveData(rowListLiveData) {
                 when (it) {
                     is Resource.Loading -> {
-                        showFullScreenLoading(LoadingModel())
+                        showFullScreenLoading(view = binding.root)
                     }
 
                     is Resource.Error -> {
@@ -68,12 +67,13 @@ class DashboardFragment :
                             callback = {
                                 hideFullScreenError()
                                 viewModel.fetchAdapter(endPoint)
-                            }
+                            },
+                            view = binding.root
                         )
                     }
 
                     is Resource.Success -> {
-                        showResultViaAdapter(rowAdapter, it.data.toMutableList())
+                        if (it.data.isNotEmpty()) showResultViaAdapter(rowAdapter, it.data.toMutableList())
                     }
                 }
             }
@@ -83,7 +83,7 @@ class DashboardFragment :
                     when (it.eventTypeCode) {
                         EventTypeCode.OPEN_SCREEN -> {
                             val navDeepLinkRequest = NavDeepLinkRequest.Builder.fromUri(
-                                "android-app://kodz.org.template/mainScreenFragment?endpoint=${it.endpoint}".toUri()
+                                "android-app://kodz.org.template/dashboardFragment?endpoint=${it.endpoint}".toUri()
                             ).build()
                             navigateWithDeepLink(navDeepLinkRequest)
                         }
@@ -124,8 +124,8 @@ class DashboardFragment :
     }
 
     private fun showResultViaAdapter(adapter: DashboardAdapter, list: MutableList<ComponentBaseRow?>?) {
-        hideFullScreenLoading()
         adapter.submitData(list)
+        hideFullScreenLoading()
     }
 
     private fun prepareScreen(screenSettingsModel: SettingsModel?) {

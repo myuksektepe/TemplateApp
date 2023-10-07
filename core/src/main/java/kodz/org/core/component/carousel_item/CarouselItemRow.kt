@@ -11,7 +11,7 @@ class CarouselItemRow(
 ) : ComponentBaseRow() {
     override val layout = R.layout.component_carousel_item
     override val dataClass: KClass<*> = CarouselItemDataModel::class
-    override val viewModel = CarouselItemViewModel()
     override val contractor = CarouselItemContractor()
     override var binding: ViewDataBinding? = null
+    // override val viewModel = CarouselItemViewModel()
 }

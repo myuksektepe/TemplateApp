@@ -17,7 +17,7 @@ abstract class ComponentBaseRow {
     abstract var dataModel: ComponentBaseDataModel
     abstract val layout: Int
     abstract val dataClass: KClass<*>
-    abstract val viewModel: ComponentBaseViewModel
     abstract val contractor: ComponentBaseContractor
     abstract var binding: ViewDataBinding?
+    // abstract val viewModel: ComponentBaseViewModel
 }

@@ -1,8 +1,8 @@
 package kodz.org.core.base.data.http
 
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kodz.org.core.common.AppLog
 
 
 /**
@@ -32,7 +32,10 @@ inline fun <reified O> String.toResponseModel(): O? {
     return try {
         gson.fromJson(this, object : TypeToken<O>() {}.type)
     } catch (e: Exception) {
-        Log.e("applog", "${e.message}")
+        AppLog("${e.message}")
+        null
+    } catch (e: UnsupportedOperationException) {
+        AppLog("${e.message}")
         null
     }
 }

@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="kodz.org.core.component.carousel_item.CarouselItemViewModel" />
-
-        <variable
             name="data"
             type="kodz.org.core.component.carousel_item.CarouselItemDataModel" />
     </data>

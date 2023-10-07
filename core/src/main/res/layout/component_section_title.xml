@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:baseApppplication="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -10,10 +10,6 @@
         <variable
             name="data"
             type="kodz.org.core.component.section_title.SectionTitleDataModel" />
-
-        <variable
-            name="viewModel"
-            type="kodz.org.core.component.section_title.SectionTitleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,9 +24,9 @@
             android:text="@{data.titleText}"
             android:textSize="@dimen/_17sdp"
             android:textStyle="bold"
-            baseApppplication:layout_constraintBottom_toBottomOf="@+id/btnSectionViewAll"
-            baseApppplication:layout_constraintStart_toStartOf="parent"
-            baseApppplication:layout_constraintTop_toTopOf="@+id/btnSectionViewAll"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSectionViewAll"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnSectionViewAll"
             tools:text="Section Title" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -44,9 +40,9 @@
             android:text="@{data.buttonText != null ? data.buttonText : @string/viewAll}"
             android:textSize="@dimen/_11sdp"
             android:visibility="@{data.isButtonVisible == true ? View.VISIBLE : View.GONE}"
-            baseApppplication:layout_constraintBottom_toBottomOf="parent"
-            baseApppplication:layout_constraintEnd_toEndOf="parent"
-            baseApppplication:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="See All >" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

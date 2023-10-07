@@ -24,6 +24,12 @@ import kodz.org.core.component.entry_item_1.EntryItem1Row
 import kodz.org.core.component.entry_item_2.EntryItem2Contractor
 import kodz.org.core.component.entry_item_2.EntryItem2DataModel
 import kodz.org.core.component.entry_item_2.EntryItem2Row
+import kodz.org.core.component.entry_title_1.EntryTitle1Contractor
+import kodz.org.core.component.entry_title_1.EntryTitle1DataModel
+import kodz.org.core.component.entry_title_1.EntryTitle1Row
+import kodz.org.core.component.long_text.LongTextContractor
+import kodz.org.core.component.long_text.LongTextDataModel
+import kodz.org.core.component.long_text.LongTextRow
 import kodz.org.core.component.makeRow
 import kodz.org.core.component.searchbox.SearchBoxContractor
 import kodz.org.core.component.searchbox.SearchBoxDataModel
@@ -31,6 +37,9 @@ import kodz.org.core.component.searchbox.SearchBoxRow
 import kodz.org.core.component.section_title.SectionTitleContractor
 import kodz.org.core.component.section_title.SectionTitleDataModel
 import kodz.org.core.component.section_title.SectionTitleRow
+import kodz.org.core.component.webview.WebViewContractor
+import kodz.org.core.component.webview.WebViewDataModel
+import kodz.org.core.component.webview.WebViewRow
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.screen.ClickEventModel
@@ -39,6 +48,7 @@ import kodz.org.feature.dashboard.data.DashboardRequest
 import kodz.org.feature.dashboard.data.DashboardResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -95,6 +105,8 @@ class DashboardViewModel @Inject constructor(
                     }
 
                     is HttpFlow.Success -> {
+                        delay(3000)
+
                         var clsRow: ComponentBaseRow? = null
 
                         screenSettings.postValue(response.data.settings)
@@ -120,6 +132,8 @@ class DashboardViewModel @Inject constructor(
                                 val dataModelString = it.dataModel
                                 it.rowName?.let { rowName ->
                                     when (rowName) {
+
+                                        // Dashboard
                                         "SectionTitleRow" -> {
                                             clsRow = makeRow<SectionTitleRow, SectionTitleContractor, SectionTitleDataModel>(dataModelString, itemClickHandler)
                                         }
@@ -137,10 +151,6 @@ class DashboardViewModel @Inject constructor(
                                             clsRow = makeRow<CarouselItemRow, CarouselContractor, CarouselItemDataModel>(dataModelString, itemClickHandler)
                                         }
 
-                                        "SearchBoxRow" -> {
-                                            clsRow = makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(dataModelString, itemClickHandler)
-                                        }
-
                                         "EntryItem1Row" -> {
                                             clsRow = makeRow<EntryItem1Row, EntryItem1Contractor, EntryItem1DataModel>(dataModelString, itemClickHandler)
                                         }
@@ -148,6 +158,29 @@ class DashboardViewModel @Inject constructor(
                                         "EntryItem2Row" -> {
                                             clsRow = makeRow<EntryItem2Row, EntryItem2Contractor, EntryItem2DataModel>(dataModelString, itemClickHandler)
                                         }
+                                        // ========================================
+
+                                        // Category
+                                        "SearchBoxRow" -> {
+                                            clsRow = makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(dataModelString, itemClickHandler)
+                                        }
+                                        // ========================================
+
+
+                                        // Entry Details
+                                        "EntryTitle1Row" -> {
+                                            clsRow = makeRow<EntryTitle1Row, EntryTitle1Contractor, EntryTitle1DataModel>(dataModelString)
+                                        }
+
+                                        "WebViewRow" -> {
+                                            clsRow = makeRow<WebViewRow, WebViewContractor, WebViewDataModel>(dataModelString)
+                                        }
+
+                                        "LongTextRow" -> {
+                                            clsRow = makeRow<LongTextRow, LongTextContractor, LongTextDataModel>(dataModelString)
+                                        }
+                                        // ========================================
+
                                     }
                                     clsRow?.let { row -> componentList.add(row) }
                                 }

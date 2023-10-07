@@ -71,16 +71,16 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         AppLog("Created Fragment: $fragmentName\n-------------------------------")
     }
 
-    fun showFullScreenLoading(loadingModel: LoadingModel) {
-        (requireActivity() as BaseActivity<*, *>).showFullScreenLoading(loadingModel)
+    fun showFullScreenLoading(loadingModel: LoadingModel? = null, view: View?= null) {
+        (requireActivity() as BaseActivity<*, *>).showFullScreenLoading(loadingModel, view)
     }
 
     fun hideFullScreenLoading() {
         (requireActivity() as BaseActivity<*, *>).hideFullScreenLoading()
     }
 
-    fun showFullScreenError(errorModel: ErrorModel, callback: (() -> Unit?)? = null) {
-        (requireActivity() as BaseActivity<*, *>).showFullScreenError(errorModel, callback)
+    fun showFullScreenError(errorModel: ErrorModel, callback: (() -> Unit?)? = null, view: View?) {
+        (requireActivity() as BaseActivity<*, *>).showFullScreenError(errorModel, callback, view)
     }
 
     fun hideFullScreenError() {

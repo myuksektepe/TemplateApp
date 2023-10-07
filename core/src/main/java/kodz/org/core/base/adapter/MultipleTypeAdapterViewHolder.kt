@@ -15,7 +15,6 @@ class MultipleTypeAdapterViewHolder(private var binding: ViewDataBinding) : Recy
     fun bind(row: ComponentBaseRow) {
         binding.apply {
             setVariable(BR.data, row.dataModel)
-            setVariable(BR.viewModel, row.viewModel)
             row.contractor.initBinding(this)
             executePendingBindings()
         }

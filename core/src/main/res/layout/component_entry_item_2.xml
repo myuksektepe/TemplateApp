@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="kodz.org.core.component.entry_item_2.EntryItem2ViewModel" />
-
-        <variable
             name="data"
             type="kodz.org.core.component.entry_item_2.EntryItem2DataModel" />
     </data>

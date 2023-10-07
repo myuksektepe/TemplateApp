@@ -11,7 +11,7 @@ import kodz.org.core.model.screen.ClickEventModel
  */
 
 data class SectionTitleDataModel(
-    @SerializedName("titleText") val titleText: String,
+    @SerializedName("titleText") val titleText: String? = null,
     @SerializedName("isButtonVisible") val isButtonVisible: Boolean = true,
     @SerializedName("isButtonEnable") val isButtonEnable: Boolean = true,
     @SerializedName("buttonText") val buttonText: String? = null,

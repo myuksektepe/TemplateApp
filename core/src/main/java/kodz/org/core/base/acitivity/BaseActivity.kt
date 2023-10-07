@@ -3,6 +3,7 @@ package kodz.org.core.base.acitivity
 import android.net.Uri
 import android.os.Bundle
 import android.os.StrictMode
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -87,10 +88,10 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
         super.onDestroy()
     }
 
-    abstract fun showFullScreenLoading(loadingModel: LoadingModel)
+    abstract fun showFullScreenLoading(loadingModel: LoadingModel? = null, view: View? = null)
     abstract fun hideFullScreenLoading()
 
-    abstract fun showFullScreenError(errorModel: ErrorModel, callback: (() -> Unit?)? = null)
+    abstract fun showFullScreenError(errorModel: ErrorModel, callback: (() -> Unit?)? = null, view: View?)
     abstract fun hideFullScreenError()
 
     fun navigate(

@@ -43,7 +43,6 @@ dependencies {
     // Modules
     implementation(project(":core"))
     implementation(project(":feature:dashboard"))
-    implementation(project(":feature:new_screen"))
 
     // Main
     implementation(Dependencies.appcompat)
