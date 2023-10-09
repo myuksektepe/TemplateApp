@@ -60,7 +60,7 @@ dependencies {
     implementation(Dependencies.gson)
     implementation(Dependencies.gson)
 
-    // Swipre Refresh Layout
+    // Swipe Refresh Layout
     implementation(Dependencies.swipeRefreshLayout)
 
     // Test

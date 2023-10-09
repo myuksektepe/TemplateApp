@@ -1,7 +1,7 @@
 package kodz.org.core.base.handler
 
-import kodz.org.core.model.screen.ClickEventModel
+import kodz.org.core.model.screen.ItemClickEventModel
 
 interface ItemClickHandler : BaseEventHandler {
-    fun onItemClick(clickEventModel: ClickEventModel?)
+    fun onItemClick(itemClickEventModel: ItemClickEventModel?)
 }

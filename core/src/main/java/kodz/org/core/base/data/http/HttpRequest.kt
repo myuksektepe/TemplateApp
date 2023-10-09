@@ -4,7 +4,12 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
+import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.isOnline
+import kodz.org.core.model.http.ButtonModel
+import kodz.org.core.model.http.ErrorModel
+import kodz.org.core.model.screen.EventTypeCode
+import kodz.org.core.model.screen.ScreenModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -25,7 +30,6 @@ class HttpRequest @Inject constructor(
         val gson = Gson()
         val bodyJson = gson.toJson(requestModel)
         val inputJsonObject = gson.fromJson(bodyJson, JsonObject::class.java)
-
         coroutineScope {
             emit(HttpFlow.Loading)
             if (context.isOnline()) {
@@ -41,21 +45,26 @@ class HttpRequest @Inject constructor(
                                 val type = object : TypeToken<RS>() {}.type
                                 val outPutJsonObject = gson.toJsonTree(body).asJsonObject
                                 val responseObject = gson.fromJson<RS>(outPutJsonObject.toString(), type)
-                                emit(HttpFlow.Success(responseObject))
+                                val screenModel = (responseObject as? ScreenModel)
+                                if (screenModel?.error == null) {
+                                    emit(HttpFlow.Success(responseObject))
+                                } else {
+                                    emit(HttpFlow.Error(screenModel.error))
+                                }
                             } ?: kotlin.run {
-                                emit(HttpFlow.Error(BaseError(errorMessage = it.message())))
+                                emit(HttpFlow.Error(it.message().prepareUnCancelableError()))
                             }
                         } else {
-                            emit(HttpFlow.Error(BaseError(errorMessage = it.errorBody().toString())))
+                            emit(HttpFlow.Error(it.errorBody().toString().prepareUnCancelableError()))
                         }
                     }
                 } catch (e: Exception) {
-                    emit(HttpFlow.Error(BaseError(errorMessage = e.message)))
+                    emit(HttpFlow.Error(e.message.toString().prepareUnCancelableError()))
                 } catch (e: IllegalStateException) {
-                    emit(HttpFlow.Error(BaseError(errorMessage = e.message)))
+                    emit(HttpFlow.Error(e.message.toString().prepareUnCancelableError()))
                 }
             } else {
-                emit(HttpFlow.Error(BaseError(errorMessage = "Internet connection error!")))
+                emit(HttpFlow.Error("Lütfen internet bağlantınızı kontrol edin.".prepareUnCancelableError()))
             }
         }
     }
@@ -75,25 +84,42 @@ class HttpRequest @Inject constructor(
                     params = params,
                     token = "[TOKEN]",
                     path = path
-                )
-                call.run {
-                    if (call.isSuccessful) {
-                        body()?.let {
+                ).let {
+                    if (it.isSuccessful) {
+                        it.body()?.let { body ->
                             // Type converting
                             val type = object : TypeToken<RS>() {}.type
-                            val outPutJsonObject = gson.toJsonTree(it).asJsonObject
+                            val outPutJsonObject = gson.toJsonTree(body).asJsonObject
                             val responseObject = gson.fromJson<RS>(outPutJsonObject, type)
                             emit(HttpFlow.Success(responseObject))
                         } ?: kotlin.run {
-                            emit(HttpFlow.Error(BaseError(errorMessage = call.message())))
+                            emit(HttpFlow.Error(it.message().prepareUnCancelableError()))
                         }
                     } else {
-                        emit(HttpFlow.Error(BaseError(errorMessage = "The http request is not successful!")))
+                        emit(HttpFlow.Error(it.errorBody().toString().prepareUnCancelableError()))
                     }
                 }
             } else {
-                emit(HttpFlow.Error(BaseError(errorMessage = "Internet connection error!")))
+                emit(HttpFlow.Error("Lütfen internet bağlantınızı kontrol edin.".prepareUnCancelableError()))
             }
         }
     }
+
+    fun String.prepareUnCancelableError() = ErrorModel(
+        title = "Beklenmedik Bir Hata Oluştu",
+        description = this,
+        primaryButton = ButtonModel(
+            text = "Geri Dön",
+            textColor = null,
+            icon = CommonIcons.GO_BACK,
+            eventType = EventTypeCode.CLOSE_THE_SCREEN
+        ),
+        secondaryButton = ButtonModel(
+            text = "Yeniden Dene",
+            icon = CommonIcons.REFRESH,
+            textColor = "#009688",
+            backgroundColor = "#ffffff",
+            eventType = EventTypeCode.RETRY_LAST_ACTION
+        )
+    )
 }

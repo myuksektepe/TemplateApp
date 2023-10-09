@@ -2,7 +2,7 @@ package kodz.org.core.component.long_text
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.component.ComponentBaseDataModel
-import kodz.org.core.model.screen.ClickEventModel
+import kodz.org.core.model.screen.ItemClickEventModel
 
 
 /**
@@ -10,5 +10,5 @@ import kodz.org.core.model.screen.ClickEventModel
  */
 data class LongTextDataModel(
     @SerializedName("text") val text: String? = null,
-    @SerializedName("clickEventModel") override val clickEventModel: ClickEventModel? = null
+    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null
 ) : ComponentBaseDataModel()

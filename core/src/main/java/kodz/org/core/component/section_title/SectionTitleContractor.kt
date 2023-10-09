@@ -27,7 +27,7 @@ class SectionTitleContractor @Inject constructor() : ComponentBaseContractor() {
 
                 // EventHandler
                 btnSectionViewAll.setSpamProtectedClickListener {
-                    itemClickHandler?.onItemClick(data.clickEventModel)
+                    itemClickHandler?.onItemClick(data.itemClickEventModel)
                 }
 
             }

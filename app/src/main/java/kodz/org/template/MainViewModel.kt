@@ -5,5 +5,4 @@ import kodz.org.core.base.viewmodel.BaseViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : BaseViewModel() {
-}
+class MainViewModel @Inject constructor() : BaseViewModel() {}

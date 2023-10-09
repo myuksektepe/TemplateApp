@@ -29,7 +29,7 @@ class CarouselItemContractor : ComponentBaseContractor() {
 
                 // EventHandler
                 this.crsItemCard.setSpamProtectedClickListener {
-                    itemClickHandler?.onItemClick(data.clickEventModel)
+                    itemClickHandler?.onItemClick(data.itemClickEventModel)
                 }
 
             }

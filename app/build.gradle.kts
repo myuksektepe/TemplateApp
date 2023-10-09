@@ -50,6 +50,9 @@ dependencies {
     implementation(Dependencies.sdp)
     implementation(Dependencies.constraintlayout)
 
+    // Shimmer
+    implementation(Dependencies.shimmer)
+
     // Kotlin
     // implementation(Dependencies.kotlinReflec)
 

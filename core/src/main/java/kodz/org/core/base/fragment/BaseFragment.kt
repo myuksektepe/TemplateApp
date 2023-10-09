@@ -18,9 +18,9 @@ import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
-import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.OnBackPressed
+import kodz.org.core.model.http.ErrorModel
 
 
 /**
@@ -64,14 +64,14 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeViewModel()
         viewDidLoad(savedInstanceState)
+        observeViewModel()
 
         val fragmentName = this::class.java.simpleName
         AppLog("Created Fragment: $fragmentName\n-------------------------------")
     }
 
-    fun showFullScreenLoading(loadingModel: LoadingModel? = null, view: View?= null) {
+    fun showFullScreenLoading(loadingModel: LoadingModel? = null, view: View? = null) {
         (requireActivity() as BaseActivity<*, *>).showFullScreenLoading(loadingModel, view)
     }
 
@@ -79,8 +79,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         (requireActivity() as BaseActivity<*, *>).hideFullScreenLoading()
     }
 
-    fun showFullScreenError(errorModel: ErrorModel, callback: (() -> Unit?)? = null, view: View?) {
-        (requireActivity() as BaseActivity<*, *>).showFullScreenError(errorModel, callback, view)
+    fun showFullScreenError(errorModel: ErrorModel, view: View?) {
+        (requireActivity() as BaseActivity<*, *>).showFullScreenError(errorModel, view)
     }
 
     fun hideFullScreenError() {

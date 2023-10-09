@@ -20,7 +20,7 @@ import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.safeNavigate
 import kodz.org.core.extension.setIsVisible
-import kodz.org.core.model.ErrorModel
+import kodz.org.core.model.http.ErrorModel
 import kodz.org.core.model.LoadingModel
 
 /**
@@ -91,7 +91,7 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
     abstract fun showFullScreenLoading(loadingModel: LoadingModel? = null, view: View? = null)
     abstract fun hideFullScreenLoading()
 
-    abstract fun showFullScreenError(errorModel: ErrorModel, callback: (() -> Unit?)? = null, view: View?)
+    abstract fun showFullScreenError(errorModel: ErrorModel, view: View?)
     abstract fun hideFullScreenError()
 
     fun navigate(

@@ -5,14 +5,17 @@ import kodz.org.core.R
 
 enum class CommonIcons(val imageName: String, val resourceId: Int) {
 
-    @SerializedName("goBack")
+    @SerializedName("goBack", alternate = ["back"])
     GO_BACK("goBack", R.drawable.ic_back),
 
     @SerializedName("refresh", alternate = ["tryAgain"])
     REFRESH("refresh", R.drawable.ic_refresh),
 
     @SerializedName("close", alternate = ["exit"])
-    CLOSE("close", R.drawable.ic_close);
+    CLOSE("close", R.drawable.ic_close),
+
+    @SerializedName("home")
+    HOME("home", R.drawable.ic_home);
 
     companion object {
         fun from(value: String): CommonIcons? {

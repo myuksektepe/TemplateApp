@@ -27,7 +27,7 @@ class WebViewContractor() : ComponentBaseContractor() {
     private fun initComponent() {
         (binding as? ComponentWebviewBinding)?.run {
             data?.let {
-                it.content?.let { content ->
+                it.content?.fullHtml()?.let { content ->
                     webView.run {
 
                         // Settings
@@ -78,17 +78,7 @@ class WebViewContractor() : ComponentBaseContractor() {
                 "font-family: Times New Roman!important;" +
                 "font-size: 19px!important;" +
                 "padding: 16px !important;" +
-                "text-align: left !important;"
-
-        if (darkMode) {
-            css += "color: #adbac7 !important;" +
-                    "background: #22272e !important;"
-        } else {
-            css += "color: #1c1c1c !important;" +
-                    "background: #d4d6da !important;"
-        }
-
-        css += "}" +
+                "text-align: left !important;}" +
                 "img{" +
                 "max-width:100% !important; " +
                 "}" +

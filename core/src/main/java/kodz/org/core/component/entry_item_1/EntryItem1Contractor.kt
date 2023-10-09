@@ -32,7 +32,7 @@ class EntryItem1Contractor : ComponentBaseContractor() {
 
                 // EventHandler
                 itemLayout.setSpamProtectedClickListener {
-                    itemClickHandler?.onItemClick(data.clickEventModel)
+                    itemClickHandler?.onItemClick(data.itemClickEventModel)
                 }
 
             }

@@ -2,7 +2,7 @@ package kodz.org.core.model.screen
 
 import com.google.gson.annotations.SerializedName
 
-data class ClickEventModel(
+data class ItemClickEventModel(
     @SerializedName("eventTypeCode") val eventTypeCode: EventTypeCode? = null,
     @SerializedName("endpoint") val endpoint: String? = null,
     @SerializedName("url") val url: String? = null,

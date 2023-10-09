@@ -5,11 +5,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDeepLinkRequest
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.component.ComponentBaseRow
 import kodz.org.core.base.fragment.BaseFragment
+import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.gone
@@ -25,6 +27,7 @@ import kodz.org.feature.dashboard.domain.adapter.DashboardAdapter
 class DashboardFragment :
     BaseFragment<DashboardViewModel, FragmentDashboardBinding>(R.layout.fragment_dashboard) {
     override val viewModel: DashboardViewModel by viewModels()
+    private lateinit var sharedViewModel: SharedViewModel
     override val isBottomNavigationViewVisible = false
     private val rowAdapter = DashboardAdapter()
     private var endPoint: String = "dashboard.json"
@@ -33,15 +36,14 @@ class DashboardFragment :
     }
 
     override fun viewDidLoad(savedInstanceState: Bundle?) {
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         setUI()
         arguments?.run {
             getString("endpoint")?.let {
                 endPoint = it
-                viewModel.fetchAdapter(it)
             }
-        } ?: run {
-            viewModel.fetchAdapter(endPoint)
         }
+        viewModel.fetchAdapter(endPoint)
         AppLog("endpoint: $endPoint")
     }
 
@@ -64,10 +66,6 @@ class DashboardFragment :
                     is Resource.Error -> {
                         showFullScreenError(
                             errorModel = it.errorModel,
-                            callback = {
-                                hideFullScreenError()
-                                viewModel.fetchAdapter(endPoint)
-                            },
                             view = binding.root
                         )
                     }
@@ -78,7 +76,7 @@ class DashboardFragment :
                 }
             }
 
-            observeLiveData(clickEventModelLiveData) { clickEventModel ->
+            observeLiveData(itemClickEventModelLiveData) { clickEventModel ->
                 clickEventModel?.let {
                     when (it.eventTypeCode) {
                         EventTypeCode.OPEN_SCREEN -> {
@@ -89,10 +87,12 @@ class DashboardFragment :
                         }
 
                         EventTypeCode.CLOSE_THE_SCREEN -> {
+                            hideFullScreenError()
                             navigateUp()
                         }
 
                         EventTypeCode.CLOSE_THE_APP -> {
+                            hideFullScreenError()
                             activity?.finish()
                         }
 
@@ -104,12 +104,36 @@ class DashboardFragment :
 
                 viewModel.clearLiveData()
             }
+
+            observeLiveData(sharedViewModel.getClickEventCode()) {
+                when (it) {
+                    EventTypeCode.RETRY_LAST_ACTION -> {
+                        viewModel.fetchAdapter(endPoint)
+                    }
+
+                    EventTypeCode.CLOSE_THE_SCREEN -> {
+                        hideFullScreenError()
+                        navigateUp()
+                    }
+
+                    EventTypeCode.CLOSE_THE_APP -> {
+                        hideFullScreenError()
+                        activity?.finish()
+                    }
+
+                    else -> {
+                        // Do nothing
+                    }
+                }
+                sharedViewModel.setClickEventCode(null)
+            }
         }
     }
 
     private fun setUI() {
         binding.run {
             listDashboard.run {
+                rowAdapter.submitData(null)
                 adapter = rowAdapter
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 // setHasFixedSize(true)
@@ -135,7 +159,7 @@ class DashboardFragment :
                 setActionBarTitleAndIcon(
                     title = title,
                     subTitle = it.subTitle,
-                    icon = if (it.isBackIconVisible == true) CommonIcons.GO_BACK else it.customIcon
+                    icon = if (it.isBackIconVisible == true) CommonIcons.GO_BACK else CommonIcons.from(it.customIcon.toString())
                 )
             }
 

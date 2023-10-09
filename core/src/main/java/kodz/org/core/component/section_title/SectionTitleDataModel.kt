@@ -2,7 +2,7 @@ package kodz.org.core.component.section_title
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.component.ComponentBaseDataModel
-import kodz.org.core.model.screen.ClickEventModel
+import kodz.org.core.model.screen.ItemClickEventModel
 
 /**
  * Created by Murat Yüksektepe on 9.08.2023.
@@ -15,5 +15,5 @@ data class SectionTitleDataModel(
     @SerializedName("isButtonVisible") val isButtonVisible: Boolean = true,
     @SerializedName("isButtonEnable") val isButtonEnable: Boolean = true,
     @SerializedName("buttonText") val buttonText: String? = null,
-    @SerializedName("clickEventModel") override val clickEventModel: ClickEventModel? = null
+    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null
 ) : ComponentBaseDataModel()

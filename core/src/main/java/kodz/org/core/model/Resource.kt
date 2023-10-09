@@ -1,5 +1,7 @@
 package kodz.org.core.model
 
+import kodz.org.core.model.http.ErrorModel
+
 sealed class Resource<out T> {
     object Loading : Resource<Nothing>()
     data class Error(val errorModel: ErrorModel) : Resource<Nothing>()

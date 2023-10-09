@@ -1,6 +1,6 @@
 package kodz.org.core.base.component
 
-import kodz.org.core.model.screen.ClickEventModel
+import kodz.org.core.model.screen.ItemClickEventModel
 
 
 /**
@@ -15,5 +15,5 @@ import kodz.org.core.model.screen.ClickEventModel
  * olan veriler için değişkenler oluşturulur.
  */
 abstract class ComponentBaseDataModel() {
-    abstract val clickEventModel: ClickEventModel?
+    abstract val itemClickEventModel: ItemClickEventModel?
 }

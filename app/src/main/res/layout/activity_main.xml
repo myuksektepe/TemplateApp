@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,7 +81,7 @@
             android:id="@+id/frmError"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/scarlet30"
+            android:background="@color/black70"
             android:elevation="4dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -106,6 +107,7 @@
                         android:id="@+id/txtErrorTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:textSize="@dimen/_16sdp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -136,7 +138,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_8sdp"
                         android:backgroundTint="@color/success"
-                        android:drawableTint="@color/white"
                         android:ellipsize="end"
                         android:maxLines="2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -146,7 +147,7 @@
                         tools:text="Tamam olabilir anladık" />
 
                     <Button
-                        android:id="@+id/btnErrorCancel"
+                        android:id="@+id/btnErrorSecondary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_8sdp"
@@ -164,49 +165,98 @@
 
         </FrameLayout>
 
-        <!-- Toolbar -->
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBar"
+        <!-- Shimmer -->
+        <FrameLayout
+            android:id="@+id/frmShimmer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/fragmentContainer"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:orientation="vertical"
+                shimmer:duration="800">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/shimmer_1" />
+
+                    <include layout="@layout/shimmer_1" />
+
+                    <include layout="@layout/shimmer_1" />
+
+                    <include layout="@layout/shimmer_1" />
+
+                    <include layout="@layout/shimmer_1" />
+
+                    <include layout="@layout/shimmer_1" />
+
+                    <include layout="@layout/shimmer_1" />
+
+                    <include layout="@layout/shimmer_1" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/allScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolBar"
+            <!-- Toolbar -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:elevation="16dp"
-                android:shadowColor="@color/black70"
-                android:shadowRadius="8" />
-        </com.google.android.material.appbar.AppBarLayout>
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/fragmentContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Fragment Container -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainer"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBar"
-            app:navGraph="@navigation/nav_graph" />
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:elevation="16dp"
+                    android:shadowColor="@color/black70"
+                    android:shadowRadius="8" />
+            </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- BottomNavigationView -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_menu" />
+            <!-- Fragment Container -->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainer"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appBar"
+                app:navGraph="@navigation/nav_graph" />
+
+            <!-- BottomNavigationView -->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/bottom_menu" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
