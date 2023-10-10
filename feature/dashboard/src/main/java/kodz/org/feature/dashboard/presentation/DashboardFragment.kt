@@ -14,6 +14,7 @@ import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
+import kodz.org.core.common.DASHBOARD_ENDPOINT
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core.model.Resource
@@ -30,7 +31,8 @@ class DashboardFragment :
     private lateinit var sharedViewModel: SharedViewModel
     override val isBottomNavigationViewVisible = false
     private val rowAdapter = DashboardAdapter()
-    private var endPoint: String = "dashboard.json"
+    private var endpoint: String? = null
+    private var thisPageOpenedBefore: Boolean = false
     override fun bindingViewModel(binding: FragmentDashboardBinding) {
         binding.lifecycleOwner = this
     }
@@ -38,13 +40,20 @@ class DashboardFragment :
     override fun viewDidLoad(savedInstanceState: Bundle?) {
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         setUI()
+
         arguments?.run {
             getString("endpoint")?.let {
-                endPoint = it
+                endpoint = it
+            } ?: kotlin.run {
+                endpoint = DASHBOARD_ENDPOINT
             }
         }
-        viewModel.fetchAdapter(endPoint)
-        AppLog("endpoint: $endPoint")
+
+        AppLog("endpoint: $endpoint")
+        AppLog("thisPageOpenedBefore: $thisPageOpenedBefore")
+
+        viewModel.fetchAdapter(if (!thisPageOpenedBefore) endpoint else null)
+        thisPageOpenedBefore = true
     }
 
     override fun observeViewModel() {
@@ -80,10 +89,7 @@ class DashboardFragment :
                 clickEventModel?.let {
                     when (it.eventTypeCode) {
                         EventTypeCode.OPEN_SCREEN -> {
-                            val navDeepLinkRequest = NavDeepLinkRequest.Builder.fromUri(
-                                "android-app://kodz.org.template/dashboardFragment?endpoint=${it.endpoint}".toUri()
-                            ).build()
-                            navigateWithDeepLink(navDeepLinkRequest)
+                            goToDeepLink(it.endpoint)
                         }
 
                         EventTypeCode.CLOSE_THE_SCREEN -> {
@@ -100,32 +106,33 @@ class DashboardFragment :
                             // Do nothing
                         }
                     }
+                    viewModel.clearLiveData()
                 }
-
-                viewModel.clearLiveData()
             }
 
-            observeLiveData(sharedViewModel.getClickEventCode()) {
-                when (it) {
-                    EventTypeCode.RETRY_LAST_ACTION -> {
-                        viewModel.fetchAdapter(endPoint)
-                    }
+            observeLiveData(sharedViewModel.getClickEventCode()) { eventTypeCode ->
+                eventTypeCode?.let {
+                    when (it) {
+                        EventTypeCode.RETRY_LAST_ACTION -> {
+                            viewModel.fetchAdapter(endpoint)
+                        }
 
-                    EventTypeCode.CLOSE_THE_SCREEN -> {
-                        hideFullScreenError()
-                        navigateUp()
-                    }
+                        EventTypeCode.CLOSE_THE_SCREEN -> {
+                            hideFullScreenError()
+                            navigateUp()
+                        }
 
-                    EventTypeCode.CLOSE_THE_APP -> {
-                        hideFullScreenError()
-                        activity?.finish()
-                    }
+                        EventTypeCode.CLOSE_THE_APP -> {
+                            hideFullScreenError()
+                            activity?.finish()
+                        }
 
-                    else -> {
-                        // Do nothing
+                        else -> {
+                            // Do nothing
+                        }
                     }
+                    sharedViewModel.setClickEventCode(null)
                 }
-                sharedViewModel.setClickEventCode(null)
             }
         }
     }
@@ -140,7 +147,7 @@ class DashboardFragment :
             }
 
             swiperefresh.setOnRefreshListener {
-                viewModel.fetchAdapter(endPoint)
+                viewModel.fetchAdapter(endpoint)
                 binding.searchBox.edtSearch.text = null
                 swiperefresh.isRefreshing = false
             }
@@ -150,6 +157,8 @@ class DashboardFragment :
     private fun showResultViaAdapter(adapter: DashboardAdapter, list: MutableList<ComponentBaseRow?>?) {
         adapter.submitData(list)
         hideFullScreenLoading()
+        hideFullScreenError()
+        // popBackStack()
     }
 
     private fun prepareScreen(screenSettingsModel: SettingsModel?) {
@@ -183,6 +192,13 @@ class DashboardFragment :
                 binding.searchBox.root.visible()
             } else binding.searchBox.root.gone()
         }
+    }
+
+    private fun goToDeepLink(endpoint: String?) {
+        val navDeepLinkRequest = NavDeepLinkRequest.Builder
+            .fromUri("android-app://kodz.org.template/dashboardFragment?endpoint=${endpoint}".toUri())
+            .build()
+        navigateWithDeepLink(navDeepLinkRequest)
     }
 
     override fun onBackPressed(): Boolean {

@@ -101,13 +101,20 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
     }
 
     fun navigateWithDeepLink(deepLinkRequest: NavDeepLinkRequest) {
-        if (requireActivity() is BaseActivity<*, *>)
+        if (requireActivity() is BaseActivity<*, *>) {
             (requireActivity() as BaseActivity<*, *>).navigateWithDeepLink(deepLinkRequest)
+        }
     }
 
     fun navigateUp() {
         if (requireActivity() is BaseActivity<*, *>) {
             (requireActivity() as BaseActivity<*, *>).navigateUp()
+        }
+    }
+
+    fun popBackStack() {
+        if (requireActivity() is BaseActivity<*, *>) {
+            (requireActivity() as BaseActivity<*, *>).popBackStack()
         }
     }
 

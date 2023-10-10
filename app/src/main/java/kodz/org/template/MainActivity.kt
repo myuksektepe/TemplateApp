@@ -171,7 +171,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 toolBar.subtitle = subTitle
                 appBar.visible()
             }
-            icon?.let { icon -> toolBar.navigationIcon = getDrawable(icon.resourceId) }
+            icon?.let { icon -> toolBar.navigationIcon = getDrawable(icon.resourceId) } ?: toolBar.setNavigationIcon(null)
             toolBar.setNavigationOnClickListener {
                 if (!isAnyDialogVisible) {
                     if (icon == CommonIcons.GO_BACK) navigateUp()

@@ -20,8 +20,8 @@ import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.safeNavigate
 import kodz.org.core.extension.setIsVisible
-import kodz.org.core.model.http.ErrorModel
 import kodz.org.core.model.LoadingModel
+import kodz.org.core.model.http.ErrorModel
 
 /**
  * Created by Murat Yüksektepe on 9.08.2023.
@@ -114,6 +114,8 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
     }
 
     fun navigateUp() = navHost?.navController?.navigateUp()
+
+    fun popBackStack() = navHost?.navController?.popBackStack()
 
     protected fun setStartDestinationOfNavGraph(navGraphId: Int, destinationId: Int) {
         val inflater = navHost?.navController?.navInflater

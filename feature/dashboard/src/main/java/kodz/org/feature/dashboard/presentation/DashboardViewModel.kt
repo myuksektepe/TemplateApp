@@ -81,93 +81,95 @@ class DashboardViewModel @Inject constructor(
     private val itemClickEventModel = MutableLiveData<ItemClickEventModel?>()
     val itemClickEventModelLiveData: LiveData<ItemClickEventModel?> get() = itemClickEventModel
 
-    fun fetchAdapter(endpoint: String) {
-        componentList.clear()
-        job?.cancel()
-        job = null
-        job = viewModelScope.launch(Dispatchers.IO) {
-            httpRequest.postRequest<DashboardRequest, DashboardResponse>(context, DashboardRequest(endpoint)).collectLatest { response ->
-                when (response) {
-                    is HttpFlow.Loading -> {
-                        rowList.postValue(Resource.Loading)
-                    }
-
-                    is HttpFlow.Error -> {
-                        rowList.postValue(Resource.Error(response.errorModel))
-                    }
-
-                    is HttpFlow.Success -> {
-                        var clsRow: ComponentBaseRow? = null
-
-                        // Screen settings
-                        screenSettings.postValue(response.data.settings)
-
-                        // Rows
-                        response.data.rows?.forEach {
-                            if (it.isVisible == true) {
-                                val dataModelString = it.dataModel
-                                it.rowName?.let { rowName ->
-                                    when (rowName) {
-
-                                        // Dashboard
-                                        "SectionTitleRow" -> {
-                                            clsRow = makeRow<SectionTitleRow, SectionTitleContractor, SectionTitleDataModel>(dataModelString, itemClickHandler)
-                                        }
-
-                                        "CarouselRow" -> {
-                                            dataModelString?.toResponseModel<CarouselDataModel>()?.let { dataModel ->
-                                                dataModel.itemList.forEach { carouselItemData ->
-                                                    CarouselItemRow(carouselItemData)
-                                                }
-                                                clsRow = makeRow<CarouselRow, CarouselContractor, CarouselDataModel>(dataModelString, itemClickHandler)
-                                            }
-                                        }
-
-                                        "EntryItem1Row" -> {
-                                            clsRow = makeRow<EntryItem1Row, EntryItem1Contractor, EntryItem1DataModel>(dataModelString, itemClickHandler)
-                                        }
-
-                                        "EntryItem2Row" -> {
-                                            clsRow = makeRow<EntryItem2Row, EntryItem2Contractor, EntryItem2DataModel>(dataModelString, itemClickHandler)
-                                        }
-                                        // ========================================
-
-                                        // Category
-                                        "SearchBoxRow" -> {
-                                            clsRow = makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(dataModelString)
-                                        }
-                                        // ========================================
-
-                                        // Entry Details
-                                        "EntryTitle1Row" -> {
-                                            clsRow = makeRow<EntryTitle1Row, EntryTitle1Contractor, EntryTitle1DataModel>(dataModelString)
-                                        }
-
-                                        "WebViewRow" -> {
-                                            clsRow = makeRow<WebViewRow, WebViewContractor, WebViewDataModel>(dataModelString)
-                                        }
-
-                                        "LongTextRow" -> {
-                                            clsRow = makeRow<LongTextRow, LongTextContractor, LongTextDataModel>(dataModelString)
-                                        }
-
-                                        "VideoPlayerRow" -> {
-                                            clsRow = makeRow<VideoPlayerRow, VideoPlayerContractor, VideoPlayerDataModel>(dataModelString)
-                                        }
-                                        // ========================================
-
-                                        else -> {
-                                            clsRow = null
-                                            AppLog("${it.rowName} is not included in app!")
-                                        }
-                                    }
-                                    clsRow?.let { row -> componentList.add(row) }
-                                }
-                            }
+    fun fetchAdapter(endpoint: String?) {
+        endpoint?.let {
+            componentList.clear()
+            job?.cancel()
+            job = null
+            job = viewModelScope.launch(Dispatchers.IO) {
+                httpRequest.postRequest<DashboardRequest, DashboardResponse>(context, DashboardRequest(it)).collectLatest { response ->
+                    when (response) {
+                        is HttpFlow.Loading -> {
+                            rowList.postValue(Resource.Loading)
                         }
 
-                        // Send Component List to Adapter
-                        rowList.postValue(Resource.Success(componentList))
+                        is HttpFlow.Error -> {
+                            rowList.postValue(Resource.Error(response.errorModel))
+                        }
+
+                        is HttpFlow.Success -> {
+                            var clsRow: ComponentBaseRow? = null
+
+                            // Screen settings
+                            screenSettings.postValue(response.data.settings)
+
+                            // Rows
+                            response.data.rows?.forEach {
+                                if (it.isVisible == true) {
+                                    val dataModelString = it.dataModel
+                                    it.rowName?.let { rowName ->
+                                        when (rowName) {
+
+                                            // Dashboard
+                                            "SectionTitleRow" -> {
+                                                clsRow = makeRow<SectionTitleRow, SectionTitleContractor, SectionTitleDataModel>(dataModelString, itemClickHandler)
+                                            }
+
+                                            "CarouselRow" -> {
+                                                dataModelString?.toResponseModel<CarouselDataModel>()?.let { dataModel ->
+                                                    dataModel.itemList.forEach { carouselItemData ->
+                                                        CarouselItemRow(carouselItemData)
+                                                    }
+                                                    clsRow = makeRow<CarouselRow, CarouselContractor, CarouselDataModel>(dataModelString, itemClickHandler)
+                                                }
+                                            }
+
+                                            "EntryItem1Row" -> {
+                                                clsRow = makeRow<EntryItem1Row, EntryItem1Contractor, EntryItem1DataModel>(dataModelString, itemClickHandler)
+                                            }
+
+                                            "EntryItem2Row" -> {
+                                                clsRow = makeRow<EntryItem2Row, EntryItem2Contractor, EntryItem2DataModel>(dataModelString, itemClickHandler)
+                                            }
+                                            // ========================================
+
+                                            // Category
+                                            "SearchBoxRow" -> {
+                                                clsRow = makeRow<SearchBoxRow, SearchBoxContractor, SearchBoxDataModel>(dataModelString)
+                                            }
+                                            // ========================================
+
+                                            // Entry Details
+                                            "EntryTitle1Row" -> {
+                                                clsRow = makeRow<EntryTitle1Row, EntryTitle1Contractor, EntryTitle1DataModel>(dataModelString)
+                                            }
+
+                                            "WebViewRow" -> {
+                                                clsRow = makeRow<WebViewRow, WebViewContractor, WebViewDataModel>(dataModelString)
+                                            }
+
+                                            "LongTextRow" -> {
+                                                clsRow = makeRow<LongTextRow, LongTextContractor, LongTextDataModel>(dataModelString)
+                                            }
+
+                                            "VideoPlayerRow" -> {
+                                                clsRow = makeRow<VideoPlayerRow, VideoPlayerContractor, VideoPlayerDataModel>(dataModelString)
+                                            }
+                                            // ========================================
+
+                                            else -> {
+                                                clsRow = null
+                                                AppLog("${it.rowName} is not included in app!")
+                                            }
+                                        }
+                                        clsRow?.let { row -> componentList.add(row) }
+                                    }
+                                }
+                            }
+
+                            // Send Component List to Adapter
+                            rowList.postValue(Resource.Success(componentList))
+                        }
                     }
                 }
             }

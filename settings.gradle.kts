@@ -19,4 +19,3 @@ rootProject.name = "Template"
 include(":app")
 include(":core")
 include(":feature:dashboard")
-include(":feature:entry_detail")
