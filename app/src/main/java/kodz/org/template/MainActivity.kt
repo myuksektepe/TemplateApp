@@ -2,6 +2,7 @@ package kodz.org.template
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -43,6 +44,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
+
+        when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                binding.toolBar.setNavigationIconTint(Color.WHITE)
+            }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                binding.toolBar.setNavigationIconTint(Color.BLACK)
+            }
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
+        }
     }
 
     override fun obverseViewModel() {}

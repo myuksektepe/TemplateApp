@@ -155,10 +155,9 @@ class DashboardFragment :
     }
 
     private fun showResultViaAdapter(adapter: DashboardAdapter, list: MutableList<ComponentBaseRow?>?) {
-        adapter.submitData(list)
         hideFullScreenLoading()
         hideFullScreenError()
-        // popBackStack()
+        adapter.submitData(list)
     }
 
     private fun prepareScreen(screenSettingsModel: SettingsModel?) {

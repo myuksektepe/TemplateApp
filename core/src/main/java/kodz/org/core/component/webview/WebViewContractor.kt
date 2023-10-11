@@ -1,5 +1,6 @@
 package kodz.org.core.component.webview
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.view.ViewGroup
@@ -64,21 +65,32 @@ class WebViewContractor() : ComponentBaseContractor() {
     }
 
     private fun String.fullHtml(): String {
+        var colorText = "color:black !important;"
+        when (binding?.root?.context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                colorText = "color:white !important;"
+            }
+        }
+
         // Meta
         val meta = "<meta name='viewport' content='width=device-width'>"
 
         //CSS
-        var css = "<style type='text/css'>" +
+        val css = "<style type='text/css'>" +
                 "*{" +
                 "font-family:Times New Roman!important; " +
                 "line-height:1.5!important;" +
                 "-webkit-user-select: none !important;" +
                 "}" +
+
                 "body{" +
                 "font-family: Times New Roman!important;" +
                 "font-size: 19px!important;" +
                 "padding: 16px !important;" +
-                "text-align: left !important;}" +
+                "text-align: left !important;" +
+                colorText +
+                "}" +
+
                 "img{" +
                 "max-width:100% !important; " +
                 "}" +
