@@ -41,8 +41,9 @@ android {
 
 dependencies {
     // Modules
+    implementation(project(":core_ui:component"))
     implementation(project(":core"))
-    implementation(project(":feature:dashboard"))
+    implementation(project(":feature:screen"))
 
     // Main
     implementation(Dependencies.appcompat)
@@ -52,9 +53,6 @@ dependencies {
 
     // Shimmer
     implementation(Dependencies.shimmer)
-
-    // Kotlin
-    // implementation(Dependencies.kotlinReflec)
 
     // KTX
     implementation(Dependencies.ktxCore)

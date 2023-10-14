@@ -26,10 +26,13 @@ enum class EventTypeCode(code: String?) {
     RETRY_LAST_ACTION("030"),
 
     @SerializedName("090")
-    CLOSE_THE_SCREEN("090"),
+    CLOSE_THE_DIALOG("090"),
 
     @SerializedName("091")
-    CLOSE_THE_APP("091");
+    CLOSE_THE_SCREEN("091"),
+
+    @SerializedName("092")
+    CLOSE_THE_APP("092");
 
     companion object {
         fun from(value: String): EventTypeCode? {

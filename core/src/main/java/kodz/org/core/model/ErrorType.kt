@@ -1,5 +1,7 @@
 package kodz.org.core.model
 
+import com.google.gson.annotations.SerializedName
+
 
 /**
  * Created by Murat Yüksektepe on 9.08.2023.
@@ -7,7 +9,10 @@ package kodz.org.core.model
  * yuksektepemurat@gmail.com
  */
 enum class ErrorType(val type: String) {
+    @SerializedName("blocker")
     BLOCKER("blocker"),
+
+    @SerializedName("warning")
     WARNING("warning");
 
     companion object {

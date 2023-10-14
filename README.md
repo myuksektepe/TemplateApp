@@ -20,5 +20,6 @@ Item click event types;
 
 - 030: Retry the last action,
 
-- 090: Close the screen,
-- 091: Close the app,
+- 090: Close the popup / dialog,
+- 091: Close the screen,
+- 092: Close the app,

@@ -41,21 +41,21 @@ dependencies {
     implementation(Dependencies.material)
     implementation(Dependencies.sdp)
 
+    // KTX
+    implementation(Dependencies.ktxCore)
+    implementation(Dependencies.ktxNavigationFragment)
+    implementation(Dependencies.ktxNavigationUi)
+
+    // Kotlin
+    implementation(Dependencies.kotlinReflec)
+
     // Glide
     implementation(Dependencies.glide) {
         exclude(group = "com.android.support")
     }
     kapt("androidx.annotation:annotation:1.7.0")
     kapt(Dependencies.glideCompiler)
-
-    // Kotlin
-    implementation(Dependencies.kotlinReflec)
-
-    // KTX
-    implementation(Dependencies.ktxCore)
-    implementation(Dependencies.ktxNavigationFragment)
-    implementation(Dependencies.ktxNavigationUi)
-
+    
     // Retrofit2
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofitGson)
@@ -64,6 +64,12 @@ dependencies {
 
     // Gson
     implementation(Dependencies.gson)
+
+    // Lottie
+    implementation(Dependencies.lottie)
+
+    // Shimmer
+    implementation(Dependencies.shimmer)
 
     // Hilt
     implementation(Dependencies.hilt)

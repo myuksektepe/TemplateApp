@@ -7,7 +7,7 @@
 object DependencyVersions {
     const val kotlin = "1.9.0"
     const val appCompat = "1.6.1"
-    const val material = "1.9.0"
+    const val material = "1.10.0"
     const val constraintlayout = "2.1.4"
     const val legacySupportV4 = "1.0.0"
     const val recyclerView = "1.2.1"

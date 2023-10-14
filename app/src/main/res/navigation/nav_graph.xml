@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/screenFragment">
 
     <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="kodz.org.feature.dashboard.presentation.DashboardFragment"
-        android:label="DashboardFragment"
+        android:id="@+id/screenFragment"
+        android:name="kodz.org.feature.screen.presentation.ScreenFragment"
+        android:label="screenFragment"
         tools:layout="@layout/fragment_dashboard">
         <argument
             android:name="endpoint"
             app:argType="string"
             app:nullable="true" />
-        <deepLink app:uri="android-app://kodz.org.template/dashboardFragment?endpoint={endpoint}" />
+        <deepLink app:uri="android-app://kodz.org.template/screenFragment?endpoint={endpoint}" />
     </fragment>
 
 </navigation>

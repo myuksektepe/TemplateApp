@@ -6,10 +6,10 @@ import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.isOnline
+import kodz.org.core.model.ErrorType
 import kodz.org.core.model.http.ButtonModel
 import kodz.org.core.model.http.ErrorModel
 import kodz.org.core.model.screen.EventTypeCode
-import kodz.org.core.model.screen.ScreenModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -45,12 +45,7 @@ class HttpRequest @Inject constructor(
                                 val type = object : TypeToken<RS>() {}.type
                                 val outPutJsonObject = gson.toJsonTree(body).asJsonObject
                                 val responseObject = gson.fromJson<RS>(outPutJsonObject.toString(), type)
-                                val screenModel = (responseObject as? ScreenModel)
-                                if (screenModel?.error == null) {
-                                    emit(HttpFlow.Success(responseObject))
-                                } else {
-                                    emit(HttpFlow.Error(screenModel.error))
-                                }
+                                emit(HttpFlow.Success(responseObject))
                             } ?: kotlin.run {
                                 emit(HttpFlow.Error(it.message().prepareUnCancelableError()))
                             }
@@ -106,6 +101,7 @@ class HttpRequest @Inject constructor(
     }
 
     fun String.prepareUnCancelableError() = ErrorModel(
+        type = ErrorType.BLOCKER,
         title = "Beklenmedik Bir Hata Oluştu",
         description = this,
         primaryButton = ButtonModel(

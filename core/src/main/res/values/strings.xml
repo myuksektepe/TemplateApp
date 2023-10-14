@@ -1,15 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home">Ana Sayfa</string>
-    <string name="loading">Yükleniyor…</string>
-    <string name="pleaseWait">Lütfen Bekleyiniz…</string>
-    <string name="tryAgain">Yeniden Deneyin</string>
-    <string name="viewAll">Tümünü Gör ></string>
-    <string name="error">Hata!</string>
-    <string name="warning">Uyarı!</string>
-    <string name="success">Başarılı</string>
-    <string name="okay">Tamam</string>
-    <string name="cancel">İptal</string>
+    <string name="appName">Obi Dahi</string>
+    <string name="empty" translatable="false"></string>
+    <string name="lipsum" translatable="false">Nullam ut tincidunt ipsum. Aenean tempus pretium urna in tempor. Vivamus pretium, orci quis maximus sagittis, metus risus tempor sapien, vitae condimentum leo urna nec purus. Aenean vulputate at eros sed blandit. Morbi dignissim vulputate ligula, ac pellentesque erat. Phasellus suscipit arcu pharetra lacus laoreet porttitor. Vestibulum fermentum, sem eu porta porttitor, nisi sapien tempor urna, eu laoreet est urna nec lacus. Phasellus quis sapien risus. In efficitur tortor ligula, sit amet ultrices dolor tempus ac. Nullam libero erat, varius vitae consectetur sit amet, vestibulum ac mi. Sed ac quam elementum, tristique eros eu, varius erat. Nullam dolor ex, dictum eu sapien quis, lobortis elementum velit.</string>
 
-    <string name="lipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
-    <string name="search">Hızlı arama…</string>
+    <!-- Buttons -->
+    <string name="viewAll">Tümünü Gör</string>
+    <string name="okay">Tamam</string>
+    <string name="cancel">İptal Et</string>
+    <string name="tryAgain">Yeniden Dene</string>
+    <string name="close">Kapat</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="download">İndir</string>
+    <string name="view">Görüntüle</string>
+    <string name="like">Beğen</string>
+    <string name="apply">Uygula</string>
+    <string name="loading">Yükleniyor…</string>
+
+    <!-- Warnings & Errors -->
+    <string name="oops">Ooops! Bir hata oluştu :(</string>
+    <string name="warning">Uyarı!</string>
+    <string name="error">Hata!</string>
+    <string name="fail">Başarısız!</string>
+    <string name="success">Başarılı</string>
+    <string name="please_wait">Lütfen Bekleyin.</string>
+    <string name="video_is_not_playing">Bu video şu anda oynatılamıyor.</string>
+    <string name="check_your_internet_connection">Lütfen internet bağlantınızı kontrol edin!</string>
+    <string name="correct_answer">Doğru Cevap!</string>
+
+    <string name="home">Anasayfa</string>
+    <string name="searchWith">Hızlı arama…</string>
 </resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:clipChildren="false"
+        android:clipToOutline="false"
+        android:clipToPadding="false"
+        android:padding="@dimen/_8sdp"
+        android:stateListAnimator="@null">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/crdCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:clipChildren="false"
+            android:clipToOutline="false"
+            android:clipToPadding="false"
+            android:stateListAnimator="@null"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="@dimen/_100sdp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgCircle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:minWidth="@dimen/_16sdp"
+                android:minHeight="@dimen/_16sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder"
+                android:stateListAnimator="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

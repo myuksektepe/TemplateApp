@@ -1,6 +1,7 @@
 package kodz.org.core.model.http
 
 import com.google.gson.annotations.SerializedName
+import kodz.org.core.model.ErrorType
 
 
 /**
@@ -9,6 +10,7 @@ import com.google.gson.annotations.SerializedName
  * yuksektepemurat@gmail.com
  */
 data class ErrorModel(
+    @SerializedName("type") val type: ErrorType?,
     @SerializedName("title") val title: String? = null,
     @SerializedName("description") val description: String? = null,
     @SerializedName("primaryButton") val primaryButton: ButtonModel? = null,

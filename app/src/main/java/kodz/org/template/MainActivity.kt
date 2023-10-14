@@ -1,7 +1,6 @@
 package kodz.org.template
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
@@ -23,12 +22,12 @@ import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.visible
+import kodz.org.core.model.ErrorType
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.http.ErrorModel
 import kodz.org.template.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
@@ -49,9 +48,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             Configuration.UI_MODE_NIGHT_YES -> {
                 binding.toolBar.setNavigationIconTint(Color.WHITE)
             }
+
             Configuration.UI_MODE_NIGHT_NO -> {
                 binding.toolBar.setNavigationIconTint(Color.BLACK)
             }
+
             Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
         }
     }
@@ -100,21 +101,22 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
             // Primary Button
             errorModel.primaryButton?.let { button ->
-                btnErrorPrimary.text = button.text ?: getString(kodz.org.core.R.string.okay)
+                btnErrorPrimary.setText(button.text ?: getString(kodz.org.core.R.string.okay))
 
                 val textColor = if (button.textColor != null) Color.parseColor(button.textColor) else resources.getColor(R.color.white)
                 btnErrorPrimary.setTextColor(textColor)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    btnErrorPrimary.compoundDrawableTintList = ColorStateList.valueOf(textColor)
+                    btnErrorPrimary.setIconColor(textColor)
                 }
 
-                val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.success)
-                btnErrorPrimary.setBackgroundColor(backgroundColor)
+                val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.green)
+                btnErrorPrimary.setBgColor(backgroundColor)
 
-                val icon = button.icon?.let {
-                    getDrawable(it.resourceId)
-                }
-                btnErrorPrimary.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null)
+                button.icon?.let {
+                    getDrawable(it.resourceId)?.let { icon ->
+                        btnErrorPrimary.setIcon(icon)
+                    }
+                } ?: kotlin.run { btnErrorPrimary.setIcon(null) }
 
                 button.eventType?.let { eventTypeCode ->
                     btnErrorPrimary.setSpamProtectedClickListener {
@@ -130,21 +132,22 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             // Secondary Button
             errorModel.secondaryButton?.let { button ->
                 button.text?.let { text ->
-                    btnErrorSecondary.text = text
+                    btnErrorSecondary.setText(text)
 
                     val textColor = if (button.textColor != null) Color.parseColor(button.textColor) else resources.getColor(R.color.white)
                     btnErrorSecondary.setTextColor(textColor)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        btnErrorSecondary.compoundDrawableTintList = ColorStateList.valueOf(textColor)
+                        btnErrorSecondary.setIconColor(textColor)
                     }
 
-                    val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.scarlet)
-                    btnErrorSecondary.setBackgroundColor(backgroundColor)
+                    val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.red)
+                    btnErrorSecondary.setBgColor(backgroundColor)
 
-                    val icon = button.icon?.let {
-                        getDrawable(it.resourceId)
-                    }
-                    btnErrorSecondary.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null)
+                    button.icon?.let {
+                        getDrawable(it.resourceId)?.let { icon ->
+                            btnErrorSecondary.setIcon(icon)
+                        }
+                    } ?: kotlin.run { btnErrorPrimary.setIcon(null) }
 
                     button.eventType?.let { eventTypeCode ->
                         btnErrorSecondary.setSpamProtectedClickListener {
@@ -159,8 +162,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
             // Layouts
             frmError.visible()
-            frmShimmer.visible()
-            allScreen.gone()
+            if (errorModel.type == ErrorType.BLOCKER) {
+                frmShimmer.visible()
+                allScreen.gone()
+            }
         }
         isAnyDialogVisible = true
     }

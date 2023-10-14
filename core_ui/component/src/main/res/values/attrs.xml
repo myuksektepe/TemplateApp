@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="width" format="dimension" />
+    <attr name="height" format="dimension" />
+    <attr name="matchParent" format="boolean" />
+
+    <!-- Text -->
+    <attr name="text" format="string" />
+
+    <!-- Background -->
+    <attr name="backgroundColor" format="color" />
+
+    <!-- Icon -->
+    <attr name="iconDrawable" format="reference" />
+    <attr name="iconColor" format="color" />
+    <attr name="iconPadding" format="dimension" />
+
+    <!-- Image -->
+    <attr name="imageUrl" format="string" />
+    <attr name="imageDrawable" format="reference" />
+
+    <!-- Shadow -->
+    <attr name="showShadow" format="boolean" />
+    <attr name="shadowColor" format="color" />
+
+
+    <declare-styleable name="RoundedButton">
+        <attr name="matchParent" />
+        <attr name="backgroundColor" />
+        <attr name="iconDrawable" />
+        <attr name="text" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleButton">
+        <attr name="backgroundColor" />
+        <attr name="iconDrawable" />
+        <attr name="iconColor" />
+        <attr name="iconPadding" />
+    </declare-styleable>
+
+    <declare-styleable name="ClassicTextView">
+        <attr name="showShadow" />
+        <attr name="weight" format="enum">
+            <enum name="bold" value="2" />
+            <enum name="regular" value="1" />
+            <enum name="thin" value="0" />
+        </attr>
+        <attr name="align" format="enum">
+            <enum name="left" value="1" />
+            <enum name="center" value="2" />
+            <enum name="right" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImage">
+        <attr name="showShadow" />
+        <attr name="shadowColor" />
+        <attr name="imageUrl" />
+        <attr name="imageDrawable" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundedImage">
+        <attr name="showShadow" />
+        <attr name="shadowColor" />
+        <attr name="imageUrl" />
+        <attr name="imageDrawable" />
+    </declare-styleable>
+
+    <declare-styleable name="IconTextView">
+        <attr name="titleText" format="string" />
+        <attr name="numberText" format="integer" />
+        <attr name="iconDrawable" />
+        <attr name="iconColor" />
+    </declare-styleable>
+</resources>

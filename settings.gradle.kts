@@ -18,4 +18,6 @@ dependencyResolutionManagement {
 rootProject.name = "Template"
 include(":app")
 include(":core")
-include(":feature:dashboard")
+include(":core_ui:row")
+include(":core_ui:component")
+include(":feature:screen")

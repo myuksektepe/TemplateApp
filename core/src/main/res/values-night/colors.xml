@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dayNightReverse">#EAEAEA</color>
+    <color name="whiteBlack">#000000</color>
+
+    <!-- Colors -->
+    <color name="circleButtonBackground">#3A3936</color>
+    <color name="titleColor">#e2f1f6</color>
+    <color name="activeTab">#7bac28</color>
+    <color name="passiveTab">#343434</color>
+    <color name="splashBackground">#F19AA8</color>
+    <color name="mainBackground">#2C2C30</color>
+
+    <!-- View All RoundedButton -->
+    <color name="viewAllButtonBorder">#404040</color>
+    <color name="viewAllButtonBackground">#2E2E2E</color>
+    <color name="viewAllButtonText">#ECECEC</color>
+
+    <!-- Question Answer -->
+    <color name="questionCardBackground">#2C2C2C</color>
+    <color name="answerButtonBackground">#3E473E</color>
+    <color name="answerButtonText">#BEFFBE</color>
+</resources>

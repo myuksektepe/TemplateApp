@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LoadingDialogStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MaterialCardView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">48dp</item>
+        <item name="cornerSizeTopLeft">32dp</item>
+        <item name="cornerSizeBottomRight">24dp</item>
+        <item name="cornerSizeBottomLeft">16dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="android:shadowRadius">300</item>
+    </style>
+
+
+    <style name="SeekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_horizontal</item>
+        <item name="android:thumb">@drawable/circle_for_seek</item>
+        <item name="android:thumbOffset">0dp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="splitTrack">false</item>
+    </style>
+</resources>
