@@ -127,10 +127,7 @@ class ScreenFragment :
                     }
 
                     is Resource.Error -> {
-                        showFullScreenError(
-                            errorModel = it.errorModel,
-                            view = binding.root
-                        )
+                        showFullScreenError(it.errorModel)
                     }
 
                     is Resource.Success -> {
@@ -145,7 +142,7 @@ class ScreenFragment :
 
                             // Error
                             error?.let { error ->
-                                showFullScreenError(error, binding.root)
+                                showFullScreenError(error)
                             }
                         }
                     }

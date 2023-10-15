@@ -79,8 +79,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         (requireActivity() as BaseActivity<*, *>).hideFullScreenLoading()
     }
 
-    fun showFullScreenError(errorModel: ErrorModel, view: View?) {
-        (requireActivity() as BaseActivity<*, *>).showFullScreenError(errorModel, view)
+    fun showFullScreenError(errorModel: ErrorModel) {
+        (requireActivity() as BaseActivity<*, *>).showFullScreenError(errorModel)
     }
 
     fun hideFullScreenError() {

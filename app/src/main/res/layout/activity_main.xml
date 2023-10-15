@@ -76,89 +76,18 @@
 
         </FrameLayout>
 
-        <!-- Error -->
+        <!-- Translucent -->
         <FrameLayout
-            android:id="@+id/frmError"
+            android:id="@+id/frmTranslucent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black70"
-            android:elevation="4dp"
+            android:background="@color/black80"
+            android:elevation="1dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/_32sdp"
-                android:shadowColor="@color/black70"
-                app:cardCornerRadius="@dimen/_16sdp"
-                app:cardElevation="@dimen/_16sdp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/_24sdp">
-
-                    <kodz.org.core_ui.component.text.ClassicTextView
-                        android:id="@+id/txtErrorTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_16sdp"
-                        app:align="center"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:weight="bold"
-                        tools:text="@string/error" />
-
-                    <kodz.org.core_ui.component.text.ClassicTextView
-                        android:id="@+id/txtErrorDescription"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:elevation="5dp"
-                        android:maxHeight="@dimen/_100sdp"
-                        android:nestedScrollingEnabled="true"
-                        android:padding="@dimen/_6sdp"
-                        android:scrollbars="vertical"
-                        android:textSize="@dimen/_14sdp"
-                        app:align="center"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtErrorTitle"
-                        tools:text="@string/lipsum" />
-
-                    <kodz.org.core_ui.component.button.RoundedButton
-                        android:id="@+id/btnErrorPrimary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        app:backgroundColor="@color/green"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txtErrorDescription"
-                        tools:text="Tamam olabilir anladık" />
-
-                    <kodz.org.core_ui.component.button.RoundedButton
-                        android:id="@+id/btnErrorSecondary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:maxLines="2"
-                        android:text="@string/cancel"
-                        app:backgroundColor="@color/red"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btnErrorPrimary"
-                        tools:text="@string/cancel" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
 
         </FrameLayout>
 

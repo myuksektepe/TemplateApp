@@ -9,6 +9,7 @@
 
     <color name="transparent">#00FFFFFF</color>
     <color name="dayNightReverse">#FF000000</color>
+    <color name="nightDayReverse">#FFFFFFFF</color>
     <color name="whiteBlack">#FFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="black80">#80000000</color>

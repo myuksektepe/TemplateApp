@@ -91,7 +91,7 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding>(private v
     abstract fun showFullScreenLoading(loadingModel: LoadingModel? = null, view: View? = null)
     abstract fun hideFullScreenLoading()
 
-    abstract fun showFullScreenError(errorModel: ErrorModel, view: View?)
+    abstract fun showFullScreenError(errorModel: ErrorModel)
     abstract fun hideFullScreenError()
 
     fun navigate(

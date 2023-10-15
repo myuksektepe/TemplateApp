@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/lighterGray"
+            app:layout_constraintBottom_toBottomOf="@+id/imgClose"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgClose" />
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:scaleType="center"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <kodz.org.core_ui.component.text.ClassicTextView
+            android:id="@+id/txtDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:textSize="@dimen/_16sdp"
+            app:align="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/line"
+            app:weight="bold"
+            tools:text="@string/error" />
+
+        <kodz.org.core_ui.component.text.ClassicTextView
+            android:id="@+id/txtDialogDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:maxHeight="@dimen/_100sdp"
+            android:nestedScrollingEnabled="true"
+            android:padding="@dimen/_6sdp"
+            android:scrollbars="vertical"
+            android:textSize="@dimen/_14sdp"
+            app:align="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtDialogTitle"
+            tools:text="@string/lipsum" />
+
+        <kodz.org.core_ui.component.button.RoundedButton
+            android:id="@+id/btnDialogPrimary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:backgroundColor="@color/green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDialogDescription"
+            tools:text="Tamam olabilir anladık" />
+
+        <kodz.org.core_ui.component.button.RoundedButton
+            android:id="@+id/btnDialogSecondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="@string/cancel"
+            app:backgroundColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDialogPrimary"
+            tools:text="@string/cancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

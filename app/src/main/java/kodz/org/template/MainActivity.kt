@@ -1,13 +1,18 @@
 package kodz.org.template
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.LifecycleOwner
@@ -19,12 +24,15 @@ import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
+import kodz.org.core.common.EMPTY
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.visible
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.http.ErrorModel
+import kodz.org.core_ui.component.button.RoundedButton
+import kodz.org.core_ui.component.text.ClassicTextView
 import kodz.org.template.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,9 +44,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override var viewLifeCycleOwner: LifecycleOwner = this
     override fun getBottomNavigationView(): BottomNavigationView = binding.bottomNavigation
     override fun getFragmentContainerView(): FragmentContainerView = binding.fragmentContainer
-
+    override fun obverseViewModel() {}
     private var view: View? = null
     private var isAnyDialogVisible: Boolean = false
+    private var dialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,8 +65,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
         }
     }
-
-    override fun obverseViewModel() {}
 
     override fun showFullScreenLoading(loadingModel: LoadingModel?, view: View?) {
         binding.apply {
@@ -86,93 +93,20 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "UseCompatTextViewDrawableApis")
-    override fun showFullScreenError(errorModel: ErrorModel, view: View?) {
+    override fun showFullScreenError(errorModel: ErrorModel) {
         hideFullScreenLoading()
-        binding.apply {
-            // Title
-            txtErrorTitle.text = errorModel.title ?: getString(kodz.org.core.R.string.error)
-
-            // Description
-            txtErrorDescription.apply {
-                text = errorModel.description
-                movementMethod = ScrollingMovementMethod()
-            }
-            txtLoadingDescription.movementMethod = ScrollingMovementMethod()
-
-            // Primary Button
-            errorModel.primaryButton?.let { button ->
-                btnErrorPrimary.setText(button.text ?: getString(kodz.org.core.R.string.okay))
-
-                val textColor = if (button.textColor != null) Color.parseColor(button.textColor) else resources.getColor(R.color.white)
-                btnErrorPrimary.setTextColor(textColor)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    btnErrorPrimary.setIconColor(textColor)
-                }
-
-                val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.green)
-                btnErrorPrimary.setBgColor(backgroundColor)
-
-                button.icon?.let {
-                    getDrawable(it.resourceId)?.let { icon ->
-                        btnErrorPrimary.setIcon(icon)
-                    }
-                } ?: kotlin.run { btnErrorPrimary.setIcon(null) }
-
-                button.eventType?.let { eventTypeCode ->
-                    btnErrorPrimary.setSpamProtectedClickListener {
-                        sharedViewModel.setClickEventCode(eventTypeCode)
-                    }
-                }
-
-                btnErrorPrimary.visible()
-            } ?: kotlin.run {
-                btnErrorPrimary.gone()
-            }
-
-            // Secondary Button
-            errorModel.secondaryButton?.let { button ->
-                button.text?.let { text ->
-                    btnErrorSecondary.setText(text)
-
-                    val textColor = if (button.textColor != null) Color.parseColor(button.textColor) else resources.getColor(R.color.white)
-                    btnErrorSecondary.setTextColor(textColor)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        btnErrorSecondary.setIconColor(textColor)
-                    }
-
-                    val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.red)
-                    btnErrorSecondary.setBgColor(backgroundColor)
-
-                    button.icon?.let {
-                        getDrawable(it.resourceId)?.let { icon ->
-                            btnErrorSecondary.setIcon(icon)
-                        }
-                    } ?: kotlin.run { btnErrorPrimary.setIcon(null) }
-
-                    button.eventType?.let { eventTypeCode ->
-                        btnErrorSecondary.setSpamProtectedClickListener {
-                            sharedViewModel.setClickEventCode(eventTypeCode)
-                        }
-                    }
-                }
-                btnErrorSecondary.visible()
-            } ?: kotlin.run {
-                btnErrorSecondary.gone()
-            }
-
-            // Layouts
-            frmError.visible()
-            if (errorModel.type == ErrorType.BLOCKER) {
-                frmShimmer.visible()
-                allScreen.gone()
-            }
+        binding.frmTranslucent.visible()
+        if (errorModel.type == ErrorType.BLOCKER) {
+            binding.frmShimmer.visible()
+            binding.allScreen.gone()
         }
         isAnyDialogVisible = true
+        showDialog(errorModel)
     }
 
     override fun hideFullScreenError() {
+        dialog?.dismiss()
         binding.apply {
-            frmError.gone()
             frmShimmer.gone()
             allScreen.visible()
         }
@@ -214,6 +148,119 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     }
                 }
             }
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun showDialog(errorModel: ErrorModel) {
+        dialog = Dialog(this)
+        dialog?.run {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setContentView(R.layout.bottom_sheet)
+            setCancelable(errorModel.type == ErrorType.WARNING)
+
+            // Close Button
+            findViewById<ImageView>(R.id.imgClose).run {
+                if (errorModel.type == ErrorType.WARNING) {
+                    visible()
+                    setSpamProtectedClickListener {
+                        dismiss()
+                    }
+                } else gone()
+            }
+
+            // Title
+            findViewById<ClassicTextView>(R.id.txtDialogTitle).run {
+                text = errorModel.title ?: getString(kodz.org.core.R.string.error)
+            }
+
+            // Description
+            findViewById<ClassicTextView>(R.id.txtDialogDescription).run {
+                text = errorModel.description ?: EMPTY
+                movementMethod = ScrollingMovementMethod()
+            }
+
+            // Primary Button
+            findViewById<RoundedButton>(R.id.btnDialogPrimary).run {
+                errorModel.primaryButton?.let { button ->
+                    // Text
+                    setText(button.text ?: getString(kodz.org.core.R.string.okay))
+
+                    // Text Color
+                    val textColor = if (button.textColor != null) Color.parseColor(button.textColor) else resources.getColor(R.color.white)
+                    setTextColor(textColor)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
+
+                    // Background Color
+                    val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.green)
+                    setBgColor(backgroundColor)
+
+                    // Icon
+                    button.icon?.let {
+                        getDrawable(it.resourceId)?.let { icon ->
+                            setIcon(icon)
+                        }
+                    } ?: kotlin.run { setIcon(null) }
+
+                    // OnClick
+                    button.eventType?.let { eventTypeCode ->
+                        setSpamProtectedClickListener {
+                            sharedViewModel.setClickEventCode(eventTypeCode)
+                            dismiss()
+                        }
+                    }
+
+                    visible()
+                } ?: kotlin.run { gone() }
+            }
+
+            // Secondary Button
+            findViewById<RoundedButton>(R.id.btnDialogSecondary).run {
+                errorModel.secondaryButton?.let { button ->
+                    // Text
+                    setText(button.text ?: getString(kodz.org.core.R.string.okay))
+
+                    // Text Color
+                    val textColor = if (button.textColor != null) Color.parseColor(button.textColor) else resources.getColor(R.color.white)
+                    setTextColor(textColor)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
+
+                    // Background Color
+                    val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.green)
+                    setBgColor(backgroundColor)
+
+                    // Icon
+                    button.icon?.let {
+                        getDrawable(it.resourceId)?.let { icon ->
+                            setIcon(icon)
+                        }
+                    } ?: kotlin.run { setIcon(null) }
+
+                    // OnClick
+                    button.eventType?.let { eventTypeCode ->
+                        setSpamProtectedClickListener {
+                            sharedViewModel.setClickEventCode(eventTypeCode)
+                            dismiss()
+                        }
+                    }
+
+                    visible()
+                } ?: kotlin.run { gone() }
+            }
+
+            show()
+
+            window?.run {
+                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                attributes.windowAnimations = R.style.DialogAnimation
+                setGravity(Gravity.BOTTOM)
+            }
+
+            dialog?.setOnDismissListener {
+                binding.frmTranslucent.gone()
+            }
+
         }
     }
 }
