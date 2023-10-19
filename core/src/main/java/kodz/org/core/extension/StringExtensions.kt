@@ -1,6 +1,7 @@
 package kodz.org.core.extension
 
-import java.util.*
+import android.graphics.Color
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 
@@ -30,5 +31,14 @@ fun Long?.getDurationText(): String {
         return String.format(Locale.US, "%02d:%02d", min, sec)
     } ?: kotlin.run {
         return "NaN"
+    }
+}
+
+
+fun String?.toColor(): Int? {
+    return try {
+        Color.parseColor(this)
+    } catch (e: Exception) {
+        null
     }
 }

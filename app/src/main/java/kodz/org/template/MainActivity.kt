@@ -17,25 +17,24 @@ import androidx.activity.viewModels
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.SharedViewModel
-import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.common.EMPTY
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.setSpamProtectedClickListener
+import kodz.org.core.extension.toColor
 import kodz.org.core.extension.visible
+import kodz.org.core.model.ButtonType
+import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.LoadingModel
-import kodz.org.core.model.http.ErrorModel
 import kodz.org.core_ui.component.button.RoundedButton
+import kodz.org.core_ui.component.button.TextButton
 import kodz.org.core_ui.component.text.ClassicTextView
 import kodz.org.template.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
@@ -67,7 +66,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     }
 
     override fun showFullScreenLoading(loadingModel: LoadingModel?, view: View?) {
-        binding.apply {
+        binding.run {
             // Title
             txtLoadingTitle.text = loadingModel?.title ?: getString(kodz.org.core.R.string.loading)
 
@@ -84,7 +83,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     }
 
     override fun hideFullScreenLoading() {
-        binding.apply {
+        binding.run {
             frmLoading.gone()
             frmShimmer.gone()
             allScreen.visible()
@@ -106,7 +105,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
     override fun hideFullScreenError() {
         dialog?.dismiss()
-        binding.apply {
+        binding.run {
             frmShimmer.gone()
             allScreen.visible()
         }
@@ -133,22 +132,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override fun onBackPressed() {
         if (isAnyDialogVisible) return
         super.onBackPressed()
-    }
-
-    private fun setClickable(view: View?, isClickable: Boolean) {
-        lifecycleScope.launch(Dispatchers.Main) {
-            if (view != null) {
-                this@MainActivity.view = view
-                view.isEnabled = isClickable
-                AppLog("$isClickable - ${view.toString()}")
-                if (view is ViewGroup) {
-                    for (i in 0 until view.childCount) {
-                        setClickable(view.getChildAt(i), isClickable)
-                        AppLog("-- $isClickable - ${view.getChildAt(i).toString()}")
-                    }
-                }
-            }
-        }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -187,12 +170,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     setText(button.text ?: getString(kodz.org.core.R.string.okay))
 
                     // Text Color
-                    val textColor = if (button.textColor != null) Color.parseColor(button.textColor) else resources.getColor(R.color.white)
+                    val textColor = if (button.textColor.toColor() != null) {
+                        button.textColor.toColor()!!
+                    } else resources.getColor(R.color.white)
                     setTextColor(textColor)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
 
                     // Background Color
-                    val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.green)
+                    val backgroundColor = if (button.backgroundColor.toColor() != null) {
+                        button.backgroundColor.toColor()!!
+                    } else resources.getColor(kodz.org.core.R.color.green)
                     setBgColor(backgroundColor)
 
                     // Icon
@@ -215,37 +202,82 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             }
 
             // Secondary Button
-            findViewById<RoundedButton>(R.id.btnDialogSecondary).run {
-                errorModel.secondaryButton?.let { button ->
-                    // Text
-                    setText(button.text ?: getString(kodz.org.core.R.string.okay))
+            findViewById<TextButton>(R.id.btnDialogSecondaryText).gone()
+            findViewById<RoundedButton>(R.id.btnDialogSecondaryRounded).gone()
 
-                    // Text Color
-                    val textColor = if (button.textColor != null) Color.parseColor(button.textColor) else resources.getColor(R.color.white)
-                    setTextColor(textColor)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
+            if (errorModel.secondaryButton?.type == ButtonType.ROUNDED) {
+                findViewById<RoundedButton>(R.id.btnDialogSecondaryRounded).run {
+                    errorModel.secondaryButton?.let { button ->
+                        // Text
+                        setText(button.text ?: getString(kodz.org.core.R.string.okay))
 
-                    // Background Color
-                    val backgroundColor = if (button.backgroundColor != null) Color.parseColor(button.backgroundColor) else resources.getColor(kodz.org.core.R.color.green)
-                    setBgColor(backgroundColor)
+                        // Text Color
+                        val textColor = if (button.textColor.toColor() != null) {
+                            button.textColor.toColor()!!
+                        } else resources.getColor(R.color.white)
+                        setTextColor(textColor)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
 
-                    // Icon
-                    button.icon?.let {
-                        getDrawable(it.resourceId)?.let { icon ->
-                            setIcon(icon)
+                        // Background Color
+                        val backgroundColor = if (button.backgroundColor.toColor() != null) {
+                            button.backgroundColor.toColor()!!
+                        } else resources.getColor(kodz.org.core.R.color.red)
+                        setBgColor(backgroundColor)
+
+                        // Icon
+                        button.icon?.let {
+                            getDrawable(it.resourceId)?.let { icon ->
+                                setIcon(icon)
+                            }
+                        } ?: kotlin.run { setIcon(null) }
+
+                        // OnClick
+                        button.eventType?.let { eventTypeCode ->
+                            setSpamProtectedClickListener {
+                                sharedViewModel.setClickEventCode(eventTypeCode)
+                                dismiss()
+                            }
                         }
-                    } ?: kotlin.run { setIcon(null) }
 
-                    // OnClick
-                    button.eventType?.let { eventTypeCode ->
-                        setSpamProtectedClickListener {
-                            sharedViewModel.setClickEventCode(eventTypeCode)
-                            dismiss()
+                        visible()
+                    } ?: kotlin.run { gone() }
+                }
+            } else if (errorModel.secondaryButton?.type == ButtonType.TEXT) {
+                findViewById<TextButton>(R.id.btnDialogSecondaryText).run {
+                    errorModel.secondaryButton?.let { button ->
+                        // Text
+                        setText(button.text ?: getString(kodz.org.core.R.string.okay))
+
+                        // Text Color
+                        button.textColor.toColor()?.let { textColor ->
+                            setTextColor(textColor)
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
+                            setUnderlineColor(textColor)
                         }
-                    }
 
-                    visible()
-                } ?: kotlin.run { gone() }
+                        // Icon
+                        button.icon?.let {
+                            getDrawable(it.resourceId)?.let { icon ->
+                                setIcon(icon)
+                            }
+                        } ?: kotlin.run { setIcon(null) }
+
+                        // Underline
+                        button.showUnderline?.let {
+                            underline(it)
+                        }
+
+                        // OnClick
+                        button.eventType?.let { eventTypeCode ->
+                            setSpamProtectedClickListener {
+                                sharedViewModel.setClickEventCode(eventTypeCode)
+                                dismiss()
+                            }
+                        }
+
+                        visible()
+                    } ?: kotlin.run { gone() }
+                }
             }
 
             show()
@@ -258,6 +290,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             }
 
             dialog?.setOnDismissListener {
+                isAnyDialogVisible = false
                 binding.frmTranslucent.gone()
             }
 

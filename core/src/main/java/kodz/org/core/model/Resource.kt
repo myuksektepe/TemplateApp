@@ -1,6 +1,6 @@
 package kodz.org.core.model
 
-import kodz.org.core.model.http.ErrorModel
+import kodz.org.core.model.ErrorModel
 
 sealed class Resource<out T> {
     object Loading : Resource<Nothing>()

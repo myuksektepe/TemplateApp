@@ -13,9 +13,9 @@ import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.AppLog
+import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
-import kodz.org.core.model.screen.ItemClickEventModel
-import kodz.org.core.model.screen.ScreenModel
+import kodz.org.core.model.ScreenModel
 import kodz.org.core_ui.row.carousel.CarouselRow
 import kodz.org.core_ui.row.carousel.CarouselRowContractor
 import kodz.org.core_ui.row.carousel.CarouselRowDataModel

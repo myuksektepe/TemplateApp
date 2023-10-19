@@ -18,8 +18,8 @@ import kodz.org.core.common.DASHBOARD_ENDPOINT
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core.model.Resource
-import kodz.org.core.model.screen.EventTypeCode
-import kodz.org.core.model.screen.SettingsModel
+import kodz.org.core.model.EventTypeCode
+import kodz.org.core.model.SettingsModel
 import kodz.org.feature.screen.R
 import kodz.org.feature.screen.databinding.FragmentDashboardBinding
 import kodz.org.feature.screen.domain.adapter.ScreenAdapter

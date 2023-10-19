@@ -13,7 +13,7 @@ import kodz.org.core.base.row.BaseRow
  */
 class MultipleTypeAdapterViewHolder(private var binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(row: BaseRow) {
-        binding.apply {
+        binding.run {
             setVariable(BR.data, row.dataModel)
             row.contractor.initBinding(this)
             executePendingBindings()

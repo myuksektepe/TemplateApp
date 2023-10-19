@@ -8,62 +8,51 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import kodz.org.core.extension.gone
+import kodz.org.core.extension.visible
 import kodz.org.core_ui.component.R
 
 
 /**
- * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 12.10.2023.
+ * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 15.10.2023.
  */
+
 @SuppressLint("UseCompatLoadingForDrawables", "RestrictedApi")
-class RoundedButton @JvmOverloads constructor(
+class TextButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle), View.OnClickListener {
-
-    lateinit var cardView: CardView
-    lateinit var iconView: ImageView
-    lateinit var textView: TextView
-    lateinit var dividerView: View
-    private var _backgroundColor: Int = 0
+    private lateinit var iconView: ImageView
+    private lateinit var textView: TextView
+    private lateinit var underline: View
+    private lateinit var dividerView: View
+    private var _textColor: Int = 0
+    private var _underline: Boolean = false
     private var _onClickListener: OnClickListener? = null
     private var _callback: Function0<Unit>? = null
 
     init {
-        inflate(context, R.layout.component_rounded_button, this)
-
+        inflate(context, R.layout.component_text_button, this)
         super.setOnClickListener(this)
 
         // UI Elements
-        cardView = findViewById<CardView>(R.id.crdRoundedButton)
-        iconView = findViewById<ImageView>(R.id.imgRoundedButton)
-        textView = findViewById<TextView>(R.id.txtRoundedButton)
+        iconView = findViewById<ImageView>(R.id.imgTextButton)
+        textView = findViewById<TextView>(R.id.txtTextButton)
+        underline = findViewById<View>(R.id.underline)
         dividerView = findViewById<View>(R.id.divider)
 
         // Attributes
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.RoundedButton)
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.TextButton)
 
         // Init Attributes
-        val matchParent = attributes.getBoolean(R.styleable.RoundedButton_matchParent, false)
-        _backgroundColor = attributes.getColor(R.styleable.RoundedButton_backgroundColor, resources.getColor(kodz.org.core.R.color.green))
+        _textColor = attributes.getColor(R.styleable.TextButton_textColor, resources.getColor(kodz.org.core.R.color.black))
+        _underline = attributes.getBoolean(R.styleable.TextButton_underline, false)
         var iconVisibility = false
-        val iconDrawable = attributes.getDrawable(R.styleable.RoundedButton_iconDrawable)
+        val iconDrawable = attributes.getDrawable(R.styleable.TextButton_iconDrawable)
         if (iconDrawable != null) iconVisibility = true
-        val buttonText = attributes.getString(R.styleable.RoundedButton_text)
-
-        // CardView
-        cardView.run {
-            setCardBackgroundColor(_backgroundColor)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                outlineAmbientShadowColor = _backgroundColor
-                outlineSpotShadowColor = _backgroundColor
-            }
-            if (matchParent) {
-                layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            }
-        }
+        val buttonText = attributes.getString(R.styleable.TextButton_text)
 
         // Icon View
         iconView.run {
@@ -75,11 +64,18 @@ class RoundedButton @JvmOverloads constructor(
         // TextView
         textView.run {
             text = buttonText
+            setTextColor(_textColor)
+        }
+
+        // Underline
+        underline.run {
+            visibility = if (_underline) View.VISIBLE else View.GONE
         }
 
         attributes.recycle()
 
     }
+
 
     fun setText(text: String) {
         textView.text = text
@@ -89,19 +85,23 @@ class RoundedButton @JvmOverloads constructor(
         textView.setTextColor(color)
     }
 
-    fun setBgColor(color: Int) {
-        cardView.setCardBackgroundColor(color)
-    }
-
     fun setIconColor(color: Int) {
         iconView.setColorFilter(color)
+    }
+
+    fun setUnderlineColor(color: Int) {
+        underline.setBackgroundColor(color)
+    }
+
+    fun underline(visible: Boolean) {
+        if (visible) underline.visible() else underline.gone()
     }
 
     fun setDisable() {
         val backgroundColor = resources.getColor(kodz.org.core.R.color.lightGray)
         this.isEnabled = false
         this.alpha = 0.7f
-        cardView.setCardBackgroundColor(backgroundColor)
+        textView.setTextColor(backgroundColor)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             outlineAmbientShadowColor = backgroundColor
             outlineSpotShadowColor = backgroundColor
@@ -111,10 +111,10 @@ class RoundedButton @JvmOverloads constructor(
     fun setEnable() {
         this.isEnabled = true
         this.alpha = 1f
-        cardView.setCardBackgroundColor(_backgroundColor)
+        textView.setTextColor(_textColor)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            outlineAmbientShadowColor = _backgroundColor
-            outlineSpotShadowColor = _backgroundColor
+            outlineAmbientShadowColor = _textColor
+            outlineSpotShadowColor = _textColor
         }
     }
 

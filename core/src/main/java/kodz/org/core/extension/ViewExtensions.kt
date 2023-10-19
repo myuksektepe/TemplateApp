@@ -1,6 +1,10 @@
 package kodz.org.core.extension
 
-import android.view.*
+import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.Window
+import android.view.WindowManager
 
 
 /**
@@ -36,6 +40,21 @@ fun View.setEnable() {
     this.isFocusable = true
     this.isClickable = true
     this.isEnabled = true
+}
+
+open class SpamProtectedClickListener(
+    private var delay: Long?,
+) : View.OnClickListener {
+    companion object {
+        const val DEFAULT_DELAY = 1000L
+    }
+
+    override fun onClick(v: View) {
+        v.isEnabled = false
+        v.postDelayed({
+            v.isEnabled = true
+        }, delay ?: DEFAULT_DELAY)
+    }
 }
 
 fun View.setSpamProtectedClickListener(timeDelay: Long? = 1000L, onSafeClick: (View) -> Unit) {

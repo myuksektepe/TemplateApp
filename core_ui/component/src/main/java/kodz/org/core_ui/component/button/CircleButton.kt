@@ -40,12 +40,12 @@ class CircleButton @JvmOverloads constructor(
         val iconPadding = attributes.getDimensionPixelSize(R.styleable.CircleButton_iconPadding, 10)
 
         // CardView
-        cardView.apply {
+        cardView.run {
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         }
 
         // Icon View
-        imageView.apply {
+        imageView.run {
             setImageDrawable(iconDrawable)
             setColorFilter(iconColor)
 

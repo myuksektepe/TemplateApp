@@ -4,14 +4,14 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.viewpager2.widget.ViewPager2
 import kodz.org.core.R
-import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.common.HorizontalMarginItemDecoration
 import kodz.org.core.extension.gone
-import kodz.org.core_ui.row.databinding.RowCarouselBinding
 import kodz.org.core_ui.row.carousel_item.CarouselItemRow
+import kodz.org.core_ui.row.common.MultipleTypeAdapter
+import kodz.org.core_ui.row.databinding.RowCarouselBinding
 
 class CarouselRowContractor : BaseRowContractor() {
     override var binding: ViewDataBinding? = null

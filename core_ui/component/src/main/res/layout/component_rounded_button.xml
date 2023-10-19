@@ -4,19 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToOutline="false"
-        android:clipToPadding="false"
-        app:cardBackgroundColor="@color/transparent"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp"
-        app:cardUseCompatPadding="false">
+        android:minHeight="@dimen/_30sdp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/crdRoundedButton"
@@ -26,47 +21,53 @@
             android:outlineSpotShadowColor="@color/darkGray"
             app:cardBackgroundColor="@color/darkGray"
             app:cardCornerRadius="@dimen/_8sdp"
-            app:cardElevation="@dimen/_5sdp"
-            app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/_6sdp"
+            app:contentPadding="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="true">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/imgRoundedButton"
                     android:layout_width="@dimen/_18sdp"
                     android:layout_height="@dimen/_18sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:scaleType="centerInside"
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/divider"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white"
                     tools:ignore="UseAppTint"
                     tools:src="@drawable/ic_play" />
 
-                <TextView
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="0dp"
+                    android:background="@color/lighterGray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/txtRoundedButton"
+                    app:layout_constraintStart_toEndOf="@id/imgRoundedButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <kodz.org.core_ui.component.text.ClassicTextView
                     android:id="@+id/txtRoundedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/averta_regular"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_14sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imgRoundedButton"
+                    app:layout_constraintStart_toEndOf="@id/divider"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Beğen" />
+                    tools:text="Tamam" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

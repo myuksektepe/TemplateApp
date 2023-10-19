@@ -7,6 +7,7 @@
 
     <!-- Text -->
     <attr name="text" format="string" />
+    <attr name="textColor" format="color" />
 
     <!-- Background -->
     <attr name="backgroundColor" format="color" />
@@ -24,6 +25,16 @@
     <attr name="showShadow" format="boolean" />
     <attr name="shadowColor" format="color" />
 
+    <!-- Underline -->
+    <attr name="underline" format="boolean" />
+
+    <declare-styleable name="TextButton">
+        <attr name="matchParent" />
+        <attr name="textColor" />
+        <attr name="iconDrawable" />
+        <attr name="text" />
+        <attr name="underline" />
+    </declare-styleable>
 
     <declare-styleable name="RoundedButton">
         <attr name="matchParent" />

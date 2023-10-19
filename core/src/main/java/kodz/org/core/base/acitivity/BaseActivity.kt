@@ -21,7 +21,7 @@ import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.safeNavigate
 import kodz.org.core.extension.setIsVisible
 import kodz.org.core.model.LoadingModel
-import kodz.org.core.model.http.ErrorModel
+import kodz.org.core.model.ErrorModel
 
 /**
  * Created by Murat Yüksektepe on 9.08.2023.

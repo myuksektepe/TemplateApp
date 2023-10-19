@@ -20,7 +20,7 @@ import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.OnBackPressed
-import kodz.org.core.model.http.ErrorModel
+import kodz.org.core.model.ErrorModel
 
 
 /**

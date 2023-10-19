@@ -6,10 +6,10 @@ import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.extension.isOnline
+import kodz.org.core.model.ButtonModel
+import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
-import kodz.org.core.model.http.ButtonModel
-import kodz.org.core.model.http.ErrorModel
-import kodz.org.core.model.screen.EventTypeCode
+import kodz.org.core.model.EventTypeCode
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

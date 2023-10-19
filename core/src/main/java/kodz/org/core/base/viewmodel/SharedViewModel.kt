@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kodz.org.core.model.screen.EventTypeCode
+import kodz.org.core.model.EventTypeCode
 import javax.inject.Inject
 
 

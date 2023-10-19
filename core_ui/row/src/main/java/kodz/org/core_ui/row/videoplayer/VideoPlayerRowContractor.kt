@@ -58,7 +58,7 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                 // Video
                 data.videoUrl?.let {
                     val uri = Uri.parse(it)
-                    videoView.apply {
+                    videoView.run {
                         try {
                             setVideoURI(uri)
                             setOnPreparedListener { mp ->
