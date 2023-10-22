@@ -17,38 +17,27 @@
         android:clipToPadding="false"
         android:padding="@dimen/_16sdp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <kodz.org.core_ui.component.image.RoundedImage
+            android:id="@+id/imgEntry"
             android:layout_width="0dp"
             android:layout_height="@dimen/_70sdp"
             app:cardCornerRadius="@dimen/_8sdp"
             app:cardElevation="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imgEntry"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/placeholder" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
+        <kodz.org.core_ui.component.text.ClassicTextView
             android:id="@+id/txtEntryTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
-            android:ellipsize="end"
             android:maxLines="2"
             android:textSize="@dimen/_14sdp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/imgEntry"
             tools:text="@string/lipsum" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@ import kodz.org.core_ui.component.R
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 11.10.2023.
  */
 @SuppressLint("UseCompatLoadingForDrawables", "RestrictedApi")
-class CircleButton @JvmOverloads constructor(
+class CircleImageButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0

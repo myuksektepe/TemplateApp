@@ -28,7 +28,7 @@ class EntryItem2RowContractor : BaseRowContractor() {
                 Glide.with(this.imgEntry.context)
                     .load(data.imageUrl)
                     .error(R.drawable.placeholder)
-                    .into(imgEntry)
+                    .into(imgEntry.imageView)
 
                 // EventHandler
                 itemLayout.setSpamProtectedClickListener {

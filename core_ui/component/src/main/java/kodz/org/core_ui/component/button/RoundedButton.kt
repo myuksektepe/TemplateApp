@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -52,6 +53,7 @@ class RoundedButton @JvmOverloads constructor(
         val iconDrawable = attributes.getDrawable(R.styleable.RoundedButton_iconDrawable)
         if (iconDrawable != null) iconVisibility = true
         val buttonText = attributes.getString(R.styleable.RoundedButton_text)
+        val textSize = attributes.getDimensionPixelSize(R.styleable.RoundedButton_textSize, 50)
 
         // CardView
         cardView.run {
@@ -75,6 +77,7 @@ class RoundedButton @JvmOverloads constructor(
         // TextView
         textView.run {
             text = buttonText
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
         }
 
         attributes.recycle()

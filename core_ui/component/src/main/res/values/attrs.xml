@@ -7,6 +7,7 @@
 
     <!-- Text -->
     <attr name="text" format="string" />
+    <attr name="textSize" format="dimension" />
     <attr name="textColor" format="color" />
 
     <!-- Background -->
@@ -33,6 +34,7 @@
         <attr name="textColor" />
         <attr name="iconDrawable" />
         <attr name="text" />
+        <attr name="textSize" />
         <attr name="underline" />
     </declare-styleable>
 
@@ -41,6 +43,7 @@
         <attr name="backgroundColor" />
         <attr name="iconDrawable" />
         <attr name="text" />
+        <attr name="textSize" />
     </declare-styleable>
 
     <declare-styleable name="CircleButton">

@@ -29,7 +29,7 @@
             app:weight="bold"
             tools:text="Section Title" />
 
-        <kodz.org.core_ui.component.button.RoundedButton
+        <kodz.org.core_ui.component.button.TextButton
             android:id="@+id/btnSectionViewAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,12 +37,13 @@
             android:background="@color/transparent"
             android:enabled="@{data.isButtonEnable}"
             android:text="@{data.buttonText != null ? data.buttonText : @string/viewAll}"
-            android:textSize="@dimen/_11sdp"
             android:visibility="@{data.isButtonVisible == true ? View.VISIBLE : View.GONE}"
             app:backgroundColor="@color/lighterGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:textSize="@dimen/_12sdp"
+            app:underline="true"
             tools:text="See All >" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

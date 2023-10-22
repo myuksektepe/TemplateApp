@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.videoplayer
+package kodz.org.core_ui.row.video_player
 
 import android.media.MediaPlayer
 import android.net.Uri

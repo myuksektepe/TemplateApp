@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.videoplayer
+package kodz.org.core_ui.row.video_player
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.row.BaseRow

@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.carousel_item
+package kodz.org.core_ui.row.carousel.carousel_item
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.row.BaseRowDataModel

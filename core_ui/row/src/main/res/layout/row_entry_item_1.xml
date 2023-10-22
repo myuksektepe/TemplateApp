@@ -28,8 +28,7 @@
             app:cardElevation="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showShadow="false" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <kodz.org.core_ui.component.text.ClassicTextView
             android:id="@+id/txtEntryTitle"

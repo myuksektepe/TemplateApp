@@ -19,6 +19,7 @@ import kodz.org.core.model.ScreenModel
 import kodz.org.core_ui.row.carousel.CarouselRow
 import kodz.org.core_ui.row.carousel.CarouselRowContractor
 import kodz.org.core_ui.row.carousel.CarouselRowDataModel
+import kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRow
 import kodz.org.core_ui.row.common.makeRow
 import kodz.org.core_ui.row.entry_item_1.EntryItem1Row
 import kodz.org.core_ui.row.entry_item_1.EntryItem1RowContractor
@@ -32,15 +33,15 @@ import kodz.org.core_ui.row.entry_title_1.EntryTitle1RowDataModel
 import kodz.org.core_ui.row.long_text.LongTextRow
 import kodz.org.core_ui.row.long_text.LongTextRowContractor
 import kodz.org.core_ui.row.long_text.LongTextRowDataModel
-import kodz.org.core_ui.row.searchbox.SearchBoxRow
-import kodz.org.core_ui.row.searchbox.SearchBoxRowContractor
-import kodz.org.core_ui.row.searchbox.SearchBoxRowDataModel
+import kodz.org.core_ui.row.search_box.SearchBoxRow
+import kodz.org.core_ui.row.search_box.SearchBoxRowContractor
+import kodz.org.core_ui.row.search_box.SearchBoxRowDataModel
 import kodz.org.core_ui.row.section_title.SectionTitleRow
 import kodz.org.core_ui.row.section_title.SectionTitleRowContractor
 import kodz.org.core_ui.row.section_title.SectionTitleRowDataModel
-import kodz.org.core_ui.row.videoplayer.VideoPlayerRow
-import kodz.org.core_ui.row.videoplayer.VideoPlayerRowContractor
-import kodz.org.core_ui.row.videoplayer.VideoPlayerRowDataModel
+import kodz.org.core_ui.row.video_player.VideoPlayerRow
+import kodz.org.core_ui.row.video_player.VideoPlayerRowContractor
+import kodz.org.core_ui.row.video_player.VideoPlayerRowDataModel
 import kodz.org.core_ui.row.webview.WebViewRow
 import kodz.org.core_ui.row.webview.WebViewRowContractor
 import kodz.org.core_ui.row.webview.WebViewRowDataModel
@@ -111,7 +112,7 @@ class ScreenViewModel @Inject constructor(
                                                 "CarouselRow" -> {
                                                     dataModelString?.toResponseModel<CarouselRowDataModel>()?.let { dataModel ->
                                                         dataModel.itemList.forEach { carouselItemData ->
-                                                            kodz.org.core_ui.row.carousel_item.CarouselItemRow(carouselItemData)
+                                                            CarouselItemRow(carouselItemData)
                                                         }
                                                         clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
                                                     }

@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.searchbox
+package kodz.org.core_ui.row.search_box
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.handler.SearchHandler

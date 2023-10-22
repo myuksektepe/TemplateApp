@@ -7,46 +7,27 @@
         <import type="android.view.View" />
     </data>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/crdRounded"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transparent"
-        android:clipChildren="false"
-        android:clipToOutline="false"
-        android:clipToPadding="false">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/crdRounded"
+        <ImageView
+            android:id="@+id/imgRounded"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/transparent"
-            android:clipChildren="false"
-            android:clipToOutline="false"
-            android:clipToPadding="false"
-            app:cardBackgroundColor="@color/transparent"
-            app:cardCornerRadius="@dimen/_8sdp"
-            app:cardUseCompatPadding="false"
+            android:layout_gravity="center"
+            android:minWidth="@dimen/_16sdp"
+            android:minHeight="@dimen/_16sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imgRounded"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:minWidth="@dimen/_16sdp"
-                android:minHeight="@dimen/_16sdp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholder"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.cardview.widget.CardView>
 </layout>

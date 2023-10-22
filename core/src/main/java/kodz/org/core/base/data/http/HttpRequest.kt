@@ -10,6 +10,7 @@ import kodz.org.core.model.ButtonModel
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
+import kodz.org.core.model.ScreenModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -45,6 +46,12 @@ class HttpRequest @Inject constructor(
                                 val type = object : TypeToken<RS>() {}.type
                                 val outPutJsonObject = gson.toJsonTree(body).asJsonObject
                                 val responseObject = gson.fromJson<RS>(outPutJsonObject.toString(), type)
+                                (responseObject as? ScreenModel)?.let { screenModel ->
+                                    if (screenModel.error?.type == ErrorType.BLOCKER) {
+                                        emit(HttpFlow.Error(screenModel.error))
+                                        return@coroutineScope
+                                    }
+                                }
                                 emit(HttpFlow.Success(responseObject))
                             } ?: kotlin.run {
                                 emit(HttpFlow.Error(it.message().prepareUnCancelableError()))

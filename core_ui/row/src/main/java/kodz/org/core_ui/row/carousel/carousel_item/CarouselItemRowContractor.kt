@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.carousel_item
+package kodz.org.core_ui.row.carousel.carousel_item
 
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide

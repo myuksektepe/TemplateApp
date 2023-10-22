@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.searchbox
+package kodz.org.core_ui.row.search_box
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.handler.SearchHandler
 import kodz.org.core.base.row.BaseRowContractor
-import kodz.org.core_ui.row.databinding.RowSearchboxBinding
+import kodz.org.core_ui.row.databinding.RowSearchBoxBinding
 
 class SearchBoxRowContractor : BaseRowContractor() {
     override var binding: ViewDataBinding? = null
@@ -20,7 +20,7 @@ class SearchBoxRowContractor : BaseRowContractor() {
     }
 
     private fun initComponent() {
-        (binding as? RowSearchboxBinding)?.run {
+        (binding as? RowSearchBoxBinding)?.run {
             data?.let { data ->
                 edtSearch.imeOptions = EditorInfo.IME_ACTION_SEARCH
                 edtSearch.addTextChangedListener(object : TextWatcher {

@@ -26,7 +26,7 @@
 
                     <include
                         android:id="@+id/searchBox"
-                        layout="@layout/row_searchbox"
+                        layout="@layout/row_search_box"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone" />
