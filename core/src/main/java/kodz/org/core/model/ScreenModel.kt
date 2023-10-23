@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.data.http.HttpBaseResponse
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.common.CommonIcons
+import kodz.org.core.common.CommonLottie
 
 open class ScreenModel(
     @SerializedName("settings") val settings: SettingsModel? = null,
@@ -29,20 +30,32 @@ data class SettingsModel(
 )
 
 // =====================================================
+/* LOTTIE */
+
+data class LottieModel(
+    @SerializedName("name") val name: CommonLottie? = null,
+    @SerializedName("autoPlay") val autoPlay: Boolean? = null,
+    @SerializedName("loop") val loop: Boolean? = null,
+    @SerializedName("repeatCount") val repeatCount: Int? = null
+)
+
+// =====================================================
 /* ERROR */
 data class ErrorModel(
     @SerializedName("type") val type: ErrorType?,
     @SerializedName("title") val title: String? = null,
     @SerializedName("description") val description: String? = null,
+    @SerializedName("lottie") val lottie: LottieModel? = null,
     @SerializedName("primaryButton") val primaryButton: ButtonModel? = null,
     @SerializedName("secondaryButton") val secondaryButton: ButtonModel? = null,
 )
 
 data class ButtonModel(
     @SerializedName("type") val type: ButtonType? = null,
-    @SerializedName("text") val text: String? = null,
     @SerializedName("icon") val icon: CommonIcons? = null,
+    @SerializedName("text") val text: String? = null,
     @SerializedName("textColor") val textColor: String? = null,
+    @SerializedName("textWeight") val textWeightType: TextWeightType? = null,
     @SerializedName("backgroundColor") val backgroundColor: String? = null,
     @SerializedName("showUnderline") val showUnderline: Boolean? = false,
     @SerializedName("eventType") val eventType: EventTypeCode? = null,

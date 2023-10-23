@@ -1,5 +1,6 @@
 package kodz.org.template
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.res.Configuration
@@ -17,6 +18,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
@@ -134,7 +136,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         super.onBackPressed()
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "DiscouragedApi")
     private fun showDialog(errorModel: ErrorModel) {
         dialog = Dialog(this)
         dialog?.run {
@@ -150,6 +152,18 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                         dismiss()
                     }
                 } else gone()
+            }
+
+            // Lottie
+            findViewById<LottieAnimationView>(R.id.lottieView).run {
+                errorModel.lottie?.let { lottie ->
+                    lottie.name?.resourceId?.let { rawFile ->
+                        repeatCount = if (lottie.loop == true) ValueAnimator.INFINITE else lottie.repeatCount ?: 0
+                        if (lottie.autoPlay == true) animate()
+                        setAnimation(rawFile)
+                        visible()
+                    }
+                } ?: kotlin.run { gone() }
             }
 
             // Title
@@ -175,6 +189,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     } else resources.getColor(R.color.white)
                     setTextColor(textColor)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
+
+                    // TextWeight
+                    button.textWeightType?.let {
+                        setTextWeight(it)
+                    }
 
                     // Background Color
                     val backgroundColor = if (button.backgroundColor.toColor() != null) {
@@ -208,6 +227,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             if (errorModel.secondaryButton?.type == ButtonType.ROUNDED) {
                 findViewById<RoundedButton>(R.id.btnDialogSecondaryRounded).run {
                     errorModel.secondaryButton?.let { button ->
+                        // Icon
+                        button.icon?.let {
+                            getDrawable(it.resourceId)?.let { icon ->
+                                setIcon(icon)
+                            }
+                        } ?: kotlin.run { setIcon(null) }
+
                         // Text
                         setText(button.text ?: getString(kodz.org.core.R.string.okay))
 
@@ -218,18 +244,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                         setTextColor(textColor)
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
 
+                        // TextWeight
+                        button.textWeightType?.let {
+                            setTextWeight(it)
+                        }
+
                         // Background Color
                         val backgroundColor = if (button.backgroundColor.toColor() != null) {
                             button.backgroundColor.toColor()!!
                         } else resources.getColor(kodz.org.core.R.color.red)
                         setBgColor(backgroundColor)
-
-                        // Icon
-                        button.icon?.let {
-                            getDrawable(it.resourceId)?.let { icon ->
-                                setIcon(icon)
-                            }
-                        } ?: kotlin.run { setIcon(null) }
 
                         // OnClick
                         button.eventType?.let { eventTypeCode ->
@@ -245,6 +269,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             } else if (errorModel.secondaryButton?.type == ButtonType.TEXT) {
                 findViewById<TextButton>(R.id.btnDialogSecondaryText).run {
                     errorModel.secondaryButton?.let { button ->
+                        // Icon
+                        button.icon?.let {
+                            getDrawable(it.resourceId)?.let { icon ->
+                                setIcon(icon)
+                            }
+                        } ?: kotlin.run { setIcon(null) }
+
                         // Text
                         setText(button.text ?: getString(kodz.org.core.R.string.okay))
 
@@ -255,12 +286,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                             setUnderlineColor(textColor)
                         }
 
-                        // Icon
-                        button.icon?.let {
-                            getDrawable(it.resourceId)?.let { icon ->
-                                setIcon(icon)
-                            }
-                        } ?: kotlin.run { setIcon(null) }
+                        // Text Weight
+                        button.textWeightType?.let {
+                            setTextWeight(it)
+                        }
 
                         // Underline
                         button.showUnderline?.let {

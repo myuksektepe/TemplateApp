@@ -61,7 +61,7 @@ object DependencyVersions {
     const val sdp = "1.1.0"
 
     // Lottie
-    const val lottie = "6.0.0"
+    const val lottie = "6.1.0"
 
     // Blurry
     const val blurry = "4.0.1"

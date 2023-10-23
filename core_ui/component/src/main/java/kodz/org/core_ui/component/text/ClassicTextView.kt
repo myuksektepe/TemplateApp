@@ -26,29 +26,11 @@ class ClassicTextView @JvmOverloads constructor(
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.ClassicTextView)
 
         // Init attributes
-        when (attributes.getInt(R.styleable.ClassicTextView_weight, 1)) {
-            0 -> {
-                typeface = ResourcesCompat.getFont(context, R.font.averta_light)
-            }
-            1 -> {
-                typeface = ResourcesCompat.getFont(context, R.font.averta_regular)
-            }
-            2 -> {
-                typeface = ResourcesCompat.getFont(context, R.font.averta_bold)
-            }
-        }
+        val textWeight = attributes.getInt(R.styleable.ClassicTextView_weight, 1)
+        setTextWeight(textWeight)
 
-        when (attributes.getInt(R.styleable.ClassicTextView_align, 1)) {
-            1 -> {
-                textAlignment = TEXT_ALIGNMENT_TEXT_START
-            }
-            2 -> {
-                textAlignment = TEXT_ALIGNMENT_CENTER
-            }
-            3 -> {
-                textAlignment = TEXT_ALIGNMENT_TEXT_END
-            }
-        }
+        val textAlignment = attributes.getInt(R.styleable.ClassicTextView_align, 1)
+        setTextAlign(textAlignment)
 
         if (attributes.getBoolean(R.styleable.ClassicTextView_showShadow, false)) {
             setShadowLayer(8f, 0f, 2f, kodz.org.core.R.color.black80)
@@ -57,4 +39,35 @@ class ClassicTextView @JvmOverloads constructor(
         attributes.recycle()
     }
 
+    fun setTextWeight(weight: Int) {
+        when (weight) {
+            0 -> {
+                typeface = ResourcesCompat.getFont(context, R.font.averta_light)
+            }
+
+            1 -> {
+                typeface = ResourcesCompat.getFont(context, R.font.averta_regular)
+            }
+
+            2 -> {
+                typeface = ResourcesCompat.getFont(context, R.font.averta_bold)
+            }
+        }
+    }
+
+    fun setTextAlign(align: Int) {
+        when (align) {
+            1 -> {
+                textAlignment = TEXT_ALIGNMENT_TEXT_START
+            }
+
+            2 -> {
+                textAlignment = TEXT_ALIGNMENT_CENTER
+            }
+
+            3 -> {
+                textAlignment = TEXT_ALIGNMENT_TEXT_END
+            }
+        }
+    }
 }

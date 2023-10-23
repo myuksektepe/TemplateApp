@@ -9,6 +9,7 @@
     <attr name="text" format="string" />
     <attr name="textSize" format="dimension" />
     <attr name="textColor" format="color" />
+    <attr name="textWeight" format="string" />
 
     <!-- Background -->
     <attr name="backgroundColor" format="color" />
@@ -30,20 +31,21 @@
     <attr name="underline" format="boolean" />
 
     <declare-styleable name="TextButton">
-        <attr name="matchParent" />
-        <attr name="textColor" />
         <attr name="iconDrawable" />
         <attr name="text" />
         <attr name="textSize" />
+        <attr name="textColor" />
+        <attr name="matchParent" />
         <attr name="underline" />
     </declare-styleable>
 
     <declare-styleable name="RoundedButton">
-        <attr name="matchParent" />
-        <attr name="backgroundColor" />
         <attr name="iconDrawable" />
         <attr name="text" />
         <attr name="textSize" />
+        <attr name="textWeight" />
+        <attr name="matchParent" />
+        <attr name="backgroundColor" />
     </declare-styleable>
 
     <declare-styleable name="CircleButton">

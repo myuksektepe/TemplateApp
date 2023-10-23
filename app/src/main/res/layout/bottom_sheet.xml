@@ -31,6 +31,21 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UseAppTint" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieView"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/success"
+            tools:visibility="visible" />
+
         <kodz.org.core_ui.component.text.ClassicTextView
             android:id="@+id/txtDialogTitle"
             android:layout_width="wrap_content"
@@ -40,7 +55,7 @@
             app:align="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/line"
+            app:layout_constraintTop_toBottomOf="@+id/lottieView"
             app:weight="bold"
             tools:text="@string/error" />
 

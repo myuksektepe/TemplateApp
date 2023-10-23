@@ -8,10 +8,11 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import kodz.org.core.model.TextWeightType
 import kodz.org.core_ui.component.R
+import kodz.org.core_ui.component.text.ClassicTextView
 
 
 /**
@@ -26,7 +27,7 @@ class RoundedButton @JvmOverloads constructor(
 
     lateinit var cardView: CardView
     lateinit var iconView: ImageView
-    lateinit var textView: TextView
+    lateinit var textView: ClassicTextView
     lateinit var dividerView: View
     private var _backgroundColor: Int = 0
     private var _onClickListener: OnClickListener? = null
@@ -40,7 +41,7 @@ class RoundedButton @JvmOverloads constructor(
         // UI Elements
         cardView = findViewById<CardView>(R.id.crdRoundedButton)
         iconView = findViewById<ImageView>(R.id.imgRoundedButton)
-        textView = findViewById<TextView>(R.id.txtRoundedButton)
+        textView = findViewById<ClassicTextView>(R.id.txtRoundedButton)
         dividerView = findViewById<View>(R.id.divider)
 
         // Attributes
@@ -90,6 +91,14 @@ class RoundedButton @JvmOverloads constructor(
 
     fun setTextColor(color: Int) {
         textView.setTextColor(color)
+    }
+
+    fun setTextWeight(weightType: TextWeightType) {
+        when (weightType) {
+            TextWeightType.THIN -> textView.setTextWeight(0)
+            TextWeightType.NORMAL -> textView.setTextWeight(1)
+            TextWeightType.BOLD -> textView.setTextWeight(2)
+        }
     }
 
     fun setBgColor(color: Int) {

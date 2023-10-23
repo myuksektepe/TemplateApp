@@ -54,6 +54,9 @@ dependencies {
     // Shimmer
     implementation(Dependencies.shimmer)
 
+    // Lottie
+    implementation(Dependencies.lottie)
+
     // KTX
     implementation(Dependencies.ktxCore)
     implementation(Dependencies.ktxActivity)

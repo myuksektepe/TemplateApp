@@ -8,11 +8,12 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
+import kodz.org.core.model.TextWeightType
 import kodz.org.core_ui.component.R
+import kodz.org.core_ui.component.text.ClassicTextView
 
 
 /**
@@ -26,7 +27,7 @@ class TextButton @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle), View.OnClickListener {
     private lateinit var iconView: ImageView
-    private lateinit var textView: TextView
+    private lateinit var textView: ClassicTextView
     private lateinit var underline: View
     private lateinit var dividerView: View
     private var _textColor: Int = 0
@@ -40,7 +41,7 @@ class TextButton @JvmOverloads constructor(
 
         // UI Elements
         iconView = findViewById<ImageView>(R.id.imgTextButton)
-        textView = findViewById<TextView>(R.id.txtTextButton)
+        textView = findViewById<ClassicTextView>(R.id.txtTextButton)
         underline = findViewById<View>(R.id.underline)
         dividerView = findViewById<View>(R.id.divider)
 
@@ -86,6 +87,14 @@ class TextButton @JvmOverloads constructor(
 
     fun setTextColor(color: Int) {
         textView.setTextColor(color)
+    }
+
+    fun setTextWeight(weightType: TextWeightType) {
+        when (weightType) {
+            TextWeightType.THIN -> textView.setTextWeight(0)
+            TextWeightType.NORMAL -> textView.setTextWeight(1)
+            TextWeightType.BOLD -> textView.setTextWeight(2)
+        }
     }
 
     fun setIconColor(color: Int) {
