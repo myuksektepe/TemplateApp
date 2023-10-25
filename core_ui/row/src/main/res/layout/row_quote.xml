@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kodz.org.core_ui.row.quote.QuoteDataModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        app:cardBackgroundColor="@{data.showBackground != true ? @color/transparent : @color/white}"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@{data.showBackground == true ? @dimen/_8sdp : 0}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <kodz.org.core_ui.component.text.ClassicTextView
+                android:id="@+id/txtQuote"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:ellipsize="end"
+                android:maxLines="6"
+                android:text="@{data.text}"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toStartOf="@id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/lipsum" />
+
+            <kodz.org.core_ui.component.text.ClassicTextView
+                android:id="@+id/txtAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@{data.author}"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/txtQuote"
+                app:layout_constraintTop_toBottomOf="@+id/txtQuote"
+                app:weight="bold"
+                tools:text="Abraham Lincoln"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:scaleX="-1"
+                android:scaleY="-1"
+                android:src="@drawable/ic_quote"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/ic_quote"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAuthor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtAuthor" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

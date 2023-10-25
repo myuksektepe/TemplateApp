@@ -9,6 +9,6 @@ import kodz.org.core.model.ItemClickEventModel
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 6.10.2023.
  */
 data class LongTextRowDataModel(
-    @SerializedName("text") val text: String? = null,
-    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null
+    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null,
+    @SerializedName("text") val text: String? = null
 ) : BaseRowDataModel()

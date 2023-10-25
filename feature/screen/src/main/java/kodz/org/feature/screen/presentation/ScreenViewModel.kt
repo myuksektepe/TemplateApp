@@ -36,6 +36,9 @@ import kodz.org.core_ui.row.full_width_image.FullWidthImageRow
 import kodz.org.core_ui.row.long_text.LongTextRow
 import kodz.org.core_ui.row.long_text.LongTextRowContractor
 import kodz.org.core_ui.row.long_text.LongTextRowDataModel
+import kodz.org.core_ui.row.quote.QuoteContractor
+import kodz.org.core_ui.row.quote.QuoteDataModel
+import kodz.org.core_ui.row.quote.QuoteRow
 import kodz.org.core_ui.row.search_box.SearchBoxRow
 import kodz.org.core_ui.row.search_box.SearchBoxRowContractor
 import kodz.org.core_ui.row.search_box.SearchBoxRowDataModel
@@ -131,6 +134,10 @@ class ScreenViewModel @Inject constructor(
 
                                                 "FullWidthImageRow" -> {
                                                     clsRow = makeRow<FullWidthImageRow, FullWidthImageContractor, FullWidthImageDataModel>(dataModelString, itemClickHandler)
+                                                }
+
+                                                "QuoteRow" -> {
+                                                    clsRow = makeRow<QuoteRow, QuoteContractor, QuoteDataModel>(dataModelString, itemClickHandler)
                                                 }
                                                 // ========================================
 
