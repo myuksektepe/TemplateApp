@@ -9,7 +9,6 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.bumptech.glide.request.RequestOptions
 import kodz.org.core_ui.component.R
 
@@ -67,8 +66,8 @@ class RoundedImage @JvmOverloads constructor(
     fun setImageUrl(url: String) {
         val glideRequest = RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(FitCenter())
-            .override(200, 200)
+            //.transform(FitCenter())
+            //.override(200, 200)
 
         Glide.with(context)
             .load(url)

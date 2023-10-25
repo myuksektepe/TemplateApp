@@ -46,9 +46,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     override fun getBottomNavigationView(): BottomNavigationView = binding.bottomNavigation
     override fun getFragmentContainerView(): FragmentContainerView = binding.fragmentContainer
     override fun obverseViewModel() {}
-    private var view: View? = null
     private var isAnyDialogVisible: Boolean = false
     private var dialog: Dialog? = null
+    private val shownDialogs = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,13 +96,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     @SuppressLint("UseCompatLoadingForDrawables", "UseCompatTextViewDrawableApis")
     override fun showFullScreenError(errorModel: ErrorModel) {
         hideFullScreenLoading()
-        binding.frmTranslucent.visible()
-        if (errorModel.type == ErrorType.BLOCKER) {
-            binding.frmShimmer.visible()
-            binding.allScreen.gone()
-        }
-        isAnyDialogVisible = true
-        showDialog(errorModel)
+        prepareDialog(errorModel)
     }
 
     override fun hideFullScreenError() {
@@ -137,7 +131,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "DiscouragedApi")
-    private fun showDialog(errorModel: ErrorModel) {
+    private fun prepareDialog(errorModel: ErrorModel) {
         dialog = Dialog(this)
         dialog?.run {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -309,20 +303,38 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 }
             }
 
-            show()
+            dialog?.setOnDismissListener {
+                isAnyDialogVisible = false
+                binding.frmTranslucent.gone()
+            }
 
+        }
+
+        if (errorModel.tag !in shownDialogs) {
+            showDialog(errorModel.type)
+            errorModel.tag?.let { shownDialogs.add(it) }
+        } else {
+            if (errorModel.showOnce == false || errorModel.showOnce == null) {
+                showDialog(errorModel.type)
+            }
+        }
+    }
+
+    private fun showDialog(type: ErrorType?) {
+        dialog?.run {
+            if (type == ErrorType.BLOCKER) {
+                binding.frmShimmer.visible()
+                binding.allScreen.gone()
+            }
+            isAnyDialogVisible = true
+            binding.frmTranslucent.visible()
+            show()
             window?.run {
                 setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 attributes.windowAnimations = R.style.DialogAnimation
                 setGravity(Gravity.BOTTOM)
             }
-
-            dialog?.setOnDismissListener {
-                isAnyDialogVisible = false
-                binding.frmTranslucent.gone()
-            }
-
         }
     }
 }

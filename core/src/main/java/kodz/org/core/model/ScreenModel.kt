@@ -43,6 +43,8 @@ data class LottieModel(
 /* ERROR */
 data class ErrorModel(
     @SerializedName("type") val type: ErrorType?,
+    @SerializedName("showOnce") val showOnce: Boolean? = null,
+    @SerializedName("tag") val tag: String? = null,
     @SerializedName("title") val title: String? = null,
     @SerializedName("description") val description: String? = null,
     @SerializedName("lottie") val lottie: LottieModel? = null,

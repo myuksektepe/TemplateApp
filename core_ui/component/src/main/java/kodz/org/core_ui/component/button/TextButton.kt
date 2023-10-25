@@ -55,7 +55,7 @@ class TextButton @JvmOverloads constructor(
         val iconDrawable = attributes.getDrawable(R.styleable.TextButton_iconDrawable)
         if (iconDrawable != null) iconVisibility = true
         val buttonText = attributes.getString(R.styleable.TextButton_text)
-        val textSize = attributes.getDimensionPixelSize(R.styleable.RoundedButton_textSize, 47)
+        val textSize = attributes.getDimensionPixelSize(R.styleable.RoundedButton_textSize, 45)
 
         // Icon View
         iconView.run {

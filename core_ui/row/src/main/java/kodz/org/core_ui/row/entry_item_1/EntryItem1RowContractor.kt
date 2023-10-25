@@ -14,10 +14,10 @@ class EntryItem1RowContractor : BaseRowContractor() {
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
-        initComponent()
+        initRow()
     }
 
-    private fun initComponent() {
+    private fun initRow() {
         (binding as? RowEntryItem1Binding)?.run {
             data?.let { data ->
 

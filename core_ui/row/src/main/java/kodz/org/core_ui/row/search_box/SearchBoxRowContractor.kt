@@ -16,10 +16,10 @@ class SearchBoxRowContractor : BaseRowContractor() {
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
-        initComponent()
+        initRow()
     }
 
-    private fun initComponent() {
+    private fun initRow() {
         (binding as? RowSearchBoxBinding)?.run {
             data?.let { data ->
                 edtSearch.imeOptions = EditorInfo.IME_ACTION_SEARCH

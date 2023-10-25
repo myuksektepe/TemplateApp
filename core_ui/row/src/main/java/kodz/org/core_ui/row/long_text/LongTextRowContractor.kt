@@ -15,10 +15,10 @@ class LongTextRowContractor : BaseRowContractor() {
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
-        initComponent()
+        initRow()
     }
 
-    private fun initComponent() {
+    private fun initRow() {
         (binding as? RowLongTextBinding)?.run {
             data?.let { data ->
                 longText.text = data.text

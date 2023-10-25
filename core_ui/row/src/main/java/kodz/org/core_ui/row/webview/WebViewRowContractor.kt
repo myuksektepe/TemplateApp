@@ -21,10 +21,10 @@ class WebViewRowContractor() : BaseRowContractor() {
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
-        initComponent()
+        initRow()
     }
 
-    private fun initComponent() {
+    private fun initRow() {
         (binding as? RowWebviewBinding)?.run {
             data?.let {
                 it.content?.fullHtml()?.let { content ->

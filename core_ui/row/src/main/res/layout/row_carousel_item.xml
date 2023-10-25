@@ -33,33 +33,37 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/placeholder" />
 
-            <TextView
+            <kodz.org.core_ui.component.text.ClassicTextView
                 android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16sdp"
                 android:layout_marginBottom="@dimen/_8sdp"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:text="@{data.title}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtDescription"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="TextView" />
+                app:weight="bold"
+                tools:text="@string/lipsum" />
 
-            <TextView
+            <kodz.org.core_ui.component.text.ClassicTextView
                 android:id="@+id/txtDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16sdp"
                 android:layout_marginBottom="@dimen/_16sdp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@{data.description}"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="TextView" />
+                tools:text="@string/lipsum" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

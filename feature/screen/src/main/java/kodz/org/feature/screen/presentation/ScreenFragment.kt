@@ -1,5 +1,7 @@
 package kodz.org.feature.screen.presentation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -67,6 +69,13 @@ class ScreenFragment :
                     when (it.eventTypeCode) {
                         EventTypeCode.OPEN_SCREEN -> {
                             goToDeepLink(it.endpoint)
+                        }
+
+                        EventTypeCode.GO_URL -> {
+                            Intent(Intent.ACTION_VIEW).run {
+                                data = Uri.parse(it.url)
+                                startActivity(this)
+                            }
                         }
 
                         EventTypeCode.CLOSE_THE_DIALOG -> {

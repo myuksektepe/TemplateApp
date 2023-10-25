@@ -1,16 +1,18 @@
-package kodz.org.core_ui.row.carousel.carousel_item
+package kodz.org.core_ui.row.full_width_image
 
 import androidx.databinding.ViewDataBinding
-import com.bumptech.glide.Glide
-import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.extension.setSpamProtectedClickListener
-import kodz.org.core_ui.row.databinding.RowCarouselItemBinding
+import kodz.org.core_ui.row.databinding.RowFullWidthImageBinding
 
-class CarouselItemRowContractor : BaseRowContractor() {
-    override var binding: ViewDataBinding? = null
+
+/**
+ * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 25.10.2023.
+ */
+class FullWidthImageContractor : BaseRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
+    override var binding: ViewDataBinding? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
@@ -18,17 +20,16 @@ class CarouselItemRowContractor : BaseRowContractor() {
     }
 
     private fun initRow() {
-        (binding as? RowCarouselItemBinding)?.run {
+        (binding as? RowFullWidthImageBinding)?.run {
             data?.let { data ->
 
-                // Image
-                Glide.with(this.img.context)
-                    .load(data.imageUrl)
-                    .error(R.drawable.placeholder)
-                    .into(img)
+                data.height?.takeIf { it.isNotEmpty() }?.let {
+                    imgFullWidth.layoutParams.height = it.toInt()
+                    imgFullWidth.requestLayout()
+                }
 
                 // EventHandler
-                this.crsItemCard.setSpamProtectedClickListener {
+                imgFullWidth.setSpamProtectedClickListener {
                     itemClickHandler?.onItemClick(data.itemClickEventModel)
                 }
 

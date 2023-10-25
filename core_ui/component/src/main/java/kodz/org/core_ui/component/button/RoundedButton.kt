@@ -54,7 +54,7 @@ class RoundedButton @JvmOverloads constructor(
         val iconDrawable = attributes.getDrawable(R.styleable.RoundedButton_iconDrawable)
         if (iconDrawable != null) iconVisibility = true
         val buttonText = attributes.getString(R.styleable.RoundedButton_text)
-        val textSize = attributes.getDimensionPixelSize(R.styleable.RoundedButton_textSize, 50)
+        val textSize = attributes.getDimensionPixelSize(R.styleable.RoundedButton_textSize, 45)
 
         // CardView
         cardView.run {

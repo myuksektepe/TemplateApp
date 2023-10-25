@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kodz.org.core_ui.row.full_width_image.FullWidthImageDataModel" />
+    </data>
+
+    <kodz.org.core_ui.component.image.RoundedImage xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/imgFullWidth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:imageUrl="@{data.imageUrl}"
+        app:shadowColor="@color/black70"
+        app:showShadow="true" />
+</layout>

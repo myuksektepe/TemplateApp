@@ -5,11 +5,13 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import kodz.org.core.common.CommonIcons
+import kodz.org.core.common.CommonLottie
 import kodz.org.core.extension.isOnline
 import kodz.org.core.model.ButtonModel
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
+import kodz.org.core.model.LottieModel
 import kodz.org.core.model.ScreenModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -111,9 +113,11 @@ class HttpRequest @Inject constructor(
         type = ErrorType.BLOCKER,
         title = "Beklenmedik Bir Hata Oluştu",
         description = this,
+        lottie = LottieModel(CommonLottie.ERROR),
         primaryButton = ButtonModel(
             text = "Geri Dön",
             textColor = null,
+            backgroundColor = "#F44336",
             icon = CommonIcons.GO_BACK,
             eventType = EventTypeCode.CLOSE_THE_SCREEN
         ),

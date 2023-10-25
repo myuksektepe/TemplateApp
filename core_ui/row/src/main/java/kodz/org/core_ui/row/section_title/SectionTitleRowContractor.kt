@@ -17,10 +17,10 @@ class SectionTitleRowContractor : BaseRowContractor() {
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
-        initComponent()
+        initRow()
     }
 
-    private fun initComponent() {
+    private fun initRow() {
         (binding as? RowSectionTitleBinding)?.run {
             data?.let { data ->
 

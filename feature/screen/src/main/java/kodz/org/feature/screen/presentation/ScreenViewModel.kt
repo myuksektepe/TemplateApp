@@ -30,6 +30,9 @@ import kodz.org.core_ui.row.entry_item_2.EntryItem2RowDataModel
 import kodz.org.core_ui.row.entry_title_1.EntryTitle1Row
 import kodz.org.core_ui.row.entry_title_1.EntryTitle1RowContractor
 import kodz.org.core_ui.row.entry_title_1.EntryTitle1RowDataModel
+import kodz.org.core_ui.row.full_width_image.FullWidthImageContractor
+import kodz.org.core_ui.row.full_width_image.FullWidthImageDataModel
+import kodz.org.core_ui.row.full_width_image.FullWidthImageRow
 import kodz.org.core_ui.row.long_text.LongTextRow
 import kodz.org.core_ui.row.long_text.LongTextRowContractor
 import kodz.org.core_ui.row.long_text.LongTextRowDataModel
@@ -124,6 +127,10 @@ class ScreenViewModel @Inject constructor(
 
                                                 "EntryItem2Row" -> {
                                                     clsRow = makeRow<EntryItem2Row, EntryItem2RowContractor, EntryItem2RowDataModel>(dataModelString, itemClickHandler)
+                                                }
+
+                                                "FullWidthImageRow" -> {
+                                                    clsRow = makeRow<FullWidthImageRow, FullWidthImageContractor, FullWidthImageDataModel>(dataModelString, itemClickHandler)
                                                 }
                                                 // ========================================
 

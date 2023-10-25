@@ -35,10 +35,10 @@ class VideoPlayerRowContractor : BaseRowContractor() {
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding as RowVideoPlayerBinding
-        initComponent()
+        initRow()
     }
 
-    private fun initComponent() {
+    private fun initRow() {
         (binding as? RowVideoPlayerBinding)?.run {
             data?.let { data ->
 
