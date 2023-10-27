@@ -245,7 +245,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             button.eventType?.let { eventTypeCode ->
                 setSpamProtectedClickListener {
                     sharedViewModel.setClickEventCode(eventTypeCode)
-                    // dismiss()
+                    dialog?.dismiss()
                 }
             }
 
@@ -283,6 +283,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             if (addMarginTop == true) {
                 layoutParams?.setMargins(0, 32, 0, 0)
             }
-            setLayoutParams(layoutParams)
+
+            layoutParams?.let { setLayoutParams(it) }
         }
 }

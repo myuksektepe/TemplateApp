@@ -41,11 +41,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:textColor="@color/darkGray"
-            app:textSize="@dimen/_7sdp"
-            app:underline="false"
-            app:showOutline="true"
             app:outlineColor="@color/darkGray"
+            app:showOutline="true"
+            app:textColor="@color/darkGray"
+            app:textSize="@dimen/_8sdp"
             tools:text="See All >" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

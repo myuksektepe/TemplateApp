@@ -65,16 +65,18 @@ class ScreenFragment :
             }
 
             observeLiveData(itemClickEventModelLiveData) { clickEventModel ->
-                clickEventModel?.let {
-                    when (it.eventTypeCode) {
+                clickEventModel?.let { eventModel ->
+                    when (eventModel.eventTypeCode) {
                         EventTypeCode.OPEN_SCREEN -> {
-                            goToDeepLink(it.endpoint)
+                            goToDeepLink(eventModel.endpoint)
                         }
 
                         EventTypeCode.GO_URL -> {
-                            Intent(Intent.ACTION_VIEW).run {
-                                data = Uri.parse(it.url)
-                                startActivity(this)
+                            eventModel.url?.let {
+                                Intent(Intent.ACTION_VIEW).run {
+                                    data = Uri.parse(it)
+                                    startActivity(this)
+                                }
                             }
                         }
 
