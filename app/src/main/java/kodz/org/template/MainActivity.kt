@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.LifecycleOwner
@@ -24,17 +25,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.common.CommonIcons
-import kodz.org.core.common.EMPTY
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.toColor
 import kodz.org.core.extension.visible
+import kodz.org.core.model.ButtonModel
 import kodz.org.core.model.ButtonType
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.LoadingModel
-import kodz.org.core_ui.component.button.RoundedButton
-import kodz.org.core_ui.component.button.TextButton
+import kodz.org.core_ui.component.button.MultipleButton
 import kodz.org.core_ui.component.text.ClassicTextView
 import kodz.org.template.databinding.ActivityMainBinding
 
@@ -167,147 +167,25 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
             // Description
             findViewById<ClassicTextView>(R.id.txtDialogDescription).run {
-                text = errorModel.description ?: EMPTY
-                movementMethod = ScrollingMovementMethod()
-            }
-
-            // Primary Button
-            findViewById<RoundedButton>(R.id.btnDialogPrimary).run {
-                errorModel.primaryButton?.let { button ->
-                    // Text
-                    setText(button.text ?: getString(kodz.org.core.R.string.okay))
-
-                    // Text Color
-                    val textColor = if (button.textColor.toColor() != null) {
-                        button.textColor.toColor()!!
-                    } else resources.getColor(R.color.white)
-                    setTextColor(textColor)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
-
-                    // TextWeight
-                    button.textWeightType?.let {
-                        setTextWeight(it)
-                    }
-
-                    // Background Color
-                    val backgroundColor = if (button.backgroundColor.toColor() != null) {
-                        button.backgroundColor.toColor()!!
-                    } else resources.getColor(kodz.org.core.R.color.green)
-                    setBgColor(backgroundColor)
-
-                    // Icon
-                    button.icon?.let {
-                        getDrawable(it.resourceId)?.let { icon ->
-                            setIcon(icon)
-                        }
-                    } ?: kotlin.run { setIcon(null) }
-
-                    // OnClick
-                    button.eventType?.let { eventTypeCode ->
-                        setSpamProtectedClickListener {
-                            sharedViewModel.setClickEventCode(eventTypeCode)
-                            dismiss()
-                        }
-                    }
-
+                errorModel.description?.let {
+                    text = it
+                    movementMethod = ScrollingMovementMethod()
                     visible()
-                } ?: kotlin.run { gone() }
+                } ?: kotlin.run {
+                    gone()
+                }
             }
 
-            // Secondary Button
-            findViewById<TextButton>(R.id.btnDialogSecondaryText).gone()
-            findViewById<RoundedButton>(R.id.btnDialogSecondaryRounded).gone()
-
-            if (errorModel.secondaryButton?.type == ButtonType.ROUNDED) {
-                findViewById<RoundedButton>(R.id.btnDialogSecondaryRounded).run {
-                    errorModel.secondaryButton?.let { button ->
-                        // Icon
-                        button.icon?.let {
-                            getDrawable(it.resourceId)?.let { icon ->
-                                setIcon(icon)
-                            }
-                        } ?: kotlin.run { setIcon(null) }
-
-                        // Text
-                        setText(button.text ?: getString(kodz.org.core.R.string.okay))
-
-                        // Text Color
-                        val textColor = if (button.textColor.toColor() != null) {
-                            button.textColor.toColor()!!
-                        } else resources.getColor(R.color.white)
-                        setTextColor(textColor)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
-
-                        // TextWeight
-                        button.textWeightType?.let {
-                            setTextWeight(it)
-                        }
-
-                        // Background Color
-                        val backgroundColor = if (button.backgroundColor.toColor() != null) {
-                            button.backgroundColor.toColor()!!
-                        } else resources.getColor(kodz.org.core.R.color.red)
-                        setBgColor(backgroundColor)
-
-                        // OnClick
-                        button.eventType?.let { eventTypeCode ->
-                            setSpamProtectedClickListener {
-                                sharedViewModel.setClickEventCode(eventTypeCode)
-                                dismiss()
-                            }
-                        }
-
-                        visible()
-                    } ?: kotlin.run { gone() }
-                }
-            } else if (errorModel.secondaryButton?.type == ButtonType.TEXT) {
-                findViewById<TextButton>(R.id.btnDialogSecondaryText).run {
-                    errorModel.secondaryButton?.let { button ->
-                        // Icon
-                        button.icon?.let {
-                            getDrawable(it.resourceId)?.let { icon ->
-                                setIcon(icon)
-                            }
-                        } ?: kotlin.run { setIcon(null) }
-
-                        // Text
-                        setText(button.text ?: getString(kodz.org.core.R.string.okay))
-
-                        // Text Color
-                        button.textColor.toColor()?.let { textColor ->
-                            setTextColor(textColor)
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
-                            setUnderlineColor(textColor)
-                        }
-
-                        // Text Weight
-                        button.textWeightType?.let {
-                            setTextWeight(it)
-                        }
-
-                        // Underline
-                        button.showUnderline?.let {
-                            underline(it)
-                        }
-
-                        // OnClick
-                        button.eventType?.let { eventTypeCode ->
-                            setSpamProtectedClickListener {
-                                sharedViewModel.setClickEventCode(eventTypeCode)
-                                dismiss()
-                            }
-                        }
-
-                        visible()
-                    } ?: kotlin.run { gone() }
-                }
+            // Primary & Secondary Button
+            findViewById<LinearLayout>(R.id.buttons).run {
+                errorModel.primaryButton?.let { addView(createButton(it)) }
+                errorModel.secondaryButton?.let { addView(createButton(it, true)) }
             }
 
             dialog?.setOnDismissListener {
                 isAnyDialogVisible = false
                 binding.frmTranslucent.gone()
             }
-
         }
 
         if (errorModel.tag !in shownDialogs) {
@@ -337,4 +215,74 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             }
         }
     }
+
+    private fun createButton(button: ButtonModel, addMarginTop: Boolean? = false) =
+        MultipleButton(this, null).apply {
+            // Text
+            setText(button.text ?: getString(kodz.org.core.R.string.okay))
+
+            // Text Color
+            val textColor = if (button.textColor.toColor() != null) {
+                button.textColor.toColor()!!
+            } else resources.getColor(kodz.org.core.R.color.white)
+            setTextColor(textColor)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
+
+            // TextWeight
+            button.textWeightType?.let {
+                setTextWeight(it)
+            }
+
+            // Icon
+            button.icon?.let {
+                getDrawable(it.resourceId)?.let { icon ->
+                    setIcon(icon)
+                }
+            } ?: kotlin.run { setIcon(null) }
+
+
+            // OnClick
+            button.eventType?.let { eventTypeCode ->
+                setSpamProtectedClickListener {
+                    sharedViewModel.setClickEventCode(eventTypeCode)
+                    // dismiss()
+                }
+            }
+
+
+            var layoutParams: LinearLayout.LayoutParams? = null
+            when (button.type) {
+                ButtonType.TEXT -> {
+                    setBgColor(null)
+                    setMatchParent(true)
+                    button.showUnderline?.let { visible -> showUnderline(visible) }
+                    layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                }
+
+                ButtonType.FILLED -> {
+                    val backgroundColor = if (button.backgroundColor.toColor() != null) {
+                        button.backgroundColor.toColor()!!
+                    } else resources.getColor(kodz.org.core.R.color.green)
+                    showUnderline(false)
+                    setBgColor(backgroundColor)
+                    setMatchParent(true)
+                    layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                }
+
+                ButtonType.OUTLINED -> {
+                    showUnderline(false)
+                    setBgColor(null)
+                    setMatchParent(true)
+                    showOutline(textColor)
+                    layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                }
+
+                else -> {}
+            }
+
+            if (addMarginTop == true) {
+                layoutParams?.setMargins(0, 32, 0, 0)
+            }
+            setLayoutParams(layoutParams)
+        }
 }

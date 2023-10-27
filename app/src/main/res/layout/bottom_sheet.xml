@@ -86,54 +86,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtDialogDescription">
-
-            <kodz.org.core_ui.component.button.RoundedButton
-                android:id="@+id/btnDialogPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:backgroundColor="@color/green"
-                app:iconDrawable="@drawable/ic_refresh"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:matchParent="true"
-                tools:text="@string/okay" />
-
-            <kodz.org.core_ui.component.button.TextButton
-                android:id="@+id/btnDialogSecondaryText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:text="@string/cancel"
-                android:visibility="gone"
-                app:iconDrawable="@drawable/ic_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnDialogPrimary"
-                app:matchParent="false"
-                app:textColor="@color/dayNightReverse"
-                tools:text="@string/cancel"
-                tools:underline="true"
-                tools:visibility="visible" />
-
-            <kodz.org.core_ui.component.button.RoundedButton
-                android:id="@+id/btnDialogSecondaryRounded"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:text="@string/cancel"
-                android:visibility="gone"
-                app:backgroundColor="@color/red"
-                app:iconDrawable="@drawable/ic_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnDialogPrimary"
-                app:matchParent="true"
-                tools:text="@string/cancel"
-                tools:visibility="visible" />
-        </LinearLayout>
-
+            app:layout_constraintTop_toBottomOf="@id/txtDialogDescription"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

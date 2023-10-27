@@ -62,23 +62,4 @@
         <item>@color/pastelRose</item>
     </integer-array>
 
-    <!-- Colors -->
-    <color name="circleButtonBackground">#FFFFFF</color>
-    <color name="titleColor">#03213c</color>
-    <color name="activeTab">#7bac28</color>
-    <color name="passiveTab">#343434</color>
-    <color name="splashBackground">#F19AA8</color>
-    <color name="mainBackground">#F3F3F3</color>
-
-
-    <!-- View All RoundedButton -->
-    <color name="viewAllButtonBorder">#E1E1E1</color>
-    <color name="viewAllButtonBackground">#F5F5F5</color>
-    <color name="viewAllButtonText">#191918</color>
-
-    <!-- Question Answer -->
-    <color name="questionCardBackground">#D8D8D8</color>
-    <color name="answerButtonBackground">#2cda93</color>
-    <color name="answerButtonText">#F8FAF8</color>
-
 </resources>

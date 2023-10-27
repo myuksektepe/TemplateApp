@@ -27,25 +27,24 @@
     <attr name="showShadow" format="boolean" />
     <attr name="shadowColor" format="color" />
 
+    <!-- Outline -->
+    <attr name="outlineColor" format="color" />
+    <attr name="showOutline" format="boolean" />
+
     <!-- Underline -->
     <attr name="underline" format="boolean" />
 
-    <declare-styleable name="TextButton">
-        <attr name="iconDrawable" />
-        <attr name="text" />
-        <attr name="textSize" />
-        <attr name="textColor" />
-        <attr name="matchParent" />
-        <attr name="underline" />
-    </declare-styleable>
-
-    <declare-styleable name="RoundedButton">
+    <declare-styleable name="MultipleButton">
         <attr name="iconDrawable" />
         <attr name="text" />
         <attr name="textSize" />
         <attr name="textWeight" />
-        <attr name="matchParent" />
+        <attr name="textColor" />
         <attr name="backgroundColor" />
+        <attr name="outlineColor" />
+        <attr name="showOutline" />
+        <attr name="underline" />
+        <attr name="matchParent" />
     </declare-styleable>
 
     <declare-styleable name="CircleButton">

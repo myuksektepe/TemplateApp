@@ -6,3 +6,6 @@ package kodz.org.core.common
  */
 const val DASHBOARD_ENDPOINT = "dashboard.json"
 const val EMPTY = ""
+const val THIN = "thin"
+const val NORMAL = "normal"
+const val BOLD = "bold"

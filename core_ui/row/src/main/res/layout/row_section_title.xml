@@ -14,7 +14,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_16sdp">
 
         <kodz.org.core_ui.component.text.ClassicTextView
             android:id="@+id/txtSectionTitle"
@@ -29,21 +30,22 @@
             app:weight="bold"
             tools:text="Section Title" />
 
-        <kodz.org.core_ui.component.button.TextButton
+        <kodz.org.core_ui.component.button.MultipleButton
             android:id="@+id/btnSectionViewAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_16sdp"
-            android:background="@color/transparent"
             android:enabled="@{data.isButtonEnable}"
             android:text="@{data.buttonText != null ? data.buttonText : @string/viewAll}"
             android:visibility="@{data.isButtonVisible == true ? View.VISIBLE : View.GONE}"
-            app:backgroundColor="@color/lighterGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:textSize="@dimen/_12sdp"
-            app:underline="true"
+            app:textColor="@color/darkGray"
+            app:textSize="@dimen/_7sdp"
+            app:underline="false"
+            app:showOutline="true"
+            app:outlineColor="@color/darkGray"
             tools:text="See All >" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
