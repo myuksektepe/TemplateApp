@@ -50,25 +50,27 @@
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/txtQuote"
                 app:layout_constraintTop_toBottomOf="@+id/txtQuote"
-                app:weight="bold"
+                app:textWeight="bold"
                 tools:text="Abraham Lincoln"
                 tools:visibility="visible" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageView"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:scaleX="-1"
                 android:scaleY="-1"
                 android:src="@drawable/ic_quote"
+                android:tint="@color/dayNightReverse"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageView2"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:src="@drawable/ic_quote"
+                android:tint="@color/dayNightReverse"
                 app:layout_constraintBottom_toBottomOf="@+id/txtAuthor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtAuthor" />

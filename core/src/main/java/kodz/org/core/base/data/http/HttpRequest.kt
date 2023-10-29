@@ -8,6 +8,7 @@ import kodz.org.core.common.CommonIcons
 import kodz.org.core.common.CommonLottie
 import kodz.org.core.extension.isOnline
 import kodz.org.core.model.ButtonModel
+import kodz.org.core.model.DialogBox
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
@@ -111,22 +112,24 @@ class HttpRequest @Inject constructor(
 
     fun String.prepareUnCancelableError() = ErrorModel(
         type = ErrorType.BLOCKER,
-        title = "Beklenmedik Bir Hata Oluştu",
-        description = this,
-        lottie = LottieModel(CommonLottie.ERROR),
-        primaryButton = ButtonModel(
-            text = "Geri Dön",
-            textColor = null,
-            backgroundColor = "#F44336",
-            icon = CommonIcons.GO_BACK,
-            eventType = EventTypeCode.CLOSE_THE_SCREEN
-        ),
-        secondaryButton = ButtonModel(
-            text = "Yeniden Dene",
-            icon = CommonIcons.REFRESH,
-            textColor = "#009688",
-            backgroundColor = "#ffffff",
-            eventType = EventTypeCode.RETRY_LAST_ACTION
+        dialogBox = DialogBox(
+            title = "Beklenmedik Bir Hata Oluştu",
+            description = this,
+            lottie = LottieModel(CommonLottie.ERROR),
+            primaryButton = ButtonModel(
+                text = "Geri Dön",
+                textColor = null,
+                backgroundColor = "#F44336",
+                icon = CommonIcons.GO_BACK,
+                eventType = EventTypeCode.CLOSE_THE_SCREEN
+            ),
+            secondaryButton = ButtonModel(
+                text = "Yeniden Dene",
+                icon = CommonIcons.REFRESH,
+                textColor = "#009688",
+                backgroundColor = "#ffffff",
+                eventType = EventTypeCode.RETRY_LAST_ACTION
+            )
         )
     )
 }

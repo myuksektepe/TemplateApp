@@ -43,7 +43,6 @@ dependencies {
     implementation(Dependencies.appcompat)
     implementation(Dependencies.material)
     implementation(Dependencies.sdp)
-    implementation(Dependencies.appcompat)
 
     // Kotlin
     implementation(Dependencies.kotlinReflec)

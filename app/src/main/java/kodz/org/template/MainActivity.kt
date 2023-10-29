@@ -148,38 +148,40 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 } else gone()
             }
 
-            // Lottie
-            findViewById<LottieAnimationView>(R.id.lottieView).run {
-                errorModel.lottie?.let { lottie ->
-                    lottie.name?.resourceId?.let { rawFile ->
-                        repeatCount = if (lottie.loop == true) ValueAnimator.INFINITE else lottie.repeatCount ?: 0
-                        if (lottie.autoPlay == true) animate()
-                        setAnimation(rawFile)
-                        visible()
-                    }
-                } ?: kotlin.run { gone() }
-            }
-
-            // Title
-            findViewById<ClassicTextView>(R.id.txtDialogTitle).run {
-                text = errorModel.title ?: getString(kodz.org.core.R.string.error)
-            }
-
-            // Description
-            findViewById<ClassicTextView>(R.id.txtDialogDescription).run {
-                errorModel.description?.let {
-                    text = it
-                    movementMethod = ScrollingMovementMethod()
-                    visible()
-                } ?: kotlin.run {
-                    gone()
+            errorModel.dialogBox?.let { dialogBox ->
+                // Lottie
+                findViewById<LottieAnimationView>(R.id.lottieView).run {
+                    dialogBox.lottie?.let { lottie ->
+                        lottie.name?.resourceId?.let { rawFile ->
+                            repeatCount = if (lottie.loop == true) ValueAnimator.INFINITE else lottie.repeatCount ?: 0
+                            if (lottie.autoPlay == true) animate()
+                            setAnimation(rawFile)
+                            visible()
+                        }
+                    } ?: kotlin.run { gone() }
                 }
-            }
 
-            // Primary & Secondary Button
-            findViewById<LinearLayout>(R.id.buttons).run {
-                errorModel.primaryButton?.let { addView(createButton(it)) }
-                errorModel.secondaryButton?.let { addView(createButton(it, true)) }
+                // Title
+                findViewById<ClassicTextView>(R.id.txtDialogTitle).run {
+                    text = dialogBox.title ?: getString(kodz.org.core.R.string.error)
+                }
+
+                // Description
+                findViewById<ClassicTextView>(R.id.txtDialogDescription).run {
+                    dialogBox.description?.let {
+                        text = it
+                        movementMethod = ScrollingMovementMethod()
+                        visible()
+                    } ?: kotlin.run {
+                        gone()
+                    }
+                }
+
+                // Primary & Secondary Button
+                findViewById<LinearLayout>(R.id.buttons).run {
+                    dialogBox.primaryButton?.let { addView(createButton(it)) }
+                    dialogBox.secondaryButton?.let { addView(createButton(it, true)) }
+                }
             }
 
             dialog?.setOnDismissListener {
@@ -188,11 +190,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             }
         }
 
-        if (errorModel.tag !in shownDialogs) {
+        if (errorModel.dialogBox?.tag !in shownDialogs) {
             showDialog(errorModel.type)
-            errorModel.tag?.let { shownDialogs.add(it) }
+            errorModel.dialogBox?.tag?.let { shownDialogs.add(it) }
         } else {
-            if (errorModel.showOnce == false || errorModel.showOnce == null) {
+            if (errorModel.dialogBox?.showOnce == false || errorModel.dialogBox?.showOnce == null) {
                 showDialog(errorModel.type)
             }
         }

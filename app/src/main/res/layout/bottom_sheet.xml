@@ -70,7 +70,7 @@
             android:padding="@dimen/_6sdp"
             android:scrollbars="vertical"
             android:textSize="@dimen/_14sdp"
-            app:textWeight="center"
+            app:textAlign="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtDialogTitle"

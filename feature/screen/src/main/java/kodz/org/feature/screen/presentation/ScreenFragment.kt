@@ -19,6 +19,8 @@ import kodz.org.core.common.CommonIcons
 import kodz.org.core.common.DASHBOARD_ENDPOINT
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
+import kodz.org.core.model.ErrorModel
+import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
 import kodz.org.core.model.Resource
 import kodz.org.core.model.SettingsModel
@@ -77,6 +79,12 @@ class ScreenFragment :
                                     data = Uri.parse(it)
                                     startActivity(this)
                                 }
+                            }
+                        }
+
+                        EventTypeCode.SHOW_ALERT_DIALOG -> {
+                            eventModel.dialogBox?.let {
+                                showFullScreenError(ErrorModel(ErrorType.WARNING, it))
                             }
                         }
 
