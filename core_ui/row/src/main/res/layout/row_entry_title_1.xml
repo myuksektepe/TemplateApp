@@ -14,28 +14,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <kodz.org.core_ui.component.text.ClassicTextView
             android:id="@+id/txtEntryTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:gravity="center"
             android:maxLines="3"
             android:padding="@dimen/_16sdp"
             android:text="@{data.titleText}"
             android:textSize="@dimen/_17sdp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:textAlign="@{data.textAlign.name().toLowerCase()}"
+            app:textWeight="@{data.textWeight.name().toLowerCase()}"
             tools:text="Hızlı büyüyen bir start-up'ta yazılımcı olarak çalışmak size neler katabilir?" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginHorizontal="@dimen/_16sdp"
-            android:background="@color/black70"
+            android:background="@color/dayNightReverse"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

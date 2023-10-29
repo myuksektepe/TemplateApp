@@ -89,19 +89,20 @@ class MultipleButton @JvmOverloads constructor(
                 dividerView.gone()
             }
 
-            // Text
-            _text?.let {
-                textView.run {
-                    text = it
-                    setTextSize(TypedValue.COMPLEX_UNIT_PX, _textSize.toFloat())
-                    when (_textWeight) {
-                        TextWeightType.THIN.name -> setTextWeight(0)
-                        TextWeightType.NORMAL.name -> setTextWeight(1)
-                        TextWeightType.BOLD.name -> setTextWeight(2)
-                    }
-                    setTextColor(_textColor)
-                    visible()
-                }
+            // TextView
+            textView.run {
+                // Text
+                _text?.let { text = it }
+
+                // TextSize
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, _textSize.toFloat())
+
+                // TextWeight
+                _textWeight?.let { setTextWeight(it) }
+
+                // Text Color
+                setTextColor(_textColor)
+                visible()
             }
 
             // CardView
@@ -185,11 +186,7 @@ class MultipleButton @JvmOverloads constructor(
     }
 
     fun setTextWeight(weightType: TextWeightType) {
-        when (weightType) {
-            TextWeightType.THIN -> textView.setTextWeight(0)
-            TextWeightType.NORMAL -> textView.setTextWeight(1)
-            TextWeightType.BOLD -> textView.setTextWeight(2)
-        }
+        textView.setTextWeight(weightType.name)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

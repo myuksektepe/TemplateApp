@@ -47,7 +47,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/txtDescription"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:weight="bold"
+                app:textWeight="bold"
                 tools:text="@string/lipsum" />
 
             <kodz.org.core_ui.component.text.ClassicTextView

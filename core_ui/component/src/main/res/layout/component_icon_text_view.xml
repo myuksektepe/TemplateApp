@@ -26,11 +26,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_8sdp"
-            app:align="center"
+            app:textAlign="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgIcon"
-            app:weight="thin"
+            app:textWeight="thin"
             tools:text="İzlenme Sayısı" />
 
         <kodz.org.core_ui.component.text.ClassicTextView
@@ -38,11 +38,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_14sdp"
-            app:align="center"
+            app:textAlign="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtTitle"
-            app:weight="bold"
+            app:textWeight="bold"
             tools:text="23" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

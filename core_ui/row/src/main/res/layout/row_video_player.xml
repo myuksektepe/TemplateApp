@@ -78,7 +78,7 @@
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@+id/progressBar"
                 app:layout_constraintStart_toStartOf="@+id/progressBar"
-                app:weight="bold"
+                app:textWeight="bold"
                 tools:text="00:24" />
 
             <!-- Total Time -->
@@ -91,7 +91,7 @@
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@+id/progressBar"
                 app:layout_constraintEnd_toEndOf="@+id/progressBar"
-                app:weight="thin"
+                app:textWeight="thin"
                 tools:text="01:18" />
 
             <!-- Progress Bar -->

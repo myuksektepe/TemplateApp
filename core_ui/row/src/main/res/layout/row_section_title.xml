@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/btnSectionViewAll"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnSectionViewAll"
-            app:weight="bold"
+            app:textWeight="bold"
             tools:text="Section Title" />
 
         <kodz.org.core_ui.component.button.MultipleButton
@@ -42,9 +42,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:outlineColor="@color/darkGray"
-            app:showOutline="true"
+            app:showOutline="false"
+            app:backgroundColor="@color/lighterGrayX2"
             app:textColor="@color/darkGray"
-            app:textSize="@dimen/_8sdp"
+            app:textSize="@dimen/_10sdp"
             tools:text="See All >" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

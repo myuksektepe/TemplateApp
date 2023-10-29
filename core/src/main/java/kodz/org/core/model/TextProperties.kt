@@ -16,3 +16,14 @@ enum class TextWeightType(weight: String) {
     @SerializedName("bold")
     BOLD("bold"),
 }
+
+enum class TextAlignType(align: String) {
+    @SerializedName("left")
+    LEFT("left"),
+
+    @SerializedName("center")
+    CENTER("center"),
+
+    @SerializedName("right")
+    RIGHT("right"),
+}

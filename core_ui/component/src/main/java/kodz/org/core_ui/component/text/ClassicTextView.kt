@@ -5,6 +5,8 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
+import kodz.org.core.model.TextAlignType
+import kodz.org.core.model.TextWeightType
 import kodz.org.core_ui.component.R
 
 
@@ -23,50 +25,61 @@ class ClassicTextView @JvmOverloads constructor(
         inflate(context, R.layout.component_classic_text_view, null)
 
         // Attributes
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.ClassicTextView)
+        context.obtainStyledAttributes(attrs, R.styleable.ClassicTextView).run {
 
-        // Init attributes
-        val textWeight = attributes.getInt(R.styleable.ClassicTextView_weight, 1)
-        setTextWeight(textWeight)
-
-        val textAlignment = attributes.getInt(R.styleable.ClassicTextView_align, 1)
-        setTextAlign(textAlignment)
-
-        if (attributes.getBoolean(R.styleable.ClassicTextView_showShadow, false)) {
-            setShadowLayer(8f, 0f, 2f, kodz.org.core.R.color.black80)
-        }
-
-        attributes.recycle()
-    }
-
-    fun setTextWeight(weight: Int) {
-        when (weight) {
-            0 -> {
-                typeface = ResourcesCompat.getFont(context, R.font.averta_light)
+            // Text Weight
+            getString(R.styleable.ClassicTextView_textWeight)?.let { textWeight ->
+                setTextWeight(textWeight)
             }
 
-            1 -> {
-                typeface = ResourcesCompat.getFont(context, R.font.averta_regular)
+            // Text Align
+            getString(R.styleable.ClassicTextView_textAlign)?.let { textWeight ->
+                setTextAlign(textWeight)
             }
 
-            2 -> {
-                typeface = ResourcesCompat.getFont(context, R.font.averta_bold)
+            if (getBoolean(R.styleable.ClassicTextView_showShadow, false)) {
+                setShadowLayer(8f, 0f, 2f, kodz.org.core.R.color.black80)
             }
+            recycle()
         }
     }
 
-    fun setTextAlign(align: Int) {
-        when (align) {
-            1 -> {
-                textAlignment = TEXT_ALIGNMENT_TEXT_START
+    fun setTextWeight(weight: String) {
+        typeface = when (weight) {
+            TextWeightType.THIN.name.lowercase() -> {
+                ResourcesCompat.getFont(context, R.font.averta_light)
             }
 
-            2 -> {
-                textAlignment = TEXT_ALIGNMENT_CENTER
+            TextWeightType.NORMAL.name.lowercase() -> {
+                ResourcesCompat.getFont(context, R.font.averta_regular)
             }
 
-            3 -> {
-                textAlignment = TEXT_ALIGNMENT_TEXT_END
+            TextWeightType.BOLD.name.lowercase() -> {
+                ResourcesCompat.getFont(context, R.font.averta_bold)
+            }
+
+            else -> {
+                ResourcesCompat.getFont(context, R.font.averta_regular)
+            }
+        }
+    }
+
+    fun setTextAlign(align: String) {
+        textAlignment = when (align) {
+            TextAlignType.LEFT.name.lowercase() -> {
+                TEXT_ALIGNMENT_TEXT_START
+            }
+
+            TextAlignType.CENTER.name.lowercase() -> {
+                TEXT_ALIGNMENT_CENTER
+            }
+
+            TextAlignType.RIGHT.name.lowercase() -> {
+                TEXT_ALIGNMENT_TEXT_END
+            }
+
+            else -> {
+                TEXT_ALIGNMENT_TEXT_START
             }
         }
     }

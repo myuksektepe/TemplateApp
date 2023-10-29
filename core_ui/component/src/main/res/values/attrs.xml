@@ -10,6 +10,7 @@
     <attr name="textSize" format="dimension" />
     <attr name="textColor" format="color" />
     <attr name="textWeight" format="string" />
+    <attr name="textAlign" format="string" />
 
     <!-- Background -->
     <attr name="backgroundColor" format="color" />
@@ -34,6 +35,12 @@
     <!-- Underline -->
     <attr name="underline" format="boolean" />
 
+    <declare-styleable name="ClassicTextView">
+        <attr name="showShadow" />
+        <attr name="textWeight" />
+        <attr name="textAlign" />
+    </declare-styleable>
+
     <declare-styleable name="MultipleButton">
         <attr name="iconDrawable" />
         <attr name="text" />
@@ -52,20 +59,6 @@
         <attr name="iconDrawable" />
         <attr name="iconColor" />
         <attr name="iconPadding" />
-    </declare-styleable>
-
-    <declare-styleable name="ClassicTextView">
-        <attr name="showShadow" />
-        <attr name="weight" format="enum">
-            <enum name="bold" value="2" />
-            <enum name="regular" value="1" />
-            <enum name="thin" value="0" />
-        </attr>
-        <attr name="align" format="enum">
-            <enum name="left" value="1" />
-            <enum name="center" value="2" />
-            <enum name="right" value="3" />
-        </attr>
     </declare-styleable>
 
     <declare-styleable name="CircleImage">
