@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kodz.org.core_ui.row.categories_slider.categories_slider_item.CategoriesSliderItemDataModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cnsCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <kodz.org.core_ui.component.image.CircleImage
+            android:id="@+id/crcCategoryImage"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showShadow="true"
+            tools:src="@drawable/ic_done" />
+
+        <kodz.org.core_ui.component.text.ClassicTextView
+            android:id="@+id/txtCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxWidth="@dimen/_70sdp"
+            android:maxLines="4"
+            app:layout_constraintEnd_toEndOf="@+id/crcCategoryImage"
+            app:layout_constraintStart_toStartOf="@+id/crcCategoryImage"
+            app:layout_constraintTop_toBottomOf="@+id/crcCategoryImage"
+            app:textAlign="center"
+            tools:text="@string/lipsum" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

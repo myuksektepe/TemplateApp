@@ -20,8 +20,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/crdCircle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@color/transparent"
             android:clipChildren="false"
             android:clipToOutline="false"
@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgCircle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -20,6 +20,10 @@ import kodz.org.core_ui.row.carousel.CarouselRow
 import kodz.org.core_ui.row.carousel.CarouselRowContractor
 import kodz.org.core_ui.row.carousel.CarouselRowDataModel
 import kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRow
+import kodz.org.core_ui.row.categories_slider.CategoriesSliderContractor
+import kodz.org.core_ui.row.categories_slider.CategoriesSliderDataModel
+import kodz.org.core_ui.row.categories_slider.CategoriesSliderRow
+import kodz.org.core_ui.row.categories_slider.categories_slider_item.CategoriesSliderItemRow
 import kodz.org.core_ui.row.common.makeRow
 import kodz.org.core_ui.row.entry_item_1.EntryItem1Row
 import kodz.org.core_ui.row.entry_item_1.EntryItem1RowContractor
@@ -117,7 +121,7 @@ class ScreenViewModel @Inject constructor(
 
                                                 "CarouselRow" -> {
                                                     dataModelString?.toResponseModel<CarouselRowDataModel>()?.let { dataModel ->
-                                                        dataModel.itemList.forEach { carouselItemData ->
+                                                        dataModel.itemList?.forEach { carouselItemData ->
                                                             CarouselItemRow(carouselItemData)
                                                         }
                                                         clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
@@ -138,6 +142,15 @@ class ScreenViewModel @Inject constructor(
 
                                                 "QuoteRow" -> {
                                                     clsRow = makeRow<QuoteRow, QuoteContractor, QuoteDataModel>(dataModelString, itemClickHandler)
+                                                }
+
+                                                "CategoriesSliderRow" -> {
+                                                    dataModelString?.toResponseModel<CategoriesSliderDataModel>()?.let { dataModel ->
+                                                        dataModel.itemList?.forEach { listItemData ->
+                                                            CategoriesSliderItemRow(listItemData)
+                                                        }
+                                                    }
+                                                    clsRow = makeRow<CategoriesSliderRow, CategoriesSliderContractor, CategoriesSliderDataModel>(dataModelString, itemClickHandler)
                                                 }
                                                 // ========================================
 

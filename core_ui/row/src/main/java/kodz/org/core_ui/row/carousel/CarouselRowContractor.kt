@@ -25,22 +25,27 @@ class CarouselRowContractor : BaseRowContractor() {
 
     private fun initRow() {
         (binding as? RowCarouselBinding)?.run {
-            data?.itemList?.let { list ->
-                prepareCarousel(this.viewPagerVertical)
-                this.viewPagerVertical.adapter = carouselAdapter
+            this.data?.let { data ->
 
-                val itemList = mutableListOf<CarouselItemRow>()
-                list.forEach {
-                    itemList.add(
-                        CarouselItemRow(it).apply {
-                            contractor.itemClickHandler = itemClickHandler
-                        }
-                    )
+                // Item List
+                data.itemList?.let { list ->
+                    prepareCarousel(this.viewPagerVertical)
+                    this.viewPagerVertical.adapter = carouselAdapter
+
+                    val itemList = mutableListOf<CarouselItemRow>()
+                    list.forEach {
+                        itemList.add(
+                            CarouselItemRow(it).apply {
+                                contractor.itemClickHandler = itemClickHandler
+                            }
+                        )
+                    }
+
+                    carouselAdapter.submitList(itemList as List<BaseRow>?)
+                } ?: run {
+                    binding?.root?.gone()
                 }
 
-                carouselAdapter.submitList(itemList as List<BaseRow>?)
-            } ?: run {
-                binding?.root?.gone()
             }
         }
     }

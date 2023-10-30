@@ -6,6 +6,6 @@ import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRowDataModel
 
 data class CarouselRowDataModel(
-    @SerializedName("itemList", alternate = ["itemlist"]) val itemList: List<CarouselItemRowDataModel>,
-    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null
+    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null,
+    @SerializedName("itemList", alternate = ["itemlist"]) val itemList: List<CarouselItemRowDataModel>?
 ) : BaseRowDataModel()

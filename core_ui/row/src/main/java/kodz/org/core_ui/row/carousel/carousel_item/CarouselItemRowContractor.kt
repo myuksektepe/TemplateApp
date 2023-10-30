@@ -28,7 +28,7 @@ class CarouselItemRowContractor : BaseRowContractor() {
                     .into(img)
 
                 // EventHandler
-                this.crsItemCard.setSpamProtectedClickListener {
+                crsItemCard.setSpamProtectedClickListener {
                     itemClickHandler?.onItemClick(data.itemClickEventModel)
                 }
 
