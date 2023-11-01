@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,12 +9,29 @@
             type="kodz.org.core_ui.row.carousel.CarouselRowDataModel" />
     </data>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerVertical"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_230sdp"
-        android:nestedScrollingEnabled="true"
-        android:orientation="horizontal"
-        android:overScrollMode="never"
-        android:scrollbars="none" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerVertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_230sdp"
+            android:nestedScrollingEnabled="true"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp"
+            android:background="@color/transparent"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            android:layout_marginBottom="@dimen/_16sdp"/>
+    </LinearLayout>
+
 </layout>

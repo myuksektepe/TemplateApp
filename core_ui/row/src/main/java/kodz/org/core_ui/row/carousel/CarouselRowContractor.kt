@@ -3,12 +3,14 @@ package kodz.org.core_ui.row.carousel
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.common.HorizontalMarginItemDecoration
 import kodz.org.core.extension.gone
+import kodz.org.core.extension.visible
 import kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRow
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.databinding.RowCarouselBinding
@@ -29,9 +31,15 @@ class CarouselRowContractor : BaseRowContractor() {
 
                 // Item List
                 data.itemList?.let { list ->
-                    prepareCarousel(this.viewPagerVertical)
-                    this.viewPagerVertical.adapter = carouselAdapter
+                    prepareCarousel(viewPagerVertical)
 
+                    // Indicator Dots
+                    if(data.showIndicator == true) {
+                        tabLayout.visible()
+                        TabLayoutMediator(tabLayout, viewPagerVertical) { _, _ -> }.attach()
+                    } else tabLayout.gone()
+
+                    // Items
                     val itemList = mutableListOf<CarouselItemRow>()
                     list.forEach {
                         itemList.add(
@@ -41,6 +49,8 @@ class CarouselRowContractor : BaseRowContractor() {
                         )
                     }
 
+
+                    viewPagerVertical.adapter = carouselAdapter
                     carouselAdapter.submitList(itemList as List<BaseRow>?)
                 } ?: run {
                     binding?.root?.gone()
