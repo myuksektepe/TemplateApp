@@ -26,6 +26,9 @@ class CategoriesSliderItemContractor : BaseRowContractor() {
                 // Text
                 txtCategoryName.text = data.categoryName
 
+                // Image
+                data.iconUrl?.let { crcCategoryImage.setImageUrl(it) }
+
                 // Event Handler
                 cnsCategory.setSpamProtectedClickListener {
                     itemClickHandler?.onItemClick(data.itemClickEventModel)

@@ -30,7 +30,7 @@ class ClassicTextView @JvmOverloads constructor(
             // Text Weight
             getString(R.styleable.ClassicTextView_textWeight)?.let { textWeight ->
                 setTextWeight(textWeight)
-            }
+            } ?: kotlin.run { setTextWeight("normal") }
 
             // Text Align
             getString(R.styleable.ClassicTextView_textAlign)?.let { textWeight ->

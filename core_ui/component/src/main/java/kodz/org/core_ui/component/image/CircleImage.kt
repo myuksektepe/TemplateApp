@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.FitCenter
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import kodz.org.core_ui.component.R
 
@@ -67,11 +67,12 @@ class CircleImage @JvmOverloads constructor(
     fun setImageUrl(url: String) {
         val glideRequest = RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(FitCenter())
+            .transform(CenterCrop())
             .override(200, 200)
 
         Glide.with(context)
             .load(url)
+            .placeholder(kodz.org.core.R.drawable.placeholder)
             .apply(glideRequest)
             .into(imageView)
     }

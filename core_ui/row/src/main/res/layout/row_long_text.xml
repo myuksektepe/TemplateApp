@@ -10,7 +10,7 @@
             type="kodz.org.core_ui.row.long_text.LongTextRowDataModel" />
     </data>
 
-    <TextView
+    <kodz.org.core_ui.component.text.ClassicTextView
         android:id="@+id/longText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
