@@ -7,7 +7,8 @@ import kodz.org.core_ui.row.R
 import kotlin.reflect.KClass
 
 class CarouselRow(
-    override var dataModel: BaseRowDataModel
+    override var dataModel: BaseRowDataModel,
+    override var isInSlider: Boolean? = null
 ) : BaseRow() {
     override val layout: Int = R.layout.row_carousel
     override val dataClass: KClass<*> = CarouselRowDataModel::class

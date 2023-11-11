@@ -226,7 +226,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             // Text Color
             val textColor = if (button.textColor.toColor() != null) {
                 button.textColor.toColor()!!
-            } else resources.getColor(kodz.org.core.R.color.white)
+            } else resources.getColor(kodz.org.core.R.color.dayNightReverse)
             setTextColor(textColor)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
 

@@ -12,7 +12,8 @@ import kotlin.reflect.KClass
  * yuksektepemurat@gmail.com
  */
 open class SectionTitleRow(
-    override var dataModel: BaseRowDataModel
+    override var dataModel: BaseRowDataModel,
+    override var isInSlider: Boolean? = null
 ) : BaseRow() {
     override val layout: Int = R.layout.row_section_title
     override val dataClass: KClass<*> = SectionTitleRowDataModel::class

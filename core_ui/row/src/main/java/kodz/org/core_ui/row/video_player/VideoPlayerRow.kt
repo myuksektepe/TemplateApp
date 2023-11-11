@@ -10,7 +10,10 @@ import kotlin.reflect.KClass
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 9.10.2023.
  */
-class VideoPlayerRow(override var dataModel: BaseRowDataModel) : BaseRow() {
+class VideoPlayerRow(
+    override var dataModel: BaseRowDataModel,
+    override var isInSlider: Boolean? = null
+) : BaseRow() {
     override val layout: Int = R.layout.row_video_player
     override val dataClass: KClass<*> = VideoPlayerRowDataModel::class
     override val contractor: BaseRowContractor = VideoPlayerRowContractor()

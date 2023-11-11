@@ -11,10 +11,11 @@ import kotlin.reflect.KClass
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 25.10.2023.
  */
 class QuoteRow(
-    override var dataModel: BaseRowDataModel
+    override var dataModel: BaseRowDataModel,
+    override var isInSlider: Boolean? = null
 ) : BaseRow() {
     override val layout: Int = R.layout.row_quote
     override val dataClass: KClass<*> = QuoteDataModel::class
-    override val contractor = QuoteContractor()
+    override val contractor = QuoteContractor(isInSlider)
     override var binding: ViewDataBinding? = null
 }

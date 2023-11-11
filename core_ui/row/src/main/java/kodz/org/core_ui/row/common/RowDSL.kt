@@ -12,7 +12,7 @@ inline fun <reified R : BaseRow, reified C : BaseRowContractor, reified BDM : Ba
     itemClickHandler: ItemClickHandler? = null
 ): BaseRow? {
     return dataModelString?.toResponseModel<BDM>()?.let { dataModel ->
-        return R::class.primaryConstructor?.call(dataModel)?.apply {
+        return R::class.primaryConstructor?.call(dataModel, null)?.apply {
             (contractor as? C)?.itemClickHandler = itemClickHandler
         }
     }

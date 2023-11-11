@@ -10,7 +10,10 @@ import kotlin.reflect.KClass
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 1.11.2023.
  */
-class SliderRow(override var dataModel: BaseRowDataModel) : BaseRow() {
+class SliderRow(
+    override var dataModel: BaseRowDataModel,
+    override var isInSlider: Boolean? = null
+) : BaseRow() {
     override val layout: Int = R.layout.row_slider
     override val dataClass: KClass<*> = SliderRowDataModel::class
     override val contractor = SliderRowContractor()

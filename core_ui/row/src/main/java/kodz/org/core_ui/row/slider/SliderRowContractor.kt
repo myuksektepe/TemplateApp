@@ -7,7 +7,6 @@ import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.extension.gone
-import kodz.org.core.extension.makeSlidable
 import kodz.org.core.extension.visible
 import kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRow
 import kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRowDataModel
@@ -34,6 +33,10 @@ class SliderRowContractor : BaseRowContractor() {
         (binding as? RowSliderBinding)?.run {
             data?.let { data ->
 
+                if (!sliderAdapter.hasStableIds()) {
+                    sliderAdapter.setHasStableIds(true)
+                }
+
                 // Item List
                 data.itemList?.let {
                     viewPagerVertical.adapter = sliderAdapter
@@ -52,11 +55,7 @@ class SliderRowContractor : BaseRowContractor() {
                             data.itemList.forEach {
                                 Gson().fromJson(it, CarouselItemRowDataModel::class.java)?.run {
                                     if (!this.title.isNullOrEmpty() || !this.imageUrl.isNullOrEmpty()) {
-                                        itemList.add(
-                                            CarouselItemRow(this).apply {
-                                                binding?.makeSlidable()
-                                            }
-                                        )
+                                        itemList.add(CarouselItemRow(this, true))
                                     }
                                 }
                             }
@@ -66,11 +65,7 @@ class SliderRowContractor : BaseRowContractor() {
                             data.itemList.forEach {
                                 Gson().fromJson(it, QuoteDataModel::class.java)?.run {
                                     if (!this.text.isNullOrEmpty()) {
-                                        itemList.add(
-                                            QuoteRow(this).apply {
-                                                binding?.makeSlidable()
-                                            }
-                                        )
+                                        itemList.add(QuoteRow(this, true))
                                     }
                                 }
                             }

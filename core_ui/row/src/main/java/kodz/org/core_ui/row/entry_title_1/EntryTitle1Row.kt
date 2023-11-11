@@ -6,7 +6,10 @@ import kodz.org.core.base.row.BaseRowDataModel
 import kodz.org.core_ui.row.R
 import kotlin.reflect.KClass
 
-class EntryTitle1Row(override var dataModel: BaseRowDataModel) : BaseRow() {
+class EntryTitle1Row(
+    override var dataModel: BaseRowDataModel,
+    override var isInSlider: Boolean? = null
+) : BaseRow() {
     override val layout: Int = R.layout.row_entry_title_1
     override val dataClass: KClass<*> = EntryTitle1RowDataModel::class
     override val contractor = EntryTitle1RowContractor()

@@ -9,7 +9,10 @@ import kotlin.reflect.KClass
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 6.10.2023.
  */
-class LongTextRow(override var dataModel: BaseRowDataModel) : BaseRow() {
+class LongTextRow(
+    override var dataModel: BaseRowDataModel,
+    override var isInSlider: Boolean? = null
+) : BaseRow() {
     override val layout: Int = R.layout.row_long_text
     override val dataClass: KClass<*> = LongTextRowDataModel::class
     override val contractor = LongTextRowContractor()

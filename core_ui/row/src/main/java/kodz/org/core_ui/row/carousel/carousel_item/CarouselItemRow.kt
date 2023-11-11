@@ -7,10 +7,11 @@ import kodz.org.core_ui.row.R
 import kotlin.reflect.KClass
 
 class CarouselItemRow(
-    override var dataModel: BaseRowDataModel
+    override var dataModel: BaseRowDataModel,
+    override var isInSlider: Boolean? = null
 ) : BaseRow() {
     override val layout = R.layout.row_carousel_item
     override val dataClass: KClass<*> = CarouselItemRowDataModel::class
-    override val contractor = CarouselItemRowContractor()
+    override val contractor = CarouselItemRowContractor(isInSlider)
     override var binding: ViewDataBinding? = null
 }
