@@ -13,10 +13,11 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/crdQuote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_16sdp"
-        app:cardBackgroundColor="@{data.showBackground != true ? @color/transparent : @color/white}"
+        app:cardBackgroundColor="@{data.showBackground != true ? @color/transparent : @color/nightDayReverse}"
         app:cardCornerRadius="@dimen/_8sdp"
         app:cardElevation="@{data.showBackground == true ? @dimen/_8sdp : 0}"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +26,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
             <kodz.org.core_ui.component.text.ClassicTextView
                 android:id="@+id/txtQuote"

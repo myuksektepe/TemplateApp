@@ -32,6 +32,7 @@ class CarouselRowContractor : BaseRowContractor() {
                 // Item List
                 data.itemList?.let { list ->
                     prepareCarousel(viewPagerVertical)
+                    viewPagerVertical.adapter = carouselAdapter
 
                     // Indicator Dots
                     if(data.showIndicator == true) {
@@ -49,8 +50,6 @@ class CarouselRowContractor : BaseRowContractor() {
                         )
                     }
 
-
-                    viewPagerVertical.adapter = carouselAdapter
                     carouselAdapter.submitList(itemList as List<BaseRow>?)
                 } ?: run {
                     binding?.root?.gone()

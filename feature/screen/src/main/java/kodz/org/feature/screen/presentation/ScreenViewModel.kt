@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kodz.org.core.base.data.http.HttpFlow
 import kodz.org.core.base.data.http.HttpRequest
-import kodz.org.core.base.data.http.toResponseModel
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
@@ -19,11 +18,9 @@ import kodz.org.core.model.ScreenModel
 import kodz.org.core_ui.row.carousel.CarouselRow
 import kodz.org.core_ui.row.carousel.CarouselRowContractor
 import kodz.org.core_ui.row.carousel.CarouselRowDataModel
-import kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRow
 import kodz.org.core_ui.row.categories_slider.CategoriesSliderContractor
 import kodz.org.core_ui.row.categories_slider.CategoriesSliderDataModel
 import kodz.org.core_ui.row.categories_slider.CategoriesSliderRow
-import kodz.org.core_ui.row.categories_slider.categories_slider_item.CategoriesSliderItemRow
 import kodz.org.core_ui.row.common.makeRow
 import kodz.org.core_ui.row.entry_item_1.EntryItem1Row
 import kodz.org.core_ui.row.entry_item_1.EntryItem1RowContractor
@@ -49,6 +46,9 @@ import kodz.org.core_ui.row.search_box.SearchBoxRowDataModel
 import kodz.org.core_ui.row.section_title.SectionTitleRow
 import kodz.org.core_ui.row.section_title.SectionTitleRowContractor
 import kodz.org.core_ui.row.section_title.SectionTitleRowDataModel
+import kodz.org.core_ui.row.slider.SliderRow
+import kodz.org.core_ui.row.slider.SliderRowContractor
+import kodz.org.core_ui.row.slider.SliderRowDataModel
 import kodz.org.core_ui.row.video_player.VideoPlayerRow
 import kodz.org.core_ui.row.video_player.VideoPlayerRowContractor
 import kodz.org.core_ui.row.video_player.VideoPlayerRowDataModel
@@ -119,13 +119,12 @@ class ScreenViewModel @Inject constructor(
                                                     clsRow = makeRow<SectionTitleRow, SectionTitleRowContractor, SectionTitleRowDataModel>(dataModelString, itemClickHandler)
                                                 }
 
+                                                "SliderRow" -> {
+                                                    clsRow = makeRow<SliderRow, SliderRowContractor, SliderRowDataModel>(dataModelString, itemClickHandler)
+                                                }
+
                                                 "CarouselRow" -> {
-                                                    dataModelString?.toResponseModel<CarouselRowDataModel>()?.let { dataModel ->
-                                                        dataModel.itemList?.forEach { carouselItemData ->
-                                                            CarouselItemRow(carouselItemData)
-                                                        }
-                                                        clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
-                                                    }
+                                                    clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
                                                 }
 
                                                 "EntryItem1Row" -> {
@@ -145,11 +144,6 @@ class ScreenViewModel @Inject constructor(
                                                 }
 
                                                 "CategoriesSliderRow" -> {
-                                                    dataModelString?.toResponseModel<CategoriesSliderDataModel>()?.let { dataModel ->
-                                                        dataModel.itemList?.forEach { listItemData ->
-                                                            CategoriesSliderItemRow(listItemData)
-                                                        }
-                                                    }
                                                     clsRow = makeRow<CategoriesSliderRow, CategoriesSliderContractor, CategoriesSliderDataModel>(dataModelString, itemClickHandler)
                                                 }
                                                 // ========================================

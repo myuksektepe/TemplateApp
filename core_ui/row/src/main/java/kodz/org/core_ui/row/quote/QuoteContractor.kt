@@ -15,6 +15,7 @@ import kodz.org.core_ui.row.databinding.RowQuoteBinding
 class QuoteContractor : BaseRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
     override var binding: ViewDataBinding? = null
+
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
         initRow()
