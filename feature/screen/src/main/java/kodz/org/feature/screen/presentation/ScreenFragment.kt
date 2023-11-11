@@ -173,10 +173,10 @@ class ScreenFragment :
     private fun setUI() {
         binding.run {
             listDashboard.run {
+                // setHasFixedSize(true)
                 rowAdapter.submitData(null)
                 adapter = rowAdapter
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                // setHasFixedSize(true)
             }
 
             swiperefresh.setOnRefreshListener {

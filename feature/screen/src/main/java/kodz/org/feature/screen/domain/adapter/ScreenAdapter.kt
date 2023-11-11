@@ -55,5 +55,10 @@ class ScreenAdapter : MultipleTypeAdapter(), Filterable {
                 submitList(list)
             }
         }
+
+    }
+
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
     }
 }

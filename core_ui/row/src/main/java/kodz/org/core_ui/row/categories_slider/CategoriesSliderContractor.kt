@@ -28,6 +28,10 @@ class CategoriesSliderContractor : BaseRowContractor() {
         (binding as? RowCategoriesSliderBinding)?.run {
             this.data?.let { data ->
 
+                if (!listAdapter.hasStableIds()) {
+                    listAdapter.setHasStableIds(true)
+                }
+
                 // Item List
                 data.itemList?.let { list ->
 
