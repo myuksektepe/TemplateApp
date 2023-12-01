@@ -6,6 +6,10 @@ import kodz.org.core.base.row.BaseRowDataModel
 import kodz.org.core_ui.row.R
 import kotlin.reflect.KClass
 
+
+/**
+ * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 1.11.2023.
+ */
 class CarouselRow(
     override var dataModel: BaseRowDataModel,
     override var isInSlider: Boolean? = null

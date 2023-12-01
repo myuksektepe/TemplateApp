@@ -1,24 +1,28 @@
 package kodz.org.core_ui.row.carousel
 
-import android.view.View
 import androidx.databinding.ViewDataBinding
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import kodz.org.core.R
+import com.google.gson.Gson
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.row.BaseRowContractor
-import kodz.org.core.common.HorizontalMarginItemDecoration
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
-import kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRow
+import kodz.org.core_ui.row.carousel_UNUSED.carousel_item.CarouselItemRow
+import kodz.org.core_ui.row.carousel_UNUSED.carousel_item.CarouselItemRowDataModel
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.databinding.RowCarouselBinding
+import kodz.org.core_ui.row.quote.QuoteDataModel
+import kodz.org.core_ui.row.quote.QuoteRow
 
+
+/**
+ * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 1.11.2023.
+ */
 class CarouselRowContractor : BaseRowContractor() {
-    override var binding: ViewDataBinding? = null
-    private val carouselAdapter by lazy { MultipleTypeAdapter() }
     override var itemClickHandler: ItemClickHandler? = null
+    override var binding: ViewDataBinding? = null
+    private val sliderAdapter by lazy { MultipleTypeAdapter() }
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding
@@ -27,58 +31,61 @@ class CarouselRowContractor : BaseRowContractor() {
 
     private fun initRow() {
         (binding as? RowCarouselBinding)?.run {
-            this.data?.let { data ->
+            data?.let { data ->
+
+                if (!sliderAdapter.hasStableIds()) {
+                    sliderAdapter.setHasStableIds(true)
+                }
 
                 // Item List
-                data.itemList?.let { list ->
-                    prepareCarousel(viewPagerVertical)
-                    viewPagerVertical.adapter = carouselAdapter
+                data.itemList?.let {
+                    viewPagerVertical.adapter = sliderAdapter
 
                     // Indicator Dots
-                    if(data.showIndicator == true) {
+                    if (data.showIndicator == true) {
                         tabLayout.visible()
                         TabLayoutMediator(tabLayout, viewPagerVertical) { _, _ -> }.attach()
                     } else tabLayout.gone()
 
                     // Items
-                    val itemList = mutableListOf<CarouselItemRow>()
-                    list.forEach {
-                        itemList.add(
-                            CarouselItemRow(it).apply {
-                                contractor.itemClickHandler = itemClickHandler
+                    val itemList = mutableListOf<BaseRow>()
+
+                    when (data.itemType) {
+                        "CarouselItemRow" -> {
+                            data.itemList.forEach {
+                                Gson().fromJson(it, CarouselItemRowDataModel::class.java)?.run {
+                                    if (!this.title.isNullOrEmpty() || !this.imageUrl.isNullOrEmpty()) {
+                                        itemList.add(
+                                            CarouselItemRow(this, true).apply {
+                                                contractor.itemClickHandler = itemClickHandler
+                                            }
+                                        )
+                                    }
+                                }
                             }
-                        )
+                        }
+
+                        "QuoteRow" -> {
+                            data.itemList.forEach {
+                                Gson().fromJson(it, QuoteDataModel::class.java)?.run {
+                                    if (!this.text.isNullOrEmpty()) {
+                                        itemList.add(
+                                            QuoteRow(this, true).apply {
+                                                contractor.itemClickHandler = itemClickHandler
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
 
-                    carouselAdapter.submitList(itemList as List<BaseRow>?)
-                } ?: run {
+                    sliderAdapter.submitList(itemList as List<BaseRow>?)
+                } ?: kotlin.run {
                     binding?.root?.gone()
                 }
 
             }
         }
-    }
-
-    private fun prepareCarousel(viewPager: ViewPager2) {
-        val context = viewPager.context
-        viewPager.offscreenPageLimit = 1
-        val nextItemVisiblePx = context.resources.getDimension(R.dimen.viewpager_next_item_visible)
-        val currentItemHorizontalMarginPx = context.resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
-        val pageTranslationX = nextItemVisiblePx + currentItemHorizontalMarginPx
-        val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
-            page.translationX = -pageTranslationX * position
-            // Next line scales the item's height. You can remove it if you don't want this effect
-            page.scaleY = 1 - (0.25f * kotlin.math.abs(position))
-            // If you want a fading effect uncomment the next line:
-            page.alpha = 0.47f + (1 - kotlin.math.abs(position))
-        }
-        viewPager.setPageTransformer(pageTransformer)
-        // The ItemDecoration gives the current (centered) item horizontal margin so that
-        // it doesn't occupy the whole screen width. Without it the items overlap
-        val itemDecoration = HorizontalMarginItemDecoration(
-            context,
-            R.dimen.viewpager_current_item_horizontal_margin
-        )
-        if (viewPager.itemDecorationCount == 0) viewPager.addItemDecoration(itemDecoration)
     }
 }

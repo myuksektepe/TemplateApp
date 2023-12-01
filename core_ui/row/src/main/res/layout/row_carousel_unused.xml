@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.slider.SliderRowDataModel" />
+            type="kodz.org.core_ui.row.carousel_UNUSED.CarouselRowDataModel" />
     </data>
 
     <LinearLayout
@@ -17,14 +17,14 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerVertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_230sdp"
             android:nestedScrollingEnabled="true"
             android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollbars="none" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_16sdp"

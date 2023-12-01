@@ -15,9 +15,6 @@ import kodz.org.core.common.AppLog
 import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.ScreenModel
-import kodz.org.core_ui.row.carousel.CarouselRow
-import kodz.org.core_ui.row.carousel.CarouselRowContractor
-import kodz.org.core_ui.row.carousel.CarouselRowDataModel
 import kodz.org.core_ui.row.categories_slider.CategoriesSliderContractor
 import kodz.org.core_ui.row.categories_slider.CategoriesSliderDataModel
 import kodz.org.core_ui.row.categories_slider.CategoriesSliderRow
@@ -46,9 +43,9 @@ import kodz.org.core_ui.row.search_box.SearchBoxRowDataModel
 import kodz.org.core_ui.row.section_title.SectionTitleRow
 import kodz.org.core_ui.row.section_title.SectionTitleRowContractor
 import kodz.org.core_ui.row.section_title.SectionTitleRowDataModel
-import kodz.org.core_ui.row.slider.SliderRow
-import kodz.org.core_ui.row.slider.SliderRowContractor
-import kodz.org.core_ui.row.slider.SliderRowDataModel
+import kodz.org.core_ui.row.carousel.CarouselRow
+import kodz.org.core_ui.row.carousel.CarouselRowContractor
+import kodz.org.core_ui.row.carousel.CarouselRowDataModel
 import kodz.org.core_ui.row.video_player.VideoPlayerRow
 import kodz.org.core_ui.row.video_player.VideoPlayerRowContractor
 import kodz.org.core_ui.row.video_player.VideoPlayerRowDataModel
@@ -120,7 +117,7 @@ class ScreenViewModel @Inject constructor(
                                                 }
 
                                                 "SliderRow" -> {
-                                                    clsRow = makeRow<SliderRow, SliderRowContractor, SliderRowDataModel>(dataModelString, itemClickHandler)
+                                                    clsRow = makeRow<kodz.org.core_ui.row.carousel.CarouselRow, kodz.org.core_ui.row.carousel.CarouselRowContractor, kodz.org.core_ui.row.carousel.CarouselRowDataModel>(dataModelString, itemClickHandler)
                                                 }
 
                                                 "CarouselRow" -> {

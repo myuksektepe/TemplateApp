@@ -17,14 +17,14 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerVertical"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_230sdp"
+            android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
             android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollbars="none" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_16sdp"

@@ -21,8 +21,8 @@ object DependencyVersions {
 
     // KTX
     const val ktxCore = "1.12.0"
-    const val ktxActivity = "1.7.2"
-    const val ktxFragment = "1.6.1"
+    const val ktxActivity = "1.8.0"
+    const val ktxFragment = "1.6.2"
     const val ktxLifecycle = "2.6.0-alpha03"
 
     // Hilt

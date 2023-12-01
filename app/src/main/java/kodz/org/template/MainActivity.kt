@@ -251,7 +251,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 }
             }
 
-
             var layoutParams: LinearLayout.LayoutParams? = null
             when (button.type) {
                 ButtonType.TEXT -> {

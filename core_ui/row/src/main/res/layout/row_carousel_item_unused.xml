@@ -7,13 +7,13 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.carousel.carousel_item.CarouselItemRowDataModel" />
+            type="kodz.org.core_ui.row.carousel_UNUSED.carousel_item.CarouselItemRowDataModel" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/crsItemCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/_16sdp"
         app:cardCornerRadius="@dimen/_8sdp"
         app:cardElevation="@dimen/_8sdp">
