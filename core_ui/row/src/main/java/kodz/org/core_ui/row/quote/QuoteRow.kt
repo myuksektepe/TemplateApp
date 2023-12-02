@@ -15,7 +15,7 @@ class QuoteRow(
     override var isInSlider: Boolean? = null
 ) : BaseRow() {
     override val layout: Int = R.layout.row_quote
-    override val dataClass: KClass<*> = QuoteDataModel::class
-    override val contractor = QuoteContractor(isInSlider)
+    override val dataClass: KClass<*> = QuoteRowDataModel::class
+    override val contractor = QuoteRowContractor(isInSlider)
     override var binding: ViewDataBinding? = null
 }

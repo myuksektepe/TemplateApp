@@ -9,7 +9,7 @@ import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.common.HorizontalMarginItemDecoration
 import kodz.org.core.extension.gone
-import kodz.org.core_ui.row.carousel_UNUSED.carousel_item.CarouselItemRow
+import kodz.org.core_ui.row.carousel_item.CarouselItemRow
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.databinding.RowCarouselUnusedBinding
 

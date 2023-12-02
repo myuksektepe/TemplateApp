@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.carousel_UNUSED.carousel_item
+package kodz.org.core_ui.row.carousel_item
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.row.BaseRow
@@ -10,7 +10,7 @@ class CarouselItemRow(
     override var dataModel: BaseRowDataModel,
     override var isInSlider: Boolean? = null
 ) : BaseRow() {
-    override val layout = R.layout.row_carousel_item_unused
+    override val layout = R.layout.row_carousel_item
     override val dataClass: KClass<*> = CarouselItemRowDataModel::class
     override val contractor = CarouselItemRowContractor(isInSlider)
     override var binding: ViewDataBinding? = null

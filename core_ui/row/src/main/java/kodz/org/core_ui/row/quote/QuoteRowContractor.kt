@@ -1,35 +1,41 @@
-package kodz.org.core_ui.row.full_width_image
+package kodz.org.core_ui.row.quote
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.extension.gone
+import kodz.org.core.extension.makeSlidable
 import kodz.org.core.extension.setSpamProtectedClickListener
-import kodz.org.core_ui.row.databinding.RowFullWidthImageBinding
+import kodz.org.core.extension.visible
+import kodz.org.core_ui.row.databinding.RowQuoteBinding
 
 
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 25.10.2023.
  */
-class FullWidthImageContractor : BaseRowContractor() {
+class QuoteRowContractor(
+    private val isInSlider: Boolean? = null
+) : BaseRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
     override var binding: ViewDataBinding? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = viewDataBinding
+        binding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowFullWidthImageBinding)?.run {
+        (binding as? RowQuoteBinding)?.run {
             data?.let { data ->
-
-                data.height?.takeIf { it.isNotEmpty() }?.let {
-                    imgFullWidth.layoutParams.height = it.toInt()
-                    imgFullWidth.requestLayout()
+                // Author Visibility
+                data.author?.takeIf { it.isNotEmpty() }?.let {
+                    txtAuthor.visible()
+                } ?: run {
+                    txtAuthor.gone()
                 }
 
                 // EventHandler
-                imgFullWidth.setSpamProtectedClickListener {
+                txtQuote.setSpamProtectedClickListener {
                     itemClickHandler?.onItemClick(data.itemClickEventModel)
                 }
 

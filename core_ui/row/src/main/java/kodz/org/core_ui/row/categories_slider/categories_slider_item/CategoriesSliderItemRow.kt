@@ -15,7 +15,7 @@ class CategoriesSliderItemRow(
     override var isInSlider: Boolean? = null
 ) : BaseRow() {
     override val layout: Int = R.layout.row_categories_slider_item
-    override val dataClass: KClass<*> = CategoriesSliderItemDataModel::class
-    override val contractor = CategoriesSliderItemContractor()
+    override val dataClass: KClass<*> = CategoriesSliderItemRowDataModel::class
+    override val contractor = CategoriesSliderItemRowContractor()
     override var binding: ViewDataBinding? = null
 }

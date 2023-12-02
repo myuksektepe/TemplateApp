@@ -15,7 +15,7 @@ class FullWidthImageRow(
     override var isInSlider: Boolean? = null
 ) : BaseRow() {
     override val layout: Int = R.layout.row_full_width_image
-    override val dataClass: KClass<*> = FullWidthImageDataModel::class
-    override val contractor = FullWidthImageContractor()
+    override val dataClass: KClass<*> = FullWidthImageRowDataModel::class
+    override val contractor = FullWidthImageRowContractor()
     override var binding: ViewDataBinding? = null
 }

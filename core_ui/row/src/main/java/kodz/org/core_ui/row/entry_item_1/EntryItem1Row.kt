@@ -12,6 +12,6 @@ class EntryItem1Row(
 ) : BaseRow() {
     override val layout: Int = R.layout.row_entry_item_1
     override val dataClass: KClass<*> = EntryItem1RowDataModel::class
-    override val contractor = EntryItem1RowContractor()
+    override val contractor = EntryItem1RowContractor(isInSlider)
     override var binding: ViewDataBinding? = null
 }

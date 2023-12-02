@@ -8,12 +8,16 @@ import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
-import kodz.org.core_ui.row.carousel_UNUSED.carousel_item.CarouselItemRow
-import kodz.org.core_ui.row.carousel_UNUSED.carousel_item.CarouselItemRowDataModel
+import kodz.org.core_ui.row.carousel_item.CarouselItemRow
+import kodz.org.core_ui.row.carousel_item.CarouselItemRowDataModel
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.databinding.RowCarouselBinding
-import kodz.org.core_ui.row.quote.QuoteDataModel
+import kodz.org.core_ui.row.entry_item_1.EntryItem1Row
+import kodz.org.core_ui.row.entry_item_1.EntryItem1RowDataModel
+import kodz.org.core_ui.row.entry_item_2.EntryItem2Row
+import kodz.org.core_ui.row.entry_item_2.EntryItem2RowDataModel
 import kodz.org.core_ui.row.quote.QuoteRow
+import kodz.org.core_ui.row.quote.QuoteRowDataModel
 
 
 /**
@@ -67,10 +71,38 @@ class CarouselRowContractor : BaseRowContractor() {
 
                         "QuoteRow" -> {
                             data.itemList.forEach {
-                                Gson().fromJson(it, QuoteDataModel::class.java)?.run {
+                                Gson().fromJson(it, QuoteRowDataModel::class.java)?.run {
                                     if (!this.text.isNullOrEmpty()) {
                                         itemList.add(
                                             QuoteRow(this, true).apply {
+                                                contractor.itemClickHandler = itemClickHandler
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        "EntryItem1Row" -> {
+                            data.itemList.forEach {
+                                Gson().fromJson(it, EntryItem1RowDataModel::class.java)?.run {
+                                    if (!this.title.isNullOrEmpty()) {
+                                        itemList.add(
+                                            EntryItem1Row(this, true).apply {
+                                                contractor.itemClickHandler = itemClickHandler
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        "EntryItem2Row" -> {
+                            data.itemList.forEach {
+                                Gson().fromJson(it, EntryItem2RowDataModel::class.java)?.run {
+                                    if (!this.title.isNullOrEmpty()) {
+                                        itemList.add(
+                                            EntryItem2Row(this, true).apply {
                                                 contractor.itemClickHandler = itemClickHandler
                                             }
                                         )

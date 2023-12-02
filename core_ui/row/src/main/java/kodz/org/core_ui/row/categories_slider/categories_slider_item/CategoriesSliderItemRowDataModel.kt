@@ -8,7 +8,7 @@ import kodz.org.core.model.ItemClickEventModel
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 31.10.2023.
  */
-data class CategoriesSliderItemDataModel(
+data class CategoriesSliderItemRowDataModel(
     @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel?,
     @SerializedName("id") val id: String?,
     @SerializedName("iconUrl") val iconUrl: String?,

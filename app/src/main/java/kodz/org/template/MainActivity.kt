@@ -235,13 +235,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 setTextWeight(it)
             }
 
+            // TextSize
+            setTextSize(32)
+
             // Icon
             button.icon?.let {
                 getDrawable(it.resourceId)?.let { icon ->
                     setIcon(icon)
                 }
             } ?: kotlin.run { setIcon(null) }
-
 
             // OnClick
             button.eventType?.let { eventTypeCode ->

@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.carousel_UNUSED.carousel_item
+package kodz.org.core_ui.row.carousel_item
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.row.BaseRowDataModel
@@ -9,5 +9,6 @@ data class CarouselItemRowDataModel(
     @SerializedName("title") val title: String?,
     @SerializedName("description") val description: String?,
     @SerializedName("imageUrl") val imageUrl: String?,
-    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null
+    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null,
+    val isInSlider: Boolean = true
 ) : BaseRowDataModel()

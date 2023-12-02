@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.carousel_UNUSED.carousel_item
+package kodz.org.core_ui.row.carousel_item
 
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
@@ -7,7 +7,7 @@ import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.extension.makeSlidable
 import kodz.org.core.extension.setSpamProtectedClickListener
-import kodz.org.core_ui.row.databinding.RowCarouselItemUnusedBinding
+import kodz.org.core_ui.row.databinding.RowCarouselItemBinding
 
 class CarouselItemRowContractor(
     private val isInSlider: Boolean? = null
@@ -16,16 +16,14 @@ class CarouselItemRowContractor(
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = viewDataBinding
+        // Is In Slider?
+        binding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowCarouselItemUnusedBinding)?.run {
+        (binding as? RowCarouselItemBinding)?.run {
             data?.let { data ->
-
-                if (isInSlider == true) this.makeSlidable()
-
                 // Image
                 Glide.with(this.img.context)
                     .load(data.imageUrl)
@@ -36,7 +34,6 @@ class CarouselItemRowContractor(
                 crsItemCard.setSpamProtectedClickListener {
                     itemClickHandler?.onItemClick(data.itemClickEventModel)
                 }
-
             }
         }
     }

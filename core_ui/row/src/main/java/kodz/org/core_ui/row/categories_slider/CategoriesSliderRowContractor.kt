@@ -14,7 +14,7 @@ import kodz.org.core_ui.row.databinding.RowCategoriesSliderBinding
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 31.10.2023.
  */
-class CategoriesSliderContractor : BaseRowContractor() {
+class CategoriesSliderRowContractor : BaseRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
     override var binding: ViewDataBinding? = null
     private val listAdapter by lazy { MultipleTypeAdapter() }

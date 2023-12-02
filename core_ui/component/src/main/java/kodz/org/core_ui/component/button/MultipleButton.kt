@@ -189,6 +189,10 @@ class MultipleButton @JvmOverloads constructor(
         textView.setTextWeight(weightType.name)
     }
 
+    fun setTextSize(textSize: Int) {
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     fun showOutline(color: Int) {
         cardView.run {

@@ -10,7 +10,7 @@ import kodz.org.core_ui.row.databinding.RowCategoriesSliderItemBinding
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 31.10.2023.
  */
-class CategoriesSliderItemContractor : BaseRowContractor() {
+class CategoriesSliderItemRowContractor : BaseRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
     override var binding: ViewDataBinding? = null
 

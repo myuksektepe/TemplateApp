@@ -15,9 +15,12 @@ import kodz.org.core.common.AppLog
 import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.ScreenModel
-import kodz.org.core_ui.row.categories_slider.CategoriesSliderContractor
-import kodz.org.core_ui.row.categories_slider.CategoriesSliderDataModel
+import kodz.org.core_ui.row.carousel.CarouselRow
+import kodz.org.core_ui.row.carousel.CarouselRowContractor
+import kodz.org.core_ui.row.carousel.CarouselRowDataModel
 import kodz.org.core_ui.row.categories_slider.CategoriesSliderRow
+import kodz.org.core_ui.row.categories_slider.CategoriesSliderRowContractor
+import kodz.org.core_ui.row.categories_slider.CategoriesSliderRowDataModel
 import kodz.org.core_ui.row.common.makeRow
 import kodz.org.core_ui.row.entry_item_1.EntryItem1Row
 import kodz.org.core_ui.row.entry_item_1.EntryItem1RowContractor
@@ -28,24 +31,21 @@ import kodz.org.core_ui.row.entry_item_2.EntryItem2RowDataModel
 import kodz.org.core_ui.row.entry_title_1.EntryTitle1Row
 import kodz.org.core_ui.row.entry_title_1.EntryTitle1RowContractor
 import kodz.org.core_ui.row.entry_title_1.EntryTitle1RowDataModel
-import kodz.org.core_ui.row.full_width_image.FullWidthImageContractor
-import kodz.org.core_ui.row.full_width_image.FullWidthImageDataModel
 import kodz.org.core_ui.row.full_width_image.FullWidthImageRow
+import kodz.org.core_ui.row.full_width_image.FullWidthImageRowContractor
+import kodz.org.core_ui.row.full_width_image.FullWidthImageRowDataModel
 import kodz.org.core_ui.row.long_text.LongTextRow
 import kodz.org.core_ui.row.long_text.LongTextRowContractor
 import kodz.org.core_ui.row.long_text.LongTextRowDataModel
-import kodz.org.core_ui.row.quote.QuoteContractor
-import kodz.org.core_ui.row.quote.QuoteDataModel
 import kodz.org.core_ui.row.quote.QuoteRow
+import kodz.org.core_ui.row.quote.QuoteRowContractor
+import kodz.org.core_ui.row.quote.QuoteRowDataModel
 import kodz.org.core_ui.row.search_box.SearchBoxRow
 import kodz.org.core_ui.row.search_box.SearchBoxRowContractor
 import kodz.org.core_ui.row.search_box.SearchBoxRowDataModel
 import kodz.org.core_ui.row.section_title.SectionTitleRow
 import kodz.org.core_ui.row.section_title.SectionTitleRowContractor
 import kodz.org.core_ui.row.section_title.SectionTitleRowDataModel
-import kodz.org.core_ui.row.carousel.CarouselRow
-import kodz.org.core_ui.row.carousel.CarouselRowContractor
-import kodz.org.core_ui.row.carousel.CarouselRowDataModel
 import kodz.org.core_ui.row.video_player.VideoPlayerRow
 import kodz.org.core_ui.row.video_player.VideoPlayerRowContractor
 import kodz.org.core_ui.row.video_player.VideoPlayerRowDataModel
@@ -117,12 +117,14 @@ class ScreenViewModel @Inject constructor(
                                                 }
 
                                                 "SliderRow" -> {
-                                                    clsRow = makeRow<kodz.org.core_ui.row.carousel.CarouselRow, kodz.org.core_ui.row.carousel.CarouselRowContractor, kodz.org.core_ui.row.carousel.CarouselRowDataModel>(dataModelString, itemClickHandler)
+                                                    clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
                                                 }
 
+                                                /*
                                                 "CarouselRow" -> {
                                                     clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
                                                 }
+                                                 */
 
                                                 "EntryItem1Row" -> {
                                                     clsRow = makeRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowDataModel>(dataModelString, itemClickHandler)
@@ -133,15 +135,15 @@ class ScreenViewModel @Inject constructor(
                                                 }
 
                                                 "FullWidthImageRow" -> {
-                                                    clsRow = makeRow<FullWidthImageRow, FullWidthImageContractor, FullWidthImageDataModel>(dataModelString, itemClickHandler)
+                                                    clsRow = makeRow<FullWidthImageRow, FullWidthImageRowContractor, FullWidthImageRowDataModel>(dataModelString, itemClickHandler)
                                                 }
 
                                                 "QuoteRow" -> {
-                                                    clsRow = makeRow<QuoteRow, QuoteContractor, QuoteDataModel>(dataModelString, itemClickHandler)
+                                                    clsRow = makeRow<QuoteRow, QuoteRowContractor, QuoteRowDataModel>(dataModelString, itemClickHandler)
                                                 }
 
                                                 "CategoriesSliderRow" -> {
-                                                    clsRow = makeRow<CategoriesSliderRow, CategoriesSliderContractor, CategoriesSliderDataModel>(dataModelString, itemClickHandler)
+                                                    clsRow = makeRow<CategoriesSliderRow, CategoriesSliderRowContractor, CategoriesSliderRowDataModel>(dataModelString, itemClickHandler)
                                                 }
                                                 // ========================================
 
