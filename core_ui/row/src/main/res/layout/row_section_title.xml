@@ -45,7 +45,6 @@
             app:showOutline="false"
             app:backgroundColor="@color/lighterGrayX2"
             app:textColor="@color/darkGray"
-            app:textSize="@dimen/_10sdp"
             tools:text="See All >" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

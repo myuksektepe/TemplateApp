@@ -70,7 +70,7 @@ class MultipleButton @JvmOverloads constructor(
             // Init Attributes
             _iconDrawable = getDrawable(R.styleable.MultipleButton_iconDrawable)
             _text = getString(R.styleable.MultipleButton_text)
-            _textSize = getDimensionPixelSize(R.styleable.MultipleButton_textSize, 45)
+            _textSize = getDimensionPixelSize(R.styleable.MultipleButton_textSize, 16)
             _textWeight = getString(R.styleable.MultipleButton_textWeight)
             _textColor = getColor(R.styleable.MultipleButton_textColor, resources.getColor(kodz.org.core.R.color.white))
             _backgroundColor = getColor(R.styleable.MultipleButton_backgroundColor, resources.getColor(kodz.org.core.R.color.transparent))
@@ -95,7 +95,7 @@ class MultipleButton @JvmOverloads constructor(
                 _text?.let { text = it }
 
                 // TextSize
-                setTextSize(TypedValue.COMPLEX_UNIT_PX, _textSize.toFloat())
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, _textSize.toFloat())
 
                 // TextWeight
                 _textWeight?.let { setTextWeight(it) }
