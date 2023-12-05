@@ -1,8 +1,10 @@
 package kodz.org.core_ui.row.video_player
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.net.Uri
 import android.widget.MediaController
+import android.widget.SeekBar
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -11,8 +13,12 @@ import com.bumptech.glide.request.RequestOptions
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.common.AppLog
+import kodz.org.core.common.HUNDRED
+import kodz.org.core.common.ZERO
 import kodz.org.core.extension.animFadeOut
 import kodz.org.core.extension.getDurationText
+import kodz.org.core.extension.visible
+import kodz.org.core_ui.component.button.CircleImageButton
 import kodz.org.core_ui.row.databinding.RowVideoPlayerBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -27,11 +33,19 @@ import java.io.FileNotFoundException
 class VideoPlayerRowContractor : BaseRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
     override var binding: ViewDataBinding? = null
-    private var videoDuration: Int = 0
-    private var videoCurrentTime: Int = 0
-    private var progressNow: Int = 0
-    private val jumpTime = 10000
+    private var videoDuration: Int = ZERO
+    private var videoCurrentTime: Int = ZERO
+    private var progressNow: Int = ZERO
     private var mediaPlayer: MediaPlayer? = null
+
+    companion object {
+        const val START_DURATION_STRING = "00:00"
+        const val THUMBNAIL_WIDTH = 170
+        const val THUMBNAIL_HEIGHT = 220
+        const val VOLUME_MAX = 1f
+        const val DELAY_ONE_SEC: Long = 1000
+        const val JUMP_TIME_MILLI_SEC = 10000
+    }
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         binding = viewDataBinding as RowVideoPlayerBinding
@@ -47,7 +61,7 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                     val glideRequest = RequestOptions()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .transform(CenterCrop())
-                        .override(170, 220)
+                        .override(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
 
                     Glide.with(this.root.context)
                         .load(it)
@@ -63,7 +77,10 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                             setVideoURI(uri)
                             setOnPreparedListener { mp ->
                                 videoOnReady(mp)
-                                if (data.autoPlay == true) mp.start()
+                                if (data.autoPlay == true) {
+                                    mp.start()
+                                    btnPlayPause.setPause()
+                                }
                             }
                             setOnCompletionListener { mp ->
                                 videoOnFinish(mp)
@@ -93,37 +110,34 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                     }
                 }
 
-                /*
                 if (data.isControllersVisible == true) {
+                    controllers.visible()
+
                     // Video Buttons
                     btnPlayPause.setOnClickListener {
                         GlobalScope.launch(Dispatchers.Main) {
                             if (videoView.isPlaying) {
                                 videoView.pause()
-                                btnPlayPause.setIconDrawable(
-                                    root.context.resources.getDrawable(kodz.org.core.R.drawable.ic_play)
-                                )
+                                btnPlayPause.setPlay()
                             } else {
                                 videoView.start()
-                                btnPlayPause.setIconDrawable(
-                                    root.context.resources.getDrawable(kodz.org.core.R.drawable.ic_pause)
-                                )
+                                btnPlayPause.setPause()
                             }
                         }
                     }
 
                     btnForward10.setOnClickListener {
                         GlobalScope.launch(Dispatchers.Main) {
-                            videoView.seekTo(videoCurrentTime + jumpTime)
+                            videoView.seekTo(videoCurrentTime + JUMP_TIME_MILLI_SEC)
                         }
                     }
 
                     btnReplay10.setOnClickListener {
                         GlobalScope.launch(Dispatchers.Main) {
-                            if (videoCurrentTime >= jumpTime) {
-                                videoView.seekTo(videoCurrentTime - jumpTime)
+                            if (videoCurrentTime >= JUMP_TIME_MILLI_SEC) {
+                                videoView.seekTo(videoCurrentTime - JUMP_TIME_MILLI_SEC)
                             } else {
-                                videoView.seekTo(0)
+                                videoView.seekTo(ZERO)
                             }
                         }
                     }
@@ -133,7 +147,7 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                             if (fromUser) {
                                 GlobalScope.launch(Dispatchers.Main) {
-                                    videoView.seekTo((progress * videoDuration) / 100)
+                                    videoView.seekTo((progress * videoDuration) / HUNDRED)
                                 }
                             }
                         }
@@ -148,7 +162,6 @@ class VideoPlayerRowContractor : BaseRowContractor() {
 
                     })
                 }
-                 */
             }
         }
     }
@@ -160,20 +173,17 @@ class VideoPlayerRowContractor : BaseRowContractor() {
         mediaPlayer = mp
         mediaPlayer?.let {
             it.isLooping = false
-            it.setVolume(1f, 1f)
+            it.setVolume(VOLUME_MAX, VOLUME_MAX)
 
             videoDuration = it.duration
 
             // SeekBar
-            binding.progressBar.progress = 0
-            binding.progressBar.max = 100
+            binding.progressBar.progress = ZERO
+            binding.progressBar.max = HUNDRED
             setSeekbar()
             GlobalScope.launch(Dispatchers.Main) {
                 binding.txtTotalTime.text = videoDuration.toLong().getDurationText()
                 binding.imgThumbnail.context.animFadeOut()
-                binding.btnPlayPause.setIconDrawable(
-                    binding.root.context.resources.getDrawable(kodz.org.core.R.drawable.ic_play)
-                )
             }.invokeOnCompletion { _ ->
                 // it.start()
             }
@@ -184,12 +194,10 @@ class VideoPlayerRowContractor : BaseRowContractor() {
         val binding = (binding as RowVideoPlayerBinding)
         mediaPlayer = mp
         GlobalScope.launch(Dispatchers.Main) {
-            mediaPlayer!!.seekTo(0)
-            binding.btnPlayPause.setIconDrawable(
-                binding.root.context.resources.getDrawable(kodz.org.core.R.drawable.ic_play)
-            )
-            binding.txtCurrentTime.text = "00:00"
-            binding.progressBar.progress = 0
+            mediaPlayer!!.seekTo(ZERO)
+            binding.btnPlayPause.setReplay()
+            binding.txtCurrentTime.text = START_DURATION_STRING
+            binding.progressBar.progress = ZERO
         }
     }
 
@@ -198,16 +206,38 @@ class VideoPlayerRowContractor : BaseRowContractor() {
         GlobalScope.launch(Dispatchers.IO) {
             do {
                 videoCurrentTime = binding.videoView.currentPosition
-                progressNow = ((videoCurrentTime * 100) / videoDuration)
+                progressNow = ((videoCurrentTime * HUNDRED) / videoDuration)
 
                 GlobalScope.launch(Dispatchers.Main) {
                     binding.txtCurrentTime.text = videoCurrentTime.toLong().getDurationText()
                     binding.progressBar.progress = progressNow
                 }
 
-                if (binding.progressBar.progress >= 100) break
-                delay(1000)
-            } while (progressNow <= 100)
+                if (binding.progressBar.progress >= HUNDRED) break
+                delay(DELAY_ONE_SEC)
+            } while (progressNow <= HUNDRED)
         }
+    }
+
+    // Extensions
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun CircleImageButton.setPlay() {
+        this.setIconDrawable(
+            this.context.resources.getDrawable(kodz.org.core.R.drawable.ic_play)
+        )
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun CircleImageButton.setPause() {
+        this.setIconDrawable(
+            this.context.resources.getDrawable(kodz.org.core.R.drawable.ic_pause)
+        )
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun CircleImageButton.setReplay() {
+        this.setIconDrawable(
+            this.context.resources.getDrawable(kodz.org.core.R.drawable.ic_refresh)
+        )
     }
 }

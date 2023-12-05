@@ -12,3 +12,5 @@ const val FOUR = 4
 const val FIVE = 5
 const val TEN = 10
 const val FORTY_FIVE = 45
+const val HUNDRED = 100
+const val THOUSAND = 1000
