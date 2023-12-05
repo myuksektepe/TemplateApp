@@ -43,13 +43,11 @@ class WebViewRowContractor() : BaseRowContractor() {
                         settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
                         setBackgroundColor(Color.TRANSPARENT)
                         settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+                        settings.javaScriptEnabled = true
 
                         // Load Data
-                        loadData(
-                            content,
-                            "text/html; charset=utf-8",
-                            "UTF-8"
-                        )
+                        // loadData(content, "text/html; charset=utf-8", "UTF-8")
+                        loadDataWithBaseURL(null, content, "text/html; charset=utf-8", "UTF-8", null)
 
                         // Layout Params
                         layoutParams = LinearLayout.LayoutParams(
