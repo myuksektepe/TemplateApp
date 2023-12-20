@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rowCarouselItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipChildren="false"
@@ -50,7 +51,7 @@
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:text="@{data.title}"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
                     android:textSize="@dimen/_15sdp"
                     app:layout_constraintBottom_toTopOf="@+id/txtDescription"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +68,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@{data.description}"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

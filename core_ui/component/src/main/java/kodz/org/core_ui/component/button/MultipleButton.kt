@@ -72,7 +72,7 @@ class MultipleButton @JvmOverloads constructor(
             _text = getString(R.styleable.MultipleButton_text)
             _textSize = getDimensionPixelSize(R.styleable.MultipleButton_textSize, 16)
             _textWeight = getString(R.styleable.MultipleButton_textWeight)
-            _textColor = getColor(R.styleable.MultipleButton_textColor, resources.getColor(kodz.org.core.R.color.white))
+            _textColor = getColor(R.styleable.MultipleButton_textColor, resources.getColor(android.R.color.white))
             _backgroundColor = getColor(R.styleable.MultipleButton_backgroundColor, resources.getColor(kodz.org.core.R.color.transparent))
             _outlineColor = getColor(R.styleable.MultipleButton_outlineColor, resources.getColor(kodz.org.core.R.color.transparent))
             _showOutline = getBoolean(R.styleable.MultipleButton_showOutline, false)

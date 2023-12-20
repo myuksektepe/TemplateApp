@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    kapt("androidx.annotation:annotation:1.7.0")
     // Main
     implementation(Dependencies.appcompat)
     implementation(Dependencies.material)
@@ -53,8 +54,11 @@ dependencies {
     implementation(Dependencies.glide) {
         exclude(group = "com.android.support")
     }
-    kapt("androidx.annotation:annotation:1.7.0")
     kapt(Dependencies.glideCompiler)
+    implementation(Dependencies.okHttp)
+    implementation(Dependencies.glideOkHttpIntegration) {
+        exclude("glide-parent")
+    }
     
     // Retrofit2
     implementation(Dependencies.retrofit)

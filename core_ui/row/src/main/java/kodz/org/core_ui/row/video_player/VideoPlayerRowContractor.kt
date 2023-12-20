@@ -1,9 +1,10 @@
 package kodz.org.core_ui.row.video_player
 
 import android.annotation.SuppressLint
+import android.graphics.SurfaceTexture
 import android.media.MediaPlayer
-import android.net.Uri
-import android.widget.MediaController
+import android.view.Surface
+import android.view.TextureView
 import android.widget.SeekBar
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
@@ -48,7 +49,7 @@ class VideoPlayerRowContractor : BaseRowContractor() {
     }
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = viewDataBinding as RowVideoPlayerBinding
+        binding = viewDataBinding
         initRow()
     }
 
@@ -70,36 +71,53 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                 }
 
                 // Video
-                data.videoUrl?.let {
-                    val uri = Uri.parse(it)
-                    videoView.run {
+                data.videoUrl?.let { url ->
+                    textureView.run {
                         try {
-                            setVideoURI(uri)
-                            setOnPreparedListener { mp ->
-                                videoOnReady(mp)
-                                if (data.autoPlay == true) {
-                                    mp.start()
-                                    btnPlayPause.setPause()
-                                }
-                            }
-                            setOnCompletionListener { mp ->
-                                videoOnFinish(mp)
-                            }
-                            setOnErrorListener { mp, what, extra ->
-                                AppLog("Video setOnErrorListener what: $what")
-                                AppLog("Video setOnErrorListener extra: $extra")
-                                true
-                            }
-                            setOnInfoListener { _, what, _ ->
-                                if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-                                    imgThumbnail.startAnimation(this.rootView.context.animFadeOut())
-                                }
-                                true
-                            }
+                            this.surfaceTextureListener = object : TextureView.SurfaceTextureListener {
+                                override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
+                                    mediaPlayer = MediaPlayer().apply {
+                                        setDataSource(url)
+                                        setSurface(Surface(surface))
+                                        prepare()
 
-                            if (data.isControllersVisible == true) {
-                                val mediaController = MediaController(this.context)
-                                setMediaController(mediaController)
+                                        setOnPreparedListener { mp ->
+                                            onVideoReady(mp)
+                                            if (data.autoPlay == true) {
+                                                mp.start()
+                                                btnPlayPause.setPause()
+                                            }
+                                        }
+                                        setOnCompletionListener { mp ->
+                                            onVideoFinish(mp)
+                                        }
+                                        setOnInfoListener { _, what, _ ->
+                                            if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                                                imgThumbnail.startAnimation(this@run.context.animFadeOut())
+                                            }
+                                            true
+                                        }
+                                        setOnErrorListener { _, what, extra ->
+                                            AppLog("Video setOnErrorListener what: $what")
+                                            AppLog("Video setOnErrorListener extra: $extra")
+                                            true
+                                        }
+
+                                        // setOnBufferingUpdateListener { mp, percent -> }
+                                    }
+                                }
+
+                                override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
+                                }
+
+                                override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
+                                    mediaPlayer?.stop()
+                                    mediaPlayer = null
+                                    return false
+                                }
+
+                                override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
+                                }
                             }
 
                         } catch (e: Exception) {
@@ -116,11 +134,11 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                     // Video Buttons
                     btnPlayPause.setOnClickListener {
                         GlobalScope.launch(Dispatchers.Main) {
-                            if (videoView.isPlaying) {
-                                videoView.pause()
+                            if (mediaPlayer?.isPlaying == true) {
+                                mediaPlayer?.pause()
                                 btnPlayPause.setPlay()
                             } else {
-                                videoView.start()
+                                mediaPlayer?.start()
                                 btnPlayPause.setPause()
                             }
                         }
@@ -128,16 +146,16 @@ class VideoPlayerRowContractor : BaseRowContractor() {
 
                     btnForward10.setOnClickListener {
                         GlobalScope.launch(Dispatchers.Main) {
-                            videoView.seekTo(videoCurrentTime + JUMP_TIME_MILLI_SEC)
+                            mediaPlayer?.seekTo(videoCurrentTime + JUMP_TIME_MILLI_SEC)
                         }
                     }
 
                     btnReplay10.setOnClickListener {
                         GlobalScope.launch(Dispatchers.Main) {
                             if (videoCurrentTime >= JUMP_TIME_MILLI_SEC) {
-                                videoView.seekTo(videoCurrentTime - JUMP_TIME_MILLI_SEC)
+                                mediaPlayer?.seekTo(videoCurrentTime - JUMP_TIME_MILLI_SEC)
                             } else {
-                                videoView.seekTo(ZERO)
+                                mediaPlayer?.seekTo(ZERO)
                             }
                         }
                     }
@@ -147,7 +165,7 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                             if (fromUser) {
                                 GlobalScope.launch(Dispatchers.Main) {
-                                    videoView.seekTo((progress * videoDuration) / HUNDRED)
+                                    mediaPlayer?.seekTo((progress * videoDuration) / HUNDRED)
                                 }
                             }
                         }
@@ -166,15 +184,13 @@ class VideoPlayerRowContractor : BaseRowContractor() {
         }
     }
 
-    private fun videoOnReady(mp: MediaPlayer) {
+    private fun onVideoReady(mp: MediaPlayer) {
         val binding = (binding as RowVideoPlayerBinding)
 
         // MediaPlayer
-        mediaPlayer = mp
-        mediaPlayer?.let {
+        mp.let {
             it.isLooping = false
             it.setVolume(VOLUME_MAX, VOLUME_MAX)
-
             videoDuration = it.duration
 
             // SeekBar
@@ -190,14 +206,14 @@ class VideoPlayerRowContractor : BaseRowContractor() {
         }
     }
 
-    private fun videoOnFinish(mp: MediaPlayer) {
-        val binding = (binding as RowVideoPlayerBinding)
-        mediaPlayer = mp
+    private fun onVideoFinish(mp: MediaPlayer) {
         GlobalScope.launch(Dispatchers.Main) {
-            mediaPlayer!!.seekTo(ZERO)
-            binding.btnPlayPause.setReplay()
-            binding.txtCurrentTime.text = START_DURATION_STRING
-            binding.progressBar.progress = ZERO
+            mp.seekTo(ZERO)
+            (binding as RowVideoPlayerBinding).run {
+                btnPlayPause.setReplay()
+                txtCurrentTime.text = START_DURATION_STRING
+                progressBar.progress = ZERO
+            }
         }
     }
 
@@ -205,7 +221,7 @@ class VideoPlayerRowContractor : BaseRowContractor() {
         val binding = (binding as RowVideoPlayerBinding)
         GlobalScope.launch(Dispatchers.IO) {
             do {
-                videoCurrentTime = binding.videoView.currentPosition
+                mediaPlayer?.currentPosition?.let { videoCurrentTime = it }
                 progressNow = ((videoCurrentTime * HUNDRED) / videoDuration)
 
                 GlobalScope.launch(Dispatchers.Main) {
@@ -240,4 +256,5 @@ class VideoPlayerRowContractor : BaseRowContractor() {
             this.context.resources.getDrawable(kodz.org.core.R.drawable.ic_refresh)
         )
     }
+
 }

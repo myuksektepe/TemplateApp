@@ -8,7 +8,7 @@ object DependencyVersions {
     const val kotlin = "1.9.0"
     const val appCompat = "1.6.1"
     const val material = "1.10.0"
-    const val constraintlayout = "2.1.4"
+    const val constraintlayout = "2.2.0-alpha13"
     const val legacySupportV4 = "1.0.0"
     const val recyclerView = "1.2.1"
     const val recyclerViewSelection = "1.2.0-alpha01"
@@ -46,7 +46,7 @@ object DependencyVersions {
     const val retrofitCoroutinesAdapter = "0.9.2"
 
     // OkHttp
-    const val okHttpLogging = "4.10.0"
+    const val okHttp = "4.12.0"
 
     // Glide
     const val glide = "4.14.2"
@@ -125,11 +125,13 @@ object Dependencies {
     const val retrofitCoroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${DependencyVersions.retrofitCoroutinesAdapter}"
 
     // OkHttp
-    const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${DependencyVersions.okHttpLogging}"
+    const val okHttp = "com.squareup.okhttp3:okhttp:${DependencyVersions.okHttp}"
+    const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${DependencyVersions.okHttp}"
 
     // Glide
     const val glide = "com.github.bumptech.glide:glide:${DependencyVersions.glide}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${DependencyVersions.glide}"
+    const val glideOkHttpIntegration = "com.github.bumptech.glide:okhttp3-integration:${DependencyVersions.glide}"
 
     // Auto Image Slider
     const val autoImageSlider = "com.github.smarteist:autoimageslider:${DependencyVersions.autoImageSlider}"

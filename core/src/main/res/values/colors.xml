@@ -11,12 +11,12 @@
     <color name="dayNightReverse">#FF000000</color>
     <color name="nightDayReverse">#FFFFFFFF</color>
     <color name="whiteBlack">#FFFFFF</color>
-    <color name="black">#FF000000</color>
+    <!--<color name="black">#FF000000</color>-->
     <color name="black80">#80000000</color>
     <color name="black70">#70000000</color>
     <color name="black60">#60000000</color>
     <color name="black40">#40000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!--<color name="white">#FFFFFFFF</color>-->
     <color name="white80">#80FFFFFF</color>
     <color name="darkGray">#393939</color>
     <color name="lightGray">#707070</color>

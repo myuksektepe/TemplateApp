@@ -21,7 +21,7 @@ class SearchBoxRowContractor : BaseRowContractor() {
 
     private fun initRow() {
         (binding as? RowSearchBoxBinding)?.run {
-            data?.let { data ->
+            data?.let {
                 edtSearch.imeOptions = EditorInfo.IME_ACTION_SEARCH
                 edtSearch.addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

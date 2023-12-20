@@ -46,9 +46,12 @@ import kodz.org.core_ui.row.search_box.SearchBoxRowDataModel
 import kodz.org.core_ui.row.section_title.SectionTitleRow
 import kodz.org.core_ui.row.section_title.SectionTitleRowContractor
 import kodz.org.core_ui.row.section_title.SectionTitleRowDataModel
-import kodz.org.core_ui.row.video_player_2.VideoPlayerRow2
-import kodz.org.core_ui.row.video_player_2.VideoPlayerRowContractor2
-import kodz.org.core_ui.row.video_player_2.VideoPlayerRowDataModel2
+import kodz.org.core_ui.row.vertical_list.VerticalListRow
+import kodz.org.core_ui.row.vertical_list.VerticalListRowContractor
+import kodz.org.core_ui.row.vertical_list.VerticalListRowDataModel
+import kodz.org.core_ui.row.video_player.VideoPlayerRow
+import kodz.org.core_ui.row.video_player.VideoPlayerRowContractor
+import kodz.org.core_ui.row.video_player.VideoPlayerRowDataModel
 import kodz.org.core_ui.row.webview.WebViewRow
 import kodz.org.core_ui.row.webview.WebViewRowContractor
 import kodz.org.core_ui.row.webview.WebViewRowDataModel
@@ -116,15 +119,13 @@ class ScreenViewModel @Inject constructor(
                                                     clsRow = makeRow<SectionTitleRow, SectionTitleRowContractor, SectionTitleRowDataModel>(dataModelString, itemClickHandler)
                                                 }
 
-                                                "SliderRow" -> {
-                                                    clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
-                                                }
-
-                                                /*
                                                 "CarouselRow" -> {
                                                     clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
                                                 }
-                                                 */
+
+                                                "VerticalListRow" -> {
+                                                    clsRow = makeRow<VerticalListRow, VerticalListRowContractor, VerticalListRowDataModel>(dataModelString, itemClickHandler)
+                                                }
 
                                                 "EntryItem1Row" -> {
                                                     clsRow = makeRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowDataModel>(dataModelString, itemClickHandler)
@@ -167,7 +168,7 @@ class ScreenViewModel @Inject constructor(
                                                 }
 
                                                 "VideoPlayerRow" -> {
-                                                    clsRow = makeRow<VideoPlayerRow2, VideoPlayerRowContractor2, VideoPlayerRowDataModel2>(dataModelString)
+                                                    clsRow = makeRow<VideoPlayerRow, VideoPlayerRowContractor, VideoPlayerRowDataModel>(dataModelString)
                                                 }
                                                 // ========================================
 

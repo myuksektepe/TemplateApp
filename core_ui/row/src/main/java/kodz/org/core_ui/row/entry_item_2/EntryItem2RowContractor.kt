@@ -1,7 +1,8 @@
 package kodz.org.core_ui.row.entry_item_2
 
 import androidx.databinding.ViewDataBinding
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import kodz.org.core.GlideApp
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRowContractor
@@ -27,8 +28,10 @@ class EntryItem2RowContractor(
                 txtEntryTitle.text = data.title
 
                 // Image
-                Glide.with(this.imgEntry.context)
+                GlideApp.with(this.imgEntry.context)
                     .load(data.imageUrl)
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .error(R.drawable.placeholder)
                     .into(imgEntry.imageView)
 

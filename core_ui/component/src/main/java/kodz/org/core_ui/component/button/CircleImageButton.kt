@@ -34,7 +34,7 @@ class CircleImageButton @JvmOverloads constructor(
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.CircleButton)
 
         // Init Attributes
-        val backgroundColor = attributes.getColor(R.styleable.CircleButton_backgroundColor, resources.getColor(kodz.org.core.R.color.white))
+        val backgroundColor = attributes.getColor(R.styleable.CircleButton_backgroundColor, resources.getColor(android.R.color.white))
         val iconDrawable = attributes.getDrawable(R.styleable.CircleButton_iconDrawable)
         val iconColor = attributes.getColor(R.styleable.CircleButton_iconColor, resources.getColor(kodz.org.core.R.color.orange))
         val iconPadding = attributes.getDimensionPixelSize(R.styleable.CircleButton_iconPadding, 10)
@@ -53,8 +53,8 @@ class CircleImageButton @JvmOverloads constructor(
             backgroundTintList = colorList
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                outlineAmbientShadowColor = if (backgroundColor == resources.getColor(kodz.org.core.R.color.white)) iconColor else backgroundColor
-                outlineSpotShadowColor = if (backgroundColor == resources.getColor(kodz.org.core.R.color.white)) iconColor else backgroundColor
+                outlineAmbientShadowColor = if (backgroundColor == resources.getColor(android.R.color.white)) iconColor else backgroundColor
+                outlineSpotShadowColor = if (backgroundColor == resources.getColor(android.R.color.white)) iconColor else backgroundColor
             }
 
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT).apply {

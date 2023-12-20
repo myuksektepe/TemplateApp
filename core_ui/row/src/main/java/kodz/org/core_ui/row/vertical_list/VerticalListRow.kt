@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.carousel_UNUSED
+package kodz.org.core_ui.row.vertical_list
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.row.BaseRow
@@ -6,12 +6,12 @@ import kodz.org.core.base.row.BaseRowDataModel
 import kodz.org.core_ui.row.R
 import kotlin.reflect.KClass
 
-class CarouselRow(
+class VerticalListRow(
     override var dataModel: BaseRowDataModel,
     override var isInSlider: Boolean? = null
 ) : BaseRow() {
-    override val layout: Int = R.layout.row_carousel_unused
-    override val dataClass: KClass<*> = CarouselRowDataModel::class
-    override val contractor = CarouselRowContractor()
+    override val layout: Int = R.layout.row_vertical_list
+    override val dataClass: KClass<*> = VerticalListRowDataModel::class
+    override val contractor = VerticalListRowContractor()
     override var binding: ViewDataBinding? = null
 }

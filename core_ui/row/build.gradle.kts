@@ -35,6 +35,8 @@ android {
 }
 
 dependencies {
+    kapt("androidx.annotation:annotation:1.7.0")
+
     // Module
     implementation(project(":core"))
     implementation(project(":core_ui:component"))
@@ -57,8 +59,11 @@ dependencies {
     implementation(Dependencies.glide) {
         exclude(group = "com.android.support")
     }
-    kapt("androidx.annotation:annotation:1.7.0")
     kapt(Dependencies.glideCompiler)
+    implementation(Dependencies.okHttp)
+    implementation(Dependencies.glideOkHttpIntegration) {
+        exclude("glide-parent")
+    }
 
     // Lottie
     implementation(Dependencies.lottie)
