@@ -11,16 +11,17 @@ import kodz.org.core_ui.row.databinding.RowCategoriesSliderItemBinding
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 31.10.2023.
  */
 class CategoriesSliderItemRowContractor : BaseRowContractor() {
+    override var viewBinding: ViewDataBinding? = null
+    override val binding by lazy { viewBinding as? RowCategoriesSliderItemBinding }
     override var itemClickHandler: ItemClickHandler? = null
-    override var binding: ViewDataBinding? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = viewDataBinding
+        viewBinding = viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowCategoriesSliderItemBinding)?.run {
+        binding?.run {
             this.data?.let { data ->
 
                 // Text

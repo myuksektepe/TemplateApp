@@ -16,16 +16,17 @@ import kodz.org.core_ui.row.databinding.RowQuoteBinding
 class QuoteRowContractor(
     private val isInSlider: Boolean? = null
 ) : BaseRowContractor() {
+    override var viewBinding: ViewDataBinding? = null
+    override val binding by lazy { viewBinding as? RowQuoteBinding }
     override var itemClickHandler: ItemClickHandler? = null
-    override var binding: ViewDataBinding? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
+        viewBinding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowQuoteBinding)?.run {
+        binding?.run {
             data?.let { data ->
                 // Author Visibility
                 data.author?.takeIf { it.isNotEmpty() }?.let {

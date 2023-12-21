@@ -17,6 +17,7 @@
     <string name="like">Beğen</string>
     <string name="apply">Uygula</string>
     <string name="loading">Yükleniyor…</string>
+    <string name="showMore">Daha fazla göster</string>
 
     <!-- Warnings & Errors -->
     <string name="oops">Ooops! Bir hata oluştu :(</string>

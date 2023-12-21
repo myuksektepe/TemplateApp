@@ -12,17 +12,18 @@ import kodz.org.core_ui.row.databinding.RowCarouselItemBinding
 class CarouselItemRowContractor(
     private val isInSlider: Boolean? = null
 ) : BaseRowContractor() {
-    override var binding: ViewDataBinding? = null
+    override var viewBinding: ViewDataBinding? = null
+    override val binding by lazy { viewBinding as? RowCarouselItemBinding }
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         // Is In Slider?
-        binding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
+        viewBinding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowCarouselItemBinding)?.run {
+        binding?.run {
             data?.let { data ->
                 // Image
                 Glide.with(this.img.context)

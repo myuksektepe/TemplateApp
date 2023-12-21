@@ -12,16 +12,17 @@ import kodz.org.core_ui.row.databinding.RowEntryItem1Binding
 class EntryItem1RowContractor(
     private val isInSlider: Boolean? = null
 ) : BaseRowContractor() {
-    override var binding: ViewDataBinding? = null
+    override var viewBinding: ViewDataBinding? = null
+    override val binding by lazy { viewBinding as? RowEntryItem1Binding }
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
+        viewBinding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowEntryItem1Binding)?.run {
+        binding?.run {
             data?.let { data ->
                 // Title
                 txtEntryTitle.text = data.title

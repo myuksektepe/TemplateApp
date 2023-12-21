@@ -11,17 +11,18 @@ import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core_ui.row.databinding.RowWebviewBinding
 
 class WebViewRowContractor() : BaseRowContractor() {
+    override var viewBinding: ViewDataBinding? = null
+    override val binding by lazy { viewBinding as? RowWebviewBinding }
     override var itemClickHandler: ItemClickHandler? = null
-    override var binding: ViewDataBinding? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = viewDataBinding
+        viewBinding = viewDataBinding
         initRow()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initRow() {
-        (binding as? RowWebviewBinding)?.run {
+        binding?.run {
             data?.let {
                 it.content?.fullHtml()?.let { content ->
                     webView.run {
@@ -46,7 +47,13 @@ class WebViewRowContractor() : BaseRowContractor() {
                          */
 
                         // Load Data
-                        loadDataWithBaseURL(null, content, "text/html; charset=utf-8", "UTF-8", null)
+                        loadDataWithBaseURL(
+                            null,
+                            content,
+                            "text/html; charset=utf-8",
+                            "UTF-8",
+                            null
+                        )
 
                         // Layout Params
                         layoutParams = LinearLayout.LayoutParams(

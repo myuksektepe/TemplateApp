@@ -15,17 +15,18 @@ import kodz.org.core_ui.row.databinding.RowCarouselBinding
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 1.11.2023.
  */
 class CarouselRowContractor : BaseRowContractor() {
+    override var viewBinding: ViewDataBinding? = null
+    override val binding by lazy { viewBinding as? RowCarouselBinding }
     override var itemClickHandler: ItemClickHandler? = null
-    override var binding: ViewDataBinding? = null
     private val sliderAdapter by lazy { MultipleTypeAdapter() }
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = viewDataBinding
+        viewBinding = viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowCarouselBinding)?.run {
+        binding?.run {
             data?.let { data ->
 
                 if (!sliderAdapter.hasStableIds()) {

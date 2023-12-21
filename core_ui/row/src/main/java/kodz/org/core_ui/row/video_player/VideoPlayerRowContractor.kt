@@ -32,8 +32,9 @@ import java.io.FileNotFoundException
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 9.10.2023.
  */
 class VideoPlayerRowContractor : BaseRowContractor() {
+    override var viewBinding: ViewDataBinding? = null
+    override val binding by lazy { viewBinding as? RowVideoPlayerBinding }
     override var itemClickHandler: ItemClickHandler? = null
-    override var binding: ViewDataBinding? = null
     private var videoDuration: Int = ZERO
     private var videoCurrentTime: Int = ZERO
     private var progressNow: Int = ZERO
@@ -49,12 +50,12 @@ class VideoPlayerRowContractor : BaseRowContractor() {
     }
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = viewDataBinding
+        viewBinding = viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowVideoPlayerBinding)?.run {
+        binding?.run {
             data?.let { data ->
 
                 // Thumbnail
@@ -74,51 +75,60 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                 data.videoUrl?.let { url ->
                     textureView.run {
                         try {
-                            this.surfaceTextureListener = object : TextureView.SurfaceTextureListener {
-                                override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
-                                    mediaPlayer = MediaPlayer().apply {
-                                        setDataSource(url)
-                                        setSurface(Surface(surface))
-                                        prepare()
+                            this.surfaceTextureListener =
+                                object : TextureView.SurfaceTextureListener {
+                                    override fun onSurfaceTextureAvailable(
+                                        surface: SurfaceTexture,
+                                        width: Int,
+                                        height: Int
+                                    ) {
+                                        mediaPlayer = MediaPlayer().apply {
+                                            setDataSource(url)
+                                            setSurface(Surface(surface))
+                                            prepare()
 
-                                        setOnPreparedListener { mp ->
-                                            onVideoReady(mp)
-                                            if (data.autoPlay == true) {
-                                                mp.start()
-                                                btnPlayPause.setPause()
+                                            setOnPreparedListener { mp ->
+                                                onVideoReady(mp)
+                                                if (data.autoPlay == true) {
+                                                    mp.start()
+                                                    btnPlayPause.setPause()
+                                                }
                                             }
-                                        }
-                                        setOnCompletionListener { mp ->
-                                            onVideoFinish(mp)
-                                        }
-                                        setOnInfoListener { _, what, _ ->
-                                            if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-                                                imgThumbnail.startAnimation(this@run.context.animFadeOut())
+                                            setOnCompletionListener { mp ->
+                                                onVideoFinish(mp)
                                             }
-                                            true
-                                        }
-                                        setOnErrorListener { _, what, extra ->
-                                            AppLog("Video setOnErrorListener what: $what")
-                                            AppLog("Video setOnErrorListener extra: $extra")
-                                            true
-                                        }
+                                            setOnInfoListener { _, what, _ ->
+                                                if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                                                    imgThumbnail.startAnimation(this@run.context.animFadeOut())
+                                                }
+                                                true
+                                            }
+                                            setOnErrorListener { _, what, extra ->
+                                                AppLog("Video setOnErrorListener what: $what")
+                                                AppLog("Video setOnErrorListener extra: $extra")
+                                                true
+                                            }
 
-                                        // setOnBufferingUpdateListener { mp, percent -> }
+                                            // setOnBufferingUpdateListener { mp, percent -> }
+                                        }
+                                    }
+
+                                    override fun onSurfaceTextureSizeChanged(
+                                        surface: SurfaceTexture,
+                                        width: Int,
+                                        height: Int
+                                    ) {
+                                    }
+
+                                    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
+                                        mediaPlayer?.stop()
+                                        mediaPlayer = null
+                                        return false
+                                    }
+
+                                    override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
                                     }
                                 }
-
-                                override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
-                                }
-
-                                override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
-                                    mediaPlayer?.stop()
-                                    mediaPlayer = null
-                                    return false
-                                }
-
-                                override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
-                                }
-                            }
 
                         } catch (e: Exception) {
                             AppLog(e.message.toString())
@@ -161,8 +171,13 @@ class VideoPlayerRowContractor : BaseRowContractor() {
                     }
 
                     // SeekBar
-                    progressBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    progressBar.setOnSeekBarChangeListener(object :
+                        SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(
+                            seekBar: SeekBar?,
+                            progress: Int,
+                            fromUser: Boolean
+                        ) {
                             if (fromUser) {
                                 GlobalScope.launch(Dispatchers.Main) {
                                     mediaPlayer?.seekTo((progress * videoDuration) / HUNDRED)

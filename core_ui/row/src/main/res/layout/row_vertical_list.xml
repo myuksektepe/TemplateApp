@@ -10,13 +10,34 @@
             type="kodz.org.core_ui.row.vertical_list.VerticalListRowDataModel" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcyVerticalList"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rowVerticalList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        app:spanCount="2"
-        tools:itemCount="3"
-        tools:listitem="@layout/row_entry_item_2" />
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcyVerticalList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
+            tools:itemCount="3"
+            tools:listitem="@layout/row_entry_item_2" />
+
+        <kodz.org.core_ui.component.button.MultipleButton
+            android:id="@+id/btnShowMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rcyVerticalList"
+            app:layout_constraintTop_toBottomOf="@+id/rcyVerticalList"
+            app:text="@string/showMore"
+            app:underline="true"
+            app:textColor="@color/dayNightReverse"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

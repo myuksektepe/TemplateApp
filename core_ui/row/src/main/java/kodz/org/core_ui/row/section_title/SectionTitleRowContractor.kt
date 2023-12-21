@@ -12,16 +12,17 @@ import kodz.org.core_ui.row.databinding.RowSectionTitleBinding
  * yuksektepemurat@gmail.com
  */
 class SectionTitleRowContractor : BaseRowContractor() {
-    override var binding: ViewDataBinding? = null
+    override var viewBinding: ViewDataBinding? = null
+    override val binding by lazy { viewBinding as? RowSectionTitleBinding }
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        binding = viewDataBinding
+        viewBinding = viewDataBinding
         initRow()
     }
 
     private fun initRow() {
-        (binding as? RowSectionTitleBinding)?.run {
+        binding?.run {
             data?.let { data ->
 
                 // EventHandler
