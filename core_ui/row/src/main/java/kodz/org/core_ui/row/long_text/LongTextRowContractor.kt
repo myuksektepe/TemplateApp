@@ -11,16 +11,17 @@ import kodz.org.core_ui.row.databinding.RowLongTextBinding
  */
 class LongTextRowContractor : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowLongTextBinding }
+    lateinit var binding: RowLongTextBinding
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowLongTextBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let { data ->
                 longText.text = data.text
             }

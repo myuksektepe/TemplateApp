@@ -12,17 +12,18 @@ import kodz.org.core_ui.row.databinding.RowWebviewBinding
 
 class WebViewRowContractor() : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowWebviewBinding }
+    lateinit var binding: RowWebviewBinding
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowWebviewBinding
         initRow()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let {
                 it.content?.fullHtml()?.let { content ->
                     webView.run {
@@ -68,7 +69,7 @@ class WebViewRowContractor() : BaseRowContractor() {
 
     private fun String.fullHtml(): String {
         var colorText = "color:black !important;"
-        when (binding?.root?.context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+        when (binding.root.context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 colorText = "color:white !important;"
             }

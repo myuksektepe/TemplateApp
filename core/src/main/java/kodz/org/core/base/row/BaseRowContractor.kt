@@ -17,6 +17,5 @@ import kodz.org.core.base.handler.ItemClickHandler
 abstract class BaseRowContractor {
     abstract var itemClickHandler: ItemClickHandler?
     abstract var viewBinding: ViewDataBinding?
-    abstract val binding: ViewDataBinding?
     abstract fun initBinding(viewDataBinding: ViewDataBinding)
 }

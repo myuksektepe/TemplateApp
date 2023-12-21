@@ -12,16 +12,17 @@ import kodz.org.core_ui.row.databinding.RowFullWidthImageBinding
  */
 class FullWidthImageRowContractor : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowFullWidthImageBinding }
+    lateinit var binding: RowFullWidthImageBinding
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowFullWidthImageBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let { data ->
 
                 data.height?.takeIf { it.isNotEmpty() }?.let {

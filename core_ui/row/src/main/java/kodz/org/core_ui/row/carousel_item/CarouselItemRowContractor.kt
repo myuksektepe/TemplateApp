@@ -13,17 +13,18 @@ class CarouselItemRowContractor(
     private val isInSlider: Boolean? = null
 ) : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowCarouselItemBinding }
+    lateinit var binding: RowCarouselItemBinding
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         // Is In Slider?
         viewBinding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
+        binding = viewDataBinding as RowCarouselItemBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let { data ->
                 // Image
                 Glide.with(this.img.context)

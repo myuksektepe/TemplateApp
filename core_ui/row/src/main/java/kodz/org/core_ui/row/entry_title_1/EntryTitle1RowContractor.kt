@@ -7,10 +7,11 @@ import kodz.org.core_ui.row.databinding.RowEntryTitle1Binding
 
 class EntryTitle1RowContractor() : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowEntryTitle1Binding }
+    lateinit var binding: RowEntryTitle1Binding
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowEntryTitle1Binding
     }
 }

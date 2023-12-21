@@ -16,17 +16,18 @@ import kodz.org.core_ui.row.databinding.RowCategoriesSliderBinding
  */
 class CategoriesSliderRowContractor : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowCategoriesSliderBinding }
+    lateinit var binding: RowCategoriesSliderBinding
     override var itemClickHandler: ItemClickHandler? = null
     private val listAdapter by lazy { MultipleTypeAdapter() }
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowCategoriesSliderBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             this.data?.let { data ->
 
                 if (!listAdapter.hasStableIds()) {
@@ -52,7 +53,7 @@ class CategoriesSliderRowContractor : BaseRowContractor() {
 
                     listAdapter.submitList(itemList as List<BaseRow>?)
                 } ?: run {
-                    binding?.root?.gone()
+                    binding.root.gone()
                 }
 
             }

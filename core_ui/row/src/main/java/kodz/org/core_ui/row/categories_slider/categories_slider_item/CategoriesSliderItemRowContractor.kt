@@ -12,16 +12,17 @@ import kodz.org.core_ui.row.databinding.RowCategoriesSliderItemBinding
  */
 class CategoriesSliderItemRowContractor : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowCategoriesSliderItemBinding }
+    lateinit var binding: RowCategoriesSliderItemBinding
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowCategoriesSliderItemBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             this.data?.let { data ->
 
                 // Text

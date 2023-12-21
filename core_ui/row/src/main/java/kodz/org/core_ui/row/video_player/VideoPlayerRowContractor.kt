@@ -33,7 +33,7 @@ import java.io.FileNotFoundException
  */
 class VideoPlayerRowContractor : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowVideoPlayerBinding }
+    lateinit var binding: RowVideoPlayerBinding
     override var itemClickHandler: ItemClickHandler? = null
     private var videoDuration: Int = ZERO
     private var videoCurrentTime: Int = ZERO
@@ -51,11 +51,12 @@ class VideoPlayerRowContractor : BaseRowContractor() {
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowVideoPlayerBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let { data ->
 
                 // Thumbnail
@@ -224,7 +225,7 @@ class VideoPlayerRowContractor : BaseRowContractor() {
     private fun onVideoFinish(mp: MediaPlayer) {
         GlobalScope.launch(Dispatchers.Main) {
             mp.seekTo(ZERO)
-            (binding as RowVideoPlayerBinding).run {
+            binding.run {
                 btnPlayPause.setReplay()
                 txtCurrentTime.text = START_DURATION_STRING
                 progressBar.progress = ZERO
@@ -233,7 +234,6 @@ class VideoPlayerRowContractor : BaseRowContractor() {
     }
 
     private fun setSeekbar() {
-        val binding = (binding as RowVideoPlayerBinding)
         GlobalScope.launch(Dispatchers.IO) {
             do {
                 mediaPlayer?.currentPosition?.let { videoCurrentTime = it }

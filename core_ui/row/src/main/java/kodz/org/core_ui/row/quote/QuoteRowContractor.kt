@@ -17,16 +17,17 @@ class QuoteRowContractor(
     private val isInSlider: Boolean? = null
 ) : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowQuoteBinding }
+    lateinit var binding: RowQuoteBinding
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
+        binding = viewDataBinding as RowQuoteBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let { data ->
                 // Author Visibility
                 data.author?.takeIf { it.isNotEmpty() }?.let {

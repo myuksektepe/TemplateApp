@@ -11,17 +11,18 @@ import kodz.org.core_ui.row.databinding.RowSearchBoxBinding
 
 class SearchBoxRowContractor : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowSearchBoxBinding }
+    lateinit var binding: RowSearchBoxBinding
     override var itemClickHandler: ItemClickHandler? = null
     var searchHandler: SearchHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowSearchBoxBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let {
                 edtSearch.imeOptions = EditorInfo.IME_ACTION_SEARCH
                 edtSearch.addTextChangedListener(object : TextWatcher {

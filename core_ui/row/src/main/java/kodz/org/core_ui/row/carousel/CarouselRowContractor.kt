@@ -16,17 +16,18 @@ import kodz.org.core_ui.row.databinding.RowCarouselBinding
  */
 class CarouselRowContractor : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowCarouselBinding }
+    lateinit var binding: RowCarouselBinding
     override var itemClickHandler: ItemClickHandler? = null
     private val sliderAdapter by lazy { MultipleTypeAdapter() }
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
+        binding = viewDataBinding as RowCarouselBinding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let { data ->
 
                 if (!sliderAdapter.hasStableIds()) {
@@ -48,7 +49,7 @@ class CarouselRowContractor : BaseRowContractor() {
                     sliderAdapter.submitList(itemList)
 
                 } ?: kotlin.run {
-                    binding?.root?.gone()
+                    binding.root.gone()
                 }
 
             }

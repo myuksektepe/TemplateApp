@@ -14,16 +14,17 @@ class EntryItem2RowContractor(
     private val isInSlider: Boolean? = null
 ) : BaseRowContractor() {
     override var viewBinding: ViewDataBinding? = null
-    override val binding by lazy { viewBinding as? RowEntryItem2Binding }
+    lateinit var binding: RowEntryItem2Binding
     override var itemClickHandler: ItemClickHandler? = null
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
+        binding = viewBinding as RowEntryItem2Binding
         initRow()
     }
 
     private fun initRow() {
-        binding?.run {
+        binding.run {
             data?.let { data ->
                 // Title
                 txtEntryTitle.text = data.title
