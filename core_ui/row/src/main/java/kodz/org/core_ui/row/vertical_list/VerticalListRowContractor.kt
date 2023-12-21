@@ -19,6 +19,7 @@ class VerticalListRowContractor : BaseRowContractor() {
     lateinit var binding: RowVerticalListBinding
     override var itemClickHandler: ItemClickHandler? = null
     private val listAdapter by lazy { MultipleTypeAdapter() }
+    private var showingItemCount = 0
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
         binding = viewDataBinding as RowVerticalListBinding
@@ -52,6 +53,7 @@ class VerticalListRowContractor : BaseRowContractor() {
                             listAdapter.submitList(itemList)
                         }
                     }
+                    checkShowMoreButtonVisibility(data.itemList.size)
 
                     listAdapter.submitList(itemList)
                     root.visible()
@@ -66,14 +68,15 @@ class VerticalListRowContractor : BaseRowContractor() {
 
     private fun getSubList(data: VerticalListRowDataModel, increase: Int = ZERO): List<BaseRow> {
         data.itemList?.let { list ->
-            val itemList = data.itemCount?.let {
-                list.subSafeList(fromIndex = ZERO, toIndex = (it + increase))
+            val itemFilteredList = data.itemCount?.let {
+                if (showingItemCount == 0) showingItemCount = it
+                list.subSafeList(fromIndex = ZERO, toIndex = (showingItemCount + increase))
             } ?: list
-
-            if (itemList.size >= data.itemList.size) binding?.btnShowMore?.gone()
+            showingItemCount += increase
+            checkShowMoreButtonVisibility(list.size)
 
             data.itemType?.let {
-                itemList.getItemListByRowType(
+                itemFilteredList.getItemListByRowType(
                     rowType = it,
                     itemClickHandler = itemClickHandler,
                     isInSlider = false
@@ -86,4 +89,8 @@ class VerticalListRowContractor : BaseRowContractor() {
             return listOf()
         }
     }
+
+    private fun checkShowMoreButtonVisibility(itemListSize: Int) =
+        if (showingItemCount >= itemListSize) binding.btnShowMore.gone() else binding.btnShowMore.visible()
+
 }
