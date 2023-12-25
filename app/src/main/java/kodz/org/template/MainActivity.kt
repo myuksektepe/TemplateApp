@@ -25,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.common.CommonIcons
+import kodz.org.core.common.CommonSettings
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.toColor
@@ -37,9 +38,11 @@ import kodz.org.core.model.LoadingModel
 import kodz.org.core_ui.component.button.MultipleButton
 import kodz.org.core_ui.component.text.ClassicTextView
 import kodz.org.template.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
+class MainActivity @Inject constructor() :
+    BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
     override val viewModel: MainViewModel by viewModels()
     private lateinit var sharedViewModel: SharedViewModel
     override var viewLifeCycleOwner: LifecycleOwner = this
@@ -49,6 +52,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     private var isAnyDialogVisible: Boolean = false
     private var dialog: Dialog? = null
     private val shownDialogs = mutableListOf<String>()
+
+    @Inject
+    lateinit var commonSettings: CommonSettings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +71,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
             Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
         }
+
+        // Device Width & Height
+        commonSettings.deviceWidthInDp = resources.displayMetrics.run { widthPixels / density }
+        commonSettings.deviceHeightInDp = resources.displayMetrics.run { heightPixels / density }
     }
 
     override fun showFullScreenLoading(loadingModel: LoadingModel?, view: View?) {
@@ -116,7 +126,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 toolBar.subtitle = subTitle
                 appBar.visible()
             }
-            icon?.let { icon -> toolBar.navigationIcon = getDrawable(icon.resourceId) } ?: toolBar.setNavigationIcon(null)
+            icon?.let { icon -> toolBar.navigationIcon = getDrawable(icon.resourceId) }
+                ?: toolBar.setNavigationIcon(null)
             toolBar.setNavigationOnClickListener {
                 if (!isAnyDialogVisible) {
                     if (icon == CommonIcons.GO_BACK) navigateUp()
@@ -153,7 +164,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 findViewById<LottieAnimationView>(R.id.lottieView).run {
                     dialogBox.lottie?.let { lottie ->
                         lottie.name?.resourceId?.let { rawFile ->
-                            repeatCount = if (lottie.loop == true) ValueAnimator.INFINITE else lottie.repeatCount ?: 0
+                            repeatCount =
+                                if (lottie.loop == true) ValueAnimator.INFINITE else lottie.repeatCount
+                                    ?: 0
                             if (lottie.autoPlay == true) animate()
                             setAnimation(rawFile)
                             visible()
@@ -256,7 +269,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     setBgColor(null)
                     setMatchParent(true)
                     button.showUnderline?.let { visible -> showUnderline(visible) }
-                    layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
                 }
 
                 ButtonType.FILLED -> {
@@ -266,7 +282,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     showUnderline(false)
                     setBgColor(backgroundColor)
                     setMatchParent(true)
-                    layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
                 }
 
                 ButtonType.OUTLINED -> {
@@ -274,7 +293,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                     setBgColor(null)
                     setMatchParent(true)
                     showOutline(textColor)
-                    layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
                 }
 
                 else -> {}

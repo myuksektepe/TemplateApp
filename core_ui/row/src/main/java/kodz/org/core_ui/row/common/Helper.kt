@@ -7,6 +7,8 @@ import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.row.BaseRowContractor
 import kodz.org.core.base.row.BaseRowDataModel
+import kodz.org.core_ui.row.box.BoxRow
+import kodz.org.core_ui.row.box.BoxRowDataModel
 import kodz.org.core_ui.row.carousel_item.CarouselItemRow
 import kodz.org.core_ui.row.carousel_item.CarouselItemRowDataModel
 import kodz.org.core_ui.row.entry_item_1.EntryItem1Row
@@ -24,6 +26,20 @@ fun List<JsonObject>.getItemListByRowType(
 ): List<BaseRow> {
     val itemList = mutableListOf<BaseRow>()
     when (rowType) {
+        "BoxRow" -> {
+            this.forEach {
+                Gson().fromJson(it, BoxRowDataModel::class.java)?.run {
+                    if (!this.title.isNullOrEmpty()) {
+                        itemList.add(
+                            BoxRow(this, isInSlider).apply {
+                                contractor.itemClickHandler = itemClickHandler
+                            }
+                        )
+                    }
+                }
+            }
+        }
+
         "CarouselItemRow" -> {
             this.forEach {
                 Gson().fromJson(it, CarouselItemRowDataModel::class.java)?.run {

@@ -72,7 +72,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ScreenViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val httpRequest: HttpRequest,
+    private val httpRequest: HttpRequest
 ) : BaseViewModel() {
 
     private var job: Job? = null
@@ -94,107 +94,155 @@ class ScreenViewModel @Inject constructor(
             job?.cancel()
             job = null
             job = viewModelScope.launch(Dispatchers.IO) {
-                httpRequest.postRequest<ScreenRequest, ScreenResponse>(context, ScreenRequest(it)).collectLatest { response ->
-                    when (response) {
-                        is HttpFlow.Loading -> {
-                            screenModel.postValue(Resource.Loading)
-                        }
+                httpRequest.postRequest<ScreenRequest, ScreenResponse>(context, ScreenRequest(it))
+                    .collectLatest { response ->
+                        when (response) {
+                            is HttpFlow.Loading -> {
+                                screenModel.postValue(Resource.Loading)
+                            }
 
-                        is HttpFlow.Error -> {
-                            screenModel.postValue(Resource.Error(response.errorModel))
-                        }
+                            is HttpFlow.Error -> {
+                                screenModel.postValue(Resource.Error(response.errorModel))
+                            }
 
-                        is HttpFlow.Success -> {
-                            var clsRow: BaseRow? = null
-                            (response.data as? ScreenModel)?.let {
-                                // Rows
-                                it.rows?.forEach { row ->
-                                    if (row.isVisible == true) {
-                                        val dataModelString = row.dataModel
-                                        row.rowName?.let { rowName ->
-                                            when (rowName) {
+                            is HttpFlow.Success -> {
+                                var clsRow: BaseRow? = null
+                                (response.data as? ScreenModel)?.let {
+                                    // Rows
+                                    it.rows?.forEach { row ->
+                                        if (row.isVisible == true) {
+                                            val dataModelString = row.dataModel
+                                            row.rowName?.let { rowName ->
+                                                when (rowName) {
 
-                                                // Dashboard
-                                                "SectionTitleRow" -> {
-                                                    clsRow = makeRow<SectionTitleRow, SectionTitleRowContractor, SectionTitleRowDataModel>(dataModelString, itemClickHandler)
+                                                    // Dashboard
+                                                    "SectionTitleRow" -> {
+                                                        clsRow =
+                                                            makeRow<SectionTitleRow, SectionTitleRowContractor, SectionTitleRowDataModel>(
+                                                                dataModelString,
+                                                                itemClickHandler
+                                                            )
+                                                    }
+
+                                                    "CarouselRow" -> {
+                                                        clsRow =
+                                                            makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(
+                                                                dataModelString,
+                                                                itemClickHandler
+                                                            )
+                                                    }
+
+                                                    "VerticalListRow" -> {
+                                                        clsRow =
+                                                            makeRow<VerticalListRow, VerticalListRowContractor, VerticalListRowDataModel>(
+                                                                dataModelString,
+                                                                itemClickHandler
+                                                            )
+                                                    }
+
+                                                    "EntryItem1Row" -> {
+                                                        clsRow =
+                                                            makeRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowDataModel>(
+                                                                dataModelString,
+                                                                itemClickHandler
+                                                            )
+                                                    }
+
+                                                    "EntryItem2Row" -> {
+                                                        clsRow =
+                                                            makeRow<EntryItem2Row, EntryItem2RowContractor, EntryItem2RowDataModel>(
+                                                                dataModelString,
+                                                                itemClickHandler
+                                                            )
+                                                    }
+
+                                                    "FullWidthImageRow" -> {
+                                                        clsRow =
+                                                            makeRow<FullWidthImageRow, FullWidthImageRowContractor, FullWidthImageRowDataModel>(
+                                                                dataModelString,
+                                                                itemClickHandler
+                                                            )
+                                                    }
+
+                                                    "QuoteRow" -> {
+                                                        clsRow =
+                                                            makeRow<QuoteRow, QuoteRowContractor, QuoteRowDataModel>(
+                                                                dataModelString,
+                                                                itemClickHandler
+                                                            )
+                                                    }
+
+                                                    "CategoriesSliderRow" -> {
+                                                        clsRow =
+                                                            makeRow<CategoriesSliderRow, CategoriesSliderRowContractor, CategoriesSliderRowDataModel>(
+                                                                dataModelString,
+                                                                itemClickHandler
+                                                            )
+                                                    }
+                                                    // ========================================
+
+                                                    // Category
+                                                    "SearchBoxRow" -> {
+                                                        clsRow =
+                                                            makeRow<SearchBoxRow, SearchBoxRowContractor, SearchBoxRowDataModel>(
+                                                                dataModelString
+                                                            )
+                                                    }
+                                                    // ========================================
+
+                                                    // Entry Details
+                                                    "EntryTitle1Row" -> {
+                                                        clsRow =
+                                                            makeRow<EntryTitle1Row, EntryTitle1RowContractor, EntryTitle1RowDataModel>(
+                                                                dataModelString
+                                                            )
+                                                    }
+
+                                                    "WebViewRow" -> {
+                                                        clsRow =
+                                                            makeRow<WebViewRow, WebViewRowContractor, WebViewRowDataModel>(
+                                                                dataModelString
+                                                            )
+                                                    }
+
+                                                    "LongTextRow" -> {
+                                                        clsRow =
+                                                            makeRow<LongTextRow, LongTextRowContractor, LongTextRowDataModel>(
+                                                                dataModelString
+                                                            )
+                                                    }
+
+                                                    "VideoPlayerRow" -> {
+                                                        clsRow =
+                                                            makeRow<VideoPlayerRow, VideoPlayerRowContractor, VideoPlayerRowDataModel>(
+                                                                dataModelString
+                                                            )
+                                                    }
+                                                    // ========================================
+
+                                                    else -> {
+                                                        clsRow = null
+                                                        AppLog("${row.rowName} row hasn't been included in the app!")
+                                                    }
                                                 }
-
-                                                "CarouselRow" -> {
-                                                    clsRow = makeRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(dataModelString, itemClickHandler)
-                                                }
-
-                                                "VerticalListRow" -> {
-                                                    clsRow = makeRow<VerticalListRow, VerticalListRowContractor, VerticalListRowDataModel>(dataModelString, itemClickHandler)
-                                                }
-
-                                                "EntryItem1Row" -> {
-                                                    clsRow = makeRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowDataModel>(dataModelString, itemClickHandler)
-                                                }
-
-                                                "EntryItem2Row" -> {
-                                                    clsRow = makeRow<EntryItem2Row, EntryItem2RowContractor, EntryItem2RowDataModel>(dataModelString, itemClickHandler)
-                                                }
-
-                                                "FullWidthImageRow" -> {
-                                                    clsRow = makeRow<FullWidthImageRow, FullWidthImageRowContractor, FullWidthImageRowDataModel>(dataModelString, itemClickHandler)
-                                                }
-
-                                                "QuoteRow" -> {
-                                                    clsRow = makeRow<QuoteRow, QuoteRowContractor, QuoteRowDataModel>(dataModelString, itemClickHandler)
-                                                }
-
-                                                "CategoriesSliderRow" -> {
-                                                    clsRow = makeRow<CategoriesSliderRow, CategoriesSliderRowContractor, CategoriesSliderRowDataModel>(dataModelString, itemClickHandler)
-                                                }
-                                                // ========================================
-
-                                                // Category
-                                                "SearchBoxRow" -> {
-                                                    clsRow = makeRow<SearchBoxRow, SearchBoxRowContractor, SearchBoxRowDataModel>(dataModelString)
-                                                }
-                                                // ========================================
-
-                                                // Entry Details
-                                                "EntryTitle1Row" -> {
-                                                    clsRow = makeRow<EntryTitle1Row, EntryTitle1RowContractor, EntryTitle1RowDataModel>(dataModelString)
-                                                }
-
-                                                "WebViewRow" -> {
-                                                    clsRow = makeRow<WebViewRow, WebViewRowContractor, WebViewRowDataModel>(dataModelString)
-                                                }
-
-                                                "LongTextRow" -> {
-                                                    clsRow = makeRow<LongTextRow, LongTextRowContractor, LongTextRowDataModel>(dataModelString)
-                                                }
-
-                                                "VideoPlayerRow" -> {
-                                                    clsRow = makeRow<VideoPlayerRow, VideoPlayerRowContractor, VideoPlayerRowDataModel>(dataModelString)
-                                                }
-                                                // ========================================
-
-                                                else -> {
-                                                    clsRow = null
-                                                    AppLog("${row.rowName} row hasn't been included in the app!")
-                                                }
+                                                clsRow?.let { row -> componentList.add(row) }
                                             }
-                                            clsRow?.let { row -> componentList.add(row) }
                                         }
                                     }
-                                }
 
-                                screenModel.postValue(
-                                    Resource.Success(
-                                        ScreenModel.ViewEntity(
-                                            it.settings,
-                                            it.error,
-                                            componentList
+                                    screenModel.postValue(
+                                        Resource.Success(
+                                            ScreenModel.ViewEntity(
+                                                it.settings,
+                                                it.error,
+                                                componentList
+                                            )
                                         )
                                     )
-                                )
+                                }
                             }
                         }
                     }
-                }
             }
         }
     }

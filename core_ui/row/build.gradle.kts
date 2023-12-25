@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -70,6 +71,11 @@ dependencies {
 
     // ViewPager
     implementation(Dependencies.viewPager2)
+
+    // Hilt
+    implementation(Dependencies.hilt)
+    kapt(Dependencies.hiltCompiler)
+    kapt(Dependencies.hiltCompilerX)
 
     // Test
     testImplementation(Dependencies.junitTest)

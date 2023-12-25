@@ -7,6 +7,7 @@ import kodz.org.core.model.ItemClickEventModel
 
 class VerticalListRowDataModel(
     @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel?,
+    @SerializedName("listType") val listType: ListType? = ListType.GRID,
     @SerializedName("columnCount") val columnCount: Int? = 1,
     @SerializedName("itemCount") val itemCount: Int? = 6,
     @SerializedName("isShowMoreButtonVisible") val isShowMoreButtonVisible: Boolean? = true,

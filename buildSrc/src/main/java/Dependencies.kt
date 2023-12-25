@@ -26,7 +26,7 @@ object DependencyVersions {
     const val ktxLifecycle = "2.6.0-alpha03"
 
     // Hilt
-    const val hilt = "2.43.2"
+    const val hilt = "2.44"
     const val hiltCompiler = "1.0.0-alpha01"
 
     // Coroutines

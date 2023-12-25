@@ -1,10 +1,13 @@
 package kodz.org.core_ui.row.vertical_list
 
+import android.widget.GridLayout.VERTICAL
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.common.SpacesItemDecoration
 import kodz.org.core.common.ZERO
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.setSpamProtectedClickListener
@@ -38,7 +41,15 @@ class VerticalListRowContractor : BaseRowContractor() {
                 data.itemList?.let {
 
                     this.rcyVerticalList.run {
-                        layoutManager = GridLayoutManager(this.context, data.columnCount ?: 1)
+                        val context = this.context
+                        if (data.listType == ListType.GRID) {
+                            layoutManager = GridLayoutManager(context, data.columnCount ?: 1)
+                        } else {
+                            layoutManager = StaggeredGridLayoutManager(data.columnCount ?: 1, VERTICAL).apply {
+                                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+                                addItemDecoration(SpacesItemDecoration(16))
+                            }
+                        }
                         adapter = listAdapter
                     }
 
