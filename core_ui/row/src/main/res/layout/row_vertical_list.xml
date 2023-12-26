@@ -19,7 +19,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcyVerticalList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="2"
             tools:itemCount="3"
-            tools:listitem="@layout/row_entry_item_2" />
+            tools:listitem="@layout/row_box" />
 
         <kodz.org.core_ui.component.button.MultipleButton
             android:id="@+id/btnShowMore"

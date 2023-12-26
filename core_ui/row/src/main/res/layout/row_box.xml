@@ -18,7 +18,7 @@
         app:cardElevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
-        app:cardCornerRadius="@{ (data.cornersType == cornersType.ROUNDED) ? @dimen/_16sdp : 0}">
+        app:cardCornerRadius="@{ (data.cornersType == cornersType.ROUNDED) ? @dimen/_8sdp : 0}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

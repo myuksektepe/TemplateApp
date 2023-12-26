@@ -14,4 +14,4 @@ class BoxRowDataModel(
     @SerializedName("textColor") val textColor: String? = null,
     @SerializedName("title") val title: String? = null,
     @SerializedName("description") val description: String? = null,
-    ) : BaseRowDataModel()
+) : BaseRowDataModel()

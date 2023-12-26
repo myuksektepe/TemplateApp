@@ -1,8 +1,8 @@
 package kodz.org.core_ui.row.vertical_list
 
-import android.widget.GridLayout.VERTICAL
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
@@ -39,16 +39,17 @@ class VerticalListRowContractor : BaseRowContractor() {
 
                 // Item List
                 data.itemList?.let {
-
                     this.rcyVerticalList.run {
                         val context = this.context
                         if (data.listType == ListType.GRID) {
                             layoutManager = GridLayoutManager(context, data.columnCount ?: 1)
                         } else {
-                            layoutManager = StaggeredGridLayoutManager(data.columnCount ?: 1, VERTICAL).apply {
-                                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
-                                addItemDecoration(SpacesItemDecoration(16))
-                            }
+                            layoutManager =
+                                StaggeredGridLayoutManager(data.columnCount ?: 1, VERTICAL).apply {
+                                    if (itemDecorationCount > 0) removeItemDecorationAt(0)
+                                    gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+                                    addItemDecoration(SpacesItemDecoration(16))
+                                }
                         }
                         adapter = listAdapter
                     }

@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.toColor
 import kodz.org.core_ui.row.databinding.RowBoxBinding
 
@@ -24,12 +25,12 @@ class BoxRowContractor : BaseRowContractor() {
             data?.let { data ->
 
                 // Square or Rectangle?
-                rowBoxRoot.post {
-                    val deviceWidth = rowBoxRoot.context.resources.displayMetrics.run { widthPixels / density }
+                rowBoxRoot.run {
+                    val deviceWidth = rowBoxRoot.context.resources.displayMetrics.run { widthPixels }
                     if (data.boxType == BoxType.RECTANGLE) {
-                        rowBoxRoot.layoutParams.height = ((deviceWidth + 16) * 2).toInt()
+                        rowBoxRoot.layoutParams.height = deviceWidth
                     } else {
-                        rowBoxRoot.layoutParams.height = deviceWidth.toInt() + 16
+                        rowBoxRoot.layoutParams.height = (deviceWidth / 2)
                     }
 
                     // ----------------------------
@@ -63,12 +64,16 @@ class BoxRowContractor : BaseRowContractor() {
                         }
                     }
 
-
                     // Title
                     txtRowBoxTitle.text = data.title
 
                     // Description
                     txtRowBoxDescription.text = data.description
+
+                    // OnClick
+                    rowBoxRoot.setSpamProtectedClickListener {
+                        itemClickHandler?.onItemClick(data.itemClickEventModel)
+                    }
                 }
             }
         }
