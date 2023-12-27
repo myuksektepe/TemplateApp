@@ -35,7 +35,7 @@ class HorizontalListRowContractor : BaseListRowContractor() {
                 }
 
                 // Item List
-                data.itemList?.let { list ->
+                data.itemList?.let {
 
                     this.rcyHorizontalList.run {
                         layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)

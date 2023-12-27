@@ -8,6 +8,8 @@ import kodz.org.core_ui.row.item_rows.box.BoxRow
 import kodz.org.core_ui.row.item_rows.box.BoxRowRowDataModel
 import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRow
 import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRowRowDataModel
+import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRow
+import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1Row
 import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
@@ -93,6 +95,19 @@ fun List<JsonObject>.getItemListByRowType(
             }
         }
 
+        "CategoriesSliderItemRow" -> {
+            this.forEach {
+                Gson().fromJson(it, CategoriesSliderItemRowRowDataModel::class.java)?.run {
+                    if (!this.categoryName.isNullOrEmpty()) {
+                        itemList.add(
+                            CategoriesSliderItemRow(this, isInSlider, isInList).apply {
+                                contractor.itemClickHandler = itemClickHandler
+                            }
+                        )
+                    }
+                }
+            }
+        }
     }
     return itemList
 }

@@ -11,8 +11,6 @@ import kodz.org.core.model.ItemClickEventModel
  */
 data class HorizontalListRowDataModel(
     @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel?,
-    override val itemList: List<JsonObject>?,
-    override val itemType: String?
-) : BaseListRowDataModel() {
-
-}
+    @SerializedName("itemList", alternate = ["itemlist"]) override val itemList: List<JsonObject>?,
+    @SerializedName("itemType", alternate = ["itemtype"]) override val itemType: String?
+) : BaseListRowDataModel()

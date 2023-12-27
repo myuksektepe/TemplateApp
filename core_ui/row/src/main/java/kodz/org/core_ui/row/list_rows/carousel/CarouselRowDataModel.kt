@@ -12,6 +12,6 @@ import kodz.org.core.model.ItemClickEventModel
 class CarouselRowDataModel(
     @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null,
     @SerializedName("showIndicator", alternate = ["showindicator"]) val showIndicator: Boolean?,
-    override val itemType: String?,
-    override val itemList: List<JsonObject>?
+    @SerializedName("itemList", alternate = ["itemlist"]) override val itemList: List<JsonObject>?,
+    @SerializedName("itemType", alternate = ["itemtype"]) override val itemType: String?
 ) : BaseListRowDataModel()

@@ -12,6 +12,6 @@ class VerticalListRowDataModel(
     @SerializedName("itemCount") val itemCount: Int? = 6,
     @SerializedName("isShowMoreButtonVisible") val isShowMoreButtonVisible: Boolean? = true,
     @SerializedName("showMoreItemCount") val showMoreItemCount: Int? = 4,
-    override val itemList: List<JsonObject>?,
-    override val itemType: String?,
+    @SerializedName("itemList", alternate = ["itemlist"]) override val itemList: List<JsonObject>?,
+    @SerializedName("itemType", alternate = ["itemtype"]) override val itemType: String?
 ) : BaseListRowDataModel()
