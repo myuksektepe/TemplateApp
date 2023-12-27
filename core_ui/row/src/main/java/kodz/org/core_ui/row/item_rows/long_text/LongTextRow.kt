@@ -1,8 +1,8 @@
 package kodz.org.core_ui.row.item_rows.long_text
 
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.row.BaseRow
-import kodz.org.core.base.row.BaseRowDataModel
+import kodz.org.core.base.row.row.BaseItemRow
+import kodz.org.core.base.row.datamodel.BaseRowDataModel
 import kodz.org.core_ui.row.R
 import kotlin.reflect.KClass
 
@@ -11,10 +11,11 @@ import kotlin.reflect.KClass
  */
 class LongTextRow(
     override var dataModel: BaseRowDataModel,
-    override var isInSlider: Boolean? = null
-) : BaseRow() {
+    override var isInSlider: Boolean? = null,
+    override var isInList: Boolean?
+) : BaseItemRow() {
     override val layout: Int = R.layout.row_long_text
-    override val dataClass: KClass<*> = LongTextRowDataModel::class
-    override val contractor = LongTextRowContractor()
+    override val dataClass: KClass<*> = LongTextRowRowDataModel::class
+    override val contractor = LongTextRowContractor(isInSlider, isInList)
     override var binding: ViewDataBinding? = null
 }

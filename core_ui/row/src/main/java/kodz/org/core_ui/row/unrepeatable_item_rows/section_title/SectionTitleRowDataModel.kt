@@ -1,7 +1,7 @@
-package kodz.org.core_ui.row.unrepeatable_rows.section_title
+package kodz.org.core_ui.row.unrepeatable_item_rows.section_title
 
 import com.google.gson.annotations.SerializedName
-import kodz.org.core.base.row.BaseRowDataModel
+import kodz.org.core.base.row.datamodel.BaseUnrepeatableItemRowDataModel
 import kodz.org.core.model.ItemClickEventModel
 
 /**
@@ -16,4 +16,4 @@ data class SectionTitleRowDataModel(
     @SerializedName("isButtonEnable") val isButtonEnable: Boolean = true,
     @SerializedName("buttonText") val buttonText: String? = null,
     @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null
-) : BaseRowDataModel()
+) : BaseUnrepeatableItemRowDataModel()

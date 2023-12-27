@@ -1,6 +1,8 @@
-package kodz.org.core.base.row
+package kodz.org.core.base.row.row
 
 import androidx.databinding.ViewDataBinding
+import kodz.org.core.base.row.contractor.BaseRowContractor
+import kodz.org.core.base.row.datamodel.BaseRowDataModel
 import kotlin.reflect.KClass
 
 /**
@@ -15,7 +17,7 @@ import kotlin.reflect.KClass
  */
 abstract class BaseRow {
     abstract var dataModel: BaseRowDataModel
-    abstract var isInSlider: Boolean?
+
     abstract val layout: Int
     abstract val dataClass: KClass<*>
     abstract val contractor: BaseRowContractor

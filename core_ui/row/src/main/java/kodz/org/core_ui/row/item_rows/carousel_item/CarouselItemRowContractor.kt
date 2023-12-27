@@ -4,14 +4,15 @@ import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.extension.makeSlidable
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core_ui.row.databinding.RowCarouselItemBinding
 
 class CarouselItemRowContractor(
-    private val isInSlider: Boolean? = null
-) : BaseRowContractor() {
+    override val isInSlider: Boolean? = null,
+    override val isInList: Boolean? = null
+) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowCarouselItemBinding
     override var itemClickHandler: ItemClickHandler? = null

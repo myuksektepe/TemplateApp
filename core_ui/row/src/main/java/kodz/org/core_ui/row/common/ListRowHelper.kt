@@ -3,31 +3,32 @@ package kodz.org.core_ui.row.common
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRow
+import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core_ui.row.item_rows.box.BoxRow
-import kodz.org.core_ui.row.item_rows.box.BoxRowDataModel
+import kodz.org.core_ui.row.item_rows.box.BoxRowRowDataModel
 import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRow
-import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRowDataModel
+import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1Row
-import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
-import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowRowDataModel
 import kodz.org.core_ui.row.item_rows.quote.QuoteRow
-import kodz.org.core_ui.row.item_rows.quote.QuoteRowDataModel
+import kodz.org.core_ui.row.item_rows.quote.QuoteRowRowDataModel
 
 fun List<JsonObject>.getItemListByRowType(
     rowType: String,
     itemClickHandler: ItemClickHandler? = null,
-    isInSlider: Boolean
+    isInSlider: Boolean,
+    isInList: Boolean,
 ): List<BaseRow> {
     val itemList = mutableListOf<BaseRow>()
     when (rowType) {
         "BoxRow" -> {
             this.forEach {
-                Gson().fromJson(it, BoxRowDataModel::class.java)?.run {
+                Gson().fromJson(it, BoxRowRowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
-                            BoxRow(this, isInSlider).apply {
+                            BoxRow(this, isInSlider, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )
@@ -38,10 +39,10 @@ fun List<JsonObject>.getItemListByRowType(
 
         "CarouselItemRow" -> {
             this.forEach {
-                Gson().fromJson(it, CarouselItemRowDataModel::class.java)?.run {
+                Gson().fromJson(it, CarouselItemRowRowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty() || !this.imageUrl.isNullOrEmpty()) {
                         itemList.add(
-                            CarouselItemRow(this, isInSlider).apply {
+                            CarouselItemRow(this, isInSlider, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )
@@ -52,10 +53,10 @@ fun List<JsonObject>.getItemListByRowType(
 
         "QuoteRow" -> {
             this.forEach {
-                Gson().fromJson(it, QuoteRowDataModel::class.java)?.run {
+                Gson().fromJson(it, QuoteRowRowDataModel::class.java)?.run {
                     if (!this.text.isNullOrEmpty()) {
                         itemList.add(
-                            QuoteRow(this, isInSlider).apply {
+                            QuoteRow(this, isInSlider, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )
@@ -66,10 +67,10 @@ fun List<JsonObject>.getItemListByRowType(
 
         "EntryItem1Row" -> {
             this.forEach {
-                Gson().fromJson(it, EntryItem1RowDataModel::class.java)?.run {
+                Gson().fromJson(it, EntryItem1RowRowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
-                            EntryItem1Row(this, isInSlider).apply {
+                            EntryItem1Row(this, isInSlider, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )
@@ -80,10 +81,10 @@ fun List<JsonObject>.getItemListByRowType(
 
         "EntryItem2Row" -> {
             this.forEach {
-                Gson().fromJson(it, EntryItem2RowDataModel::class.java)?.run {
+                Gson().fromJson(it, EntryItem2RowRowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
-                            EntryItem2Row(this, isInSlider).apply {
+                            EntryItem2Row(this, isInSlider, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )

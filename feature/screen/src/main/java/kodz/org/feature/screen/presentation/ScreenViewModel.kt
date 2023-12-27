@@ -9,7 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kodz.org.core.base.data.http.HttpFlow
 import kodz.org.core.base.data.http.HttpRequest
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRow
+import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource

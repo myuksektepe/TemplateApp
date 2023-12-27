@@ -1,8 +1,8 @@
-package kodz.org.core_ui.row.unrepeatable_rows.section_title
+package kodz.org.core_ui.row.unrepeatable_item_rows.section_title
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseUnrepeatableItemRowContractor
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core_ui.row.databinding.RowSectionTitleBinding
 
@@ -11,7 +11,7 @@ import kodz.org.core_ui.row.databinding.RowSectionTitleBinding
  * muratyuksektepe.com
  * yuksektepemurat@gmail.com
  */
-class SectionTitleRowContractor : BaseRowContractor() {
+class SectionTitleRowContractor : BaseUnrepeatableItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowSectionTitleBinding
     override var itemClickHandler: ItemClickHandler? = null

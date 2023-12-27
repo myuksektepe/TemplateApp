@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.item_rows.categories_slider_item
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core_ui.row.databinding.RowCategoriesSliderItemBinding
 
@@ -10,7 +10,10 @@ import kodz.org.core_ui.row.databinding.RowCategoriesSliderItemBinding
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 31.10.2023.
  */
-class CategoriesSliderItemRowContractor : BaseRowContractor() {
+class CategoriesSliderItemRowContractor(
+    override val isInSlider: Boolean? = null,
+    override val isInList: Boolean? = null
+) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowCategoriesSliderItemBinding
     override var itemClickHandler: ItemClickHandler? = null

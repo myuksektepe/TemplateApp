@@ -1,9 +1,9 @@
 package kodz.org.core_ui.row.item_rows.video_player
 
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.row.BaseRow
-import kodz.org.core.base.row.BaseRowContractor
-import kodz.org.core.base.row.BaseRowDataModel
+import kodz.org.core.base.row.row.BaseItemRow
+import kodz.org.core.base.row.contractor.BaseRowContractor
+import kodz.org.core.base.row.datamodel.BaseRowDataModel
 import kodz.org.core_ui.row.R
 import kotlin.reflect.KClass
 
@@ -12,10 +12,11 @@ import kotlin.reflect.KClass
  */
 class VideoPlayerRow(
     override var dataModel: BaseRowDataModel,
-    override var isInSlider: Boolean? = null
-) : BaseRow() {
+    override var isInSlider: Boolean? = null,
+    override var isInList: Boolean?
+) : BaseItemRow() {
     override val layout: Int = R.layout.row_video_player
-    override val dataClass: KClass<*> = VideoPlayerRowDataModel::class
-    override val contractor: BaseRowContractor = VideoPlayerRowContractor()
+    override val dataClass: KClass<*> = VideoPlayerRowRowDataModel::class
+    override val contractor: BaseRowContractor = VideoPlayerRowContractor(isInSlider, isInList)
     override var binding: ViewDataBinding? = null
 }

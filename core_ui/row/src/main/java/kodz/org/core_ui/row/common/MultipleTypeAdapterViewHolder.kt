@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.common
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import kodz.org.core.base.row.BaseRow
+import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core_ui.row.BR
 
 

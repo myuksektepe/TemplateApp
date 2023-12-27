@@ -2,7 +2,7 @@ package kodz.org.core.model
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.data.http.HttpBaseResponse
-import kodz.org.core.base.row.BaseRow
+import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.common.CommonIcons
 import kodz.org.core.common.CommonLottie
 

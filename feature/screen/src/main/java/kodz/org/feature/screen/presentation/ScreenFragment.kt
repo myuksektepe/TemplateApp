@@ -12,7 +12,7 @@ import androidx.navigation.NavDeepLinkRequest
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.fragment.BaseFragment
-import kodz.org.core.base.row.BaseRow
+import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.common.AppLog
 import kodz.org.core.common.CommonIcons

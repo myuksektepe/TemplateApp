@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.item_rows.long_text.LongTextRowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.long_text.LongTextRowRowDataModel" />
     </data>
 
     <kodz.org.core_ui.component.text.ClassicTextView

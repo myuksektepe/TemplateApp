@@ -10,7 +10,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowRowDataModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

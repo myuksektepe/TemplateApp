@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.list_rows.carousel
 
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
-import kodz.org.core.base.row.BaseRowDataModel
+import kodz.org.core.base.row.datamodel.BaseListRowDataModel
 import kodz.org.core.model.ItemClickEventModel
 
 
@@ -12,6 +12,6 @@ import kodz.org.core.model.ItemClickEventModel
 class CarouselRowDataModel(
     @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null,
     @SerializedName("showIndicator", alternate = ["showindicator"]) val showIndicator: Boolean?,
-    @SerializedName("itemType", alternate = ["itemtype"]) val itemType: String?,
-    @SerializedName("itemList", alternate = ["itemlist"]) val itemList: List<JsonObject>?
-) : BaseRowDataModel()
+    override val itemType: String?,
+    override val itemList: List<JsonObject>?
+) : BaseListRowDataModel()

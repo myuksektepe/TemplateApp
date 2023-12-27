@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRow
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseListRowContractor
+import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.common.SpacesItemDecoration
 import kodz.org.core.common.ZERO
 import kodz.org.core.extension.gone
@@ -17,7 +17,7 @@ import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.common.getItemListByRowType
 import kodz.org.core_ui.row.databinding.RowVerticalListBinding
 
-class VerticalListRowContractor : BaseRowContractor() {
+class VerticalListRowContractor : BaseListRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowVerticalListBinding
     override var itemClickHandler: ItemClickHandler? = null
@@ -103,7 +103,8 @@ class VerticalListRowContractor : BaseRowContractor() {
                 itemFilteredList.getItemListByRowType(
                     rowType = it,
                     itemClickHandler = itemClickHandler,
-                    isInSlider = false
+                    isInSlider = false,
+                    isInList = true
                 )
             }?.let {
                 return it

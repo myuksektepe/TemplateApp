@@ -1,4 +1,4 @@
-package kodz.org.core.base.row
+package kodz.org.core.base.row.contractor
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler

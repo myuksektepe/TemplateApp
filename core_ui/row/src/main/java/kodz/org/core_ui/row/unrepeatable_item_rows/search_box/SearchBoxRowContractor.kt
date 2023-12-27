@@ -1,4 +1,4 @@
-package kodz.org.core_ui.row.unrepeatable_rows.search_box
+package kodz.org.core_ui.row.unrepeatable_item_rows.search_box
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -6,10 +6,10 @@ import android.view.inputmethod.EditorInfo
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.handler.SearchHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseUnrepeatableItemRowContractor
 import kodz.org.core_ui.row.databinding.RowSearchBoxBinding
 
-class SearchBoxRowContractor : BaseRowContractor() {
+class SearchBoxRowContractor : BaseUnrepeatableItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowSearchBoxBinding
     override var itemClickHandler: ItemClickHandler? = null

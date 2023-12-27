@@ -12,7 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.common.AppLog
 import kodz.org.core.common.HUNDRED
 import kodz.org.core.common.ZERO
@@ -31,7 +31,10 @@ import java.io.FileNotFoundException
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 9.10.2023.
  */
-class VideoPlayerRowContractor : BaseRowContractor() {
+class VideoPlayerRowContractor(
+    override val isInSlider: Boolean? = null,
+    override val isInList: Boolean? = null
+) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowVideoPlayerBinding
     override var itemClickHandler: ItemClickHandler? = null

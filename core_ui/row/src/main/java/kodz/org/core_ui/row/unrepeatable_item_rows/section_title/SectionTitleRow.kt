@@ -1,8 +1,8 @@
-package kodz.org.core_ui.row.unrepeatable_rows.section_title
+package kodz.org.core_ui.row.unrepeatable_item_rows.section_title
 
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.row.BaseRow
-import kodz.org.core.base.row.BaseRowDataModel
+import kodz.org.core.base.row.datamodel.BaseRowDataModel
+import kodz.org.core.base.row.row.BaseUnrepeatableItemRow
 import kodz.org.core_ui.row.R
 import kotlin.reflect.KClass
 
@@ -12,9 +12,8 @@ import kotlin.reflect.KClass
  * yuksektepemurat@gmail.com
  */
 open class SectionTitleRow(
-    override var dataModel: BaseRowDataModel,
-    override var isInSlider: Boolean? = null
-) : BaseRow() {
+    override var dataModel: BaseRowDataModel
+) : BaseUnrepeatableItemRow() {
     override val layout: Int = R.layout.row_section_title
     override val dataClass: KClass<*> = SectionTitleRowDataModel::class
     override val contractor = SectionTitleRowContractor()

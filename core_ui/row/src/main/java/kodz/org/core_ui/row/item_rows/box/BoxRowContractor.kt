@@ -5,15 +5,16 @@ import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.extension.makeSlidable
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.toColor
 import kodz.org.core_ui.row.databinding.RowBoxBinding
 
 class BoxRowContractor(
-    private val isInSlider: Boolean? = null
-) : BaseRowContractor() {
+    override val isInSlider: Boolean? = null,
+    override val isInList: Boolean? = null
+) : BaseItemRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowBoxBinding
@@ -31,8 +32,7 @@ class BoxRowContractor(
                 rowBoxCard.run {
 
                     // Paddings
-                    if (isInSlider == false && data.isInList == true) {
-                        // rowBoxRoot.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                    if (isInSlider == false && isInList == true) {
                         rowBoxRoot.setPadding(0, 0, 0, 0)
                     }
 

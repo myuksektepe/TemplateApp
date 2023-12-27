@@ -1,4 +1,4 @@
-package kodz.org.core.base.row
+package kodz.org.core.base.row.datamodel
 
 import kodz.org.core.model.ItemClickEventModel
 

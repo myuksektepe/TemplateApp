@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.item_rows.full_width_image
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core_ui.row.databinding.RowFullWidthImageBinding
 
@@ -10,7 +10,10 @@ import kodz.org.core_ui.row.databinding.RowFullWidthImageBinding
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 25.10.2023.
  */
-class FullWidthImageRowContractor : BaseRowContractor() {
+class FullWidthImageRowContractor(
+    override val isInSlider: Boolean? = null,
+    override val isInList: Boolean? = null
+) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowFullWidthImageBinding
     override var itemClickHandler: ItemClickHandler? = null

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
-import kodz.org.core.base.row.BaseRow
+import kodz.org.core.base.row.row.BaseRow
 
 
 /**

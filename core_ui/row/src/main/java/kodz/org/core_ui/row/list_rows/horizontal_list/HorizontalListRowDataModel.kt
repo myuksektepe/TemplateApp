@@ -1,9 +1,9 @@
 package kodz.org.core_ui.row.list_rows.horizontal_list
 
+import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
-import kodz.org.core.base.row.BaseRowDataModel
+import kodz.org.core.base.row.datamodel.BaseListRowDataModel
 import kodz.org.core.model.ItemClickEventModel
-import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRowDataModel
 
 
 /**
@@ -11,5 +11,8 @@ import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderIte
  */
 data class HorizontalListRowDataModel(
     @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel?,
-    @SerializedName("itemList", alternate = ["itemlist"]) val itemList: List<CategoriesSliderItemRowDataModel>?
-) : BaseRowDataModel()
+    override val itemList: List<JsonObject>?,
+    override val itemType: String?
+) : BaseListRowDataModel() {
+
+}

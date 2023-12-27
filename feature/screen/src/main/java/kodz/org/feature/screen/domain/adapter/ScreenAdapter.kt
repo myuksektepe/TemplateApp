@@ -2,12 +2,12 @@ package kodz.org.feature.screen.domain.adapter
 
 import android.widget.Filter
 import android.widget.Filterable
-import kodz.org.core.base.row.BaseRow
+import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1Row
-import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
-import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowRowDataModel
 
 class ScreenAdapter : MultipleTypeAdapter(), Filterable {
     override fun getFilter(): Filter = customFilter
@@ -30,7 +30,7 @@ class ScreenAdapter : MultipleTypeAdapter(), Filterable {
 
                     // EntryItem1Row
                     if (item::class == EntryItem1Row::class) {
-                        (item.dataModel as EntryItem1RowDataModel).let {
+                        (item.dataModel as EntryItem1RowRowDataModel).let {
                             if (it.title?.lowercase()?.contains(constraint.toString().lowercase()) == true) {
                                 filteredList.add(item)
                             }
@@ -38,7 +38,7 @@ class ScreenAdapter : MultipleTypeAdapter(), Filterable {
 
                         // EntryItem2Row
                     } else if (item::class == EntryItem2Row::class) {
-                        (item.dataModel as EntryItem2RowDataModel).let {
+                        (item.dataModel as EntryItem2RowRowDataModel).let {
                             if (it.title?.lowercase()?.startsWith(constraint.toString().lowercase()) == true) {
                                 filteredList.add(item)
                             }

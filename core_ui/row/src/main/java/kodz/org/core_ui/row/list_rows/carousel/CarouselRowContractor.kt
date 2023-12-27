@@ -3,7 +3,7 @@ package kodz.org.core_ui.row.list_rows.carousel
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
@@ -14,7 +14,7 @@ import kodz.org.core_ui.row.databinding.RowCarouselBinding
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 1.11.2023.
  */
-class CarouselRowContractor : BaseRowContractor() {
+class CarouselRowContractor : BaseListRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowCarouselBinding
     override var itemClickHandler: ItemClickHandler? = null
@@ -45,7 +45,14 @@ class CarouselRowContractor : BaseRowContractor() {
                     } else tabLayout.gone()
 
                     // Items
-                    val itemList = data.itemType?.let { data.itemList.getItemListByRowType(it, itemClickHandler, true) }
+                    val itemList = data.itemType?.let {
+                        data.itemList.getItemListByRowType(
+                            rowType = it,
+                            itemClickHandler = itemClickHandler,
+                            isInSlider = true,
+                            isInList = false
+                        )
+                    }
                     sliderAdapter.submitList(itemList)
 
                 } ?: kotlin.run {

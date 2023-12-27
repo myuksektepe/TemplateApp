@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.item_rows.quote.QuoteRowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.quote.QuoteRowRowDataModel" />
 
         <import type="android.view.View" />
     </data>

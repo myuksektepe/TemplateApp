@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.item_rows.quote
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.makeSlidable
 import kodz.org.core.extension.setSpamProtectedClickListener
@@ -14,8 +14,9 @@ import kodz.org.core_ui.row.databinding.RowQuoteBinding
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 25.10.2023.
  */
 class QuoteRowContractor(
-    private val isInSlider: Boolean? = null
-) : BaseRowContractor() {
+    override val isInSlider: Boolean? = null,
+    override val isInList: Boolean? = null
+) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowQuoteBinding
     override var itemClickHandler: ItemClickHandler? = null

@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core_ui.row.databinding.RowWebviewBinding
 
-class WebViewRowContractor() : BaseRowContractor() {
+class WebViewRowContractor(
+    override val isInSlider: Boolean? = null,
+    override val isInList: Boolean? = null
+) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowWebviewBinding
     override var itemClickHandler: ItemClickHandler? = null
