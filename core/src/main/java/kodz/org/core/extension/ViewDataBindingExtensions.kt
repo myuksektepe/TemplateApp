@@ -10,9 +10,7 @@ import androidx.databinding.ViewDataBinding
  */
 fun ViewDataBinding.makeSlidable(): ViewDataBinding {
     val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-    // params.setMargins(this.root.context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._16sdp))
     this.root.run {
-        // layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         layoutParams = params
     }
     return this

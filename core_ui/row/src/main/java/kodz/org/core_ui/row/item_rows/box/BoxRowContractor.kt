@@ -6,16 +6,19 @@ import com.bumptech.glide.Glide
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRowContractor
+import kodz.org.core.extension.makeSlidable
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.toColor
 import kodz.org.core_ui.row.databinding.RowBoxBinding
 
-class BoxRowContractor : BaseRowContractor() {
+class BoxRowContractor(
+    private val isInSlider: Boolean? = null
+) : BaseRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowBoxBinding
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        viewBinding = viewDataBinding
+        viewBinding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
         binding = (viewBinding as RowBoxBinding)
         initRow()
     }
@@ -25,18 +28,26 @@ class BoxRowContractor : BaseRowContractor() {
             data?.let { data ->
 
                 // Square or Rectangle?
-                rowBoxRoot.run {
-                    val deviceWidth = rowBoxRoot.context.resources.displayMetrics.run { widthPixels }
-                    if (data.boxType == kodz.org.core_ui.row.item_rows.box.BoxType.RECTANGLE) {
-                        rowBoxRoot.layoutParams.height = deviceWidth
+                rowBoxCard.run {
+
+                    // Paddings
+                    if (isInSlider == false && data.isInList == true) {
+                        // rowBoxRoot.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                        rowBoxRoot.setPadding(0, 0, 0, 0)
+                    }
+
+                    // Height - Width
+                    val deviceWidth = context.resources.displayMetrics.run { widthPixels }
+                    if (data.boxType == BoxType.RECTANGLE) {
+                        layoutParams.height = deviceWidth
                     } else {
-                        rowBoxRoot.layoutParams.height = (deviceWidth / 2)
+                        layoutParams.height = (deviceWidth / 2)
                     }
 
                     // ----------------------------
                     // Background Color
                     data.backgroundColor?.let {
-                        rowBoxRoot.run {
+                        run {
                             it.toColor()?.let { bgColor -> setCardBackgroundColor(bgColor) }
                         }
                     }
@@ -71,7 +82,7 @@ class BoxRowContractor : BaseRowContractor() {
                     txtRowBoxDescription.text = data.description
 
                     // OnClick
-                    rowBoxRoot.setSpamProtectedClickListener {
+                    setSpamProtectedClickListener {
                         itemClickHandler?.onItemClick(data.itemClickEventModel)
                     }
                 }

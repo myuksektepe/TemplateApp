@@ -8,6 +8,7 @@ class BoxRowDataModel(
     @SerializedName("itemClickEventModel") override val itemClickEventModel: ItemClickEventModel?,
     @SerializedName("boxType") val boxType: BoxType? = BoxType.SQUARE,
     @SerializedName("cornersType") val cornersType: CornersType? = CornersType.ROUNDED,
+    @SerializedName("isInList") val isInList: Boolean? = true,
     @SerializedName("backgroundImageUrl") val backgroundImageUrl: String? = null,
     @SerializedName("backgroundColor") val backgroundColor: String? = null,
     @SerializedName("isGradientVisible") val gradientIsVisible: Boolean? = true,

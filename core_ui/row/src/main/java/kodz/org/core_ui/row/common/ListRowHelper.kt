@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.BaseRow
+import kodz.org.core_ui.row.item_rows.box.BoxRow
 import kodz.org.core_ui.row.item_rows.box.BoxRowDataModel
 import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRow
 import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRowDataModel
@@ -26,7 +27,7 @@ fun List<JsonObject>.getItemListByRowType(
                 Gson().fromJson(it, BoxRowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
-                            kodz.org.core_ui.row.item_rows.box.BoxRow(this, isInSlider).apply {
+                            BoxRow(this, isInSlider).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )

@@ -11,7 +11,7 @@ class BoxRow(
     override var isInSlider: Boolean?,
 ) : BaseRow() {
     override val layout: Int = R.layout.row_box
-    override val dataClass: KClass<*> = kodz.org.core_ui.row.item_rows.box.BoxRowDataModel::class
-    override val contractor = kodz.org.core_ui.row.item_rows.box.BoxRowContractor()
+    override val dataClass: KClass<*> = BoxRowDataModel::class
+    override val contractor = BoxRowContractor(isInSlider)
     override var binding: ViewDataBinding? = null
 }

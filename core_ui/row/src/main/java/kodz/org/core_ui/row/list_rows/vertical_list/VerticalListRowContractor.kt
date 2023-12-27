@@ -40,17 +40,29 @@ class VerticalListRowContractor : BaseRowContractor() {
                 // Item List
                 data.itemList?.let {
                     this.rcyVerticalList.run {
+
                         val context = this.context
+                        val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
+
+                        // Remove item decoration first
+                        if (itemDecorationCount > ZERO) removeItemDecorationAt(ZERO)
+
+                        // Grid or Staggered
                         if (data.listType == ListType.STAGGERED) {
-                            layoutManager =
-                                StaggeredGridLayoutManager(data.columnCount ?: 1, LinearLayoutManager.VERTICAL).apply {
-                                    if (itemDecorationCount > 0) removeItemDecorationAt(0)
-                                    gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
-                                    addItemDecoration(SpacesItemDecoration(32))
-                                }
+                            layoutManager = StaggeredGridLayoutManager(
+                                data.columnCount ?: 1,
+                                LinearLayoutManager.VERTICAL
+                            ).apply {
+                                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+                            }
                         } else {
                             layoutManager = GridLayoutManager(context, data.columnCount ?: 1)
                         }
+
+                        // Add item decoration
+                        addItemDecoration(SpacesItemDecoration(itemSpaceInt))
+
+                        // Set listAdapter
                         adapter = listAdapter
                     }
 
