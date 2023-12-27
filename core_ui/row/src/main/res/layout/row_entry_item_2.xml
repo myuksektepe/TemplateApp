@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.entry_item_2.EntryItem2RowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowDataModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

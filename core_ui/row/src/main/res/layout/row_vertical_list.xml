@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.vertical_list.VerticalListRowDataModel" />
+            type="kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRowDataModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

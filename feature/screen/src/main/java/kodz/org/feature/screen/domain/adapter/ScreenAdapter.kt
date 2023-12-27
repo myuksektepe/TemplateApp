@@ -4,10 +4,10 @@ import android.widget.Filter
 import android.widget.Filterable
 import kodz.org.core.base.row.BaseRow
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
-import kodz.org.core_ui.row.entry_item_1.EntryItem1Row
-import kodz.org.core_ui.row.entry_item_1.EntryItem1RowDataModel
-import kodz.org.core_ui.row.entry_item_2.EntryItem2Row
-import kodz.org.core_ui.row.entry_item_2.EntryItem2RowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1Row
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowDataModel
 
 class ScreenAdapter : MultipleTypeAdapter(), Filterable {
     override fun getFilter(): Filter = customFilter

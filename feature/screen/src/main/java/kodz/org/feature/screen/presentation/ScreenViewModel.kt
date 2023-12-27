@@ -15,46 +15,46 @@ import kodz.org.core.common.AppLog
 import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.ScreenModel
-import kodz.org.core_ui.row.carousel.CarouselRow
-import kodz.org.core_ui.row.carousel.CarouselRowContractor
-import kodz.org.core_ui.row.carousel.CarouselRowDataModel
-import kodz.org.core_ui.row.categories_slider.CategoriesSliderRow
-import kodz.org.core_ui.row.categories_slider.CategoriesSliderRowContractor
-import kodz.org.core_ui.row.categories_slider.CategoriesSliderRowDataModel
+import kodz.org.core_ui.row.list_rows.horizontal_list.HorizontalListRow
+import kodz.org.core_ui.row.list_rows.horizontal_list.HorizontalListRowContractor
+import kodz.org.core_ui.row.list_rows.horizontal_list.HorizontalListRowDataModel
 import kodz.org.core_ui.row.common.makeRow
-import kodz.org.core_ui.row.entry_item_1.EntryItem1Row
-import kodz.org.core_ui.row.entry_item_1.EntryItem1RowContractor
-import kodz.org.core_ui.row.entry_item_1.EntryItem1RowDataModel
-import kodz.org.core_ui.row.entry_item_2.EntryItem2Row
-import kodz.org.core_ui.row.entry_item_2.EntryItem2RowContractor
-import kodz.org.core_ui.row.entry_item_2.EntryItem2RowDataModel
-import kodz.org.core_ui.row.entry_title_1.EntryTitle1Row
-import kodz.org.core_ui.row.entry_title_1.EntryTitle1RowContractor
-import kodz.org.core_ui.row.entry_title_1.EntryTitle1RowDataModel
-import kodz.org.core_ui.row.full_width_image.FullWidthImageRow
-import kodz.org.core_ui.row.full_width_image.FullWidthImageRowContractor
-import kodz.org.core_ui.row.full_width_image.FullWidthImageRowDataModel
-import kodz.org.core_ui.row.long_text.LongTextRow
-import kodz.org.core_ui.row.long_text.LongTextRowContractor
-import kodz.org.core_ui.row.long_text.LongTextRowDataModel
-import kodz.org.core_ui.row.quote.QuoteRow
-import kodz.org.core_ui.row.quote.QuoteRowContractor
-import kodz.org.core_ui.row.quote.QuoteRowDataModel
-import kodz.org.core_ui.row.search_box.SearchBoxRow
-import kodz.org.core_ui.row.search_box.SearchBoxRowContractor
-import kodz.org.core_ui.row.search_box.SearchBoxRowDataModel
-import kodz.org.core_ui.row.section_title.SectionTitleRow
-import kodz.org.core_ui.row.section_title.SectionTitleRowContractor
-import kodz.org.core_ui.row.section_title.SectionTitleRowDataModel
-import kodz.org.core_ui.row.vertical_list.VerticalListRow
-import kodz.org.core_ui.row.vertical_list.VerticalListRowContractor
-import kodz.org.core_ui.row.vertical_list.VerticalListRowDataModel
-import kodz.org.core_ui.row.video_player.VideoPlayerRow
-import kodz.org.core_ui.row.video_player.VideoPlayerRowContractor
-import kodz.org.core_ui.row.video_player.VideoPlayerRowDataModel
-import kodz.org.core_ui.row.webview.WebViewRow
-import kodz.org.core_ui.row.webview.WebViewRowContractor
-import kodz.org.core_ui.row.webview.WebViewRowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1Row
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowContractor
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowContractor
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowDataModel
+import kodz.org.core_ui.row.item_rows.entry_title_1.EntryTitle1Row
+import kodz.org.core_ui.row.item_rows.entry_title_1.EntryTitle1RowContractor
+import kodz.org.core_ui.row.item_rows.entry_title_1.EntryTitle1RowDataModel
+import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRow
+import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowContractor
+import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowDataModel
+import kodz.org.core_ui.row.list_rows.carousel.CarouselRow
+import kodz.org.core_ui.row.list_rows.carousel.CarouselRowContractor
+import kodz.org.core_ui.row.list_rows.carousel.CarouselRowDataModel
+import kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRow
+import kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRowContractor
+import kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRowDataModel
+import kodz.org.core_ui.row.item_rows.long_text.LongTextRow
+import kodz.org.core_ui.row.item_rows.long_text.LongTextRowContractor
+import kodz.org.core_ui.row.item_rows.long_text.LongTextRowDataModel
+import kodz.org.core_ui.row.item_rows.quote.QuoteRow
+import kodz.org.core_ui.row.item_rows.quote.QuoteRowContractor
+import kodz.org.core_ui.row.item_rows.quote.QuoteRowDataModel
+import kodz.org.core_ui.row.unrepeatable_rows.search_box.SearchBoxRow
+import kodz.org.core_ui.row.unrepeatable_rows.search_box.SearchBoxRowContractor
+import kodz.org.core_ui.row.unrepeatable_rows.search_box.SearchBoxRowDataModel
+import kodz.org.core_ui.row.unrepeatable_rows.section_title.SectionTitleRow
+import kodz.org.core_ui.row.unrepeatable_rows.section_title.SectionTitleRowContractor
+import kodz.org.core_ui.row.unrepeatable_rows.section_title.SectionTitleRowDataModel
+import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRow
+import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowContractor
+import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowDataModel
+import kodz.org.core_ui.row.item_rows.webview.WebViewRow
+import kodz.org.core_ui.row.item_rows.webview.WebViewRowContractor
+import kodz.org.core_ui.row.item_rows.webview.WebViewRowDataModel
 import kodz.org.feature.screen.data.ScreenRequest
 import kodz.org.feature.screen.data.ScreenResponse
 import kotlinx.coroutines.Dispatchers
@@ -174,7 +174,7 @@ class ScreenViewModel @Inject constructor(
 
                                                     "CategoriesSliderRow" -> {
                                                         clsRow =
-                                                            makeRow<CategoriesSliderRow, CategoriesSliderRowContractor, CategoriesSliderRowDataModel>(
+                                                            makeRow<HorizontalListRow, HorizontalListRowContractor, HorizontalListRowDataModel>(
                                                                 dataModelString,
                                                                 itemClickHandler
                                                             )

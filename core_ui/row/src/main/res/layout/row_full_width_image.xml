@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.full_width_image.FullWidthImageRowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowDataModel" />
     </data>
 
     <kodz.org.core_ui.component.image.RoundedImage xmlns:android="http://schemas.android.com/apk/res/android"

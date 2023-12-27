@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.carousel.CarouselRowDataModel" />
+            type="kodz.org.core_ui.row.list_rows.carousel.CarouselRowDataModel" />
     </data>
 
     <LinearLayout

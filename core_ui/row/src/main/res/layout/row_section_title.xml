@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.section_title.SectionTitleRowDataModel" />
+            type="kodz.org.core_ui.row.unrepeatable_rows.section_title.SectionTitleRowDataModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

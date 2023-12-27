@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.search_box.SearchBoxRowDataModel" />
+            type="kodz.org.core_ui.row.unrepeatable_rows.search_box.SearchBoxRowDataModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

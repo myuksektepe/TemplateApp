@@ -6,19 +6,19 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.box.BoxRowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.box.BoxRowDataModel" />
 
         <variable
             name="cornersType"
-            type="kodz.org.core_ui.row.box.CornersType" />
+            type="kodz.org.core_ui.row.item_rows.box.CornersType" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rowBoxRoot"
-        app:cardElevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
-        app:cardCornerRadius="@{ (data.cornersType == cornersType.ROUNDED) ? @dimen/_8sdp : 0}">
+        app:cardCornerRadius="@{ (data.cornersType == cornersType.ROUNDED) ? @dimen/_8sdp : 0}"
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:foreground="@{ (data.gradientIsVisible == true) ? @drawable/carousel_item_background : null}"
                 android:scaleType="centerCrop"
-                tools:background="@android:color/holo_blue_bright"/>
+                tools:background="@android:color/holo_blue_bright" />
 
             <kodz.org.core_ui.component.text.ClassicTextView
                 android:id="@+id/txtRowBoxTitle"
