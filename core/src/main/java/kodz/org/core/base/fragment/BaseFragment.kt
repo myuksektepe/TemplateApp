@@ -10,6 +10,7 @@ import androidx.annotation.IdRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavDeepLinkRequest
@@ -17,10 +18,10 @@ import androidx.navigation.NavDirections
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.AppLog
-import kodz.org.core.common.CommonIcons
+import kodz.org.core.common.enums.CommonIcons
+import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.LoadingModel
 import kodz.org.core.model.OnBackPressed
-import kodz.org.core.model.ErrorModel
 
 
 /**
@@ -135,4 +136,13 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
 
     fun <T> observeLiveData(liveData: LiveData<T>, observer: Observer<T>): Unit =
         liveData.observe(viewLifecycleOwner, observer)
+
+    fun <T> observeLiveDataOnce(lifecycleOwner: LifecycleOwner, liveData: LiveData<T>, observer: Observer<T>) {
+        liveData.observe(lifecycleOwner, object : Observer<T> {
+            override fun onChanged(value: T) {
+                observer.onChanged(value)
+                liveData.removeObserver(this)
+            }
+        })
+    }
 }

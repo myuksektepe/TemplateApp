@@ -3,24 +3,28 @@ package kodz.org.core.base.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kodz.org.core.model.EventTypeCode
-import javax.inject.Inject
 
 
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 8.10.2023.
  */
-@HiltViewModel
-class SharedViewModel @Inject constructor() : ViewModel() {
+class SharedViewModel : ViewModel() {
 
-    private val eventTypeCodeLiveData = MutableLiveData<EventTypeCode?>()
+    private val eventTypeCodeMutableLiveData = MutableLiveData<EventTypeCode?>()
+    val eventTypeCodeLiveData: LiveData<EventTypeCode?> = eventTypeCodeMutableLiveData
 
+    fun setClickEventCode(eventTypeCode: EventTypeCode?) {
+        eventTypeCodeMutableLiveData.postValue(eventTypeCode)
+    }
+
+    /*
     fun getClickEventCode(): LiveData<EventTypeCode?> {
-        return eventTypeCodeLiveData
+        return eventTypeCodeLiveData.distinctUntilChanged()
     }
 
     fun setClickEventCode(eventTypeCode: EventTypeCode?) {
         eventTypeCodeLiveData.postValue(eventTypeCode)
     }
+     */
 }

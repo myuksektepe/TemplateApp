@@ -3,8 +3,8 @@ package kodz.org.core.model
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.data.http.HttpBaseResponse
 import kodz.org.core.base.row.row.BaseRow
-import kodz.org.core.common.CommonIcons
-import kodz.org.core.common.CommonLottie
+import kodz.org.core.common.enums.CommonIcons
+import kodz.org.core.common.enums.CommonLottie
 
 open class ScreenModel(
     @SerializedName("settings") val settings: SettingsModel? = null,

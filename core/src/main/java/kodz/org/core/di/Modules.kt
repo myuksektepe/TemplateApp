@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kodz.org.core.common.CommonSettings
+import kodz.org.core.common.enums.CommonSettings
 import javax.inject.Singleton
 
 @Module

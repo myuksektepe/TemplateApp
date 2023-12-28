@@ -15,8 +15,8 @@ import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.common.AppLog
-import kodz.org.core.common.CommonIcons
-import kodz.org.core.common.DASHBOARD_ENDPOINT
+import kodz.org.core.common.consts.DASHBOARD_ENDPOINT
+import kodz.org.core.common.enums.CommonIcons
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core.model.ErrorModel
@@ -110,7 +110,7 @@ class ScreenFragment :
                 }
             }
 
-            observeLiveData(sharedViewModel.getClickEventCode()) { eventTypeCode ->
+            observeLiveData(sharedViewModel.eventTypeCodeLiveData) { eventTypeCode ->
                 eventTypeCode?.let {
                     when (it) {
                         EventTypeCode.RETRY_LAST_ACTION -> {

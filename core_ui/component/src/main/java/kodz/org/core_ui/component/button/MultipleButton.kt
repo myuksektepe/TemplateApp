@@ -13,10 +13,10 @@ import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
-import kodz.org.core.common.EMPTY
-import kodz.org.core.common.FORTY_FIVE
-import kodz.org.core.common.NORMAL
-import kodz.org.core.common.ZERO
+import kodz.org.core.common.consts.EMPTY
+import kodz.org.core.common.consts.FORTY_FIVE
+import kodz.org.core.common.consts.NORMAL
+import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core.model.TextWeightType

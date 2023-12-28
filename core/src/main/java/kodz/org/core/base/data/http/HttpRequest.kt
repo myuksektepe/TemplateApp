@@ -4,8 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import kodz.org.core.common.CommonIcons
-import kodz.org.core.common.CommonLottie
+import kodz.org.core.common.enums.CommonIcons
+import kodz.org.core.common.enums.CommonLottie
 import kodz.org.core.extension.isOnline
 import kodz.org.core.model.ButtonModel
 import kodz.org.core.model.DialogBox

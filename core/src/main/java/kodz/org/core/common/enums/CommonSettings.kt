@@ -1,4 +1,4 @@
-package kodz.org.core.common
+package kodz.org.core.common.enums
 
 import javax.inject.Inject
 

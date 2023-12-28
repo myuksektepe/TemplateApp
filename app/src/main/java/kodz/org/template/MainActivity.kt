@@ -24,8 +24,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.SharedViewModel
-import kodz.org.core.common.CommonIcons
-import kodz.org.core.common.CommonSettings
+import kodz.org.core.common.enums.CommonIcons
+import kodz.org.core.common.enums.CommonSettings
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.toColor
@@ -259,7 +259,6 @@ class MainActivity @Inject constructor() :
             button.eventType?.let { eventTypeCode ->
                 setSpamProtectedClickListener {
                     sharedViewModel.setClickEventCode(eventTypeCode)
-                    dialog?.dismiss()
                 }
             }
 

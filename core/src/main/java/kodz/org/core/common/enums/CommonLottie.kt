@@ -1,4 +1,4 @@
-package kodz.org.core.common
+package kodz.org.core.common.enums
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.R

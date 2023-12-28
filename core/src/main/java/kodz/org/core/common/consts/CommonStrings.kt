@@ -1,4 +1,4 @@
-package kodz.org.core.common
+package kodz.org.core.common.consts
 
 
 /**

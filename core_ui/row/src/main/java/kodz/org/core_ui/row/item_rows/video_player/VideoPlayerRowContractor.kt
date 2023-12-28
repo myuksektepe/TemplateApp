@@ -14,8 +14,8 @@ import com.bumptech.glide.request.RequestOptions
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.common.AppLog
-import kodz.org.core.common.HUNDRED
-import kodz.org.core.common.ZERO
+import kodz.org.core.common.consts.HUNDRED
+import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.animFadeOut
 import kodz.org.core.extension.getDurationText
 import kodz.org.core.extension.visible
