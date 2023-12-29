@@ -36,16 +36,17 @@ class BoxRowContractor(
                     // Paddings
                     if (isInSlider == false && isInList == true) {
                         rowBoxRoot.setPadding(ZERO, ZERO, ZERO, ZERO)
+                        
+                        // Height - Width
+                        val deviceWidth = context.resources.displayMetrics.run { widthPixels }
+                        val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
+                        if (data.boxType == BoxType.RECTANGLE) {
+                            layoutParams.height = deviceWidth - itemSpaceInt
+                        } else {
+                            layoutParams.height = (deviceWidth / TWO) - itemSpaceInt
+                        }
                     }
 
-                    // Height - Width
-                    val deviceWidth = context.resources.displayMetrics.run { widthPixels }
-                    val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
-                    if (data.boxType == BoxType.RECTANGLE) {
-                        layoutParams.height = deviceWidth - itemSpaceInt
-                    } else {
-                        layoutParams.height = (deviceWidth / TWO) - itemSpaceInt
-                    }
 
                     // ----------------------------
                     // Background Color
