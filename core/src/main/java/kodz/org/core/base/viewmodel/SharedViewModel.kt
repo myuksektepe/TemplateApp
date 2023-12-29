@@ -2,14 +2,17 @@ package kodz.org.core.base.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kodz.org.core.base.VolatileLiveData
 import kodz.org.core.model.EventTypeCode
+import javax.inject.Inject
 
 
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 8.10.2023.
  */
-class SharedViewModel : ViewModel() {
+@HiltViewModel
+class SharedViewModel @Inject constructor() : ViewModel() {
     private val eventTypeCodeMutableLiveData = VolatileLiveData<EventTypeCode?>()
     val eventTypeCodeLiveData: LiveData<EventTypeCode?> = eventTypeCodeMutableLiveData
 

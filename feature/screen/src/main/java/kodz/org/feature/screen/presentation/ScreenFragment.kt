@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.net.toUri
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDeepLinkRequest
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +32,7 @@ import kodz.org.feature.screen.domain.adapter.ScreenAdapter
 class ScreenFragment :
     BaseFragment<ScreenViewModel, FragmentDashboardBinding>(R.layout.fragment_dashboard) {
     override val viewModel: ScreenViewModel by viewModels()
-    private lateinit var sharedViewModel: SharedViewModel
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     override val isBottomNavigationViewVisible = false
     private val rowAdapter = ScreenAdapter()
     private var endpoint: String? = null
@@ -42,7 +42,6 @@ class ScreenFragment :
     }
 
     override fun viewDidLoad(savedInstanceState: Bundle?) {
-        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         setUI()
 
         arguments?.run {
@@ -135,7 +134,6 @@ class ScreenFragment :
                             // Do nothing
                         }
                     }
-                    sharedViewModel.setClickEventCode(null)
                 }
             }
 

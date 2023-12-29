@@ -18,7 +18,6 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +43,7 @@ import javax.inject.Inject
 class MainActivity @Inject constructor() :
     BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
     override val viewModel: MainViewModel by viewModels()
-    private lateinit var sharedViewModel: SharedViewModel
+    private val sharedViewModel: SharedViewModel by viewModels()
     override var viewLifeCycleOwner: LifecycleOwner = this
     override fun getBottomNavigationView(): BottomNavigationView = binding.bottomNavigation
     override fun getFragmentContainerView(): FragmentContainerView = binding.fragmentContainer
@@ -58,8 +57,6 @@ class MainActivity @Inject constructor() :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
-
         when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 binding.toolBar.setNavigationIconTint(Color.WHITE)
@@ -71,10 +68,6 @@ class MainActivity @Inject constructor() :
 
             Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
         }
-
-        // Device Width & Height
-        commonSettings.deviceWidthInDp = resources.displayMetrics.run { widthPixels / density }
-        commonSettings.deviceHeightInDp = resources.displayMetrics.run { heightPixels / density }
     }
 
     override fun showFullScreenLoading(loadingModel: LoadingModel?, view: View?) {
