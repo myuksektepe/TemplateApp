@@ -6,8 +6,6 @@ import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core_ui.row.item_rows.box.BoxRow
 import kodz.org.core_ui.row.item_rows.box.BoxRowRowDataModel
-import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRow
-import kodz.org.core_ui.row.item_rows.carousel_item.CarouselItemRowRowDataModel
 import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRow
 import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1Row
@@ -31,20 +29,6 @@ fun List<JsonObject>.getItemListByRowType(
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
                             BoxRow(this, isInSlider, isInList).apply {
-                                contractor.itemClickHandler = itemClickHandler
-                            }
-                        )
-                    }
-                }
-            }
-        }
-
-        "CarouselItemRow" -> {
-            this.forEach {
-                Gson().fromJson(it, CarouselItemRowRowDataModel::class.java)?.run {
-                    if (!this.title.isNullOrEmpty() || !this.imageUrl.isNullOrEmpty()) {
-                        itemList.add(
-                            CarouselItemRow(this, isInSlider, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )

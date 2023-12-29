@@ -57,7 +57,6 @@ import kodz.org.core_ui.row.unrepeatable_item_rows.section_title.SectionTitleRow
 import kodz.org.core_ui.row.unrepeatable_item_rows.section_title.SectionTitleRowDataModel
 import kotlin.reflect.full.primaryConstructor
 
-
 fun String.convertRow(
     dataModelString: String?,
     itemClickHandler: ItemClickHandler
