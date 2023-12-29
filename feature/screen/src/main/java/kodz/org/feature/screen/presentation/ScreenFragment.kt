@@ -113,6 +113,7 @@ class ScreenFragment :
                 eventTypeCode?.let {
                     when (it) {
                         EventTypeCode.RETRY_LAST_ACTION -> {
+                            hideFullScreenError()
                             viewModel.fetchAdapter(endpoint)
                         }
 
