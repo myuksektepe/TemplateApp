@@ -8,6 +8,7 @@ import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.common.SpacesItemDecoration
+import kodz.org.core.common.consts.ONE
 import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.setSpamProtectedClickListener
@@ -22,7 +23,7 @@ class VerticalListRowContractor : BaseListRowContractor() {
     lateinit var binding: RowVerticalListBinding
     override var itemClickHandler: ItemClickHandler? = null
     private val listAdapter by lazy { MultipleTypeAdapter() }
-    private var showingItemCount = 0
+    private var showingItemCount = ZERO
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
         binding = viewDataBinding as RowVerticalListBinding
@@ -50,13 +51,13 @@ class VerticalListRowContractor : BaseListRowContractor() {
                         // Grid or Staggered
                         if (data.listType == ListType.STAGGERED) {
                             layoutManager = StaggeredGridLayoutManager(
-                                data.columnCount ?: 1,
+                                data.columnCount ?: ONE,
                                 LinearLayoutManager.VERTICAL
                             ).apply {
                                 gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
                             }
                         } else {
-                            layoutManager = GridLayoutManager(context, data.columnCount ?: 1)
+                            layoutManager = GridLayoutManager(context, data.columnCount ?: ONE)
                         }
 
                         // Add item decoration
@@ -93,7 +94,7 @@ class VerticalListRowContractor : BaseListRowContractor() {
     private fun getSubList(data: VerticalListRowDataModel, increase: Int = ZERO): List<BaseRow> {
         data.itemList?.let { list ->
             val itemFilteredList = data.itemCount?.let {
-                if (showingItemCount == 0) showingItemCount = it
+                if (showingItemCount == ZERO) showingItemCount = it
                 list.subSafeList(fromIndex = ZERO, toIndex = (showingItemCount + increase))
             } ?: list
             showingItemCount += increase

@@ -6,6 +6,8 @@ import com.bumptech.glide.Glide
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
+import kodz.org.core.common.consts.TWO
+import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.makeSlidable
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core.extension.toColor
@@ -33,15 +35,16 @@ class BoxRowContractor(
 
                     // Paddings
                     if (isInSlider == false && isInList == true) {
-                        rowBoxRoot.setPadding(0, 0, 0, 0)
+                        rowBoxRoot.setPadding(ZERO, ZERO, ZERO, ZERO)
                     }
 
                     // Height - Width
                     val deviceWidth = context.resources.displayMetrics.run { widthPixels }
+                    val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
                     if (data.boxType == BoxType.RECTANGLE) {
-                        layoutParams.height = deviceWidth
+                        layoutParams.height = deviceWidth - itemSpaceInt
                     } else {
-                        layoutParams.height = (deviceWidth / 2)
+                        layoutParams.height = (deviceWidth / TWO) - itemSpaceInt
                     }
 
                     // ----------------------------
