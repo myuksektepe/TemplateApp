@@ -164,3 +164,10 @@ fabric.properties
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
+/buildSrc/build/
+/.idea/
+/buildSrc/build/classes/
+/buildSrc/build/kotlin/
+/buildSrc/build/libs/
+/buildSrc/build/tmp/
+/.idea/
