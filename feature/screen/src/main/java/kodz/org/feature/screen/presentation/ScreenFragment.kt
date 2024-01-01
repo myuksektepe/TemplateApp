@@ -14,8 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.SharedViewModel
-import kodz.org.core.common.AppLog
 import kodz.org.core.common.consts.DASHBOARD_ENDPOINT
+import kodz.org.core.common.consts.ENDPOINT
 import kodz.org.core.common.enums.CommonIcons
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
@@ -45,15 +45,15 @@ class ScreenFragment :
         setUI()
 
         arguments?.run {
-            getString("endpoint")?.let {
+            getString(ENDPOINT)?.let {
                 endpoint = it
             } ?: kotlin.run {
                 endpoint = DASHBOARD_ENDPOINT
             }
         }
 
-        AppLog("endpoint: $endpoint")
-        AppLog("thisPageOpenedBefore: $thisPageOpenedBefore")
+        // AppLog("endpoint: $endpoint")
+        // AppLog("thisPageOpenedBefore: $thisPageOpenedBefore")
 
         viewModel.fetchAdapter(if (!thisPageOpenedBefore) endpoint else null)
         thisPageOpenedBefore = true
@@ -227,7 +227,7 @@ class ScreenFragment :
 
     private fun goToDeepLink(endpoint: String?) {
         val navDeepLinkRequest = NavDeepLinkRequest.Builder
-            .fromUri("android-app://kodz.org.template/screenFragment?endpoint=${endpoint}".toUri())
+            .fromUri("android-app://${context?.packageName}/screenFragment?$ENDPOINT=${endpoint}".toUri())
             .build()
         navigateWithDeepLink(navDeepLinkRequest)
     }

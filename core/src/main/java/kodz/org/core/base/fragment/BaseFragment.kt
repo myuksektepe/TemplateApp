@@ -17,7 +17,6 @@ import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavDirections
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.BaseViewModel
-import kodz.org.core.common.AppLog
 import kodz.org.core.common.enums.CommonIcons
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.LoadingModel
@@ -68,8 +67,9 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         viewDidLoad(savedInstanceState)
         observeViewModel()
 
-        val fragmentName = this::class.java.simpleName
-        AppLog("Created Fragment: $fragmentName\n-------------------------------")
+        // Which fragment is visible?
+        // val fragmentName = this::class.java.simpleName
+        // AppLog("Created Fragment: $fragmentName\n-------------------------------")
     }
 
     fun showFullScreenLoading(loadingModel: LoadingModel? = null, view: View? = null) {

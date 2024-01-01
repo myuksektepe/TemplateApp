@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
+import kodz.org.core.common.AppLog
 import kodz.org.core.common.enums.CommonIcons
 import kodz.org.core.common.enums.CommonLottie
 import kodz.org.core.extension.isOnline
@@ -38,6 +39,7 @@ class HttpRequest @Inject constructor(
             emit(HttpFlow.Loading)
             if (context.isOnline()) {
                 try {
+                    AppLog("İsteği gönderildi.")
                     httpApiService.doPostRequest<RS>(
                         inputModel = inputJsonObject,
                         token = "[TOKEN]",
@@ -45,6 +47,8 @@ class HttpRequest @Inject constructor(
                     ).let {
                         if (it.isSuccessful) {
                             it.body()?.let { body ->
+                                AppLog("Başarılı cevap alındı.")
+
                                 // Type converting
                                 val type = object : TypeToken<RS>() {}.type
                                 val outPutJsonObject = gson.toJsonTree(body).asJsonObject

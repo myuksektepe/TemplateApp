@@ -11,6 +11,7 @@ import kodz.org.core.base.data.http.HttpRequest
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
+import kodz.org.core.common.AppLog
 import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.ScreenModel
@@ -49,6 +50,7 @@ class ScreenViewModel @Inject constructor(
 
 
     fun fetchAdapter(endpoint: String?) {
+        AppLog("$endpoint isteği başlatıldı.")
         endpoint?.let {
             componentList.clear()
             job?.cancel()
@@ -56,6 +58,7 @@ class ScreenViewModel @Inject constructor(
             job = viewModelScope.launch(Dispatchers.IO) {
                 httpRequest.postRequest<ScreenRequest, ScreenResponse>(context, ScreenRequest(it))
                     .collectLatest { response ->
+                        AppLog("$response")
                         when (response) {
                             is HttpFlow.Loading -> {
                                 screenModel.postValue(Resource.Loading)
@@ -71,6 +74,7 @@ class ScreenViewModel @Inject constructor(
                                     it.rows?.forEach { row ->
                                         if (row.isVisible == true) {
                                             row.rowName?.let { rowName ->
+                                                AppLog("$rowName yaratılmaya başlatıldı.")
 
                                                 // Make row with rowName
                                                 rowName.convertRow(
@@ -91,6 +95,8 @@ class ScreenViewModel @Inject constructor(
                                             )
                                         )
                                     )
+                                    AppLog("Rowlar önyüze gönderildi.")
+
                                 }
                             }
                         }
