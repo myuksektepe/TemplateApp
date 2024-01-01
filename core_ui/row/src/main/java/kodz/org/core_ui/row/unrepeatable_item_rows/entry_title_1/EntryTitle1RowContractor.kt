@@ -1,14 +1,11 @@
-package kodz.org.core_ui.row.item_rows.entry_title_1
+package kodz.org.core_ui.row.unrepeatable_item_rows.entry_title_1
 
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.row.contractor.BaseItemRowContractor
+import kodz.org.core.base.row.contractor.BaseUnrepeatableItemRowContractor
 import kodz.org.core_ui.row.databinding.RowEntryTitle1Binding
 
-class EntryTitle1RowContractor(
-    override val isInSlider: Boolean? = null,
-    override val isInList: Boolean? = null
-) : BaseItemRowContractor() {
+class EntryTitle1RowContractor() : BaseUnrepeatableItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowEntryTitle1Binding
     override var itemClickHandler: ItemClickHandler? = null

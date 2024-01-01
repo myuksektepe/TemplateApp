@@ -3,6 +3,7 @@ package kodz.org.core_ui.row.item_rows.categories_slider_item
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
+import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core_ui.row.databinding.RowCategoriesSliderItemBinding
 
@@ -11,7 +12,7 @@ import kodz.org.core_ui.row.databinding.RowCategoriesSliderItemBinding
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 31.10.2023.
  */
 class CategoriesSliderItemRowContractor(
-    override val isInSlider: Boolean? = null,
+    override val isInCarousel: Boolean? = null,
     override val isInList: Boolean? = null
 ) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
@@ -28,6 +29,9 @@ class CategoriesSliderItemRowContractor(
         binding.run {
             this.data?.let { data ->
 
+                // Paddings
+                if (isInList == true || isInCarousel == true) rowCategoryItemRoot.setPadding(ZERO, ZERO, ZERO, ZERO)
+
                 // Text
                 txtCategoryName.text = data.categoryName
 
@@ -35,7 +39,7 @@ class CategoriesSliderItemRowContractor(
                 data.iconUrl?.let { crcCategoryImage.setImageUrl(it) }
 
                 // Event Handler
-                cnsCategory.setSpamProtectedClickListener {
+                rowCategoryItemRoot.setSpamProtectedClickListener {
                     itemClickHandler?.onItemClick(data.itemClickEventModel)
                 }
             }

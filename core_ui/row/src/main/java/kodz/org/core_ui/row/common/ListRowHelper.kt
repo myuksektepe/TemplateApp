@@ -18,7 +18,7 @@ import kodz.org.core_ui.row.item_rows.quote.QuoteRowRowDataModel
 fun List<JsonObject>.getItemListByRowType(
     rowType: String,
     itemClickHandler: ItemClickHandler? = null,
-    isInSlider: Boolean,
+    isInCarousel: Boolean,
     isInList: Boolean,
 ): List<BaseRow> {
     val itemList = mutableListOf<BaseRow>()
@@ -28,7 +28,7 @@ fun List<JsonObject>.getItemListByRowType(
                 Gson().fromJson(it, BoxRowRowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
-                            BoxRow(this, isInSlider, isInList).apply {
+                            BoxRow(this, isInCarousel, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )
@@ -42,7 +42,7 @@ fun List<JsonObject>.getItemListByRowType(
                 Gson().fromJson(it, QuoteRowRowDataModel::class.java)?.run {
                     if (!this.text.isNullOrEmpty()) {
                         itemList.add(
-                            QuoteRow(this, isInSlider, isInList).apply {
+                            QuoteRow(this, isInCarousel, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )
@@ -56,7 +56,7 @@ fun List<JsonObject>.getItemListByRowType(
                 Gson().fromJson(it, EntryItem1RowRowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
-                            EntryItem1Row(this, isInSlider, isInList).apply {
+                            EntryItem1Row(this, isInCarousel, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )
@@ -70,7 +70,7 @@ fun List<JsonObject>.getItemListByRowType(
                 Gson().fromJson(it, EntryItem2RowRowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
-                            EntryItem2Row(this, isInSlider, isInList).apply {
+                            EntryItem2Row(this, isInCarousel, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )
@@ -84,7 +84,7 @@ fun List<JsonObject>.getItemListByRowType(
                 Gson().fromJson(it, CategoriesSliderItemRowRowDataModel::class.java)?.run {
                     if (!this.categoryName.isNullOrEmpty()) {
                         itemList.add(
-                            CategoriesSliderItemRow(this, isInSlider, isInList).apply {
+                            CategoriesSliderItemRow(this, isInCarousel, isInList).apply {
                                 contractor.itemClickHandler = itemClickHandler
                             }
                         )

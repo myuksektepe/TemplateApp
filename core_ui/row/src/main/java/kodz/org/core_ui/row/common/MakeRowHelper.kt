@@ -22,9 +22,6 @@ import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowContractor
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowRowDataModel
-import kodz.org.core_ui.row.item_rows.entry_title_1.EntryTitle1Row
-import kodz.org.core_ui.row.item_rows.entry_title_1.EntryTitle1RowContractor
-import kodz.org.core_ui.row.item_rows.entry_title_1.EntryTitle1RowRowDataModel
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRow
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowContractor
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowRowDataModel
@@ -49,6 +46,9 @@ import kodz.org.core_ui.row.list_rows.horizontal_list.HorizontalListRowDataModel
 import kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRow
 import kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRowContractor
 import kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRowDataModel
+import kodz.org.core_ui.row.unrepeatable_item_rows.entry_title_1.EntryTitle1Row
+import kodz.org.core_ui.row.unrepeatable_item_rows.entry_title_1.EntryTitle1RowContractor
+import kodz.org.core_ui.row.unrepeatable_item_rows.entry_title_1.EntryTitle1RowRowDataModel
 import kodz.org.core_ui.row.unrepeatable_item_rows.search_box.SearchBoxRow
 import kodz.org.core_ui.row.unrepeatable_item_rows.search_box.SearchBoxRowContractor
 import kodz.org.core_ui.row.unrepeatable_item_rows.search_box.SearchBoxRowDataModel
@@ -92,6 +92,7 @@ fun String.convertRow(
         // ========================================
 
         // Item Row (Repeatable)
+
         "EntryItem1Row" -> {
             clsRow =
                 makeItemRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowRowDataModel>(
@@ -121,13 +122,6 @@ fun String.convertRow(
                 makeItemRow<QuoteRow, QuoteRowContractor, QuoteRowRowDataModel>(
                     dataModelString,
                     itemClickHandler
-                )
-        }
-
-        "EntryTitle1Row" -> {
-            clsRow =
-                makeItemRow<EntryTitle1Row, EntryTitle1RowContractor, EntryTitle1RowRowDataModel>(
-                    dataModelString
                 )
         }
 
@@ -177,6 +171,12 @@ fun String.convertRow(
                 )
         }
 
+        "EntryTitle1Row" -> {
+            clsRow =
+                makeUnrepeatableItemRow<EntryTitle1Row, EntryTitle1RowContractor, EntryTitle1RowRowDataModel>(
+                    dataModelString
+                )
+        }
         else -> {
             clsRow = null
             AppLog("$this row hasn't been included in the app!")

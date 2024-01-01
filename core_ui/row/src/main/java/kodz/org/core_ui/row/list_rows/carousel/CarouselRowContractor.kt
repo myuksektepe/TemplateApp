@@ -4,6 +4,8 @@ import androidx.databinding.ViewDataBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseListRowContractor
+import kodz.org.core.common.SpacesItemDecorationForCarousel
+import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
@@ -36,7 +38,18 @@ class CarouselRowContractor : BaseListRowContractor() {
 
                 // Item List
                 data.itemList?.let {
-                    viewPagerVertical.adapter = sliderAdapter
+                    this.viewPagerVertical.run {
+
+                        val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._16sdp)
+
+                        // Remove item decoration first
+                        if (itemDecorationCount > ZERO) removeItemDecorationAt(ZERO)
+
+                        // Add item decoration
+                        addItemDecoration(SpacesItemDecorationForCarousel(itemSpaceInt))
+
+                        adapter = sliderAdapter
+                    }
 
                     // Indicator Dots
                     if (data.showIndicator == true) {
@@ -49,13 +62,13 @@ class CarouselRowContractor : BaseListRowContractor() {
                         data.itemList.getItemListByRowType(
                             rowType = it,
                             itemClickHandler = itemClickHandler,
-                            isInSlider = true,
+                            isInCarousel = true,
                             isInList = false
                         )
                     }
-                    sliderAdapter.submitList(itemList)
 
-                } ?: kotlin.run {
+                    sliderAdapter.submitList(itemList)
+                } ?: run {
                     binding.root.gone()
                 }
 

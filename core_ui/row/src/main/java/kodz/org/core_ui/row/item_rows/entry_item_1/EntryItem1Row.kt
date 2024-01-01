@@ -8,11 +8,11 @@ import kotlin.reflect.KClass
 
 class EntryItem1Row(
     override var dataModel: BaseRowDataModel,
-    override var isInSlider: Boolean? = null,
+    override var isInCarousel: Boolean? = null,
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_entry_item_1
     override val dataClass: KClass<*> = EntryItem1RowRowDataModel::class
-    override val contractor = EntryItem1RowContractor(isInSlider, isInList)
+    override val contractor = EntryItem1RowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

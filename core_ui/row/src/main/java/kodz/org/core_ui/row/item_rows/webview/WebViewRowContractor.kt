@@ -11,7 +11,7 @@ import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core_ui.row.databinding.RowWebviewBinding
 
 class WebViewRowContractor(
-    override val isInSlider: Boolean? = null,
+    override val isInCarousel: Boolean? = null,
     override val isInList: Boolean? = null
 ) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null

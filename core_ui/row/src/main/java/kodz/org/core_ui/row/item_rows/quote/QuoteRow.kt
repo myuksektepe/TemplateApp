@@ -12,11 +12,11 @@ import kotlin.reflect.KClass
  */
 class QuoteRow(
     override var dataModel: BaseRowDataModel,
-    override var isInSlider: Boolean? = null,
+    override var isInCarousel: Boolean? = null,
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_quote
     override val dataClass: KClass<*> = QuoteRowRowDataModel::class
-    override val contractor = QuoteRowContractor(isInSlider, isInList)
+    override val contractor = QuoteRowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

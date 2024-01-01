@@ -19,16 +19,17 @@
             android:id="@+id/viewPagerVertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:nestedScrollingEnabled="true"
             android:orientation="horizontal"
             android:overScrollMode="never"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            android:scrollX="0dp"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_16sdp"
             android:background="@color/transparent"
             app:tabBackground="@drawable/tab_selector"
             app:tabGravity="center"

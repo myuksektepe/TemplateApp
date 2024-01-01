@@ -11,7 +11,7 @@
     </data>
 
     <kodz.org.core_ui.component.text.ClassicTextView
-        android:id="@+id/longText"
+        android:id="@+id/txtLongText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_16sdp"

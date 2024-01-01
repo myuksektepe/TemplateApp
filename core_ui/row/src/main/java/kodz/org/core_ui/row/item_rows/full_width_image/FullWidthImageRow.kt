@@ -12,11 +12,11 @@ import kotlin.reflect.KClass
  */
 class FullWidthImageRow(
     override var dataModel: BaseRowDataModel,
-    override var isInSlider: Boolean? = null,
+    override var isInCarousel: Boolean? = null,
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_full_width_image
     override val dataClass: KClass<*> = FullWidthImageRowRowDataModel::class
-    override val contractor = FullWidthImageRowContractor(isInSlider, isInList)
+    override val contractor = FullWidthImageRowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

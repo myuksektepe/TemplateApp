@@ -104,7 +104,7 @@ class VerticalListRowContractor : BaseListRowContractor() {
                 itemFilteredList.getItemListByRowType(
                     rowType = it,
                     itemClickHandler = itemClickHandler,
-                    isInSlider = false,
+                    isInCarousel = false,
                     isInList = true
                 )
             }?.let {

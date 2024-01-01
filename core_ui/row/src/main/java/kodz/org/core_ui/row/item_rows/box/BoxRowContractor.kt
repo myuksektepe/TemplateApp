@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.item_rows.box
 
 import android.graphics.Color
 import androidx.databinding.ViewDataBinding
-import com.bumptech.glide.Glide
+import kodz.org.core.GlideApp
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
@@ -14,14 +14,14 @@ import kodz.org.core.extension.toColor
 import kodz.org.core_ui.row.databinding.RowBoxBinding
 
 class BoxRowContractor(
-    override val isInSlider: Boolean? = null,
+    override val isInCarousel: Boolean? = null,
     override val isInList: Boolean? = null
 ) : BaseItemRowContractor() {
     override var itemClickHandler: ItemClickHandler? = null
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowBoxBinding
     override fun initBinding(viewDataBinding: ViewDataBinding) {
-        viewBinding = if (isInSlider == true) viewDataBinding.makeSlidable() else viewDataBinding
+        viewBinding = if (isInCarousel == true) viewDataBinding.makeSlidable() else viewDataBinding
         binding = (viewBinding as RowBoxBinding)
         initRow()
     }
@@ -34,9 +34,8 @@ class BoxRowContractor(
                 rowBoxCard.run {
 
                     // Paddings
-                    if (isInSlider == false && isInList == true) {
-                        rowBoxRoot.setPadding(ZERO, ZERO, ZERO, ZERO)
-                        
+                    if (isInList == true || isInCarousel == true) rowBoxRoot.setPadding(ZERO, ZERO, ZERO, ZERO)
+                    if (isInList == true) {
                         // Height - Width
                         val deviceWidth = context.resources.displayMetrics.run { widthPixels }
                         val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
@@ -58,7 +57,7 @@ class BoxRowContractor(
 
                     // Background Image
                     data.backgroundImageUrl?.let {
-                        Glide.with(imgRowBoxBackground.context)
+                        GlideApp.with(imgRowBoxBackground.context)
                             .load(it)
                             .centerCrop()
                             //.diskCacheStrategy(DiskCacheStrategy.NONE)

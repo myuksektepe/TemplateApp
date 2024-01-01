@@ -11,11 +11,11 @@ import kotlin.reflect.KClass
  */
 class LongTextRow(
     override var dataModel: BaseRowDataModel,
-    override var isInSlider: Boolean? = null,
+    override var isInCarousel: Boolean? = null,
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_long_text
     override val dataClass: KClass<*> = LongTextRowRowDataModel::class
-    override val contractor = LongTextRowContractor(isInSlider, isInList)
+    override val contractor = LongTextRowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

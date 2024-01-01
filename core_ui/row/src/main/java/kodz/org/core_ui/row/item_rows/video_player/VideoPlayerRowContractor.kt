@@ -7,10 +7,10 @@ import android.view.Surface
 import android.view.TextureView
 import android.widget.SeekBar
 import androidx.databinding.ViewDataBinding
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
+import kodz.org.core.GlideApp
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.common.AppLog
@@ -32,7 +32,7 @@ import java.io.FileNotFoundException
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 9.10.2023.
  */
 class VideoPlayerRowContractor(
-    override val isInSlider: Boolean? = null,
+    override val isInCarousel: Boolean? = null,
     override val isInList: Boolean? = null
 ) : BaseItemRowContractor() {
     override var viewBinding: ViewDataBinding? = null
@@ -62,6 +62,9 @@ class VideoPlayerRowContractor(
         binding.run {
             data?.let { data ->
 
+                // Paddings
+                if (isInList == true || isInCarousel == true) rowVideoPlayerRoot.setPadding(ZERO, ZERO, ZERO, ZERO)
+
                 // Thumbnail
                 data.thumbnailUrl?.let {
                     val glideRequest = RequestOptions()
@@ -69,7 +72,7 @@ class VideoPlayerRowContractor(
                         .transform(CenterCrop())
                         .override(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
 
-                    Glide.with(this.root.context)
+                    GlideApp.with(this.root.context)
                         .load(it)
                         .apply(glideRequest)
                         .into(imgThumbnail)

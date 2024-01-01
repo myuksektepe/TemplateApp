@@ -12,11 +12,11 @@ import kotlin.reflect.KClass
  */
 class VideoPlayerRow(
     override var dataModel: BaseRowDataModel,
-    override var isInSlider: Boolean? = null,
+    override var isInCarousel: Boolean? = null,
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_video_player
     override val dataClass: KClass<*> = VideoPlayerRowRowDataModel::class
-    override val contractor: BaseRowContractor = VideoPlayerRowContractor(isInSlider, isInList)
+    override val contractor: BaseRowContractor = VideoPlayerRowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

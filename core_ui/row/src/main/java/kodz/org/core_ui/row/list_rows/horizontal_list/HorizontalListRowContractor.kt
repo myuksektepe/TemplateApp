@@ -5,11 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.base.row.row.BaseRow
+import kodz.org.core.common.SpacesItemDecoration
+import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.gone
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.common.getItemListByRowType
 import kodz.org.core_ui.row.databinding.RowHorizontalListBinding
-
 
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 31.10.2023.
@@ -19,7 +20,6 @@ class HorizontalListRowContractor : BaseListRowContractor() {
     lateinit var binding: RowHorizontalListBinding
     override var itemClickHandler: ItemClickHandler? = null
     private val listAdapter by lazy { MultipleTypeAdapter() }
-
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
         binding = viewDataBinding as RowHorizontalListBinding
@@ -36,9 +36,21 @@ class HorizontalListRowContractor : BaseListRowContractor() {
 
                 // Item List
                 data.itemList?.let {
-
                     this.rcyHorizontalList.run {
-                        layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+
+                        val context = this.context
+                        val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
+
+                        // Remove item decoration first
+                        if (itemDecorationCount > ZERO) removeItemDecorationAt(ZERO)
+
+                        // Layout Manager
+                        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+                        // Add item decoration
+                        addItemDecoration(SpacesItemDecoration(itemSpaceInt))
+
+                        // Set listAdapter
                         adapter = listAdapter
                     }
 
@@ -47,7 +59,7 @@ class HorizontalListRowContractor : BaseListRowContractor() {
                         data.itemList.getItemListByRowType(
                             rowType = it,
                             itemClickHandler = itemClickHandler,
-                            isInSlider = true,
+                            isInCarousel = true,
                             isInList = false
                         )
                     }

@@ -7,9 +7,9 @@ import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import kodz.org.core.GlideApp
 import kodz.org.core_ui.component.R
 
 
@@ -69,7 +69,7 @@ class RoundedImage @JvmOverloads constructor(
             //.transform(FitCenter())
             //.override(200, 200)
 
-        Glide.with(context)
+        GlideApp.with(context)
             .load(url)
             .apply(glideRequest)
             .placeholder(kodz.org.core.R.drawable.placeholder)
