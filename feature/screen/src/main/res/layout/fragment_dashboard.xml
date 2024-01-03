@@ -31,13 +31,11 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone" />
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <kodz.org.core_ui.component.list.RecyclerView
                         android:id="@+id/listDashboard"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:overScrollMode="never"
-                        android:scrollbars="none"
                         tools:itemCount="20"
                         tools:listitem="@layout/row_section_title" />
 

@@ -42,9 +42,9 @@ class VerticalListRowContractor : BaseListRowContractor() {
                 data.itemList?.let {
                     this.rcyVerticalList.run {
 
-                        setHasFixedSize(true)
                         val context = this.context
                         val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
+                        setItemViewCacheSize(listAdapter.itemCount)
 
                         // Remove item decoration first
                         if (itemDecorationCount > ZERO) removeItemDecorationAt(ZERO)

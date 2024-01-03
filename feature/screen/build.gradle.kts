@@ -37,6 +37,7 @@ dependencies {
     // Modules
     implementation(project(":core"))
     implementation(project(":core_ui:row"))
+    implementation(project(":core_ui:component"))
 
     // Main
     implementation(Dependencies.appcompat)

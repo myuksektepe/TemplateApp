@@ -17,7 +17,7 @@
         android:layout_margin="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_24sdp">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <kodz.org.core_ui.component.list.RecyclerView
             android:id="@+id/rcyVerticalList"
             android:layout_width="match_parent"
             android:layout_height="0dp"

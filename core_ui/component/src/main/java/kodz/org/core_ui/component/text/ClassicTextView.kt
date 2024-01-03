@@ -18,7 +18,7 @@ import kodz.org.core_ui.component.R
 class ClassicTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyle: Int = 0,
+    defStyle: Int = 0
 ) : AppCompatTextView(context, attrs, defStyle) {
 
     init {
