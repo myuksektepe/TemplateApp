@@ -37,17 +37,6 @@ class CarouselRowContractor : BaseListRowContractor() {
                 // Item List
                 data.itemList?.let {
                     this.viewPagerVertical.run {
-
-                        /*
-                        val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._16sdp)
-
-                        // Remove item decoration first
-                        if (itemDecorationCount > ZERO) removeItemDecorationAt(ZERO)
-
-                        // Add item decoration
-                        addItemDecoration(SpacesItemDecorationForCarousel(itemSpaceInt))
-                         */
-
                         adapter = listAdapter
                     }
 
