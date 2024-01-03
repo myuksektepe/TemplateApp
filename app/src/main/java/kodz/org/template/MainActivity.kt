@@ -34,7 +34,7 @@ import kodz.org.core.model.ButtonType
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.LoadingModel
-import kodz.org.core_ui.component.button.MultipleButton
+import kodz.org.core_ui.component.button.MultipleTypeButton
 import kodz.org.core_ui.component.text.ClassicTextView
 import kodz.org.template.databinding.ActivityMainBinding
 import javax.inject.Inject
@@ -225,7 +225,7 @@ class MainActivity @Inject constructor() :
     }
 
     private fun createButton(button: ButtonModel, addMarginTop: Boolean? = false) =
-        MultipleButton(this, null).apply {
+        MultipleTypeButton(this, null).apply {
             // Text
             setText(button.text ?: getString(kodz.org.core.R.string.okay))
 

@@ -12,80 +12,72 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rowQuoteRoot"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/crdQuote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:padding="@dimen/_16sdp">
+        android:layout_margin="@dimen/_16sdp"
+        app:cardBackgroundColor="@{data.showBackground != true ? @color/transparent : @color/nightDayReverse}"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@{data.showBackground == true ? @dimen/_8sdp : 0}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/crdQuote"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardBackgroundColor="@{data.showBackground != true ? @color/transparent : @color/nightDayReverse}"
-            app:cardCornerRadius="@dimen/_8sdp"
-            app:cardElevation="@{data.showBackground == true ? @dimen/_8sdp : 0}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <kodz.org.core_ui.component.text.ClassicTextView
+                android:id="@+id/txtQuote"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_marginTop="@dimen/_14sdp"
+                android:ellipsize="end"
+                android:maxLines="6"
+                android:minHeight="@dimen/_100sdp"
+                android:text="@{data.text}"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toStartOf="@id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/lipsum" />
 
-                <kodz.org.core_ui.component.text.ClassicTextView
-                    android:id="@+id/txtQuote"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_14sdp"
-                    android:ellipsize="end"
-                    android:maxLines="6"
-                    android:minHeight="@dimen/_100sdp"
-                    android:text="@{data.text}"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintEnd_toStartOf="@id/imageView2"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/lipsum" />
+            <kodz.org.core_ui.component.text.ClassicTextView
+                android:id="@+id/txtAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@{data.author}"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/txtQuote"
+                app:layout_constraintTop_toBottomOf="@+id/txtQuote"
+                app:textWeight="bold"
+                tools:text="Abraham Lincoln"
+                tools:visibility="visible" />
 
-                <kodz.org.core_ui.component.text.ClassicTextView
-                    android:id="@+id/txtAuthor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:text="@{data.author}"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="@+id/txtQuote"
-                    app:layout_constraintTop_toBottomOf="@+id/txtQuote"
-                    app:textWeight="bold"
-                    tools:text="Abraham Lincoln"
-                    tools:visibility="visible" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:scaleX="-1"
+                android:scaleY="-1"
+                android:src="@drawable/ic_quote"
+                android:tint="@color/dayNightReverse"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:scaleX="-1"
-                    android:scaleY="-1"
-                    android:src="@drawable/ic_quote"
-                    android:tint="@color/dayNightReverse"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:src="@drawable/ic_quote"
-                    android:tint="@color/dayNightReverse"
-                    app:layout_constraintBottom_toBottomOf="@+id/txtAuthor"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtAuthor" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/ic_quote"
+                android:tint="@color/dayNightReverse"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAuthor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtAuthor" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </layout>

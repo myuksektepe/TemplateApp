@@ -17,6 +17,8 @@ class MyGlideModule : AppGlideModule() {
         builder.apply {
             RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .error(R.drawable.placeholder)
                 .skipMemoryCache(true)
         }
     }

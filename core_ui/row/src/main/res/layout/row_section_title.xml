@@ -34,7 +34,7 @@
             app:textWeight="bold"
             tools:text="Bu uzun bir başlık için metindir, yo ye dedim karım bende deidm ki heeeeğ?" />
 
-        <kodz.org.core_ui.component.button.MultipleButton
+        <kodz.org.core_ui.component.button.MultipleTypeButton
             android:id="@+id/btnSectionViewAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,8 +42,6 @@
             android:text="@{data.buttonText != null ? data.buttonText : @string/viewAll}"
             android:visibility="@{data.isButtonVisible == true ? View.VISIBLE : View.GONE}"
             app:backgroundColor="@color/lighterGrayX2"
-            android:textSize="@dimen/_8sdp"
-            app:textSize="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

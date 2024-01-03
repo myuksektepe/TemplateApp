@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.WindowManager
+import android.widget.LinearLayout
+import androidx.core.view.setMargins
+import kodz.org.core.common.consts.ZERO
 
 
 /**
@@ -108,4 +111,19 @@ fun Window.lockScreenToUserInteractions() {
 
 fun Window.unLockScreenToUserInteractions() {
     this.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+}
+
+fun View.prepareForGroup(isInList: Boolean?, isInCarousel: Boolean?) {
+    if (isInList == true) {
+        val mLayoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(ZERO)
+        }
+        this.run {
+            setPadding(ZERO, ZERO, ZERO, ZERO)
+            layoutParams = mLayoutParams
+        }
+    }
 }

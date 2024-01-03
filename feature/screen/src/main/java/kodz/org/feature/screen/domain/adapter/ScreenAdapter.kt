@@ -13,6 +13,10 @@ class ScreenAdapter : MultipleTypeAdapter(), Filterable {
     override fun getFilter(): Filter = customFilter
     private var list = mutableListOf<BaseRow>()
 
+    init {
+        setHasStableIds(true)
+    }
+
     fun submitData(rowList: MutableList<BaseRow?>?) {
         rowList?.let {
             this.list = it.filterNotNull().toMutableList()

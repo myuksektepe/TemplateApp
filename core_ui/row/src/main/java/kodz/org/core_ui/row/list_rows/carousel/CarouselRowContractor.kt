@@ -4,8 +4,6 @@ import androidx.databinding.ViewDataBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseListRowContractor
-import kodz.org.core.common.SpacesItemDecorationForCarousel
-import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
@@ -20,7 +18,7 @@ class CarouselRowContractor : BaseListRowContractor() {
     override var viewBinding: ViewDataBinding? = null
     lateinit var binding: RowCarouselBinding
     override var itemClickHandler: ItemClickHandler? = null
-    private val sliderAdapter by lazy { MultipleTypeAdapter() }
+    private val listAdapter by lazy { MultipleTypeAdapter() }
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
@@ -32,14 +30,15 @@ class CarouselRowContractor : BaseListRowContractor() {
         binding.run {
             data?.let { data ->
 
-                if (!sliderAdapter.hasStableIds()) {
-                    sliderAdapter.setHasStableIds(true)
+                if (!listAdapter.hasStableIds()) {
+                    listAdapter.setHasStableIds(true)
                 }
 
                 // Item List
                 data.itemList?.let {
                     this.viewPagerVertical.run {
 
+                        /*
                         val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._16sdp)
 
                         // Remove item decoration first
@@ -47,8 +46,9 @@ class CarouselRowContractor : BaseListRowContractor() {
 
                         // Add item decoration
                         addItemDecoration(SpacesItemDecorationForCarousel(itemSpaceInt))
+                         */
 
-                        adapter = sliderAdapter
+                        adapter = listAdapter
                     }
 
                     // Indicator Dots
@@ -67,7 +67,7 @@ class CarouselRowContractor : BaseListRowContractor() {
                         )
                     }
 
-                    sliderAdapter.submitList(itemList)
+                    listAdapter.submitList(itemList)
                 } ?: run {
                     binding.root.gone()
                 }

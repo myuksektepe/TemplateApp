@@ -31,9 +31,7 @@ class SpacesItemDecoration(space: Int) : RecyclerView.ItemDecoration() {
     }
 }
 
-class SpacesItemDecorationForCarousel(val space: Int) : RecyclerView.ItemDecoration() {
-    private val halfSpace: Int = space / TWO
-
+class SpacesItemDecorationForCarousel(private val space: Int) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -41,34 +39,6 @@ class SpacesItemDecorationForCarousel(val space: Int) : RecyclerView.ItemDecorat
         state: RecyclerView.State
     ) {
         parent.setClipToPadding(false)
-
         view.setPadding(space, ZERO, space, ZERO)
-
-        /*
-        // First Item
-        if (parent.getChildAdapterPosition(view) == ZERO) {
-            view.setPadding(space, ZERO, halfSpace, ZERO)
-        }
-
-        // Last Item
-        else if (parent.getChildAdapterPosition(view) == ((parent.adapter?.itemCount ?: ZERO) - ONE)) {
-            parent.setPadding(halfSpace, halfSpace, space, halfSpace)
-            outRect.top = halfSpace
-            outRect.bottom = halfSpace
-            outRect.left = halfSpace
-            outRect.right = ZERO
-        }
-
-        else {
-            if (parent.getPaddingLeft() != halfSpace) {
-                parent.setPadding(halfSpace, halfSpace, halfSpace, halfSpace)
-            }
-            outRect.top = halfSpace
-            outRect.bottom = halfSpace
-            outRect.left = halfSpace
-            outRect.right = halfSpace
-        }
-
-             */
     }
 }

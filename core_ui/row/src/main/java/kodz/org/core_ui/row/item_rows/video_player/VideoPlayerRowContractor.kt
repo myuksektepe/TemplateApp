@@ -18,6 +18,7 @@ import kodz.org.core.common.consts.HUNDRED
 import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.animFadeOut
 import kodz.org.core.extension.getDurationText
+import kodz.org.core.extension.prepareForGroup
 import kodz.org.core.extension.visible
 import kodz.org.core_ui.component.button.CircleImageButton
 import kodz.org.core_ui.row.databinding.RowVideoPlayerBinding
@@ -63,7 +64,7 @@ class VideoPlayerRowContractor(
             data?.let { data ->
 
                 // Paddings
-                if (isInList == true || isInCarousel == true) rowVideoPlayerRoot.setPadding(ZERO, ZERO, ZERO, ZERO)
+                rowVideoPlayerRoot.prepareForGroup(isInList, isInCarousel)
 
                 // Thumbnail
                 data.thumbnailUrl?.let {

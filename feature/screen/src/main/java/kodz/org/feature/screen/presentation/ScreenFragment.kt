@@ -172,7 +172,8 @@ class ScreenFragment :
     private fun setUI() {
         binding.run {
             listDashboard.run {
-                // setHasFixedSize(true)
+                setHasFixedSize(true)
+                setItemViewCacheSize(rowAdapter.itemCount)
                 rowAdapter.submitData(null)
                 adapter = rowAdapter
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

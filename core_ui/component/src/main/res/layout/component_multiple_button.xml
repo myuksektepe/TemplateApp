@@ -9,12 +9,12 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cnstMultipleButton"
+        android:id="@+id/cnstMultipleTypeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/crdMultipleButton"
+            android:id="@+id/crdMultipleTypeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:outlineAmbientShadowColor="@color/darkGray"
@@ -34,46 +34,42 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/imgMultipleButton"
+                    android:id="@+id/imgMultipleTypeButton"
                     android:layout_width="@dimen/_18sdp"
                     android:layout_height="@dimen/_18sdp"
                     android:scaleType="centerInside"
                     android:tint="@color/dayNightReverse"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/dividerMultipleButton"
+                    app:layout_constraintEnd_toStartOf="@id/dividerMultipleTypeButton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="UseAppTint"
                     tools:src="@drawable/ic_play" />
 
                 <View
-                    android:id="@+id/dividerMultipleButton"
+                    android:id="@+id/dividerMultipleTypeButton"
                     android:layout_width="@dimen/_8sdp"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/txtMultipleButton"
-                    app:layout_constraintStart_toEndOf="@id/imgMultipleButton"
+                    app:layout_constraintEnd_toStartOf="@id/txtMultipleTypeButton"
+                    app:layout_constraintStart_toEndOf="@id/imgMultipleTypeButton"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <kodz.org.core_ui.component.text.ClassicTextView
-                    android:id="@+id/txtMultipleButton"
+                    android:id="@+id/txtMultipleTypeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dayNightReverse"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:gravity="center"
-                    app:autoSizeMaxTextSize="20sp"
-                    app:autoSizeMinTextSize="4dp"
-                    app:autoSizeStepGranularity="1sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toTopOf="@id/underlineMultipleButton"
+                    app:layout_constraintBottom_toTopOf="@id/underlineMultipleTypeButton"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imgMultipleButton"
+                    app:layout_constraintStart_toEndOf="@+id/imgMultipleTypeButton"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Beğen" />
 
                 <View
-                    android:id="@+id/underlineMultipleButton"
+                    android:id="@+id/underlineMultipleTypeButton"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_4sdp"
@@ -81,7 +77,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtMultipleButton"
+                    app:layout_constraintTop_toBottomOf="@id/txtMultipleTypeButton"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:visibility="visible" />
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,7 +41,7 @@
         <attr name="textAlign" />
     </declare-styleable>
 
-    <declare-styleable name="MultipleButton">
+    <declare-styleable name="MultipleTypeButton">
         <attr name="iconDrawable" />
         <attr name="text" />
         <attr name="textSize" />

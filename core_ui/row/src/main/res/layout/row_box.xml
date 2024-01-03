@@ -14,75 +14,65 @@
             type="kodz.org.core_ui.row.item_rows.box.CornersType" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rowBoxRoot"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rowBoxCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_16sdp">
+        android:layout_margin="@dimen/_16sdp"
+        app:cardCornerRadius="@{ (data.cornersType == cornersType.ROUNDED) ? @dimen/_8sdp : 0}"
+        app:cardElevation="0dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/rowBoxCard"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="@{ (data.cornersType == cornersType.ROUNDED) ? @dimen/_8sdp : 0}"
-            app:cardElevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/imgRowBoxBackground"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                android:contentDescription="@{data.title}"
+                android:foreground="@{ (data.gradientIsVisible == true) ? @drawable/carousel_item_background : null}"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@android:color/holo_blue_bright" />
 
-                <ImageView
-                    android:id="@+id/imgRowBoxBackground"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:contentDescription="@{data.title}"
-                    android:foreground="@{ (data.gradientIsVisible == true) ? @drawable/carousel_item_background : null}"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:background="@android:color/holo_blue_bright" />
+            <kodz.org.core_ui.component.text.ClassicTextView
+                android:id="@+id/txtRowBoxTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingTop="@dimen/_8sdp"
+                android:text="@{data.title}"
+                android:textColor="@color/dayNightReverse"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintBottom_toTopOf="@+id/txtRowBoxDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:textWeight="bold"
+                tools:text="@string/lipsum" />
 
-                <kodz.org.core_ui.component.text.ClassicTextView
-                    android:id="@+id/txtRowBoxTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
-                    android:layout_marginBottom="@dimen/_8sdp"
-                    android:paddingTop="@dimen/_8sdp"
-                    android:ellipsize="end"
-                    android:maxLines="3"
-                    android:text="@{data.title}"
-                    android:textColor="@color/dayNightReverse"
-                    android:textSize="@dimen/_15sdp"
-                    app:layout_constraintBottom_toTopOf="@+id/txtRowBoxDescription"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:textWeight="bold"
-                    tools:text="@string/lipsum" />
+            <kodz.org.core_ui.component.text.ClassicTextView
+                android:id="@+id/txtRowBoxDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{data.description}"
+                android:textColor="@color/dayNightReverse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/lipsum" />
 
-                <kodz.org.core_ui.component.text.ClassicTextView
-                    android:id="@+id/txtRowBoxDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="@{data.description}"
-                    android:textColor="@color/dayNightReverse"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:text="@string/lipsum" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </layout>

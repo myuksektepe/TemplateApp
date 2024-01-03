@@ -3,7 +3,7 @@ package kodz.org.core_ui.row.item_rows.categories_slider_item
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
-import kodz.org.core.common.consts.ZERO
+import kodz.org.core.extension.prepareForGroup
 import kodz.org.core.extension.setSpamProtectedClickListener
 import kodz.org.core_ui.row.databinding.RowCategoriesSliderItemBinding
 
@@ -30,7 +30,7 @@ class CategoriesSliderItemRowContractor(
             this.data?.let { data ->
 
                 // Paddings
-                if (isInList == true || isInCarousel == true) rowCategoryItemRoot.setPadding(ZERO, ZERO, ZERO, ZERO)
+                rowCategoryItemRoot.prepareForGroup(isInList, isInCarousel)
 
                 // Text
                 txtCategoryName.text = data.categoryName

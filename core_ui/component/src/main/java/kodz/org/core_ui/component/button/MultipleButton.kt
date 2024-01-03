@@ -28,7 +28,7 @@ import kodz.org.core_ui.component.text.ClassicTextView
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 26.10.2023.
  */
 @SuppressLint("UseCompatLoadingForDrawables")
-class MultipleButton @JvmOverloads constructor(
+class MultipleTypeButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
@@ -57,27 +57,27 @@ class MultipleButton @JvmOverloads constructor(
         inflate(context, R.layout.component_multiple_button, this)
 
         // UI Elements
-        rootView = findViewById<ConstraintLayout>(R.id.cnstMultipleButton)
-        cardView = findViewById<CardView>(R.id.crdMultipleButton)
-        iconView = findViewById<ImageView>(R.id.imgMultipleButton)
-        textView = findViewById<ClassicTextView>(R.id.txtMultipleButton)
-        dividerView = findViewById<View>(R.id.dividerMultipleButton)
-        underlineView = findViewById<View>(R.id.underlineMultipleButton)
+        rootView = findViewById<ConstraintLayout>(R.id.cnstMultipleTypeButton)
+        cardView = findViewById<CardView>(R.id.crdMultipleTypeButton)
+        iconView = findViewById<ImageView>(R.id.imgMultipleTypeButton)
+        textView = findViewById<ClassicTextView>(R.id.txtMultipleTypeButton)
+        dividerView = findViewById<View>(R.id.dividerMultipleTypeButton)
+        underlineView = findViewById<View>(R.id.underlineMultipleTypeButton)
 
         // Attributes
-        context.obtainStyledAttributes(attrs, R.styleable.MultipleButton).run {
+        context.obtainStyledAttributes(attrs, R.styleable.MultipleTypeButton).run {
 
             // Init Attributes
-            _iconDrawable = getDrawable(R.styleable.MultipleButton_iconDrawable)
-            _text = getString(R.styleable.MultipleButton_text)
-            _textSize = getDimensionPixelSize(R.styleable.MultipleButton_textSize, 16)
-            _textWeight = getString(R.styleable.MultipleButton_textWeight)
-            _textColor = getColor(R.styleable.MultipleButton_textColor, resources.getColor(android.R.color.white))
-            _backgroundColor = getColor(R.styleable.MultipleButton_backgroundColor, resources.getColor(kodz.org.core.R.color.transparent))
-            _outlineColor = getColor(R.styleable.MultipleButton_outlineColor, resources.getColor(kodz.org.core.R.color.transparent))
-            _showOutline = getBoolean(R.styleable.MultipleButton_showOutline, false)
-            _underline = getBoolean(R.styleable.MultipleButton_underline, false)
-            _matchParent = getBoolean(R.styleable.MultipleButton_matchParent, false)
+            _iconDrawable = getDrawable(R.styleable.MultipleTypeButton_iconDrawable)
+            _text = getString(R.styleable.MultipleTypeButton_text)
+            _textSize = getDimensionPixelSize(R.styleable.MultipleTypeButton_textSize, 16)
+            _textWeight = getString(R.styleable.MultipleTypeButton_textWeight)
+            _textColor = getColor(R.styleable.MultipleTypeButton_textColor, resources.getColor(android.R.color.white))
+            _backgroundColor = getColor(R.styleable.MultipleTypeButton_backgroundColor, resources.getColor(kodz.org.core.R.color.transparent))
+            _outlineColor = getColor(R.styleable.MultipleTypeButton_outlineColor, resources.getColor(kodz.org.core.R.color.transparent))
+            _showOutline = getBoolean(R.styleable.MultipleTypeButton_showOutline, false)
+            _underline = getBoolean(R.styleable.MultipleTypeButton_underline, false)
+            _matchParent = getBoolean(R.styleable.MultipleTypeButton_matchParent, false)
 
             // Icon
             _iconDrawable?.run {
