@@ -19,7 +19,7 @@
         android:layout_margin="@dimen/_16sdp"
         app:cardBackgroundColor="@{data.showBackground != true ? @color/transparent : @color/nightDayReverse}"
         app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="@{data.showBackground == true ? @dimen/_8sdp : 0}"
+        app:cardElevation="@{data.showBackground == true ? @dimen/_4sdp : 0}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

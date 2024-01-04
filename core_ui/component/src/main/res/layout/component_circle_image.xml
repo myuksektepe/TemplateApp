@@ -30,7 +30,7 @@
             android:stateListAnimator="@null"
             app:cardBackgroundColor="@color/transparent"
             app:cardCornerRadius="@dimen/_100sdp"
-            app:cardElevation="6dp"
+            app:cardElevation="@dimen/_4sdp"
             app:cardUseCompatPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

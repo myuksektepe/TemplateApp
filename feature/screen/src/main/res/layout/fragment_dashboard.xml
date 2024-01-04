@@ -29,6 +29,7 @@
                         layout="@layout/row_search_box"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_16sdp"
                         android:visibility="gone" />
 
                     <kodz.org.core_ui.component.list.RecyclerView
