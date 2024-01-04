@@ -40,7 +40,7 @@ class HorizontalListRowContractor : BaseListRowContractor() {
 
                         val context = this.context
                         val itemSpaceInt = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
-                        setItemViewCacheSize(listAdapter.itemCount)
+                        // setItemViewCacheSize(listAdapter.itemCount)
 
                         // Remove item decoration first
                         if (itemDecorationCount > ZERO) removeItemDecorationAt(ZERO)

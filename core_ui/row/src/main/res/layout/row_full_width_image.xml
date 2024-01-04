@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="0dp"
+        android:layout_marginVertical="@dimen/_16sdp"
         app:imageUrl="@{data.imageUrl}"
         app:shadowColor="@color/black70"
         app:showShadow="true" />
