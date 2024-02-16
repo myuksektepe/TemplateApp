@@ -4,6 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import kodz.org.core.common.AppLog
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 /**
@@ -29,4 +32,16 @@ fun Context.isOnline(): Boolean {
         val netInfo = cm.activeNetworkInfo
         return netInfo != null && netInfo.isConnectedOrConnecting
     }
+}
+
+fun String.isUrlReachable(): Boolean {
+    try {
+        val url = URL(this)
+        val httpURLConnection = url.openConnection() as HttpURLConnection
+        return httpURLConnection.responseCode == 200
+    } catch (e: Exception) {
+        AppLog(e.toString())
+        // throw UnknownHostException(e.message)
+    }
+    return false
 }

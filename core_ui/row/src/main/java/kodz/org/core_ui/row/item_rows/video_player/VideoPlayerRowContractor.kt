@@ -18,6 +18,8 @@ import kodz.org.core.common.consts.HUNDRED
 import kodz.org.core.common.consts.ZERO
 import kodz.org.core.extension.animFadeOut
 import kodz.org.core.extension.getDurationText
+import kodz.org.core.extension.gone
+import kodz.org.core.extension.isUrlReachable
 import kodz.org.core.extension.prepareForGroup
 import kodz.org.core.extension.visible
 import kodz.org.core_ui.component.button.CircleImageButton
@@ -63,146 +65,150 @@ class VideoPlayerRowContractor(
         binding.run {
             data?.let { data ->
 
-                // Paddings
-                rowVideoPlayerRoot.prepareForGroup(isInList, isInCarousel)
+                data.videoUrl?.let { videoUrl ->
+                    if (videoUrl.isUrlReachable()) {
+                        // Paddings
+                        rowVideoPlayerRoot.prepareForGroup(isInList, isInCarousel)
 
-                // Thumbnail
-                data.thumbnailUrl?.let {
-                    val glideRequest = RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .transform(CenterCrop())
-                        .override(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+                        // Thumbnail
+                        data.thumbnailUrl?.let {
+                            val glideRequest = RequestOptions()
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .transform(CenterCrop())
+                                .override(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
 
-                    GlideApp.with(this.root.context)
-                        .load(it)
-                        .apply(glideRequest)
-                        .into(imgThumbnail)
-                }
+                            GlideApp.with(this.root.context)
+                                .load(it)
+                                .apply(glideRequest)
+                                .into(imgThumbnail)
+                        }
 
-                // Video
-                data.videoUrl?.let { url ->
-                    textureView.run {
-                        try {
-                            this.surfaceTextureListener =
-                                object : TextureView.SurfaceTextureListener {
-                                    override fun onSurfaceTextureAvailable(
-                                        surface: SurfaceTexture,
-                                        width: Int,
-                                        height: Int
-                                    ) {
-                                        mediaPlayer = MediaPlayer().apply {
-                                            setDataSource(url)
-                                            setSurface(Surface(surface))
-                                            prepare()
+                        // Video
+                        videoUrl.let { url ->
+                            textureView.run {
+                                try {
+                                    this.surfaceTextureListener =
+                                        object : TextureView.SurfaceTextureListener {
+                                            override fun onSurfaceTextureAvailable(
+                                                surface: SurfaceTexture,
+                                                width: Int,
+                                                height: Int
+                                            ) {
+                                                mediaPlayer = MediaPlayer().apply {
+                                                    setDataSource(url)
+                                                    setSurface(Surface(surface))
+                                                    prepare()
 
-                                            setOnPreparedListener { mp ->
-                                                onVideoReady(mp)
-                                                if (data.autoPlay == true) {
-                                                    mp.start()
-                                                    btnPlayPause.setPause()
+                                                    setOnPreparedListener { mp ->
+                                                        onVideoReady(mp)
+                                                        if (data.autoPlay == true) {
+                                                            mp.start()
+                                                            btnPlayPause.setPause()
+                                                        }
+                                                    }
+                                                    setOnCompletionListener { mp ->
+                                                        onVideoFinish(mp)
+                                                    }
+                                                    setOnInfoListener { _, what, _ ->
+                                                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                                                            imgThumbnail.startAnimation(this@run.context.animFadeOut())
+                                                        }
+                                                        true
+                                                    }
+                                                    setOnErrorListener { _, what, extra ->
+                                                        AppLog("Video setOnErrorListener what: $what")
+                                                        AppLog("Video setOnErrorListener extra: $extra")
+                                                        true
+                                                    }
+
+                                                    // setOnBufferingUpdateListener { mp, percent -> }
                                                 }
                                             }
-                                            setOnCompletionListener { mp ->
-                                                onVideoFinish(mp)
-                                            }
-                                            setOnInfoListener { _, what, _ ->
-                                                if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-                                                    imgThumbnail.startAnimation(this@run.context.animFadeOut())
-                                                }
-                                                true
-                                            }
-                                            setOnErrorListener { _, what, extra ->
-                                                AppLog("Video setOnErrorListener what: $what")
-                                                AppLog("Video setOnErrorListener extra: $extra")
-                                                true
+
+                                            override fun onSurfaceTextureSizeChanged(
+                                                surface: SurfaceTexture,
+                                                width: Int,
+                                                height: Int
+                                            ) {
                                             }
 
-                                            // setOnBufferingUpdateListener { mp, percent -> }
+                                            override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
+                                                mediaPlayer?.stop()
+                                                mediaPlayer = null
+                                                return false
+                                            }
+
+                                            override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
+                                            }
+                                        }
+
+                                } catch (e: Exception) {
+                                    AppLog(e.message.toString())
+                                } catch (e: FileNotFoundException) {
+                                    AppLog(e.message.toString())
+                                }
+                            }
+                        }
+
+                        if (data.isControllersVisible == true) {
+                            controllers.visible()
+
+                            // Video Buttons
+                            btnPlayPause.setOnClickListener {
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    if (mediaPlayer?.isPlaying == true) {
+                                        mediaPlayer?.pause()
+                                        btnPlayPause.setPlay()
+                                    } else {
+                                        mediaPlayer?.start()
+                                        btnPlayPause.setPause()
+                                    }
+                                }
+                            }
+
+                            btnForward10.setOnClickListener {
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    mediaPlayer?.seekTo(videoCurrentTime + JUMP_TIME_MILLI_SEC)
+                                }
+                            }
+
+                            btnReplay10.setOnClickListener {
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    if (videoCurrentTime >= JUMP_TIME_MILLI_SEC) {
+                                        mediaPlayer?.seekTo(videoCurrentTime - JUMP_TIME_MILLI_SEC)
+                                    } else {
+                                        mediaPlayer?.seekTo(ZERO)
+                                    }
+                                }
+                            }
+
+                            // SeekBar
+                            progressBar.setOnSeekBarChangeListener(object :
+                                SeekBar.OnSeekBarChangeListener {
+                                override fun onProgressChanged(
+                                    seekBar: SeekBar?,
+                                    progress: Int,
+                                    fromUser: Boolean
+                                ) {
+                                    if (fromUser) {
+                                        GlobalScope.launch(Dispatchers.Main) {
+                                            mediaPlayer?.seekTo((progress * videoDuration) / HUNDRED)
                                         }
                                     }
-
-                                    override fun onSurfaceTextureSizeChanged(
-                                        surface: SurfaceTexture,
-                                        width: Int,
-                                        height: Int
-                                    ) {
-                                    }
-
-                                    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
-                                        mediaPlayer?.stop()
-                                        mediaPlayer = null
-                                        return false
-                                    }
-
-                                    override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
-                                    }
                                 }
 
-                        } catch (e: Exception) {
-                            AppLog(e.message.toString())
-                        } catch (e: FileNotFoundException) {
-                            AppLog(e.message.toString())
-                        }
-                    }
-                }
-
-                if (data.isControllersVisible == true) {
-                    controllers.visible()
-
-                    // Video Buttons
-                    btnPlayPause.setOnClickListener {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            if (mediaPlayer?.isPlaying == true) {
-                                mediaPlayer?.pause()
-                                btnPlayPause.setPlay()
-                            } else {
-                                mediaPlayer?.start()
-                                btnPlayPause.setPause()
-                            }
-                        }
-                    }
-
-                    btnForward10.setOnClickListener {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            mediaPlayer?.seekTo(videoCurrentTime + JUMP_TIME_MILLI_SEC)
-                        }
-                    }
-
-                    btnReplay10.setOnClickListener {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            if (videoCurrentTime >= JUMP_TIME_MILLI_SEC) {
-                                mediaPlayer?.seekTo(videoCurrentTime - JUMP_TIME_MILLI_SEC)
-                            } else {
-                                mediaPlayer?.seekTo(ZERO)
-                            }
-                        }
-                    }
-
-                    // SeekBar
-                    progressBar.setOnSeekBarChangeListener(object :
-                        SeekBar.OnSeekBarChangeListener {
-                        override fun onProgressChanged(
-                            seekBar: SeekBar?,
-                            progress: Int,
-                            fromUser: Boolean
-                        ) {
-                            if (fromUser) {
-                                GlobalScope.launch(Dispatchers.Main) {
-                                    mediaPlayer?.seekTo((progress * videoDuration) / HUNDRED)
+                                override fun onStartTrackingTouch(p0: SeekBar?) {
+                                    // do nothing
                                 }
-                            }
-                        }
 
-                        override fun onStartTrackingTouch(p0: SeekBar?) {
-                            // do nothing
-                        }
+                                override fun onStopTrackingTouch(p0: SeekBar?) {
+                                    // do nothing
+                                }
 
-                        override fun onStopTrackingTouch(p0: SeekBar?) {
-                            // do nothing
+                            })
                         }
-
-                    })
-                }
+                    } else binding.root.gone()
+                } ?: binding.root.gone()
             }
         }
     }
