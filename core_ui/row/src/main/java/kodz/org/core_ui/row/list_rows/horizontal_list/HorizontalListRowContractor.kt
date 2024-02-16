@@ -35,7 +35,7 @@ class HorizontalListRowContractor : BaseListRowContractor() {
                 }
 
                 // Item List
-                data.itemList?.let {
+                data.itemList?.let { itemListJson ->
                     this.rcyHorizontalList.run {
 
                         val context = this.context
@@ -57,7 +57,7 @@ class HorizontalListRowContractor : BaseListRowContractor() {
 
                     // Items
                     val itemList = data.itemType?.let {
-                        data.itemList.getItemListByRowType(
+                        itemListJson.getItemListByRowType(
                             rowType = it,
                             itemClickHandler = itemClickHandler,
                             isInCarousel = true,

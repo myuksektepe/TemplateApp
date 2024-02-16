@@ -55,6 +55,9 @@ import kodz.org.core_ui.row.unrepeatable_item_rows.search_box.SearchBoxRowDataMo
 import kodz.org.core_ui.row.unrepeatable_item_rows.section_title.SectionTitleRow
 import kodz.org.core_ui.row.unrepeatable_item_rows.section_title.SectionTitleRowContractor
 import kodz.org.core_ui.row.unrepeatable_item_rows.section_title.SectionTitleRowDataModel
+import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.TabsLayoutContractor
+import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.TabsLayoutDataModel
+import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.TabsLayoutRow
 import kotlin.reflect.full.primaryConstructor
 
 fun String.convertRow(
@@ -92,7 +95,6 @@ fun String.convertRow(
         // ========================================
 
         // Item Row (Repeatable)
-
         "EntryItem1Row" -> {
             clsRow =
                 makeItemRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowRowDataModel>(
@@ -177,6 +179,15 @@ fun String.convertRow(
                     dataModelString
                 )
         }
+
+        "TabsLayout" -> {
+            clsRow =
+                makeUnrepeatableItemRow<TabsLayoutRow, TabsLayoutContractor, TabsLayoutDataModel>(
+                    dataModelString,
+                    itemClickHandler
+                )
+        }
+
         else -> {
             clsRow = null
             AppLog("$this row hasn't been included in the app!")
