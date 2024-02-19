@@ -25,19 +25,19 @@ import kodz.org.core.model.EventTypeCode
 import kodz.org.core.model.Resource
 import kodz.org.core.model.SettingsModel
 import kodz.org.feature.screen.R
-import kodz.org.feature.screen.databinding.FragmentDashboardBinding
+import kodz.org.feature.screen.databinding.FragmentScreenBinding
 import kodz.org.feature.screen.domain.adapter.ScreenAdapter
 
 @AndroidEntryPoint
 class ScreenFragment :
-    BaseFragment<ScreenViewModel, FragmentDashboardBinding>(R.layout.fragment_dashboard) {
+    BaseFragment<ScreenViewModel, FragmentScreenBinding>(R.layout.fragment_screen) {
     override val viewModel: ScreenViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
     override val isBottomNavigationViewVisible = false
     private val rowAdapter = ScreenAdapter()
     private var endpoint: String? = null
     private var thisPageOpenedBefore: Boolean = false
-    override fun bindingViewModel(binding: FragmentDashboardBinding) {
+    override fun bindingViewModel(binding: FragmentScreenBinding) {
         binding.lifecycleOwner = this
     }
 
@@ -178,11 +178,13 @@ class ScreenFragment :
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
 
+            /*
             swiperefresh.setOnRefreshListener {
                 viewModel.fetchAdapter(endpoint)
                 binding.searchBox.edtSearch.text = null
                 swiperefresh.isRefreshing = false
             }
+             */
         }
     }
 

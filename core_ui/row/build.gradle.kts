@@ -52,6 +52,7 @@ dependencies {
 
     // KTX
     implementation(Dependencies.ktxCore)
+    implementation(Dependencies.ktxFragment)
 
     // Gson
     implementation(Dependencies.gson)

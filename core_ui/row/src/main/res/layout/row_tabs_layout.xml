@@ -22,14 +22,13 @@
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:minHeight="?attr/actionBarSize"
-            app:tabInlineLabel="true"
-            app:tabIndicatorFullWidth="true"/>
+            app:tabIndicatorFullWidth="true"
+            app:tabInlineLabel="true" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/tabsLayoutViewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_height="match_parent"
             android:nestedScrollingEnabled="true"
             android:orientation="horizontal"
             android:overScrollMode="never"

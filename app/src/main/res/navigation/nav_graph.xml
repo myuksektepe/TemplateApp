@@ -9,7 +9,7 @@
         android:id="@+id/screenFragment"
         android:name="kodz.org.feature.screen.presentation.ScreenFragment"
         android:label="screenFragment"
-        tools:layout="@layout/fragment_dashboard">
+        tools:layout="@layout/fragment_screen">
         <argument
             android:name="endpoint"
             app:argType="string"

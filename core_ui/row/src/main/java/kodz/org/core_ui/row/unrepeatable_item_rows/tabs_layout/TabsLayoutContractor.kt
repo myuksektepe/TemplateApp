@@ -1,17 +1,22 @@
 package kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout
 
+import android.content.ContextWrapper
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentActivity
+import com.google.android.material.tabs.TabLayoutMediator
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseUnrepeatableItemRowContractor
 import kodz.org.core.common.AppLog
-import kodz.org.core_ui.row.common.MultipleTypeAdapter
+import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core_ui.row.databinding.RowTabsLayoutBinding
+import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPage
+import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPageAdapter
 
 class TabsLayoutContractor() : BaseUnrepeatableItemRowContractor() {
-    override var itemClickHandler: ItemClickHandler? = null
     override var viewBinding: ViewDataBinding? = null
     private var binding: RowTabsLayoutBinding? = null
-    private val listAdapter by lazy { MultipleTypeAdapter() }
+    private var pageAdapter: TabsLayoutPageAdapter? = null
+    private val tabTitles = mutableListOf<Pair<String, Int?>>()
 
     override fun initBinding(viewDataBinding: ViewDataBinding) {
         viewBinding = viewDataBinding
@@ -23,16 +28,19 @@ class TabsLayoutContractor() : BaseUnrepeatableItemRowContractor() {
         binding?.run {
             data?.let { data ->
 
-                if (!listAdapter.hasStableIds()) {
-                    listAdapter.setHasStableIds(true)
-                }
-
                 // ViewPager
-                tabsLayoutViewPager.adapter = listAdapter
+                val context = (this.root.context as ContextWrapper).baseContext
+                val fragmentManager = (context as FragmentActivity).supportFragmentManager
+
+                tabsLayoutTabLayout.removeAllTabs()
+                tabsLayoutViewPager.isUserInputEnabled = false
+                pageAdapter = TabsLayoutPageAdapter(fragmentManager = fragmentManager, context.lifecycle)
 
                 // Tabs
                 data.tabs?.forEach { tab ->
                     tab.tabTitle?.let { tabText ->
+                        tabTitles.add(tabText to tab.tabIcon?.resourceId)
+                        /*
                         tabsLayoutTabLayout.addTab(
                             tabsLayoutTabLayout.newTab().apply {
                                 text = tabText
@@ -41,15 +49,30 @@ class TabsLayoutContractor() : BaseUnrepeatableItemRowContractor() {
                                 }
                             }
                         )
+                         */
                     }
 
                     tab.tabContent?.let { itemListJson ->
-                        AppLog(itemListJson[0].toString())
+                        pageAdapter?.addFragment(TabsLayoutPage(itemListJson))
                     }
                 }
 
-                // TabLayoutMediator(tabsLayoutTabLayout, tabsLayoutViewPager) { _, _ -> }.attach()
+                tabsLayoutViewPager.adapter = pageAdapter
+
+                TabLayoutMediator(tabsLayoutTabLayout, tabsLayoutViewPager) { tab, position ->
+                    tab.text = tabTitles[position].first
+                    tabTitles[position].second?.let { tab.setIcon(it) }
+                }.attach()
+            }
+        }
+    }
+
+    override var itemClickHandler: ItemClickHandler? = object : ItemClickHandler {
+        override fun onItemClick(itemClickEventModel: ItemClickEventModel?) {
+            itemClickEventModel?.let {
+                AppLog(it.toString())
             }
         }
     }
 }
+

@@ -64,7 +64,7 @@ import kotlin.reflect.full.primaryConstructor
 fun String.convertRow(
     dataModelJsonObject: JsonObject? = null,
     dataModelString: String? = null,
-    itemClickHandler: ItemClickHandler
+    itemClickHandler: ItemClickHandler?
 ): BaseRow? {
     var clsRow: BaseRow? = null
     when (this) {
@@ -213,7 +213,6 @@ fun String.convertRow(
 
     return clsRow
 }
-
 
 inline fun <reified R : BaseItemRow, reified C : BaseItemRowContractor, reified BDM : BaseItemRowDataModel> makeItemRow(
     dataModelString: String? = null,
