@@ -12,6 +12,12 @@ import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.AppLog
+import kodz.org.core.model.ButtonModel
+import kodz.org.core.model.ButtonType
+import kodz.org.core.model.DialogBox
+import kodz.org.core.model.ErrorModel
+import kodz.org.core.model.ErrorType
+import kodz.org.core.model.EventTypeCode
 import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.ScreenModel
@@ -78,7 +84,7 @@ class ScreenViewModel @Inject constructor(
 
                                                 // Make row with rowName
                                                 rowName.convertRow(
-                                                    dataModelString = row.dataModel,
+                                                    dataModelJsonObject = row.dataModel,
                                                     itemClickHandler = itemClickHandler
                                                 )?.let { row -> componentList.add(row) }
 
@@ -86,16 +92,36 @@ class ScreenViewModel @Inject constructor(
                                         }
                                     }
 
-                                    screenModel.postValue(
-                                        Resource.Success(
-                                            ScreenModel.ViewEntity(
-                                                it.settings,
-                                                it.error,
-                                                componentList
+                                    if (componentList.isNotEmpty()) {
+                                        screenModel.postValue(
+                                            Resource.Success(
+                                                ScreenModel.ViewEntity(
+                                                    it.settings,
+                                                    it.error,
+                                                    componentList
+                                                )
                                             )
                                         )
-                                    )
-                                    AppLog("Rowlar önyüze gönderildi.")
+                                        AppLog("Rowlar önyüze gönderildi.")
+                                    } else {
+                                        screenModel.postValue(
+                                            Resource.Error(
+                                                ErrorModel(
+                                                    ErrorType.WARNING,
+                                                    DialogBox(
+                                                        showOnce = false,
+                                                        tag = "",
+                                                        title = context.getString(kodz.org.core.R.string.error),
+                                                        description = context.getString(kodz.org.core.R.string.tryAgain),
+                                                        primaryButton = ButtonModel(
+                                                            type = ButtonType.FILLED,
+                                                            eventType = EventTypeCode.RETRY_LAST_ACTION
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    }
 
                                 }
                             }

@@ -1,6 +1,7 @@
 package kodz.org.core.base.data.http
 
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import kodz.org.core.common.AppLog
 
@@ -29,6 +30,18 @@ inline fun <I, reified O> I.convert(): O {
 }
 
 inline fun <reified O> String.toResponseModel(): O? {
+    return try {
+        gson.fromJson(this, object : TypeToken<O>() {}.type)
+    } catch (e: Exception) {
+        AppLog("${e.message}")
+        null
+    } catch (e: UnsupportedOperationException) {
+        AppLog("${e.message}")
+        null
+    }
+}
+
+inline fun <reified O> JsonObject.toResponseModel(): O? {
     return try {
         gson.fromJson(this, object : TypeToken<O>() {}.type)
     } catch (e: Exception) {

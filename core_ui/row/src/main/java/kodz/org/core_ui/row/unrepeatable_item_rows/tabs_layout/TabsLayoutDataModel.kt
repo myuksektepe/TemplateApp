@@ -6,12 +6,12 @@ import kodz.org.core.common.enums.CommonIcons
 import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.RowItemModel
 
-class TabsLayoutDataModel(
-    @SerializedName("itemClickEventModel") override val itemClickEventModel: ItemClickEventModel? = null,
+data class TabsLayoutDataModel(
     @SerializedName("tabs") val tabs: List<TabModel>?,
+    @SerializedName("itemClickEventModel") override val itemClickEventModel: ItemClickEventModel? = null
 ) : BaseUnrepeatableItemRowDataModel()
 
-class TabModel(
+data class TabModel(
     @SerializedName("tabTitle") val tabTitle: String?,
     @SerializedName("tabIcon") val tabIcon: CommonIcons?,
     @SerializedName("tabContent") val tabContent: List<RowItemModel?>?

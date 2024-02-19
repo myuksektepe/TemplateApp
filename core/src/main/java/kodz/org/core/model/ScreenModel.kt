@@ -1,5 +1,6 @@
 package kodz.org.core.model
 
+import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.data.http.HttpBaseResponse
 import kodz.org.core.base.row.row.BaseRow
@@ -72,5 +73,5 @@ data class ButtonModel(
 data class RowItemModel(
     @SerializedName("isVisible") val isVisible: Boolean? = null,
     @SerializedName("rowName") val rowName: String? = null,
-    @SerializedName("dataModel") val dataModel: String? = null,
+    @SerializedName("dataModel") val dataModel: JsonObject? = null,
 )

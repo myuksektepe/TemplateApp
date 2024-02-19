@@ -1,5 +1,6 @@
 package kodz.org.core_ui.row.common
 
+import com.google.gson.JsonObject
 import kodz.org.core.base.data.http.toResponseModel
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
@@ -61,7 +62,8 @@ import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.TabsLayoutRow
 import kotlin.reflect.full.primaryConstructor
 
 fun String.convertRow(
-    dataModelString: String?,
+    dataModelJsonObject: JsonObject? = null,
+    dataModelString: String? = null,
     itemClickHandler: ItemClickHandler
 ): BaseRow? {
     var clsRow: BaseRow? = null
@@ -71,24 +73,27 @@ fun String.convertRow(
         "HorizontalListRow" -> {
             clsRow =
                 makeListRow<HorizontalListRow, HorizontalListRowContractor, HorizontalListRowDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
         "VerticalListRow" -> {
             clsRow =
                 makeListRow<VerticalListRow, VerticalListRowContractor, VerticalListRowDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
         "CarouselRow" -> {
             clsRow =
                 makeListRow<CarouselRow, CarouselRowContractor, CarouselRowDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
@@ -98,60 +103,68 @@ fun String.convertRow(
         "EntryItem1Row" -> {
             clsRow =
                 makeItemRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowRowDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
         "EntryItem2Row" -> {
             clsRow =
                 makeItemRow<EntryItem2Row, EntryItem2RowContractor, EntryItem2RowRowDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
         "FullWidthImageRow" -> {
             clsRow =
                 makeItemRow<FullWidthImageRow, FullWidthImageRowContractor, FullWidthImageRowRowDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
         "QuoteRow" -> {
             clsRow =
                 makeItemRow<QuoteRow, QuoteRowContractor, QuoteRowRowDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
         "WebViewRow" -> {
             clsRow =
                 makeItemRow<WebViewRow, WebViewRowContractor, WebViewRowRowDataModel>(
-                    dataModelString
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
                 )
         }
 
         "LongTextRow" -> {
             clsRow =
                 makeItemRow<LongTextRow, LongTextRowContractor, LongTextRowRowDataModel>(
-                    dataModelString
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
                 )
         }
 
         "VideoPlayerRow" -> {
             clsRow =
                 makeItemRow<VideoPlayerRow, VideoPlayerRowContractor, VideoPlayerRowRowDataModel>(
-                    dataModelString
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
                 )
         }
 
         "BoxRow" -> {
             clsRow =
                 makeItemRow<BoxRow, BoxRowContractor, BoxRowRowDataModel>(
-                    dataModelString
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
                 )
         }
 
@@ -161,30 +174,34 @@ fun String.convertRow(
         "SectionTitleRow" -> {
             clsRow =
                 makeUnrepeatableItemRow<SectionTitleRow, SectionTitleRowContractor, SectionTitleRowDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
         "SearchBoxRow" -> {
             clsRow =
                 makeUnrepeatableItemRow<SearchBoxRow, SearchBoxRowContractor, SearchBoxRowDataModel>(
-                    dataModelString
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
                 )
         }
 
         "EntryTitle1Row" -> {
             clsRow =
                 makeUnrepeatableItemRow<EntryTitle1Row, EntryTitle1RowContractor, EntryTitle1RowRowDataModel>(
-                    dataModelString
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
                 )
         }
 
         "TabsLayout" -> {
             clsRow =
                 makeUnrepeatableItemRow<TabsLayoutRow, TabsLayoutContractor, TabsLayoutDataModel>(
-                    dataModelString,
-                    itemClickHandler
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
@@ -199,10 +216,11 @@ fun String.convertRow(
 
 
 inline fun <reified R : BaseItemRow, reified C : BaseItemRowContractor, reified BDM : BaseItemRowDataModel> makeItemRow(
-    dataModelString: String?,
+    dataModelString: String? = null,
+    dataModelJsonObject: JsonObject? = null,
     itemClickHandler: ItemClickHandler? = null
 ): BaseRow? {
-    return dataModelString?.toResponseModel<BDM>()?.let { dataModel ->
+    return dataModelJsonObject?.toResponseModel<BDM>()?.let { dataModel ->
         return R::class.primaryConstructor?.call(dataModel, null, null)?.apply {
             (contractor as? C)?.itemClickHandler = itemClickHandler
         }
@@ -210,10 +228,11 @@ inline fun <reified R : BaseItemRow, reified C : BaseItemRowContractor, reified 
 }
 
 inline fun <reified R : BaseUnrepeatableItemRow, reified C : BaseUnrepeatableItemRowContractor, reified BDM : BaseUnrepeatableItemRowDataModel> makeUnrepeatableItemRow(
-    dataModelString: String?,
+    dataModelString: String? = null,
+    dataModelJsonObject: JsonObject? = null,
     itemClickHandler: ItemClickHandler? = null
 ): BaseRow? {
-    return dataModelString?.toResponseModel<BDM>()?.let { dataModel ->
+    return dataModelJsonObject?.toResponseModel<BDM>()?.let { dataModel ->
         return R::class.primaryConstructor?.call(dataModel)?.apply {
             (contractor as? C)?.itemClickHandler = itemClickHandler
         }
@@ -221,23 +240,13 @@ inline fun <reified R : BaseUnrepeatableItemRow, reified C : BaseUnrepeatableIte
 }
 
 inline fun <reified R : BaseListRow, reified C : BaseListRowContractor, reified BDM : BaseListRowDataModel> makeListRow(
-    dataModelString: String?,
+    dataModelString: String? = null,
+    dataModelJsonObject: JsonObject? = null,
     itemClickHandler: ItemClickHandler? = null
 ): BaseRow? {
-    return dataModelString?.toResponseModel<BDM>()?.let { dataModel ->
+    return dataModelJsonObject?.toResponseModel<BDM>()?.let { dataModel ->
         return R::class.primaryConstructor?.call(dataModel)?.apply {
             (contractor as? C)?.itemClickHandler = itemClickHandler
         }
     }
 }
-
-/*
-inline fun <reified R : BaseRow, reified C : BaseRowContractor> makeRow(
-    dataModel: BaseRowDataModel?,
-    itemClickHandler: ItemClickHandler? = null
-): BaseRow? {
-    return R::class.primaryConstructor?.call(dataModel)?.apply {
-        (contractor as? C)?.itemClickHandler = itemClickHandler
-    }
-}
- */
