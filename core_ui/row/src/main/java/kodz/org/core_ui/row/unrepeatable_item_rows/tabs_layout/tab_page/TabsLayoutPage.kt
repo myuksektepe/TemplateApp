@@ -26,7 +26,7 @@ class TabsLayoutPage(
     override fun viewDidLoad(savedInstanceState: Bundle?) {
         componentList.clear()
         binding.run {
-            listTabPage.run {
+            recyclerViewTabPage.run {
                 // setItemViewCacheSize(rowAdapter.itemCount)
                 rowAdapter.submitList(null)
                 adapter = rowAdapter
@@ -44,7 +44,7 @@ class TabsLayoutPage(
 
             if (componentList.isNotEmpty()) {
                 rowAdapter.submitList(componentList)
-                listTabPage.setItemViewCacheSize(componentList.size)
+                recyclerViewTabPage.setItemViewCacheSize(componentList.size)
             }
 
         }

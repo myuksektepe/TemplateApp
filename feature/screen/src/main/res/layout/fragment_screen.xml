@@ -7,13 +7,12 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    -->
-    <!--
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     -->
 
     <androidx.core.widget.NestedScrollView

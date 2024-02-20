@@ -129,11 +129,6 @@ class MainActivity @Inject constructor() :
         }
     }
 
-    override fun onBackPressed() {
-        if (isAnyDialogVisible) return
-        super.onBackPressed()
-    }
-
     @SuppressLint("UseCompatLoadingForDrawables", "DiscouragedApi")
     private fun prepareDialog(errorModel: ErrorModel) {
         dialog = Dialog(this)
@@ -300,4 +295,9 @@ class MainActivity @Inject constructor() :
 
             layoutParams?.let { setLayoutParams(it) }
         }
+
+    override fun onBackPressed() {
+        if (isAnyDialogVisible) return
+        super.onBackPressed()
+    }
 }
