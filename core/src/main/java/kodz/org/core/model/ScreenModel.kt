@@ -15,7 +15,7 @@ open class ScreenModel(
     class ViewEntity(
         val settings: SettingsModel? = null,
         val error: ErrorModel? = null,
-        val rows: MutableList<BaseRow>? = null
+        val rows: MutableList<BaseRow?>? = null
     )
 }
 

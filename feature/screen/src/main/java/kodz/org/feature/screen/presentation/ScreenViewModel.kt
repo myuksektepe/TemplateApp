@@ -43,7 +43,7 @@ class ScreenViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private var job: Job? = null
-    private val componentList = mutableListOf<BaseRow>()
+    private val componentList = mutableListOf<BaseRow?>()
 
     private val searchedText = MutableLiveData<String?>()
     val searchedTextLiveData: LiveData<String?> get() = searchedText
@@ -54,6 +54,13 @@ class ScreenViewModel @Inject constructor(
     private val screenModel = MutableLiveData<Resource<ScreenModel.ViewEntity>>()
     val screenModelLiveData: LiveData<Resource<ScreenModel.ViewEntity>> get() = screenModel
 
+    private val itemClickHandler = object : ItemClickHandler {
+        override fun onItemClick(itemClickEventModel: ItemClickEventModel?) {
+            itemClickEventModel?.let {
+                this@ScreenViewModel.itemClickEventModel.postValue(it)
+            }
+        }
+    }
 
     fun fetchAdapter(endpoint: String?) {
         AppLog("$endpoint isteği başlatıldı.")
@@ -127,14 +134,6 @@ class ScreenViewModel @Inject constructor(
                             }
                         }
                     }
-            }
-        }
-    }
-
-    private val itemClickHandler = object : ItemClickHandler {
-        override fun onItemClick(itemClickEventModel: ItemClickEventModel?) {
-            itemClickEventModel?.let {
-                this@ScreenViewModel.itemClickEventModel.postValue(it)
             }
         }
     }

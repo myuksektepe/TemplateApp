@@ -5,6 +5,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -24,6 +26,7 @@ import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
 import kodz.org.core.model.Resource
 import kodz.org.core.model.SettingsModel
+import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.TabsLayoutRow
 import kodz.org.feature.screen.R
 import kodz.org.feature.screen.databinding.FragmentScreenBinding
 import kodz.org.feature.screen.domain.adapter.ScreenAdapter
@@ -38,7 +41,7 @@ class ScreenFragment :
     private var endpoint: String? = null
     private var thisPageOpenedBefore: Boolean = false
     override fun bindingViewModel(binding: FragmentScreenBinding) {
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     override fun viewDidLoad(savedInstanceState: Bundle?) {
@@ -138,30 +141,43 @@ class ScreenFragment :
                 }
             }
 
-            observeLiveData(screenModelLiveData) {
-                when (it) {
+            observeLiveData(screenModelLiveData) { result ->
+                when (result) {
                     is Resource.Loading -> {
                         showFullScreenLoading(view = binding.root)
                     }
 
                     is Resource.Error -> {
-                        showFullScreenError(it.errorModel)
+                        showFullScreenError(result.errorModel)
                     }
 
                     is Resource.Success -> {
-                        it.data.run {
+                        result.data.run {
                             // Settings
                             prepareScreen(settings)
 
                             // Rows
-                            rows?.let { rows ->
-                                showResultViaAdapter(rowAdapter, rows.toMutableList())
+                            rows?.let {
+                                (it.first() as? TabsLayoutRow)?.let {
+                                    val layoutParamsLL = LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.MATCH_PARENT
+                                    )
+
+                                    binding.linearLayoutScreen.run {
+                                        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+                                        isScrollContainer = false
+                                    }
+                                    binding.recyclerViewScreen.run {
+                                        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+                                        isScrollContainer = false
+                                    }
+                                }
+                                showResultViaAdapter(rowAdapter, it)
                             }
 
                             // Error
-                            error?.let { error ->
-                                showFullScreenError(error)
-                            }
+                            error?.let { showFullScreenError(it) }
                         }
                     }
                 }
@@ -171,7 +187,7 @@ class ScreenFragment :
 
     private fun setUI() {
         binding.run {
-            listDashboard.run {
+            recyclerViewScreen.run {
                 setItemViewCacheSize(rowAdapter.itemCount)
                 rowAdapter.submitData(null)
                 adapter = rowAdapter

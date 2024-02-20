@@ -20,14 +20,14 @@ class TabsLayoutPage(
     private val componentList = mutableListOf<BaseRow>()
 
     override fun observeViewModel() {
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     override fun viewDidLoad(savedInstanceState: Bundle?) {
         componentList.clear()
         binding.run {
             listTabPage.run {
-                setItemViewCacheSize(rowAdapter.itemCount)
+                // setItemViewCacheSize(rowAdapter.itemCount)
                 rowAdapter.submitList(null)
                 adapter = rowAdapter
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -44,6 +44,7 @@ class TabsLayoutPage(
 
             if (componentList.isNotEmpty()) {
                 rowAdapter.submitList(componentList)
+                listTabPage.setItemViewCacheSize(componentList.size)
             }
 
         }

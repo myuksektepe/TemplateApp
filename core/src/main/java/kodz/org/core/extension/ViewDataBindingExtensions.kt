@@ -6,7 +6,6 @@ import androidx.core.view.marginLeft
 import androidx.core.view.setMargins
 import androidx.databinding.ViewDataBinding
 
-
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 10.11.2023.
  */

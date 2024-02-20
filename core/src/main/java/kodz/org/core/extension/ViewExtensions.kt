@@ -9,7 +9,6 @@ import android.widget.LinearLayout
 import androidx.core.view.setMargins
 import kodz.org.core.common.consts.ZERO
 
-
 /**
  * Created by Murat Yüksektepe on 19.12.2022.
  * muratyuksektepe.com
