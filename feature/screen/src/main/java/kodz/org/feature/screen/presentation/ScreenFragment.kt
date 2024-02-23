@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.base.row.row.BaseRow
@@ -24,6 +25,9 @@ import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
 import kodz.org.core.model.Resource
 import kodz.org.core.model.SettingsModel
+import kodz.org.core.model.TabModel
+import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPage
+import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPageAdapter
 import kodz.org.feature.screen.R
 import kodz.org.feature.screen.databinding.FragmentScreenBinding
 import kodz.org.feature.screen.domain.adapter.ScreenAdapter
@@ -37,6 +41,8 @@ class ScreenFragment :
     private val rowAdapter = ScreenAdapter()
     private var endpoint: String? = null
     private var thisPageOpenedBefore: Boolean = false
+    private val tabTitles = mutableListOf<Pair<String, Int?>>()
+
     override fun bindingViewModel(binding: FragmentScreenBinding) {
         binding.lifecycleOwner = viewLifecycleOwner
     }
@@ -154,7 +160,17 @@ class ScreenFragment :
                             prepareScreen(settings)
 
                             // Rows
-                            rows?.let { showResultViaAdapter(rowAdapter, it) }
+                            rows?.let {
+                                showResultViaAdapter(rowAdapter, it)
+                            }
+
+                            // Tabs
+                            tabs?.let {
+                                showResultViaPageAdapter(
+                                    TabsLayoutPageAdapter(fragmentManager = this@ScreenFragment.parentFragmentManager, lifecycle),
+                                    it
+                                )
+                            }
 
                             // Error
                             error?.let { showFullScreenError(it) }
@@ -185,9 +201,40 @@ class ScreenFragment :
     }
 
     private fun showResultViaAdapter(adapter: ScreenAdapter, list: MutableList<BaseRow?>?) {
-        hideFullScreenLoading()
-        hideFullScreenError()
         adapter.submitData(list)
+        binding.nestedScrollView.visible()
+        binding.tabLayoutScreen.gone()
+        binding.viewPagerScreen.gone()
+        hideFullScreenError()
+        hideFullScreenLoading()
+    }
+
+    private fun showResultViaPageAdapter(adapter: TabsLayoutPageAdapter, tabs: List<TabModel>) {
+        binding.run {
+            viewPagerScreen.adapter = adapter
+            tabLayoutScreen.removeAllTabs()
+            tabs.forEach { tab ->
+                tab.tabTitle?.let { tabText ->
+                    tabTitles.add(tabText to tab.tabIcon?.resourceId)
+                }
+
+                tab.tabContent?.let { itemListJson ->
+                    adapter.addFragment(TabsLayoutPage(itemListJson))
+                }
+            }
+
+            TabLayoutMediator(tabLayoutScreen, viewPagerScreen) { tab, position ->
+                tab.text = tabTitles[position].first
+                tabTitles[position].second?.let { tab.setIcon(it) }
+            }.attach()
+
+            nestedScrollView.gone()
+            tabLayoutScreen.visible()
+            viewPagerScreen.visible()
+            viewPagerScreen.isUserInputEnabled = false
+            hideFullScreenError()
+            hideFullScreenLoading()
+        }
     }
 
     private fun prepareScreen(screenSettingsModel: SettingsModel?) {

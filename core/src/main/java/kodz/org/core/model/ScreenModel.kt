@@ -15,7 +15,8 @@ open class ScreenModel(
     class ViewEntity(
         val settings: SettingsModel? = null,
         val error: ErrorModel? = null,
-        val rows: MutableList<BaseRow?>? = null
+        val rows: MutableList<BaseRow?>? = null,
+        val tabs: List<TabModel>? = null,
     )
 }
 
@@ -74,4 +75,12 @@ data class RowItemModel(
     @SerializedName("isVisible") val isVisible: Boolean? = null,
     @SerializedName("rowName") val rowName: String? = null,
     @SerializedName("dataModel") val dataModel: JsonObject? = null,
+)
+
+// =====================================================
+/* TABS */
+data class TabModel(
+    @SerializedName("tabTitle") val tabTitle: String?,
+    @SerializedName("tabIcon") val tabIcon: CommonIcons?,
+    @SerializedName("tabContent") val tabContent: List<RowItemModel?>?
 )

@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kodz.org.core.R
 import kodz.org.core.base.data.http.HttpFlow
 import kodz.org.core.base.data.http.HttpRequest
+import kodz.org.core.base.data.http.toResponseModel
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
@@ -21,6 +23,7 @@ import kodz.org.core.model.EventTypeCode
 import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.ScreenModel
+import kodz.org.core.model.TabModel
 import kodz.org.core_ui.row.common.convertRow
 import kodz.org.feature.screen.data.ScreenRequest
 import kodz.org.feature.screen.data.ScreenResponse
@@ -82,54 +85,68 @@ class ScreenViewModel @Inject constructor(
                             }
 
                             is HttpFlow.Success -> {
-                                (response.data as? ScreenModel)?.let {
-                                    // Rows
-                                    it.rows?.forEach { row ->
-                                        if (row.isVisible == true) {
-                                            row.rowName?.let { rowName ->
-                                                AppLog("$rowName yaratılmaya başlatıldı.")
+                                (response.data as? ScreenModel)?.let { responseModel ->
+                                    // Tabs
+                                    if (responseModel.rows?.get(0)?.rowName == "TabsLayout" && responseModel.rows?.get(0)?.isVisible == true) {
+                                        val tabsLayout = responseModel.rows?.get(0)?.dataModel?.getAsJsonArray("tabs")
+                                        val tabModelList = tabsLayout?.mapNotNull { it.asJsonObject.toResponseModel<TabModel>() }?.toList()
 
-                                                // Make row with rowName
-                                                rowName.convertRow(
-                                                    dataModelJsonObject = row.dataModel,
-                                                    itemClickHandler = itemClickHandler
-                                                )?.let { row -> componentList.add(row) }
-
-                                            }
-                                        }
-                                    }
-
-                                    if (componentList.isNotEmpty()) {
                                         screenModel.postValue(
                                             Resource.Success(
                                                 ScreenModel.ViewEntity(
-                                                    it.settings,
-                                                    it.error,
-                                                    componentList
+                                                    settings = responseModel.settings,
+                                                    error = responseModel.error,
+                                                    rows = null,
+                                                    tabs = tabModelList
                                                 )
                                             )
                                         )
-                                        AppLog("Rowlar önyüze gönderildi.")
                                     } else {
-                                        screenModel.postValue(
-                                            Resource.Error(
-                                                ErrorModel(
-                                                    ErrorType.WARNING,
-                                                    DialogBox(
-                                                        showOnce = false,
-                                                        tag = "",
-                                                        title = context.getString(kodz.org.core.R.string.error),
-                                                        description = context.getString(kodz.org.core.R.string.tryAgain),
-                                                        primaryButton = ButtonModel(
-                                                            type = ButtonType.FILLED,
-                                                            eventType = EventTypeCode.RETRY_LAST_ACTION
+                                        // Rows
+                                        responseModel.rows?.forEach { row ->
+                                            if (row.isVisible == true) {
+                                                row.rowName?.let { rowName ->
+                                                    AppLog("$rowName yaratılmaya başlatıldı.")
+                                                    // Make row with rowName
+                                                    rowName.convertRow(
+                                                        dataModelJsonObject = row.dataModel,
+                                                        itemClickHandler = itemClickHandler
+                                                    )?.let { row -> componentList.add(row) }
+                                                }
+                                            }
+                                        }
+
+                                        if (componentList.isNotEmpty()) {
+                                            screenModel.postValue(
+                                                Resource.Success(
+                                                    ScreenModel.ViewEntity(
+                                                        settings = responseModel.settings,
+                                                        error = responseModel.error,
+                                                        rows = componentList
+                                                    )
+                                                )
+                                            )
+                                            AppLog("Rowlar önyüze gönderildi.")
+                                        } else {
+                                            screenModel.postValue(
+                                                Resource.Error(
+                                                    ErrorModel(
+                                                        ErrorType.WARNING,
+                                                        DialogBox(
+                                                            showOnce = false,
+                                                            tag = "",
+                                                            title = context.getString(R.string.error),
+                                                            description = "ScreenViewModel -> componentList is empty!",
+                                                            primaryButton = ButtonModel(
+                                                                type = ButtonType.FILLED,
+                                                                eventType = EventTypeCode.RETRY_LAST_ACTION
+                                                            )
                                                         )
                                                     )
                                                 )
                                             )
-                                        )
+                                        }
                                     }
-
                                 }
                             }
                         }
