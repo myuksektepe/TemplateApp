@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.fragment.BaseFragment
+import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.common.consts.DASHBOARD_ENDPOINT
@@ -23,6 +24,7 @@ import kodz.org.core.extension.visible
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
+import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.SettingsModel
 import kodz.org.core.model.TabModel
@@ -72,46 +74,8 @@ class ScreenFragment :
             }
 
             observeLiveData(itemClickEventModelLiveData) { clickEventModel ->
-                clickEventModel?.let { eventModel ->
-                    when (eventModel.eventTypeCode) {
-                        EventTypeCode.OPEN_SCREEN -> {
-                            goToDeepLink(eventModel.endpoint)
-                        }
-
-                        EventTypeCode.GO_URL -> {
-                            eventModel.url?.let {
-                                Intent(Intent.ACTION_VIEW).run {
-                                    data = Uri.parse(it)
-                                    startActivity(this)
-                                }
-                            }
-                        }
-
-                        EventTypeCode.SHOW_ALERT_DIALOG -> {
-                            eventModel.dialogBox?.let {
-                                showFullScreenError(ErrorModel(ErrorType.WARNING, it))
-                            }
-                        }
-
-                        EventTypeCode.CLOSE_THE_DIALOG -> {
-                            hideFullScreenError()
-                        }
-
-                        EventTypeCode.CLOSE_THE_SCREEN -> {
-                            hideFullScreenError()
-                            navigateUp()
-                        }
-
-                        EventTypeCode.CLOSE_THE_APP -> {
-                            hideFullScreenError()
-                            activity?.finish()
-                        }
-
-                        else -> {
-                            // Do nothing
-                        }
-                    }
-                    viewModel.clearLiveData()
+                clickEventModel?.let {
+                    handleItemClickEvent(it)
                 }
             }
 
@@ -167,7 +131,7 @@ class ScreenFragment :
                             // Tabs
                             tabs?.let {
                                 showResultViaPageAdapter(
-                                    TabsLayoutPageAdapter(fragmentManager = this@ScreenFragment.parentFragmentManager, lifecycle),
+                                    TabsLayoutPageAdapter(fragmentManager = this@ScreenFragment.childFragmentManager, lifecycle),
                                     it
                                 )
                             }
@@ -211,7 +175,7 @@ class ScreenFragment :
 
     private fun showResultViaPageAdapter(adapter: TabsLayoutPageAdapter, tabs: List<TabModel>) {
         binding.run {
-            viewPagerScreen.adapter = adapter
+            if (viewPagerScreen.adapter == null) viewPagerScreen.adapter = adapter
             tabLayoutScreen.removeAllTabs()
             tabs.forEach { tab ->
                 tab.tabTitle?.let { tabText ->
@@ -219,7 +183,16 @@ class ScreenFragment :
                 }
 
                 tab.tabContent?.let { itemListJson ->
-                    adapter.addFragment(TabsLayoutPage(itemListJson))
+                    adapter.addFragment(TabsLayoutPage(
+                        itemListJson = itemListJson,
+                        itemClickHandler = object : ItemClickHandler {
+                            override fun onItemClick(itemClickEventModel: ItemClickEventModel?) {
+                                itemClickEventModel?.let {
+                                    handleItemClickEvent(it)
+                                }
+                            }
+                        }
+                    ))
                 }
             }
 
@@ -275,6 +248,48 @@ class ScreenFragment :
             .fromUri("android-app://${context?.packageName}/screenFragment?$ENDPOINT=${endpoint}".toUri())
             .build()
         navigateWithDeepLink(navDeepLinkRequest)
+    }
+
+    private fun handleItemClickEvent(eventModel: ItemClickEventModel) {
+        when (eventModel.eventTypeCode) {
+            EventTypeCode.OPEN_SCREEN -> {
+                goToDeepLink(eventModel.endpoint)
+            }
+
+            EventTypeCode.GO_URL -> {
+                eventModel.url?.let {
+                    Intent(Intent.ACTION_VIEW).run {
+                        data = Uri.parse(it)
+                        startActivity(this)
+                    }
+                }
+            }
+
+            EventTypeCode.SHOW_ALERT_DIALOG -> {
+                eventModel.dialogBox?.let {
+                    showFullScreenError(ErrorModel(ErrorType.WARNING, it))
+                }
+            }
+
+            EventTypeCode.CLOSE_THE_DIALOG -> {
+                hideFullScreenError()
+            }
+
+            EventTypeCode.CLOSE_THE_SCREEN -> {
+                hideFullScreenError()
+                navigateUp()
+            }
+
+            EventTypeCode.CLOSE_THE_APP -> {
+                hideFullScreenError()
+                activity?.finish()
+            }
+
+            else -> {
+                // Do nothing
+            }
+        }
+        viewModel.clearLiveData()
     }
 
     override fun onBackPressed(): Boolean {

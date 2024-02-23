@@ -56,9 +56,6 @@ import kodz.org.core_ui.row.unrepeatable_item_rows.search_box.SearchBoxRowDataMo
 import kodz.org.core_ui.row.unrepeatable_item_rows.section_title.SectionTitleRow
 import kodz.org.core_ui.row.unrepeatable_item_rows.section_title.SectionTitleRowContractor
 import kodz.org.core_ui.row.unrepeatable_item_rows.section_title.SectionTitleRowDataModel
-import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.TabsLayoutContractor
-import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.TabsLayoutDataModel
-import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.TabsLayoutRow
 import kotlin.reflect.full.primaryConstructor
 
 fun String.convertRow(
@@ -193,15 +190,6 @@ fun String.convertRow(
                 makeUnrepeatableItemRow<EntryTitle1Row, EntryTitle1RowContractor, EntryTitle1RowRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
-                )
-        }
-
-        "TabsLayout" -> {
-            clsRow =
-                makeUnrepeatableItemRow<TabsLayoutRow, TabsLayoutContractor, TabsLayoutDataModel>(
-                    dataModelString = dataModelString,
-                    dataModelJsonObject = dataModelJsonObject,
-                    itemClickHandler = itemClickHandler
                 )
         }
 
