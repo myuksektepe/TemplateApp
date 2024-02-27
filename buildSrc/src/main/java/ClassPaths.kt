@@ -5,7 +5,7 @@
  */
 
 object ClassPathVersions {
-    const val hilt = "2.43.2"
+    const val hilt = "2.50"
     const val navigation_safe_args = "2.5.3"
 }
 

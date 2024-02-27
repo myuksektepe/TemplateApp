@@ -12,7 +12,7 @@ android {
     compileSdk = ConfigData.compileSdk
     defaultConfig {
         minSdk = ConfigData.minSdk
-        targetSdk = ConfigData.targetSdk
+        lint.targetSdk = ConfigData.targetSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }

@@ -34,12 +34,12 @@ class MultipleTypeButton @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
-    private lateinit var rootView: ConstraintLayout
-    private lateinit var cardView: CardView
-    private lateinit var iconView: ImageView
-    private lateinit var textView: ClassicTextView
-    private lateinit var underlineView: View
-    private lateinit var dividerView: View
+    private var rootView: ConstraintLayout
+    private var cardView: CardView
+    private var iconView: ImageView
+    private var textView: ClassicTextView
+    private var underlineView: View
+    private var dividerView: View
 
     private var _iconDrawable: Drawable? = null
     private var _text: String? = EMPTY

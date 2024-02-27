@@ -22,8 +22,8 @@ class RoundedImage @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : CardView(context, attrs, defStyle) {
-    lateinit var cardView: CardView
-    lateinit var imageView: ImageView
+    private var cardView: CardView
+    var imageView: ImageView
 
     init {
         inflate(context, R.layout.component_rounded_image, this)

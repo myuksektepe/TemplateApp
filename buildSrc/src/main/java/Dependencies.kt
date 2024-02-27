@@ -18,6 +18,7 @@ object DependencyVersions {
 
     // Kotlin
     const val kotlinReflec = "1.9.10"
+    const val kotlinCompilerExtensionVersion = "1.5.10"
 
     // KTX
     const val ktxCore = "1.12.0"
@@ -25,8 +26,12 @@ object DependencyVersions {
     const val ktxFragment = "1.6.2"
     const val ktxLifecycle = "2.6.0-alpha03"
 
+    // Compose
+    const val composeUi = "1.6.2"
+    const val composeBom = "2024.02.01"
+
     // Hilt
-    const val hilt = "2.44"
+    const val hilt = "2.50"
     const val hiltCompiler = "1.0.0-alpha01"
 
     // Coroutines
@@ -86,6 +91,11 @@ object Dependencies {
     const val recyclerViewSelection = "androidx.recyclerview:recyclerview-selection:${DependencyVersions.recyclerViewSelection}"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${DependencyVersions.swipeRefreshLayout}"
     const val flexBox = "com.google.android.flexbox:flexbox:${DependencyVersions.flexBox}"
+
+    // Compose
+    const val composeUi = "androidx.compose.ui:ui-android:${DependencyVersions.composeUi}"
+    const val composeBom = "androidx.compose:compose-bom:${DependencyVersions.composeBom}"
+    const val composeMaterial3 = "androidx.compose.material3:material3"
 
     // Kotlin
     const val kotlinReflec = "org.jetbrains.kotlin:kotlin-reflect:${DependencyVersions.kotlinReflec}"
