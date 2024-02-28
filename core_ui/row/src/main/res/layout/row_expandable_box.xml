@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRowDataModel" />
+
+        <variable
+            name="cornersType"
+            type="kodz.org.core_ui.row.item_rows.box.CornersType" />
+    </data>
+
+    <androidx.compose.ui.platform.ComposeView
+
+        android:id="@+id/composeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/itemMarginPage"
+        android:layout_marginBottom="@dimen/itemMarginBottom">
+
+    </androidx.compose.ui.platform.ComposeView>
+</layout>

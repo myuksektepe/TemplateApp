@@ -42,3 +42,11 @@ fun String?.toColor(): Int? {
         null
     }
 }
+
+fun String?.toColorLong(): Long? {
+    return try {
+        this?.replace("#", "0xFF")?.toLong()
+    } catch (e: Exception) {
+        null
+    }
+}

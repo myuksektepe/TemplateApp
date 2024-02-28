@@ -38,7 +38,6 @@ class BoxRowContractor(
                         // Height - Width
                         val deviceWidth = context.resources.displayMetrics.run { widthPixels }
                         val pageLeftRightSpace = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._16sdp)
-                        val itemSpace = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp)
 
                         if (data.boxType == BoxType.RECTANGLE) {
                             layoutParams.height = (deviceWidth - pageLeftRightSpace)

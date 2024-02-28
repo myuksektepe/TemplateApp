@@ -89,6 +89,9 @@ dependencies {
     // ViewPager
     implementation(Dependencies.viewPager2)
 
+    // SDP
+    implementation(Dependencies.sdp)
+
     // Test
     testImplementation(Dependencies.junitTest)
     androidTestImplementation(Dependencies.junit)

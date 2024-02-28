@@ -14,6 +14,7 @@ import kodz.org.core.base.row.row.BaseListRow
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.row.row.BaseUnrepeatableItemRow
 import kodz.org.core.common.AppLog
+import kodz.org.core.extension.isUrlReachable
 import kodz.org.core_ui.row.item_rows.box.BoxRow
 import kodz.org.core_ui.row.item_rows.box.BoxRowContractor
 import kodz.org.core_ui.row.item_rows.box.BoxRowRowDataModel
@@ -23,6 +24,9 @@ import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowContractor
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowRowDataModel
+import kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRow
+import kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRowContractor
+import kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRowDataModel
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRow
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowContractor
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowRowDataModel
@@ -150,16 +154,26 @@ fun String.convertRow(
         }
 
         "VideoPlayerRow" -> {
-            clsRow =
-                makeItemRow<VideoPlayerRow, VideoPlayerRowContractor, VideoPlayerRowRowDataModel>(
-                    dataModelString = dataModelString,
-                    dataModelJsonObject = dataModelJsonObject,
-                )
+            if (dataModelJsonObject?.get("videoUrl")?.asString?.isUrlReachable() == true) {
+                clsRow =
+                    makeItemRow<VideoPlayerRow, VideoPlayerRowContractor, VideoPlayerRowRowDataModel>(
+                        dataModelString = dataModelString,
+                        dataModelJsonObject = dataModelJsonObject,
+                    )
+            }
         }
 
         "BoxRow" -> {
             clsRow =
                 makeItemRow<BoxRow, BoxRowContractor, BoxRowRowDataModel>(
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                )
+        }
+
+        "ExpandableBoxRow" -> {
+            clsRow =
+                makeItemRow<ExpandableBoxRow, ExpandableBoxRowContractor, ExpandableBoxRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                 )

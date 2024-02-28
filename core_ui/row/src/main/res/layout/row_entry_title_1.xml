@@ -34,7 +34,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
-            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:layout_marginHorizontal="@dimen/itemMarginPage"
             android:background="@color/dayNightReverse"
             app:layout_constraintBottom_toBottomOf="parent" />
 

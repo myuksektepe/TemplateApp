@@ -15,8 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:layout_marginHorizontal="@dimen/_16sdp">
+        android:layout_marginHorizontal="@dimen/itemMarginPage"
+        android:layout_marginTop="@dimen/sectionTitleMarginTop">
 
         <kodz.org.core_ui.component.text.ClassicTextView
             android:id="@+id/txtSectionTitle"

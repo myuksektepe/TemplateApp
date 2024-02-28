@@ -14,8 +14,7 @@
         android:id="@+id/rowVerticalList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_24sdp">
+        android:layout_marginHorizontal="@dimen/_8sdp">
 
         <kodz.org.core_ui.component.list.RecyclerView
             android:id="@+id/rcyVerticalList"

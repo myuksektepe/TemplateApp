@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- Others -->
-    <dimen name="pageMargin">20dp</dimen>
-    <dimen name="pagerOffset">30dp</dimen>
-    <dimen name="pageMarginAndOffset">34dp</dimen>
-</resources>

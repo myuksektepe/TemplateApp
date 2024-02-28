@@ -3,4 +3,10 @@
     <dimen name="viewpager_next_item_visible">8dp</dimen>
     <dimen name="viewpager_current_item_horizontal_margin">16dp</dimen>
     <dimen name="margin_none">0dp</dimen>
+
+    <dimen name="sectionTitleMarginTop">@dimen/_28sdp</dimen>
+    <dimen name="itemMarginBottom">@dimen/_8sdp</dimen>
+    <dimen name="itemMarginPage">@dimen/_16sdp</dimen>
+    <dimen name="cardCornerRadius">@dimen/_8sdp</dimen>
+    <dimen name="cardElevation">@dimen/_4sdp</dimen>
 </resources>
