@@ -2,10 +2,10 @@ package kodz.org.core_ui.row.item_rows.entry_item_1
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.row.datamodel.BaseItemRowDataModel
-import kodz.org.core.model.ItemClickEventModel
+import kodz.org.core.model.ClickEventModel
 
 class EntryItem1RowDataModel(
-    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null,
+    @SerializedName("clickEventModel") override val clickEventModel: ClickEventModel? = null,
     @SerializedName("title") val title: String? = null,
     @SerializedName("imageUrl") val imageUrl: String? = null,
     @SerializedName("isShadowVisible") val isShadowVisible: Boolean? = false,

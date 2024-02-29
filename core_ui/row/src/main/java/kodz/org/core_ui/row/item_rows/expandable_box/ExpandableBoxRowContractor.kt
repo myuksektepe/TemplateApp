@@ -28,23 +28,19 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.em
-import androidx.compose.ui.unit.sp
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.common.enums.CommonIcons
 import kodz.org.core.extension.makeSlidable
+import kodz.org.core_ui.extension.noRippleToggleable
 import kodz.org.core_ui.extension.sdp
-import kodz.org.core_ui.extension.textSdp
 import kodz.org.core_ui.row.databinding.RowExpandableBoxBinding
 import kodz.org.core_ui.row.item_rows.box.CornersType
+import kodz.org.core_ui.ui.ExpandableBox
 import kodz.org.core_ui.ui.TemplateAppTheme
-import kodz.org.core_ui.ui.avertaFamily
 
 class ExpandableBoxRowContractor(
     override val isInCarousel: Boolean? = null,
@@ -95,30 +91,25 @@ class ExpandableBoxRowContractor(
 
         Card(
             shape = if (data.cornersType == CornersType.ROUNDED) RoundedCornerShape(8.sdp) else RoundedCornerShape(0.sdp),
-            modifier = modifier
-                .fillMaxWidth()
-                .clickable {
-                    isExpanded = !isExpanded
-                }
+            modifier = modifier.fillMaxWidth()
         ) {
             Column(
                 modifier.padding(horizontal = 16.sdp, vertical = 8.sdp)
             ) {
                 data.title?.let { title ->
                     Row(
-                        modifier = modifier.fillMaxWidth(),
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .noRippleToggleable(isExpanded) {
+                                isExpanded = it
+                            },
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
                             modifier = modifier.weight(1f),
                             text = title,
-                            style = TextStyle(
-                                fontFamily = avertaFamily,
-                                fontSize = 14.textSdp,
-                                letterSpacing = 0.sp,
-                                fontWeight = FontWeight.Bold,
-                            ),
+                            style = ExpandableBox().TitleTextStyle(),
                             maxLines = if (!isExpanded) 2 else 5,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -135,19 +126,16 @@ class ExpandableBoxRowContractor(
                         HorizontalDivider(
                             modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 8.sdp),
+                                .padding(vertical = 8.sdp)
+                                .clickable {
+                                    itemClickHandler?.onItemClick(data.clickEventModel)
+                                },
                             thickness = 1.sdp,
                             color = colorResource(id = R.color.dayNightReverse)
                         )
                         Text(
                             text = data.description,
-                            style = TextStyle(
-                                fontFamily = avertaFamily,
-                                // fontSize = 14.textSdp,
-                                letterSpacing = 0.sp,
-                                fontWeight = FontWeight.Normal,
-                                lineHeight = 1.5.em
-                            )
+                            style = ExpandableBox().BodyTextStyle()
                         )
                     }
                 }

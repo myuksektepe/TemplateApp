@@ -82,7 +82,7 @@ class BoxRowContractor(
 
                     // OnClick
                     setSpamProtectedClickListener {
-                        itemClickHandler?.onItemClick(data.itemClickEventModel)
+                        itemClickHandler?.onItemClick(data.clickEventModel)
                     }
                 }
             }

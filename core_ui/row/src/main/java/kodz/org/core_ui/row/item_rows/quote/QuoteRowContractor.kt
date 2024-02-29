@@ -44,7 +44,7 @@ class QuoteRowContractor(
 
                 // EventHandler
                 txtQuote.setSpamProtectedClickListener {
-                    itemClickHandler?.onItemClick(data.itemClickEventModel)
+                    itemClickHandler?.onItemClick(data.clickEventModel)
                 }
 
             }

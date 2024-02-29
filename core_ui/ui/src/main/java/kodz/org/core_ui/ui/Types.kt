@@ -1,11 +1,14 @@
 package kodz.org.core_ui.ui
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import kodz.org.core_ui.extension.textSdp
 
 val DarkTypography = Typography(
     titleLarge = TextStyle(
@@ -60,3 +63,22 @@ val LightTypography = Typography(
         color = Color.DarkGray
     ),
 )
+
+
+class ExpandableBox(){
+    @Composable
+    fun TitleTextStyle() = TextStyle(
+        fontFamily = avertaFamily,
+        fontSize = 14.textSdp,
+        letterSpacing = 0.sp,
+        fontWeight = FontWeight.Bold,
+    )
+
+    @Composable
+    fun BodyTextStyle() = TextStyle(
+        fontFamily = avertaFamily,
+        letterSpacing = 0.sp,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 1.5.em
+    )
+}

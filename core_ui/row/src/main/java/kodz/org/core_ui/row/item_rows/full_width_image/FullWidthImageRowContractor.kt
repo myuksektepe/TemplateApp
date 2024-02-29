@@ -36,7 +36,7 @@ class FullWidthImageRowContractor(
 
                 // EventHandler
                 imgFullWidth.setSpamProtectedClickListener {
-                    itemClickHandler?.onItemClick(data.itemClickEventModel)
+                    itemClickHandler?.onItemClick(data.clickEventModel)
                 }
 
             }

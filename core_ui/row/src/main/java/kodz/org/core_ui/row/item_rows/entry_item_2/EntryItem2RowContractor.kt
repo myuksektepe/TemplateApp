@@ -45,7 +45,7 @@ class EntryItem2RowContractor(
 
                 // EventHandler
                 rowEntryItem2Root.setSpamProtectedClickListener {
-                    itemClickHandler?.onItemClick(data.itemClickEventModel)
+                    itemClickHandler?.onItemClick(data.clickEventModel)
                 }
 
             }

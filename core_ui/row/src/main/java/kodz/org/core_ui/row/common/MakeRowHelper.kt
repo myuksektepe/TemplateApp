@@ -150,6 +150,7 @@ fun String.convertRow(
                 makeItemRow<LongTextRow, LongTextRowContractor, LongTextRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
@@ -168,6 +169,7 @@ fun String.convertRow(
                 makeItemRow<BoxRow, BoxRowContractor, BoxRowRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
@@ -176,6 +178,7 @@ fun String.convertRow(
                 makeItemRow<ExpandableBoxRow, ExpandableBoxRowContractor, ExpandableBoxRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
                 )
         }
 
