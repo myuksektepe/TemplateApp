@@ -10,7 +10,7 @@ class EntryTitle1Row(
     override var dataModel: BaseRowDataModel,
 ) : BaseUnrepeatableItemRow() {
     override val layout: Int = R.layout.row_entry_title_1
-    override val dataClass: KClass<*> = EntryTitle1RowRowDataModel::class
+    override val dataClass: KClass<*> = EntryTitle1RowDataModel::class
     override val contractor = EntryTitle1RowContractor()
     override var binding: ViewDataBinding? = null
 }

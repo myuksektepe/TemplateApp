@@ -12,7 +12,7 @@ class WebViewRow(
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_webview
-    override val dataClass: KClass<*> = WebViewRowRowDataModel::class
+    override val dataClass: KClass<*> = WebViewRowDataModel::class
     override val contractor = WebViewRowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

@@ -16,11 +16,11 @@ import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.AppLog
 import kodz.org.core.model.ButtonModel
 import kodz.org.core.model.ButtonType
+import kodz.org.core.model.ClickEventModel
 import kodz.org.core.model.DialogBox
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
-import kodz.org.core.model.ItemClickEventModel
 import kodz.org.core.model.Resource
 import kodz.org.core.model.ScreenModel
 import kodz.org.core.model.TabModel
@@ -51,16 +51,16 @@ class ScreenViewModel @Inject constructor(
     private val searchedText = MutableLiveData<String?>()
     val searchedTextLiveData: LiveData<String?> get() = searchedText
 
-    private val itemClickEventModel = MutableLiveData<ItemClickEventModel?>()
-    val itemClickEventModelLiveData: LiveData<ItemClickEventModel?> get() = itemClickEventModel
+    private val clickEventModel = MutableLiveData<ClickEventModel?>()
+    val clickEventModelLiveData: LiveData<ClickEventModel?> get() = clickEventModel
 
     private val screenModel = MutableLiveData<Resource<ScreenModel.ViewEntity>>()
     val screenModelLiveData: LiveData<Resource<ScreenModel.ViewEntity>> get() = screenModel
 
     private val itemClickHandler = object : ItemClickHandler {
-        override fun onItemClick(itemClickEventModel: ItemClickEventModel?) {
-            itemClickEventModel?.let {
-                this@ScreenViewModel.itemClickEventModel.postValue(it)
+        override fun onItemClick(clickEventModel: ClickEventModel?) {
+            clickEventModel?.let {
+                this@ScreenViewModel.clickEventModel.postValue(it)
             }
         }
     }
@@ -156,7 +156,7 @@ class ScreenViewModel @Inject constructor(
     }
 
     fun clearLiveData() {
-        itemClickEventModel.postValue(null)
+        clickEventModel.postValue(null)
     }
 
 }

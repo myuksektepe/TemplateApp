@@ -28,7 +28,7 @@ class SectionTitleRowContractor : BaseUnrepeatableItemRowContractor() {
 
                 // EventHandler
                 btnSectionViewAll.setSpamProtectedClickListener {
-                    itemClickHandler?.onItemClick(data.itemClickEventModel)
+                    itemClickHandler?.onItemClick(data.clickEventModel)
                 }
 
             }

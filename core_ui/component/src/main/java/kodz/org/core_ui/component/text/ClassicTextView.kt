@@ -47,19 +47,19 @@ class ClassicTextView @JvmOverloads constructor(
     fun setTextWeight(weight: String) {
         typeface = when (weight) {
             TextWeightType.THIN.name.lowercase() -> {
-                ResourcesCompat.getFont(context, R.font.averta_light)
+                ResourcesCompat.getFont(context, kodz.org.core_ui.ui.R.font.averta_light)
             }
 
             TextWeightType.NORMAL.name.lowercase() -> {
-                ResourcesCompat.getFont(context, R.font.averta_regular)
+                ResourcesCompat.getFont(context, kodz.org.core_ui.ui.R.font.averta_regular)
             }
 
             TextWeightType.BOLD.name.lowercase() -> {
-                ResourcesCompat.getFont(context, R.font.averta_bold)
+                ResourcesCompat.getFont(context, kodz.org.core_ui.ui.R.font.averta_bold)
             }
 
             else -> {
-                ResourcesCompat.getFont(context, R.font.averta_regular)
+                ResourcesCompat.getFont(context, kodz.org.core_ui.ui.R.font.averta_regular)
             }
         }
     }

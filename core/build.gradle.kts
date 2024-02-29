@@ -12,7 +12,7 @@ android {
     compileSdk = ConfigData.compileSdk
     defaultConfig {
         minSdk = ConfigData.minSdk
-        targetSdk = ConfigData.targetSdk
+        lint.targetSdk = ConfigData.targetSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
@@ -88,6 +88,9 @@ dependencies {
 
     // ViewPager
     implementation(Dependencies.viewPager2)
+
+    // SDP
+    implementation(Dependencies.sdp)
 
     // Test
     testImplementation(Dependencies.junitTest)
