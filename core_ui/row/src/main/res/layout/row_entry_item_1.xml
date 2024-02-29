@@ -15,16 +15,15 @@
         android:id="@+id/rowEntryItem1Root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/itemMarginBottom"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingHorizontal="@dimen/itemMarginPage"
-        android:paddingVertical="@dimen/itemMarginBottom">
+        android:paddingHorizontal="@dimen/itemPaddingHorizontal"
+        android:paddingVertical="@dimen/itemPaddingVertical">
 
         <kodz.org.core_ui.component.image.RoundedImage
             android:id="@+id/imgEntry"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_width="@dimen/entryItem1ImageWidth"
+            android:layout_height="@dimen/entryItem1ImageHeight"
             app:cardCornerRadius="@dimen/cardCornerRadius"
             app:cardElevation="@dimen/cardElevation"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,12 +31,12 @@
 
         <kodz.org.core_ui.component.text.ClassicTextView
             android:id="@+id/txtEntryTitle"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/none"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/defaultMarginStart"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/defaultTextSize"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgEntry"
             app:layout_constraintEnd_toEndOf="parent"

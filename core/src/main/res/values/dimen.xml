@@ -2,11 +2,67 @@
 <resources>
     <dimen name="viewpager_next_item_visible">8dp</dimen>
     <dimen name="viewpager_current_item_horizontal_margin">16dp</dimen>
-    <dimen name="margin_none">0dp</dimen>
+    <dimen name="none">0dp</dimen>
 
+    <!-- Margin -->
     <dimen name="sectionTitleMarginTop">@dimen/_28sdp</dimen>
-    <dimen name="itemMarginBottom">@dimen/_8sdp</dimen>
-    <dimen name="itemMarginPage">@dimen/_16sdp</dimen>
+    <dimen name="itemMarginHorizontal">@dimen/_16sdp</dimen>
+    <dimen name="itemMarginVertical">@dimen/_4sdp</dimen>
+
+    <!-- Padding -->
+    <dimen name="itemPaddingHorizontal">@dimen/_16sdp</dimen>
+    <dimen name="itemPaddingVertical">@dimen/_4sdp</dimen>
+    <dimen name="drawablePadding">@dimen/_8sdp</dimen>
+
+    <!-- Card -->
     <dimen name="cardCornerRadius">@dimen/_8sdp</dimen>
     <dimen name="cardElevation">@dimen/_4sdp</dimen>
+
+    <!-- Box -->
+    <dimen name="boxTitlePaddingTop">@dimen/_8sdp</dimen>
+    <dimen name="boxTitlePaddingBottom">@dimen/_4sdp</dimen>
+    <dimen name="boxDescriptionPaddingBottom">@dimen/_8sdp</dimen>
+
+    <!-- Carousel -->
+    <dimen name="carouselDotsMarginTop">@dimen/_4sdp</dimen>
+    <dimen name="carouselDotsHeight">@dimen/_10sdp</dimen>
+
+    <!-- Entry Item 1 -->
+    <dimen name="entryItem1ImageWidth">@dimen/_70sdp</dimen>
+    <dimen name="entryItem1ImageHeight">@dimen/_60sdp</dimen>
+
+    <!-- Entry Item 2 -->
+    <dimen name="entryItem2ImageHeight">@dimen/_70sdp</dimen>
+
+    <!-- Category Slider Item -->
+    <dimen name="categorySliderItemImageWidth">@dimen/_60sdp</dimen>
+    <dimen name="categorySliderItemImageHeight">@dimen/_60sdp</dimen>
+
+    <!-- Entry Title 1 -->
+    <dimen name="entryTitle1TextSize">@dimen/_18sdp</dimen>
+    <dimen name="entryTitle1DividerThickness">@dimen/_2sdp</dimen>
+
+    <!-- Quote -->
+    <dimen name="quoteQuoteMarginTop">@dimen/_14sdp</dimen>
+    <dimen name="quoteQuoteHeight">@dimen/_100sdp</dimen>
+    <dimen name="quoteAuthorMarginTop">@dimen/_8sdp</dimen>
+    <dimen name="quoteSymbolSize">@dimen/_40sdp</dimen>
+
+    <!-- Section Title -->
+    <dimen name="sectionTitleTextSize">@dimen/_16sdp</dimen>
+
+    <!-- Video Player -->
+    <dimen name="videoPlayerHeight">@dimen/_200sdp</dimen>
+    <dimen name="currentTimeMarginStart">@dimen/_12sdp</dimen>
+    <dimen name="currentTimeMarginBottom">@dimen/_10sdp</dimen>
+    <dimen name="progressBarThickness">@dimen/_10sdp</dimen>
+    <dimen name="progressBarMarginTop">@dimen/_48sdp</dimen>
+    <dimen name="playButtonSize">@dimen/_70sdp</dimen>
+    <dimen name="replayButtonSize">@dimen/_48sdp</dimen>
+    <dimen name="replayButtonSizeMarginTop">@dimen/_24sdp</dimen>
+
+    <!-- Defaults -->
+    <dimen name="defaultMarginStart">@dimen/_8sdp</dimen>
+    <dimen name="defaultTextSize">@dimen/_14sdp</dimen>
+    <dimen name="smallTextSize">@dimen/_10sdp</dimen>
 </resources>
