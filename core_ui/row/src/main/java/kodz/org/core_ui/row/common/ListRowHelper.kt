@@ -7,13 +7,13 @@ import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core_ui.row.item_rows.box.BoxRow
 import kodz.org.core_ui.row.item_rows.box.BoxRowRowDataModel
 import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRow
-import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRowRowDataModel
+import kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1Row
-import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowRowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
-import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowRowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowDataModel
 import kodz.org.core_ui.row.item_rows.quote.QuoteRow
-import kodz.org.core_ui.row.item_rows.quote.QuoteRowRowDataModel
+import kodz.org.core_ui.row.item_rows.quote.QuoteRowDataModel
 
 fun List<JsonObject>.getItemListByRowType(
     rowType: String,
@@ -39,7 +39,7 @@ fun List<JsonObject>.getItemListByRowType(
 
         "QuoteRow" -> {
             this.forEach {
-                Gson().fromJson(it, QuoteRowRowDataModel::class.java)?.run {
+                Gson().fromJson(it, QuoteRowDataModel::class.java)?.run {
                     if (!this.text.isNullOrEmpty()) {
                         itemList.add(
                             QuoteRow(this, isInCarousel, isInList).apply {
@@ -53,7 +53,7 @@ fun List<JsonObject>.getItemListByRowType(
 
         "EntryItem1Row" -> {
             this.forEach {
-                Gson().fromJson(it, EntryItem1RowRowDataModel::class.java)?.run {
+                Gson().fromJson(it, EntryItem1RowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
                             EntryItem1Row(this, isInCarousel, isInList).apply {
@@ -67,7 +67,7 @@ fun List<JsonObject>.getItemListByRowType(
 
         "EntryItem2Row" -> {
             this.forEach {
-                Gson().fromJson(it, EntryItem2RowRowDataModel::class.java)?.run {
+                Gson().fromJson(it, EntryItem2RowDataModel::class.java)?.run {
                     if (!this.title.isNullOrEmpty()) {
                         itemList.add(
                             EntryItem2Row(this, isInCarousel, isInList).apply {
@@ -81,7 +81,7 @@ fun List<JsonObject>.getItemListByRowType(
 
         "CategoriesSliderItemRow" -> {
             this.forEach {
-                Gson().fromJson(it, CategoriesSliderItemRowRowDataModel::class.java)?.run {
+                Gson().fromJson(it, CategoriesSliderItemRowDataModel::class.java)?.run {
                     if (!this.categoryName.isNullOrEmpty()) {
                         itemList.add(
                             CategoriesSliderItemRow(this, isInCarousel, isInList).apply {

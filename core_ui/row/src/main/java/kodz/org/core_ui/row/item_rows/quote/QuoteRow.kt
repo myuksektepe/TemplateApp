@@ -16,7 +16,7 @@ class QuoteRow(
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_quote
-    override val dataClass: KClass<*> = QuoteRowRowDataModel::class
+    override val dataClass: KClass<*> = QuoteRowDataModel::class
     override val contractor = QuoteRowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

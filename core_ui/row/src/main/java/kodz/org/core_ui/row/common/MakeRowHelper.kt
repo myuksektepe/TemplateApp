@@ -20,28 +20,28 @@ import kodz.org.core_ui.row.item_rows.box.BoxRowContractor
 import kodz.org.core_ui.row.item_rows.box.BoxRowRowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1Row
 import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowContractor
-import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowRowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_1.EntryItem1RowDataModel
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2Row
 import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowContractor
-import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowRowDataModel
+import kodz.org.core_ui.row.item_rows.entry_item_2.EntryItem2RowDataModel
 import kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRow
 import kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRowContractor
 import kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRowDataModel
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRow
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowContractor
-import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowRowDataModel
+import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowDataModel
 import kodz.org.core_ui.row.item_rows.long_text.LongTextRow
 import kodz.org.core_ui.row.item_rows.long_text.LongTextRowContractor
-import kodz.org.core_ui.row.item_rows.long_text.LongTextRowRowDataModel
+import kodz.org.core_ui.row.item_rows.long_text.LongTextRowDataModel
 import kodz.org.core_ui.row.item_rows.quote.QuoteRow
 import kodz.org.core_ui.row.item_rows.quote.QuoteRowContractor
-import kodz.org.core_ui.row.item_rows.quote.QuoteRowRowDataModel
+import kodz.org.core_ui.row.item_rows.quote.QuoteRowDataModel
 import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRow
 import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowContractor
-import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowRowDataModel
+import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowDataModel
 import kodz.org.core_ui.row.item_rows.webview.WebViewRow
 import kodz.org.core_ui.row.item_rows.webview.WebViewRowContractor
-import kodz.org.core_ui.row.item_rows.webview.WebViewRowRowDataModel
+import kodz.org.core_ui.row.item_rows.webview.WebViewRowDataModel
 import kodz.org.core_ui.row.list_rows.carousel.CarouselRow
 import kodz.org.core_ui.row.list_rows.carousel.CarouselRowContractor
 import kodz.org.core_ui.row.list_rows.carousel.CarouselRowDataModel
@@ -53,7 +53,7 @@ import kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRowContractor
 import kodz.org.core_ui.row.list_rows.vertical_list.VerticalListRowDataModel
 import kodz.org.core_ui.row.unrepeatable_item_rows.entry_title_1.EntryTitle1Row
 import kodz.org.core_ui.row.unrepeatable_item_rows.entry_title_1.EntryTitle1RowContractor
-import kodz.org.core_ui.row.unrepeatable_item_rows.entry_title_1.EntryTitle1RowRowDataModel
+import kodz.org.core_ui.row.unrepeatable_item_rows.entry_title_1.EntryTitle1RowDataModel
 import kodz.org.core_ui.row.unrepeatable_item_rows.search_box.SearchBoxRow
 import kodz.org.core_ui.row.unrepeatable_item_rows.search_box.SearchBoxRowContractor
 import kodz.org.core_ui.row.unrepeatable_item_rows.search_box.SearchBoxRowDataModel
@@ -103,7 +103,7 @@ fun String.convertRow(
         // Item Row (Repeatable)
         "EntryItem1Row" -> {
             clsRow =
-                makeItemRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowRowDataModel>(
+                makeItemRow<EntryItem1Row, EntryItem1RowContractor, EntryItem1RowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                     itemClickHandler = itemClickHandler
@@ -112,7 +112,7 @@ fun String.convertRow(
 
         "EntryItem2Row" -> {
             clsRow =
-                makeItemRow<EntryItem2Row, EntryItem2RowContractor, EntryItem2RowRowDataModel>(
+                makeItemRow<EntryItem2Row, EntryItem2RowContractor, EntryItem2RowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                     itemClickHandler = itemClickHandler
@@ -121,7 +121,7 @@ fun String.convertRow(
 
         "FullWidthImageRow" -> {
             clsRow =
-                makeItemRow<FullWidthImageRow, FullWidthImageRowContractor, FullWidthImageRowRowDataModel>(
+                makeItemRow<FullWidthImageRow, FullWidthImageRowContractor, FullWidthImageRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                     itemClickHandler = itemClickHandler
@@ -130,7 +130,7 @@ fun String.convertRow(
 
         "QuoteRow" -> {
             clsRow =
-                makeItemRow<QuoteRow, QuoteRowContractor, QuoteRowRowDataModel>(
+                makeItemRow<QuoteRow, QuoteRowContractor, QuoteRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                     itemClickHandler = itemClickHandler
@@ -139,7 +139,7 @@ fun String.convertRow(
 
         "WebViewRow" -> {
             clsRow =
-                makeItemRow<WebViewRow, WebViewRowContractor, WebViewRowRowDataModel>(
+                makeItemRow<WebViewRow, WebViewRowContractor, WebViewRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                 )
@@ -147,7 +147,7 @@ fun String.convertRow(
 
         "LongTextRow" -> {
             clsRow =
-                makeItemRow<LongTextRow, LongTextRowContractor, LongTextRowRowDataModel>(
+                makeItemRow<LongTextRow, LongTextRowContractor, LongTextRowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                 )
@@ -156,7 +156,7 @@ fun String.convertRow(
         "VideoPlayerRow" -> {
             if (dataModelJsonObject?.get("videoUrl")?.asString?.isUrlReachable() == true) {
                 clsRow =
-                    makeItemRow<VideoPlayerRow, VideoPlayerRowContractor, VideoPlayerRowRowDataModel>(
+                    makeItemRow<VideoPlayerRow, VideoPlayerRowContractor, VideoPlayerRowDataModel>(
                         dataModelString = dataModelString,
                         dataModelJsonObject = dataModelJsonObject,
                     )
@@ -201,7 +201,7 @@ fun String.convertRow(
 
         "EntryTitle1Row" -> {
             clsRow =
-                makeUnrepeatableItemRow<EntryTitle1Row, EntryTitle1RowContractor, EntryTitle1RowRowDataModel>(
+                makeUnrepeatableItemRow<EntryTitle1Row, EntryTitle1RowContractor, EntryTitle1RowDataModel>(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                 )

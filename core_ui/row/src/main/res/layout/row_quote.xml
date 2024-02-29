@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.item_rows.quote.QuoteRowRowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.quote.QuoteRowDataModel" />
 
         <import type="android.view.View" />
     </data>
@@ -20,7 +20,7 @@
         android:layout_marginVertical="@dimen/itemMarginVertical"
         app:cardBackgroundColor="@{data.showBackground != true ? @color/transparent : @color/nightDayReverse}"
         app:cardCornerRadius="@dimen/cardCornerRadius"
-        app:cardElevation="@{data.showBackground == true ? @dimen/cardElevation : 0}"
+        app:cardElevation="@{ (data.isShadowVisible == true) ? @dimen/cardElevation : @dimen/none}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

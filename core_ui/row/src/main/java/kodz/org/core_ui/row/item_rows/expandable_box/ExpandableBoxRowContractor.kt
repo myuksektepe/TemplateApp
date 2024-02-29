@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,9 +28,11 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.sp
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
@@ -101,7 +102,7 @@ class ExpandableBoxRowContractor(
                 }
         ) {
             Column(
-                modifier.padding(16.sdp)
+                modifier.padding(horizontal = 16.sdp, vertical = 8.sdp)
             ) {
                 data.title?.let { title ->
                     Row(
@@ -112,9 +113,12 @@ class ExpandableBoxRowContractor(
                         Text(
                             modifier = modifier.weight(1f),
                             text = title,
-                            fontFamily = avertaFamily,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.textSdp,
+                            style = TextStyle(
+                                fontFamily = avertaFamily,
+                                fontSize = 14.textSdp,
+                                letterSpacing = 0.sp,
+                                fontWeight = FontWeight.Bold,
+                            ),
                             maxLines = if (!isExpanded) 2 else 5,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -137,9 +141,13 @@ class ExpandableBoxRowContractor(
                         )
                         Text(
                             text = data.description,
-                            style = MaterialTheme.typography.bodyMedium.merge(
+                            style = TextStyle(
+                                fontFamily = avertaFamily,
+                                // fontSize = 14.textSdp,
+                                letterSpacing = 0.sp,
+                                fontWeight = FontWeight.Normal,
                                 lineHeight = 1.5.em
-                            ),
+                            )
                         )
                     }
                 }

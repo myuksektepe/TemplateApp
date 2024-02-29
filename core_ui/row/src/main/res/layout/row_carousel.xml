@@ -13,6 +13,9 @@
         android:id="@+id/rowCarousel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToOutline="false"
+        android:clipToPadding="false"
         android:orientation="vertical">
 
         <androidx.viewpager2.widget.ViewPager2
@@ -20,6 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
+            android:clipChildren="false"
+            android:clipToOutline="false"
+            android:clipToPadding="false"
             android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollX="@dimen/none"

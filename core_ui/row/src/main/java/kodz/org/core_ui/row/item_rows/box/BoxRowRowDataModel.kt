@@ -11,6 +11,7 @@ class BoxRowRowDataModel(
     @SerializedName("backgroundImageUrl") val backgroundImageUrl: String? = null,
     @SerializedName("backgroundColor") val backgroundColor: String? = null,
     @SerializedName("isGradientVisible") val gradientIsVisible: Boolean? = true,
+    @SerializedName("isShadowVisible") val isShadowVisible: Boolean? = false,
     @SerializedName("textColor") val textColor: String? = null,
     @SerializedName("title") val title: String? = null,
     @SerializedName("description") val description: String? = null,

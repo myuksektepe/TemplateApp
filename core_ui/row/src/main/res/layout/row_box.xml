@@ -21,7 +21,7 @@
         android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
         android:layout_marginVertical="@dimen/itemMarginVertical"
         app:cardCornerRadius="@{ (data.cornersType == cornersType.ROUNDED) ? @dimen/cardCornerRadius : @dimen/none}"
-        app:cardElevation="@dimen/none">
+        app:cardElevation="@{ (data.isShadowVisible == true) ? @dimen/cardElevation : @dimen/none}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

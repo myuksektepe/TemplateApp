@@ -10,7 +10,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowRowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowDataModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/videoPlayerHeight"
             app:cardCornerRadius="@dimen/cardCornerRadius"
-            app:cardElevation="@dimen/cardElevation"
+            app:cardElevation="@{ (data.isShadowVisible == true) ? @dimen/cardElevation : @dimen/none}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

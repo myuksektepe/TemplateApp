@@ -8,7 +8,7 @@ import kodz.org.core.model.ItemClickEventModel
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 25.10.2023.
  */
-class FullWidthImageRowRowDataModel(
+class FullWidthImageRowDataModel(
     @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null,
     @SerializedName("imageUrl") val imageUrl: String? = null,
     @SerializedName("height") val height: String? = null,

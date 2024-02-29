@@ -8,10 +8,11 @@ import kodz.org.core.model.ItemClickEventModel
 /**
  * Created by Murat Yüksektepe - yuksektepemurat@gmail.com on 9.10.2023.
  */
-data class VideoPlayerRowRowDataModel(
+data class VideoPlayerRowDataModel(
     @SerializedName("itemClickEventModel") override val itemClickEventModel: ItemClickEventModel?,
     @SerializedName("thumbnailUrl") val thumbnailUrl: String?,
     @SerializedName("videoUrl") val videoUrl: String?,
     @SerializedName("autoPlay") val autoPlay: Boolean?,
-    @SerializedName("isControllersVisible") val isControllersVisible: Boolean?
-) : BaseItemRowDataModel()
+    @SerializedName("isControllersVisible") val isControllersVisible: Boolean?,
+    @SerializedName("isShadowVisible") val isShadowVisible: Boolean? = false,
+    ) : BaseItemRowDataModel()
