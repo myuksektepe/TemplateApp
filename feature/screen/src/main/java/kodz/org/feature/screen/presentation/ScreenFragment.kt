@@ -24,12 +24,10 @@ import kodz.org.core.common.consts.ENDPOINT
 import kodz.org.core.common.enums.CommonIcons
 import kodz.org.core.extension.gone
 import kodz.org.core.extension.visible
+import kodz.org.core.model.ClickEventModel
 import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
-import kodz.org.core.model.ItemClickEventModel
-import kodz.org.core.model.ClickEventModel
-import kodz.org.core.model.Resource
 import kodz.org.core.model.SettingsModel
 import kodz.org.core.model.TabModel
 import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPage
