@@ -17,10 +17,10 @@ import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavDirections
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.BaseViewModel
-import kodz.org.core.common.enums.CommonIcons
-import kodz.org.core.model.ErrorModel
-import kodz.org.core.model.LoadingModel
-import kodz.org.core.model.OnBackPressed
+import kodz.org.core.domain.enums.CommonIcons
+import kodz.org.core.domain.models.ErrorModel
+import kodz.org.core.domain.models.LoadingModel
+import kodz.org.core.domain.models.OnBackPressed
 
 
 /**

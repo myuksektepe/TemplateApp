@@ -5,11 +5,11 @@ import androidx.databinding.ViewDataBinding
 import kodz.org.core.GlideApp
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
-import kodz.org.core.common.consts.TWO
-import kodz.org.core.extension.makeSlidable
-import kodz.org.core.extension.prepareForGroup
-import kodz.org.core.extension.setSpamProtectedClickListener
-import kodz.org.core.extension.toColor
+import kodz.org.core.domain.consts.TWO
+import kodz.org.core.domain.extensions.makeSlidable
+import kodz.org.core.domain.extensions.prepareForGroup
+import kodz.org.core.domain.extensions.setSpamProtectedClickListener
+import kodz.org.core.domain.extensions.toColor
 import kodz.org.core_ui.row.databinding.RowBoxBinding
 
 class BoxRowContractor(

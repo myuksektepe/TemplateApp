@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.item_rows.quote
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.row.datamodel.BaseItemRowDataModel
-import kodz.org.core.model.ClickEventModel
+import kodz.org.core.domain.models.ClickEventModel
 
 
 /**

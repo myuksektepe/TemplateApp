@@ -1,6 +1,6 @@
 package kodz.org.core.base.row.datamodel
 
-import kodz.org.core.model.ClickEventModel
+import kodz.org.core.domain.models.ClickEventModel
 
 
 /**

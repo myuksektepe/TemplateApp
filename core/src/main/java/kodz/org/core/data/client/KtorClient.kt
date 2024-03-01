@@ -12,7 +12,7 @@ import io.ktor.client.request.header
 import io.ktor.serialization.gson.gson
 import io.ktor.serialization.kotlinx.json.json
 
-import kodz.org.core.common.consts.BASE_URL
+import kodz.org.core.domain.consts.BASE_URL
 
 val ktorClient = HttpClient(CIO) {
 

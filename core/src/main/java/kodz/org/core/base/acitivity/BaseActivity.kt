@@ -17,11 +17,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kodz.org.core.base.viewmodel.BaseViewModel
-import kodz.org.core.common.enums.CommonIcons
-import kodz.org.core.extension.safeNavigate
-import kodz.org.core.extension.setIsVisible
-import kodz.org.core.model.LoadingModel
-import kodz.org.core.model.ErrorModel
+import kodz.org.core.domain.enums.CommonIcons
+import kodz.org.core.domain.extensions.safeNavigate
+import kodz.org.core.domain.extensions.setIsVisible
+import kodz.org.core.domain.models.ErrorModel
+import kodz.org.core.domain.models.LoadingModel
 
 /**
  * Created by Murat Yüksektepe on 9.08.2023.

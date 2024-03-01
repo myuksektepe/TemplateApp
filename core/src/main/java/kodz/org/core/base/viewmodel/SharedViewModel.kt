@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kodz.org.core.base.VolatileLiveData
-import kodz.org.core.model.EventTypeCode
+import kodz.org.core.domain.enums.EventTypeCode
 import javax.inject.Inject
 
 

@@ -1,6 +1,6 @@
 package kodz.org.feature.screen.domain.model
 
-import kodz.org.core.model.ErrorModel
+import kodz.org.core.domain.models.ErrorModel
 
 sealed class ScreenState<out T> {
     object Loading : ScreenState<Nothing>()

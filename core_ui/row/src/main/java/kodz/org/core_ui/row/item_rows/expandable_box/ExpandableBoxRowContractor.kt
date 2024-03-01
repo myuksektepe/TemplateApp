@@ -33,8 +33,8 @@ import androidx.databinding.ViewDataBinding
 import kodz.org.core.R
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
-import kodz.org.core.common.enums.CommonIcons
-import kodz.org.core.extension.makeSlidable
+import kodz.org.core.domain.enums.CommonIcons
+import kodz.org.core.domain.extensions.makeSlidable
 import kodz.org.core_ui.extension.noRippleToggleable
 import kodz.org.core_ui.extension.sdp
 import kodz.org.core_ui.row.databinding.RowExpandableBoxBinding

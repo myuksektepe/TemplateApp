@@ -3,7 +3,7 @@ package kodz.org.core_ui.row.list_rows.horizontal_list
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.row.datamodel.BaseListRowDataModel
-import kodz.org.core.model.ClickEventModel
+import kodz.org.core.domain.models.ClickEventModel
 
 
 /**

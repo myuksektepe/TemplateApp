@@ -22,15 +22,4 @@ class MyGlideModule : AppGlideModule() {
                 .skipMemoryCache(true)
         }
     }
-
-    /*
-    override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
-        val client = OkHttpClient.Builder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .build()
-        val factory = OkHttpUrlLoader.Factory(client)
-        glide.registry.replace(GlideUrl::class.java, InputStream::class.java, factory)
-    }
-     */
 }

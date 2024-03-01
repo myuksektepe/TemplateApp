@@ -23,17 +23,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.acitivity.BaseActivity
 import kodz.org.core.base.viewmodel.SharedViewModel
-import kodz.org.core.common.enums.CommonIcons
-import kodz.org.core.common.enums.CommonSettings
-import kodz.org.core.extension.gone
-import kodz.org.core.extension.setSpamProtectedClickListener
-import kodz.org.core.extension.toColor
-import kodz.org.core.extension.visible
-import kodz.org.core.model.ButtonModel
-import kodz.org.core.model.ButtonType
-import kodz.org.core.model.ErrorModel
-import kodz.org.core.model.ErrorType
-import kodz.org.core.model.LoadingModel
+import kodz.org.core.domain.enums.ButtonType
+import kodz.org.core.domain.enums.CommonIcons
+import kodz.org.core.domain.enums.ErrorType
+import kodz.org.core.domain.extensions.gone
+import kodz.org.core.domain.extensions.setSpamProtectedClickListener
+import kodz.org.core.domain.extensions.toColor
+import kodz.org.core.domain.extensions.visible
+import kodz.org.core.domain.models.ButtonModel
+import kodz.org.core.domain.models.ErrorModel
+import kodz.org.core.domain.models.LoadingModel
 import kodz.org.core_ui.component.button.MultipleTypeButton
 import kodz.org.core_ui.component.text.ClassicTextView
 import kodz.org.template.databinding.ActivityMainBinding
@@ -51,9 +50,6 @@ class MainActivity @Inject constructor() :
     private var isAnyDialogVisible: Boolean = false
     private var dialog: Dialog? = null
     private val shownDialogs = mutableListOf<String>()
-
-    @Inject
-    lateinit var commonSettings: CommonSettings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -147,7 +143,7 @@ class MainActivity @Inject constructor() :
                 } else gone()
             }
 
-            errorModel.dialogBox?.let { dialogBox ->
+            errorModel.dialogBoxModel?.let { dialogBox ->
                 // Lottie
                 findViewById<LottieAnimationView>(R.id.lottieView).run {
                     dialogBox.lottie?.let { lottie ->
@@ -191,11 +187,11 @@ class MainActivity @Inject constructor() :
             }
         }
 
-        if (errorModel.dialogBox?.tag !in shownDialogs) {
+        if (errorModel.dialogBoxModel?.tag !in shownDialogs) {
             showDialog(errorModel.type)
-            errorModel.dialogBox?.tag?.let { shownDialogs.add(it) }
+            errorModel.dialogBoxModel?.tag?.let { shownDialogs.add(it) }
         } else {
-            if (errorModel.dialogBox?.showOnce == false || errorModel.dialogBox?.showOnce == null) {
+            if (errorModel.dialogBoxModel?.showOnce == false || errorModel.dialogBoxModel?.showOnce == null) {
                 showDialog(errorModel.type)
             }
         }

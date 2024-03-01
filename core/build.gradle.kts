@@ -62,12 +62,6 @@ dependencies {
     implementation(Dependencies.glideOkHttpIntegration) {
         exclude("glide-parent")
     }
-    
-    // Retrofit2
-    implementation(Dependencies.retrofit)
-    implementation(Dependencies.retrofitGson)
-    implementation(Dependencies.retrofitCoroutinesAdapter)
-    implementation(Dependencies.okHttpLogging)
 
     // Ktor
     implementation(Dependencies.ktorCore)

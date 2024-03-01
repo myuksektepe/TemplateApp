@@ -6,8 +6,8 @@ import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.common.SpacesItemDecoration
-import kodz.org.core.common.consts.ZERO
-import kodz.org.core.extension.gone
+import kodz.org.core.domain.consts.ZERO
+import kodz.org.core.domain.extensions.gone
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.common.getItemListByRowType
 import kodz.org.core_ui.row.databinding.RowHorizontalListBinding

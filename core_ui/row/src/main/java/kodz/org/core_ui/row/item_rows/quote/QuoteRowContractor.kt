@@ -3,11 +3,11 @@ package kodz.org.core_ui.row.item_rows.quote
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
-import kodz.org.core.extension.gone
-import kodz.org.core.extension.makeSlidable
-import kodz.org.core.extension.prepareForGroup
-import kodz.org.core.extension.setSpamProtectedClickListener
-import kodz.org.core.extension.visible
+import kodz.org.core.domain.extensions.gone
+import kodz.org.core.domain.extensions.makeSlidable
+import kodz.org.core.domain.extensions.prepareForGroup
+import kodz.org.core.domain.extensions.setSpamProtectedClickListener
+import kodz.org.core.domain.extensions.visible
 import kodz.org.core_ui.row.databinding.RowQuoteBinding
 
 

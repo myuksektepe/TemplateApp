@@ -19,23 +19,23 @@ import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.SharedViewModel
-import kodz.org.core.common.consts.DASHBOARD_ENDPOINT
-import kodz.org.core.common.consts.ENDPOINT
-import kodz.org.core.common.enums.CommonIcons
-import kodz.org.core.extension.gone
-import kodz.org.core.extension.visible
-import kodz.org.core.model.ClickEventModel
-import kodz.org.core.model.ErrorModel
-import kodz.org.core.model.ErrorType
-import kodz.org.core.model.EventTypeCode
-import kodz.org.core.model.SettingsModel
-import kodz.org.core.model.TabModel
+import kodz.org.core.domain.consts.DASHBOARD_ENDPOINT
+import kodz.org.core.domain.consts.ENDPOINT
+import kodz.org.core.domain.enums.CommonIcons
+import kodz.org.core.domain.enums.ErrorType
+import kodz.org.core.domain.enums.EventTypeCode
+import kodz.org.core.domain.extensions.gone
+import kodz.org.core.domain.extensions.visible
+import kodz.org.core.domain.models.ClickEventModel
+import kodz.org.core.domain.models.ErrorModel
 import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPage
 import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPageAdapter
 import kodz.org.feature.screen.R
 import kodz.org.feature.screen.databinding.FragmentScreenBinding
 import kodz.org.feature.screen.domain.adapter.ScreenAdapter
 import kodz.org.feature.screen.domain.model.ScreenState
+import kodz.org.feature.screen.domain.model.SettingsModel
+import kodz.org.feature.screen.domain.model.TabModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -157,42 +157,6 @@ class ScreenFragment :
                 }
             }
 
-            /*
-            observeLiveData(screenModelLiveData) { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        showFullScreenLoading(view = binding.root)
-                    }
-
-                    is Resource.Error -> {
-                        showFullScreenError(result.errorModel)
-                    }
-
-                    is Resource.Success -> {
-                        result.data.run {
-                            // Settings
-                            prepareScreen(settings)
-
-                            // Rows
-                            rows?.let {
-                                showResultViaAdapter(rowAdapter, it)
-                            }
-
-                            // Tabs
-                            tabs?.let {
-                                showResultViaPageAdapter(
-                                    TabsLayoutPageAdapter(fragmentManager = this@ScreenFragment.childFragmentManager, lifecycle),
-                                    it
-                                )
-                            }
-
-                            // Error
-                            error?.let { showFullScreenError(it) }
-                        }
-                    }
-                }
-            }
-             */
         }
     }
 
@@ -317,7 +281,7 @@ class ScreenFragment :
             }
 
             EventTypeCode.SHOW_ALERT_DIALOG -> {
-                eventModel.dialogBox?.let {
+                eventModel.dialogBoxModel?.let {
                     showFullScreenError(ErrorModel(ErrorType.WARNING, it))
                 }
             }

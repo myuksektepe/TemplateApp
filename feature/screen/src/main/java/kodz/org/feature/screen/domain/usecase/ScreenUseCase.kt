@@ -1,18 +1,18 @@
 package kodz.org.feature.screen.domain.usecase
 
 import com.google.gson.reflect.TypeToken
-import kodz.org.core.base.data.http.gson
-import kodz.org.core.common.enums.CommonIcons
-import kodz.org.core.common.enums.CommonLottie
 import kodz.org.core.data.HttpRequestState
 import kodz.org.core.data.repository.RepositoryImpl
-import kodz.org.core.model.ButtonModel
-import kodz.org.core.model.DialogBox
-import kodz.org.core.model.ErrorModel
-import kodz.org.core.model.ErrorType
-import kodz.org.core.model.EventTypeCode
-import kodz.org.core.model.LottieModel
-import kodz.org.core.model.ScreenModel
+import kodz.org.core.domain.enums.CommonIcons
+import kodz.org.core.domain.enums.CommonLottie
+import kodz.org.core.domain.enums.ErrorType
+import kodz.org.core.domain.enums.EventTypeCode
+import kodz.org.core.domain.extensions.gson
+import kodz.org.core.domain.models.ButtonModel
+import kodz.org.core.domain.models.DialogBoxModel
+import kodz.org.core.domain.models.ErrorModel
+import kodz.org.core.domain.models.LottieModel
+import kodz.org.feature.screen.domain.model.ScreenModel
 import kodz.org.feature.screen.domain.model.ScreenState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -53,7 +53,7 @@ class ScreenUseCase @Inject constructor(
 
 fun String?.prepareUnCancelableError() = ErrorModel(
     type = ErrorType.BLOCKER,
-    dialogBox = DialogBox(
+    dialogBoxModel = DialogBoxModel(
         title = "Beklenmedik Bir Hata Oluştu",
         description = this,
         lottie = LottieModel(CommonLottie.ERROR),

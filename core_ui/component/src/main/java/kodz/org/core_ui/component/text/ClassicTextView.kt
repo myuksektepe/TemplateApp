@@ -5,8 +5,8 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
-import kodz.org.core.model.TextAlignType
-import kodz.org.core.model.TextWeightType
+import kodz.org.core.domain.enums.TextAlignType
+import kodz.org.core.domain.enums.TextWeightType
 import kodz.org.core_ui.component.R
 
 

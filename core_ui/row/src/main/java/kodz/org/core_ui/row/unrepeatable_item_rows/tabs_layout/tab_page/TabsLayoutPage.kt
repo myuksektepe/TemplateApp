@@ -7,7 +7,7 @@ import kodz.org.core.base.fragment.BaseFragment
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
-import kodz.org.core.model.RowItemModel
+import kodz.org.core.domain.models.RowItemModel
 import kodz.org.core_ui.row.R
 import kodz.org.core_ui.row.common.MultipleTypeAdapter
 import kodz.org.core_ui.row.common.convertRow

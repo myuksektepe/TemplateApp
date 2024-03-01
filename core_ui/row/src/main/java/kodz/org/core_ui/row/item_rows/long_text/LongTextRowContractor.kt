@@ -3,8 +3,8 @@ package kodz.org.core_ui.row.item_rows.long_text
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
-import kodz.org.core.extension.makeSlidable
-import kodz.org.core.extension.prepareForGroup
+import kodz.org.core.domain.extensions.makeSlidable
+import kodz.org.core.domain.extensions.prepareForGroup
 import kodz.org.core_ui.row.databinding.RowLongTextBinding
 
 

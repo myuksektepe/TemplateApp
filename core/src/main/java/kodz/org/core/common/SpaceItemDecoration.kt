@@ -3,9 +3,8 @@ package kodz.org.core.common
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import kodz.org.core.common.consts.TWO
-import kodz.org.core.common.consts.ZERO
-
+import kodz.org.core.domain.consts.TWO
+import kodz.org.core.domain.consts.ZERO
 
 class SpacesItemDecoration(space: Int) : RecyclerView.ItemDecoration() {
     private val halfSpace: Int
