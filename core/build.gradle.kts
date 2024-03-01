@@ -5,6 +5,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -67,6 +68,14 @@ dependencies {
     implementation(Dependencies.retrofitGson)
     implementation(Dependencies.retrofitCoroutinesAdapter)
     implementation(Dependencies.okHttpLogging)
+
+    // Ktor
+    implementation(Dependencies.ktorCore)
+    implementation(Dependencies.ktorCio)
+    implementation(Dependencies.ktorContentNegotiation)
+    implementation(Dependencies.ktorJson)
+    implementation(Dependencies.ktorGson)
+    implementation(Dependencies.ktorLogging)
 
     // Gson
     implementation(Dependencies.gson)

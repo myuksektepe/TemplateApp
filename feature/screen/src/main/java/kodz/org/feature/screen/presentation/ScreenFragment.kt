@@ -8,6 +8,9 @@ import android.text.TextWatcher
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavDeepLinkRequest
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,7 +28,6 @@ import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
 import kodz.org.core.model.ItemClickEventModel
-import kodz.org.core.model.Resource
 import kodz.org.core.model.SettingsModel
 import kodz.org.core.model.TabModel
 import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPage
@@ -33,6 +35,10 @@ import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayo
 import kodz.org.feature.screen.R
 import kodz.org.feature.screen.databinding.FragmentScreenBinding
 import kodz.org.feature.screen.domain.adapter.ScreenAdapter
+import kodz.org.feature.screen.domain.model.ScreenState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ScreenFragment :
@@ -63,7 +69,8 @@ class ScreenFragment :
         // AppLog("endpoint: $endpoint")
         // AppLog("thisPageOpenedBefore: $thisPageOpenedBefore")
 
-        viewModel.fetchAdapter(if (!thisPageOpenedBefore) endpoint else null)
+        //viewModel.fetchAdapter(if (!thisPageOpenedBefore) endpoint else null)
+        viewModel.fetchScreen(if (!thisPageOpenedBefore) endpoint else null)
         thisPageOpenedBefore = true
     }
 
@@ -84,7 +91,8 @@ class ScreenFragment :
                     when (it) {
                         EventTypeCode.RETRY_LAST_ACTION -> {
                             hideFullScreenError()
-                            viewModel.fetchAdapter(endpoint)
+                            //viewModel.fetchAdapter(endpoint)
+                            viewModel.fetchScreen(endpoint)
                         }
 
                         EventTypeCode.CLOSE_THE_DIALOG -> {
@@ -108,6 +116,48 @@ class ScreenFragment :
                 }
             }
 
+            lifecycleScope.launch(Dispatchers.Main) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    viewModel.screenModelStateFlow.collectLatest { result ->
+                        when (result) {
+                            is ScreenState.Loading -> {
+                                showFullScreenLoading(view = binding.root)
+                            }
+
+                            is ScreenState.Error -> {
+                                showFullScreenError(result.errorModel)
+                            }
+
+                            is ScreenState.Success -> {
+                                result.data?.run {
+                                    // Settings
+                                    prepareScreen(settings)
+
+                                    // Rows
+                                    rows?.let {
+                                        showResultViaAdapter(rowAdapter, it)
+                                    }
+
+                                    // Tabs
+                                    tabs?.let {
+                                        showResultViaPageAdapter(
+                                            TabsLayoutPageAdapter(fragmentManager = this@ScreenFragment.childFragmentManager, lifecycle),
+                                            it
+                                        )
+                                    }
+
+                                    // Error
+                                    error?.let { showFullScreenError(it) }
+                                }
+                            }
+
+                            null -> Unit
+                        }
+                    }
+                }
+            }
+
+            /*
             observeLiveData(screenModelLiveData) { result ->
                 when (result) {
                     is Resource.Loading -> {
@@ -142,6 +192,7 @@ class ScreenFragment :
                     }
                 }
             }
+             */
         }
     }
 

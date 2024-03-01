@@ -117,6 +117,7 @@ object Dependencies {
     const val ktorCio = "io.ktor:ktor-client-cio:${DependencyVersions.ktor}"
     const val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${DependencyVersions.ktor}"
     const val ktorJson = "io.ktor:ktor-serialization-kotlinx-json:${DependencyVersions.ktor}"
+    const val ktorGson = "io.ktor:ktor-serialization-gson:${DependencyVersions.ktor}"
     const val ktorLogging = "io.ktor:ktor-client-logging:${DependencyVersions.ktor}"
 
     // Retrofit
