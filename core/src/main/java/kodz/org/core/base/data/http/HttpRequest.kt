@@ -89,7 +89,7 @@ class HttpRequest @Inject constructor(
             emit(HttpFlow.Loading)
 
             if (context.isOnline()) {
-                val call = httpApiService.doGetRequest<RS>(
+                httpApiService.doGetRequest<RS>(
                     params = params,
                     token = "[TOKEN]",
                     path = path

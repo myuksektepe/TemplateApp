@@ -13,27 +13,33 @@
         android:id="@+id/rowCarousel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToOutline="false"
+        android:clipToPadding="false"
         android:orientation="vertical">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerVertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
             android:nestedScrollingEnabled="true"
+            android:clipChildren="false"
+            android:clipToOutline="false"
+            android:clipToPadding="false"
             android:orientation="horizontal"
             android:overScrollMode="never"
-            android:scrollbars="none"
-            android:scrollX="0dp"/>
+            android:scrollX="@dimen/none"
+            android:scrollbars="none" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"
+            android:layout_height="@dimen/carouselDotsHeight"
+            android:layout_marginTop="@dimen/carouselDotsMarginTop"
             android:background="@color/transparent"
             app:tabBackground="@drawable/tab_selector"
             app:tabGravity="center"
-            app:tabIndicatorHeight="0dp" />
+            app:tabIndicatorHeight="@dimen/none" />
     </LinearLayout>
 
 </layout>

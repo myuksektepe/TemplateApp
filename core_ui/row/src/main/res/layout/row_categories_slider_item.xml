@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRowRowDataModel" />
+            type="kodz.org.core_ui.row.item_rows.categories_slider_item.CategoriesSliderItemRowDataModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +17,8 @@
 
         <kodz.org.core_ui.component.image.CircleImage
             android:id="@+id/crcCategoryImage"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_width="@dimen/categorySliderItemImageWidth"
+            android:layout_height="@dimen/categorySliderItemImageHeight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxWidth="@dimen/_70sdp"
+            android:maxWidth="@dimen/categorySliderItemImageWidth"
             android:maxLines="4"
             app:layout_constraintEnd_toEndOf="@+id/crcCategoryImage"
             app:layout_constraintStart_toStartOf="@+id/crcCategoryImage"

@@ -114,56 +114,56 @@
                     layout="@layout/shimmer_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
                     android:layout_marginVertical="@dimen/_8sdp" />
 
                 <include
                     layout="@layout/shimmer_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
                     android:layout_marginVertical="@dimen/_8sdp" />
 
                 <include
                     layout="@layout/shimmer_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
                     android:layout_marginVertical="@dimen/_8sdp" />
 
                 <include
                     layout="@layout/shimmer_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
                     android:layout_marginVertical="@dimen/_8sdp" />
 
                 <include
                     layout="@layout/shimmer_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
                     android:layout_marginVertical="@dimen/_8sdp" />
 
                 <include
                     layout="@layout/shimmer_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
                     android:layout_marginVertical="@dimen/_8sdp" />
 
                 <include
                     layout="@layout/shimmer_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
                     android:layout_marginVertical="@dimen/_8sdp" />
 
                 <include
                     layout="@layout/shimmer_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
                     android:layout_marginVertical="@dimen/_8sdp" />
 
             </LinearLayout>

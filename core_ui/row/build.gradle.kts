@@ -24,7 +24,10 @@ android {
             )
         }
     }
-    buildFeatures { dataBinding = true }
+    buildFeatures {
+        dataBinding = true
+        compose = true
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_18
@@ -33,14 +36,19 @@ android {
             jvmTarget = "18"
         }
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = DependencyVersions.kotlinCompilerExtensionVersion
+    }
 }
 
 dependencies {
-    kapt("androidx.annotation:annotation:1.7.0")
+    kapt("androidx.annotation:annotation:1.7.1")
 
     // Module
     implementation(project(":core"))
     implementation(project(":core_ui:component"))
+    implementation(project(":core_ui:ui"))
 
     // Main
     implementation(Dependencies.appcompat)
@@ -53,6 +61,12 @@ dependencies {
     // KTX
     implementation(Dependencies.ktxCore)
     implementation(Dependencies.ktxFragment)
+
+    // Compose
+    implementation(Dependencies.composeUi)
+    implementation(platform(Dependencies.composeBom))
+    androidTestImplementation(Dependencies.composeBom)
+    implementation(Dependencies.composeMaterial3)
 
     // Gson
     implementation(Dependencies.gson)

@@ -2,9 +2,9 @@ package kodz.org.core_ui.row.item_rows.webview
 
 import com.google.gson.annotations.SerializedName
 import kodz.org.core.base.row.datamodel.BaseItemRowDataModel
-import kodz.org.core.model.ItemClickEventModel
+import kodz.org.core.model.ClickEventModel
 
-data class WebViewRowRowDataModel(
+data class WebViewRowDataModel(
     @SerializedName("content") val content: String? = null,
-    @SerializedName("clickEventModel") override val itemClickEventModel: ItemClickEventModel? = null
+    @SerializedName("clickEventModel") override val clickEventModel: ClickEventModel? = null
 ) : BaseItemRowDataModel()

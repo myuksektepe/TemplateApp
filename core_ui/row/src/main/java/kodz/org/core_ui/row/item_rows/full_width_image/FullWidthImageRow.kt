@@ -16,7 +16,7 @@ class FullWidthImageRow(
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_full_width_image
-    override val dataClass: KClass<*> = FullWidthImageRowRowDataModel::class
+    override val dataClass: KClass<*> = FullWidthImageRowDataModel::class
     override val contractor = FullWidthImageRowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

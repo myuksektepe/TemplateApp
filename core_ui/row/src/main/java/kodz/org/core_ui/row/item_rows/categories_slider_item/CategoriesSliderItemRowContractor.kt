@@ -40,7 +40,7 @@ class CategoriesSliderItemRowContractor(
 
                 // Event Handler
                 rowCategoryItemRoot.setSpamProtectedClickListener {
-                    itemClickHandler?.onItemClick(data.itemClickEventModel)
+                    itemClickHandler?.onItemClick(data.clickEventModel)
                 }
             }
         }

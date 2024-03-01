@@ -15,19 +15,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:layout_marginHorizontal="@dimen/_16sdp">
+        android:layout_marginHorizontal="@dimen/itemMarginHorizontal"
+        android:layout_marginTop="@dimen/sectionTitleMarginTop">
 
         <kodz.org.core_ui.component.text.ClassicTextView
             android:id="@+id/txtSectionTitle"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/none"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
             android:singleLine="false"
             android:text="@{data.titleText}"
-            android:textSize="@dimen/_17sdp"
+            android:textSize="@dimen/sectionTitleTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnSectionViewAll"
             app:layout_constraintStart_toStartOf="parent"

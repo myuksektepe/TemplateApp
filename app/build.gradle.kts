@@ -28,7 +28,10 @@ android {
             )
         }
     }
-    buildFeatures { dataBinding = true }
+    buildFeatures {
+        dataBinding = true
+        compose = true
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_18
@@ -36,6 +39,10 @@ android {
         kotlinOptions {
             jvmTarget = "18"
         }
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = DependencyVersions.kotlinCompilerExtensionVersion
     }
 }
 
@@ -50,6 +57,12 @@ dependencies {
     implementation(Dependencies.material)
     implementation(Dependencies.sdp)
     implementation(Dependencies.constraintlayout)
+
+    // Compose
+    implementation(Dependencies.composeUi)
+    implementation(platform(Dependencies.composeBom))
+    androidTestImplementation(Dependencies.composeBom)
+    implementation(Dependencies.composeMaterial3)
 
     // Shimmer
     implementation(Dependencies.shimmer)

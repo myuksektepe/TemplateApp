@@ -37,6 +37,7 @@ android {
 dependencies {
     // Module
     implementation(project(":core"))
+    implementation(project(":core_ui:ui"))
 
     // Main
     implementation(Dependencies.appcompat)

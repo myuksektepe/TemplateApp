@@ -21,8 +21,8 @@ class CircleImageButton @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
-    lateinit var cardView: ConstraintLayout
-    lateinit var imageView: ImageView
+    private var cardView: ConstraintLayout
+    private var imageView: ImageView
 
     init {
         inflate(context, R.layout.component_circle_button, this)

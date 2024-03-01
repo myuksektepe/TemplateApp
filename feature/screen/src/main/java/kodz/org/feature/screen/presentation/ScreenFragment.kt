@@ -28,6 +28,8 @@ import kodz.org.core.model.ErrorModel
 import kodz.org.core.model.ErrorType
 import kodz.org.core.model.EventTypeCode
 import kodz.org.core.model.ItemClickEventModel
+import kodz.org.core.model.ClickEventModel
+import kodz.org.core.model.Resource
 import kodz.org.core.model.SettingsModel
 import kodz.org.core.model.TabModel
 import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPage
@@ -80,7 +82,7 @@ class ScreenFragment :
                 rowAdapter.filter.filter(it)
             }
 
-            observeLiveData(itemClickEventModelLiveData) { clickEventModel ->
+            observeLiveData(clickEventModelLiveData) { clickEventModel ->
                 clickEventModel?.let {
                     handleItemClickEvent(it)
                 }
@@ -237,8 +239,8 @@ class ScreenFragment :
                     adapter.addFragment(TabsLayoutPage(
                         itemListJson = itemListJson,
                         itemClickHandler = object : ItemClickHandler {
-                            override fun onItemClick(itemClickEventModel: ItemClickEventModel?) {
-                                itemClickEventModel?.let {
+                            override fun onItemClick(clickEventModel: ClickEventModel?) {
+                                clickEventModel?.let {
                                     handleItemClickEvent(it)
                                 }
                             }
@@ -301,7 +303,7 @@ class ScreenFragment :
         navigateWithDeepLink(navDeepLinkRequest)
     }
 
-    private fun handleItemClickEvent(eventModel: ItemClickEventModel) {
+    private fun handleItemClickEvent(eventModel: ClickEventModel) {
         when (eventModel.eventTypeCode) {
             EventTypeCode.OPEN_SCREEN -> {
                 goToDeepLink(eventModel.endpoint)

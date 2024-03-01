@@ -1,6 +1,6 @@
 package kodz.org.core.base.row.datamodel
 
-import kodz.org.core.model.ItemClickEventModel
+import kodz.org.core.model.ClickEventModel
 
 
 /**
@@ -15,5 +15,5 @@ import kodz.org.core.model.ItemClickEventModel
  * olan veriler için değişkenler oluşturulur.
  */
 abstract class BaseRowDataModel() {
-    abstract val itemClickEventModel: ItemClickEventModel?
+    abstract val clickEventModel: ClickEventModel?
 }

@@ -45,7 +45,15 @@ enum class CommonIcons(val imageName: String, val resourceId: Int) {
     QUESTION_MARK("questionMark", R.drawable.ic_question_mark),
 
     @SerializedName("done", alternate = ["okay", "tick"])
-    DONE("done", R.drawable.ic_done);
+    DONE("done", R.drawable.ic_done),
+
+    @SerializedName("arrow_up")
+    ARROW_UP("arrow_up", R.drawable.ic_arrow_up),
+
+    @SerializedName("arrow_down")
+    ARROW_DOWN("arrow_down", R.drawable.ic_arrow_down),
+
+    ;
 
     companion object {
         fun from(value: String): CommonIcons? {

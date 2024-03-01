@@ -12,7 +12,7 @@ class EntryItem1Row(
     override var isInList: Boolean?
 ) : BaseItemRow() {
     override val layout: Int = R.layout.row_entry_item_1
-    override val dataClass: KClass<*> = EntryItem1RowRowDataModel::class
+    override val dataClass: KClass<*> = EntryItem1RowDataModel::class
     override val contractor = EntryItem1RowContractor(isInCarousel, isInList)
     override var binding: ViewDataBinding? = null
 }

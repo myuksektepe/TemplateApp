@@ -21,7 +21,7 @@
             android:outlineProvider="background"
             android:outlineSpotShadowColor="@color/darkGray"
             app:cardBackgroundColor="@color/darkGray"
-            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
             app:contentPadding="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
