@@ -28,7 +28,6 @@ import kodz.org.core.domain.enums.CommonIcons
 import kodz.org.core.domain.enums.ErrorType
 import kodz.org.core.domain.extensions.gone
 import kodz.org.core.domain.extensions.setSpamProtectedClickListener
-import kodz.org.core.domain.extensions.toColor
 import kodz.org.core.domain.extensions.visible
 import kodz.org.core.domain.models.ButtonModel
 import kodz.org.core.domain.models.ErrorModel
@@ -93,7 +92,7 @@ class MainActivity @Inject constructor() :
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "UseCompatTextViewDrawableApis")
-    override fun showFullScreenError(errorModel: ErrorModel) {
+    override fun showFullScreenError(errorModel: ErrorModel.ViewEntity) {
         hideFullScreenLoading()
         prepareDialog(errorModel)
     }
@@ -126,7 +125,7 @@ class MainActivity @Inject constructor() :
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "DiscouragedApi")
-    private fun prepareDialog(errorModel: ErrorModel) {
+    private fun prepareDialog(errorModel: ErrorModel.ViewEntity) {
         dialog = Dialog(this)
         dialog?.run {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -160,13 +159,13 @@ class MainActivity @Inject constructor() :
 
                 // Title
                 findViewById<ClassicTextView>(R.id.txtDialogTitle).run {
-                    text = dialogBox.title ?: getString(kodz.org.core.R.string.error)
+                    text = dialogBox.title?.asString(context) ?: getString(kodz.org.core.R.string.error)
                 }
 
                 // Description
                 findViewById<ClassicTextView>(R.id.txtDialogDescription).run {
                     dialogBox.description?.let {
-                        text = it
+                        text = it.asString(context)
                         movementMethod = ScrollingMovementMethod()
                         visible()
                     } ?: kotlin.run {
@@ -176,8 +175,8 @@ class MainActivity @Inject constructor() :
 
                 // Primary & Secondary Button
                 findViewById<LinearLayout>(R.id.buttons).run {
-                    dialogBox.primaryButton?.let { addView(createButton(it)) }
-                    dialogBox.secondaryButton?.let { addView(createButton(it, true)) }
+                    dialogBox.primaryButton?.let { addView(createButton(it.toViewEntity())) }
+                    dialogBox.secondaryButton?.let { addView(createButton(it.toViewEntity(), true)) }
                 }
             }
 
@@ -215,14 +214,14 @@ class MainActivity @Inject constructor() :
         }
     }
 
-    private fun createButton(button: ButtonModel, addMarginTop: Boolean? = false) =
+    private fun createButton(button: ButtonModel.ViewEntity, addMarginTop: Boolean? = false) =
         MultipleTypeButton(this, null).apply {
             // Text
-            setText(button.text ?: getString(kodz.org.core.R.string.okay))
+            setText(button.text?.asString(context) ?: getString(kodz.org.core.R.string.okay))
 
             // Text Color
-            val textColor = if (button.textColor.toColor() != null) {
-                button.textColor.toColor()!!
+            val textColor = if (button.textColor != null) {
+                button.textColor!!
             } else resources.getColor(kodz.org.core.R.color.dayNightReverse)
             setTextColor(textColor)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setIconColor(textColor)
@@ -259,8 +258,8 @@ class MainActivity @Inject constructor() :
                 }
 
                 ButtonType.FILLED -> {
-                    val backgroundColor = if (button.backgroundColor.toColor() != null) {
-                        button.backgroundColor.toColor()!!
+                    val backgroundColor = if (button.backgroundColor != null) {
+                        button.backgroundColor!!
                     } else resources.getColor(kodz.org.core.R.color.green)
                     showUnderline(false)
                     setBgColor(backgroundColor)

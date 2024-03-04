@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core_ui.row.databinding.RowWebviewBinding
 

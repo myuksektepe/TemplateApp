@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.list_rows.horizontal_list
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.common.SpacesItemDecoration

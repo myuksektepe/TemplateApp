@@ -1,4 +1,4 @@
-package kodz.org.core.base.handler
+package kodz.org.core.domain.interfaces.handler
 
 import kodz.org.core.domain.models.ClickEventModel
 

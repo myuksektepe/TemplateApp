@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kodz.org.core.base.fragment.BaseFragment
-import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.SharedViewModel
 import kodz.org.core.domain.consts.DASHBOARD_ENDPOINT
@@ -26,6 +25,7 @@ import kodz.org.core.domain.enums.ErrorType
 import kodz.org.core.domain.enums.EventTypeCode
 import kodz.org.core.domain.extensions.gone
 import kodz.org.core.domain.extensions.visible
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.domain.models.ClickEventModel
 import kodz.org.core.domain.models.ErrorModel
 import kodz.org.core_ui.row.unrepeatable_item_rows.tabs_layout.tab_page.TabsLayoutPage
@@ -282,7 +282,7 @@ class ScreenFragment :
 
             EventTypeCode.SHOW_ALERT_DIALOG -> {
                 eventModel.dialogBoxModel?.let {
-                    showFullScreenError(ErrorModel(ErrorType.WARNING, it))
+                    showFullScreenError(ErrorModel.ViewEntity(ErrorType.WARNING, it.toViewEntity()))
                 }
             }
 

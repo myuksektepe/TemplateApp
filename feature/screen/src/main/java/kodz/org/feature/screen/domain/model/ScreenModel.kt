@@ -12,7 +12,7 @@ class ScreenModel(
 ) {
     class ViewEntity(
         val settings: SettingsModel? = null,
-        val error: ErrorModel? = null,
+        val error: ErrorModel.ViewEntity? = null,
         val rows: MutableList<BaseRow?>? = null,
         val tabs: List<TabModel>? = null,
     )

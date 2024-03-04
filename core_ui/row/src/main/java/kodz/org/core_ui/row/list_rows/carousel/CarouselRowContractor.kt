@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.list_rows.carousel
 
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.domain.extensions.gone
 import kodz.org.core.domain.extensions.visible

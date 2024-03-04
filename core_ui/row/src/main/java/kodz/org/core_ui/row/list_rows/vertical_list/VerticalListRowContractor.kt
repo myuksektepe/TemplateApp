@@ -4,7 +4,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.common.SpacesItemDecoration

@@ -20,7 +20,7 @@ import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.domain.enums.CommonIcons
 import kodz.org.core.domain.models.ErrorModel
 import kodz.org.core.domain.models.LoadingModel
-import kodz.org.core.domain.models.OnBackPressed
+import kodz.org.core.domain.interfaces.OnBackPressed
 
 
 /**
@@ -80,7 +80,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         (requireActivity() as BaseActivity<*, *>).hideFullScreenLoading()
     }
 
-    fun showFullScreenError(errorModel: ErrorModel) {
+    fun showFullScreenError(errorModel: ErrorModel.ViewEntity) {
         (requireActivity() as BaseActivity<*, *>).showFullScreenError(errorModel)
     }
 

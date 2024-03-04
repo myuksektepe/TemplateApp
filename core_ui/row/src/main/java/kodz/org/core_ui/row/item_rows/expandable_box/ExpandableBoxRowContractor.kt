@@ -31,7 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.R
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.domain.enums.CommonIcons
 import kodz.org.core.domain.extensions.makeSlidable

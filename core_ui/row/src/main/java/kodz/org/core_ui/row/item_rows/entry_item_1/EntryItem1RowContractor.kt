@@ -3,7 +3,7 @@ package kodz.org.core_ui.row.item_rows.entry_item_1
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.GlideApp
 import kodz.org.core.R
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.domain.extensions.makeSlidable
 import kodz.org.core.domain.extensions.prepareForGroup

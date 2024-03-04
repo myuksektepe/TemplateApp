@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.common
 
 import com.google.gson.JsonObject
 import kodz.org.core.domain.extensions.toResponseModel
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.base.row.contractor.BaseUnrepeatableItemRowContractor

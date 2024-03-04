@@ -12,6 +12,7 @@ import kodz.org.core.domain.models.ButtonModel
 import kodz.org.core.domain.models.DialogBoxModel
 import kodz.org.core.domain.models.ErrorModel
 import kodz.org.core.domain.models.LottieModel
+import kodz.org.core.domain.models.TextModel
 import kodz.org.feature.screen.domain.model.ScreenModel
 import kodz.org.feature.screen.domain.model.ScreenState
 import kotlinx.coroutines.flow.Flow
@@ -51,11 +52,11 @@ class ScreenUseCase @Inject constructor(
     }
 }
 
-fun String?.prepareUnCancelableError() = ErrorModel(
+fun String?.prepareUnCancelableError() = ErrorModel.ViewEntity(
     type = ErrorType.BLOCKER,
-    dialogBoxModel = DialogBoxModel(
-        title = "Beklenmedik Bir Hata Oluştu",
-        description = this,
+    dialogBoxModel = DialogBoxModel.ViewEntity(
+        title = TextModel.StaticText(kodz.org.core.R.string.warning),
+        description = TextModel.DynamicText(this),
         lottie = LottieModel(CommonLottie.ERROR),
         primaryButton = ButtonModel(
             text = "Geri Dön",

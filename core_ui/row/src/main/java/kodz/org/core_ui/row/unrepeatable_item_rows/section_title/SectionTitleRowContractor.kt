@@ -1,7 +1,7 @@
 package kodz.org.core_ui.row.unrepeatable_item_rows.section_title
 
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseUnrepeatableItemRowContractor
 import kodz.org.core.domain.extensions.setSpamProtectedClickListener
 import kodz.org.core_ui.row.databinding.RowSectionTitleBinding

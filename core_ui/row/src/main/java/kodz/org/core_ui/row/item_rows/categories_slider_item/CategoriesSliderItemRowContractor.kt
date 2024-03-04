@@ -1,7 +1,7 @@
 package kodz.org.core_ui.row.item_rows.categories_slider_item
 
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.domain.extensions.prepareForGroup
 import kodz.org.core.domain.extensions.setSpamProtectedClickListener

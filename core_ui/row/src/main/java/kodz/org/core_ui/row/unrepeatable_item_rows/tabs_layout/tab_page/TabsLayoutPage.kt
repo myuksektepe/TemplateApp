@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import kodz.org.core.base.fragment.BaseFragment
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.domain.models.RowItemModel

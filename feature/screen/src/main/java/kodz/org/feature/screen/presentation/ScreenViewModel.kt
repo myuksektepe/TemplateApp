@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kodz.org.core.R
-import kodz.org.core.base.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
 import kodz.org.core.common.AppLog
@@ -15,10 +14,12 @@ import kodz.org.core.domain.enums.ButtonType
 import kodz.org.core.domain.enums.ErrorType
 import kodz.org.core.domain.enums.EventTypeCode
 import kodz.org.core.domain.extensions.toResponseModel
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.domain.models.ButtonModel
 import kodz.org.core.domain.models.ClickEventModel
 import kodz.org.core.domain.models.DialogBoxModel
 import kodz.org.core.domain.models.ErrorModel
+import kodz.org.core.domain.models.TextModel
 import kodz.org.core_ui.row.common.convertRow
 import kodz.org.feature.screen.domain.model.ScreenModel
 import kodz.org.feature.screen.domain.model.ScreenState
@@ -87,7 +88,7 @@ class ScreenViewModel @Inject constructor(
                                     _screenModel.value = ScreenState.Success(
                                         ScreenModel.ViewEntity(
                                             settings = responseModel.settings,
-                                            error = responseModel.error,
+                                            error = responseModel.error?.toViewEntity(),
                                             rows = null,
                                             tabs = tabModelList
                                         )
@@ -111,20 +112,20 @@ class ScreenViewModel @Inject constructor(
                                         _screenModel.value = ScreenState.Success(
                                             ScreenModel.ViewEntity(
                                                 settings = responseModel.settings,
-                                                error = responseModel.error,
+                                                error = responseModel.error?.toViewEntity(),
                                                 rows = componentList
                                             )
                                         )
                                         AppLog("Rowlar önyüze gönderildi.")
                                     } else {
                                         _screenModel.value = ScreenState.Error(
-                                            ErrorModel(
+                                            ErrorModel.ViewEntity(
                                                 ErrorType.WARNING,
-                                                DialogBoxModel(
+                                                DialogBoxModel.ViewEntity(
                                                     showOnce = false,
                                                     tag = "",
-                                                    title = context.getString(R.string.error),
-                                                    description = "ScreenViewModel -> componentList is empty!",
+                                                    title = TextModel.StaticText(R.string.error),
+                                                    description = TextModel.DynamicText("ScreenViewModel -> componentList is empty!"),
                                                     primaryButton = ButtonModel(
                                                         type = ButtonType.FILLED,
                                                         eventType = EventTypeCode.RETRY_LAST_ACTION

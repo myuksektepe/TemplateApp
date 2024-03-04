@@ -2,7 +2,7 @@ package kodz.org.core_ui.row.common
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core_ui.row.item_rows.box.BoxRow
 import kodz.org.core_ui.row.item_rows.box.BoxRowRowDataModel

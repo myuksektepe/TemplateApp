@@ -4,8 +4,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.handler.ItemClickHandler
-import kodz.org.core.base.handler.SearchHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.SearchHandler
 import kodz.org.core.base.row.contractor.BaseUnrepeatableItemRowContractor
 import kodz.org.core_ui.row.databinding.RowSearchBoxBinding
 

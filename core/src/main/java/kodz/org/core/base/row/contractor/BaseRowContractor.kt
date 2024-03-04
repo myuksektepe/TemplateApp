@@ -1,7 +1,7 @@
 package kodz.org.core.base.row.contractor
 
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 
 /**
  * Created by Murat Yüksektepe on 10.08.2023.

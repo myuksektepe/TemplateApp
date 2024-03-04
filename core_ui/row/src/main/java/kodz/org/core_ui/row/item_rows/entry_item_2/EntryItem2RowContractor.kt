@@ -4,7 +4,7 @@ import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kodz.org.core.GlideApp
 import kodz.org.core.R
-import kodz.org.core.base.handler.ItemClickHandler
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.domain.extensions.makeSlidable
 import kodz.org.core.domain.extensions.prepareForGroup
