@@ -1,10 +1,12 @@
 package kodz.org.core_ui.row.item_rows.long_text
 
+import android.os.Build
+import android.text.Html
 import androidx.databinding.ViewDataBinding
-import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.domain.extensions.makeSlidable
 import kodz.org.core.domain.extensions.prepareForGroup
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core_ui.row.databinding.RowLongTextBinding
 
 
@@ -33,7 +35,11 @@ class LongTextRowContractor(
                 txtLongText.prepareForGroup(isInList, isInCarousel)
 
                 // Text
-                txtLongText.text = data.text
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    txtLongText.text = Html.fromHtml(data.text, Html.FROM_HTML_MODE_COMPACT)
+                } else {
+                    txtLongText.text = Html.fromHtml(data.text)
+                }
             }
         }
     }

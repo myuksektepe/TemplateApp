@@ -62,8 +62,8 @@ class ScreenViewModel @Inject constructor() : BaseViewModel() {
     val screenModelStateFlow: StateFlow<ScreenState<ScreenModel.ViewEntity?>?> get() = _screenModel
 
     fun fetchScreen(endpoint: String?) {
-        componentList.clear()
         endpoint?.let {
+            componentList.clear()
             viewModelScope.launch(Dispatchers.IO) {
                 screenUseCase.fetchScreen(it).collectLatest { screenState ->
                     when (screenState) {

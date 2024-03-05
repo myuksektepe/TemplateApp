@@ -3,13 +3,14 @@ package kodz.org.core_ui.row.item_rows.box
 import android.graphics.Color
 import androidx.databinding.ViewDataBinding
 import kodz.org.core.GlideApp
-import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.domain.consts.TWO
+import kodz.org.core.domain.extensions.gone
 import kodz.org.core.domain.extensions.makeSlidable
 import kodz.org.core.domain.extensions.prepareForGroup
 import kodz.org.core.domain.extensions.setSpamProtectedClickListener
 import kodz.org.core.domain.extensions.toColor
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core_ui.row.databinding.RowBoxBinding
 
 class BoxRowContractor(
@@ -75,10 +76,16 @@ class BoxRowContractor(
                     }
 
                     // Title
-                    txtRowBoxTitle.text = data.title
+                    data.title?.let {
+                        txtRowBoxTitle.text = it
+                    } ?: {
+                        txtRowBoxTitle.gone()
+                    }
 
                     // Description
-                    txtRowBoxDescription.text = data.description
+                    data.description?.let {
+                        txtRowBoxDescription.text = it
+                    } ?: { txtRowBoxDescription.gone() }
 
                     // OnClick
                     setSpamProtectedClickListener {

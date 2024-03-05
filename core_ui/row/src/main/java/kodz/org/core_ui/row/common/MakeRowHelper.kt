@@ -1,8 +1,6 @@
 package kodz.org.core_ui.row.common
 
 import com.google.gson.JsonObject
-import kodz.org.core.domain.extensions.toResponseModel
-import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core.base.row.contractor.BaseItemRowContractor
 import kodz.org.core.base.row.contractor.BaseListRowContractor
 import kodz.org.core.base.row.contractor.BaseUnrepeatableItemRowContractor
@@ -15,6 +13,8 @@ import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.row.row.BaseUnrepeatableItemRow
 import kodz.org.core.common.AppLog
 import kodz.org.core.domain.extensions.isUrlReachable
+import kodz.org.core.domain.extensions.toResponseModel
+import kodz.org.core.domain.interfaces.handler.ItemClickHandler
 import kodz.org.core_ui.row.item_rows.box.BoxRow
 import kodz.org.core_ui.row.item_rows.box.BoxRowContractor
 import kodz.org.core_ui.row.item_rows.box.BoxRowRowDataModel
@@ -30,12 +30,18 @@ import kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRowDataModel
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRow
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowContractor
 import kodz.org.core_ui.row.item_rows.full_width_image.FullWidthImageRowDataModel
+import kodz.org.core_ui.row.item_rows.html_view.HtmlViewRow
+import kodz.org.core_ui.row.item_rows.html_view.HtmlViewRowContractor
+import kodz.org.core_ui.row.item_rows.html_view.HtmlViewRowDataModel
 import kodz.org.core_ui.row.item_rows.long_text.LongTextRow
 import kodz.org.core_ui.row.item_rows.long_text.LongTextRowContractor
 import kodz.org.core_ui.row.item_rows.long_text.LongTextRowDataModel
 import kodz.org.core_ui.row.item_rows.quote.QuoteRow
 import kodz.org.core_ui.row.item_rows.quote.QuoteRowContractor
 import kodz.org.core_ui.row.item_rows.quote.QuoteRowDataModel
+import kodz.org.core_ui.row.item_rows.spacer.SpacerRow
+import kodz.org.core_ui.row.item_rows.spacer.SpacerRowContractor
+import kodz.org.core_ui.row.item_rows.spacer.SpacerRowDataModel
 import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRow
 import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowContractor
 import kodz.org.core_ui.row.item_rows.video_player.VideoPlayerRowDataModel
@@ -179,6 +185,23 @@ fun String.convertRow(
                     dataModelString = dataModelString,
                     dataModelJsonObject = dataModelJsonObject,
                     itemClickHandler = itemClickHandler
+                )
+        }
+
+        "HtmlViewRow" -> {
+            clsRow =
+                makeItemRow<HtmlViewRow, HtmlViewRowContractor, HtmlViewRowDataModel>(
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
+                    itemClickHandler = itemClickHandler
+                )
+        }
+
+        "SpacerRow" -> {
+            clsRow =
+                makeItemRow<SpacerRow, SpacerRowContractor, SpacerRowDataModel>(
+                    dataModelString = dataModelString,
+                    dataModelJsonObject = dataModelJsonObject,
                 )
         }
 

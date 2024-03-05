@@ -94,6 +94,7 @@ object Dependencies {
 
     // Compose
     const val composeUi = "androidx.compose.ui:ui-android:${DependencyVersions.composeUi}"
+    const val composeUiText = "androidx.compose.ui:ui-text-android:${DependencyVersions.composeUi}"
     const val composeBom = "androidx.compose:compose-bom:${DependencyVersions.composeBom}"
     const val composeMaterial3 = "androidx.compose.material3:material3"
 

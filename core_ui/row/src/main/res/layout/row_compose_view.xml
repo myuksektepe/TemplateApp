@@ -5,12 +5,11 @@
 
         <variable
             name="data"
-            type="kodz.org.core_ui.row.item_rows.expandable_box.ExpandableBoxRowDataModel" />
+            type="kodz.org.core.base.row.datamodel.BaseItemRowDataModel" />
     </data>
 
     <androidx.compose.ui.platform.ComposeView
-
-        android:id="@+id/expandableBox"
+        android:id="@+id/composeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/itemMarginHorizontal"

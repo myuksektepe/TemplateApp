@@ -65,7 +65,7 @@ val LightTypography = Typography(
 )
 
 
-class ExpandableBox(){
+class ExpandableBox() {
     @Composable
     fun TitleTextStyle() = TextStyle(
         fontFamily = avertaFamily,
@@ -80,5 +80,15 @@ class ExpandableBox(){
         letterSpacing = 0.sp,
         fontWeight = FontWeight.Normal,
         lineHeight = 1.5.em
+    )
+}
+
+class HtmlView() {
+    @Composable
+    fun TextStyle() = TextStyle(
+        fontFamily = avertaFamily,
+        fontSize = 14.textSdp,
+        lineHeight = 1.5.em,
+        letterSpacing = 0.sp
     )
 }

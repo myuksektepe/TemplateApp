@@ -45,4 +45,6 @@ dependencies {
     implementation(platform(Dependencies.composeBom))
     androidTestImplementation(Dependencies.composeBom)
     implementation(Dependencies.composeMaterial3)
+    implementation(Dependencies.composeUiText)
+
 }
