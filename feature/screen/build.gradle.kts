@@ -35,9 +35,10 @@ android {
 dependencies {
 
     // Modules
-    implementation(project(":core"))
-    implementation(project(":core_ui:row"))
-    implementation(project(":core_ui:component"))
+    implementation(projects.core)
+    implementation(projects.coreUi.component)
+    implementation(projects.coreUi.row)
+
 
     // Main
     implementation(Dependencies.appcompat)

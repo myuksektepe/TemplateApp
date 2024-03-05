@@ -46,9 +46,9 @@ dependencies {
     kapt("androidx.annotation:annotation:1.7.1")
 
     // Module
-    implementation(project(":core"))
-    implementation(project(":core_ui:component"))
-    implementation(project(":core_ui:ui"))
+    implementation(projects.core)
+    implementation(projects.coreUi.component)
+    implementation(projects.coreUi.ui)
 
     // Main
     implementation(Dependencies.appcompat)

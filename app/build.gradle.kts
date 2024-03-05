@@ -48,9 +48,9 @@ android {
 
 dependencies {
     // Modules
-    implementation(project(":core_ui:component"))
-    implementation(project(":core"))
-    implementation(project(":feature:screen"))
+    implementation(projects.coreUi.component)
+    implementation(projects.core)
+    implementation(projects.feature.screen)
 
     // Main
     implementation(Dependencies.appcompat)
