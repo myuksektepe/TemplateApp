@@ -1,11 +1,9 @@
 package kodz.org.feature.screen.presentation
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kodz.org.core.R
 import kodz.org.core.base.row.row.BaseRow
 import kodz.org.core.base.viewmodel.BaseViewModel
@@ -39,14 +37,10 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class ScreenViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
-) : BaseViewModel() {
+class ScreenViewModel @Inject constructor() : BaseViewModel() {
 
     @Inject
     lateinit var screenUseCase: ScreenUseCase
-
-    private val componentList = mutableListOf<BaseRow?>()
 
     private val searchedText = MutableLiveData<String?>()
     val searchedTextLiveData: LiveData<String?> get() = searchedText
@@ -62,10 +56,13 @@ class ScreenViewModel @Inject constructor(
         }
     }
 
+    private val componentList = mutableListOf<BaseRow?>()
+
     private val _screenModel = MutableStateFlow<ScreenState<ScreenModel.ViewEntity?>?>(null)
     val screenModelStateFlow: StateFlow<ScreenState<ScreenModel.ViewEntity?>?> get() = _screenModel
 
     fun fetchScreen(endpoint: String?) {
+        componentList.clear()
         endpoint?.let {
             viewModelScope.launch(Dispatchers.IO) {
                 screenUseCase.fetchScreen(it).collectLatest { screenState ->

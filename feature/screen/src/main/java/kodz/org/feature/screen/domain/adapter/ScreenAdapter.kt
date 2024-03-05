@@ -20,8 +20,8 @@ class ScreenAdapter : MultipleTypeAdapter(), Filterable {
     fun submitData(rowList: MutableList<BaseRow?>?) {
         rowList?.let {
             this.list = it.filterNotNull().toMutableList()
-            submitList(list)
         }
+        submitList(list)
     }
 
     private val customFilter = object : Filter() {

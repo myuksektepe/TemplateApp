@@ -46,7 +46,7 @@ class ScreenFragment :
     override val viewModel: ScreenViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
     override val isBottomNavigationViewVisible = false
-    private val rowAdapter = ScreenAdapter()
+    private val rowAdapter by lazy { ScreenAdapter() }
     private var endpoint: String? = null
     private var thisPageOpenedBefore: Boolean = false
     private val tabTitles = mutableListOf<Pair<String, Int?>>()
@@ -69,7 +69,6 @@ class ScreenFragment :
         // AppLog("endpoint: $endpoint")
         // AppLog("thisPageOpenedBefore: $thisPageOpenedBefore")
 
-        //viewModel.fetchAdapter(if (!thisPageOpenedBefore) endpoint else null)
         viewModel.fetchScreen(if (!thisPageOpenedBefore) endpoint else null)
         thisPageOpenedBefore = true
     }
@@ -91,7 +90,6 @@ class ScreenFragment :
                     when (it) {
                         EventTypeCode.RETRY_LAST_ACTION -> {
                             hideFullScreenError()
-                            //viewModel.fetchAdapter(endpoint)
                             viewModel.fetchScreen(endpoint)
                         }
 
@@ -169,13 +167,11 @@ class ScreenFragment :
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
 
-            /*
             swiperefresh.setOnRefreshListener {
-                viewModel.fetchAdapter(endpoint)
+                viewModel.fetchScreen(endpoint)
                 binding.searchBox.edtSearch.text = null
                 swiperefresh.isRefreshing = false
             }
-             */
         }
     }
 
